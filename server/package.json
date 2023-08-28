@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/THANU16/Life-Server.git"
+  },
+  "author": "Thanushanth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/THANU16/Life-Server/issues"
+  },
+  "homepage": "https://github.com/THANU16/Life-Server#readme"
+}
