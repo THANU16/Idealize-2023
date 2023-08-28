@@ -1,0 +1,109 @@
+CREATE TABLE User (
+    User_ID INT AUTO_INCREMENT PRIMARY KEY,
+    First_Name VARCHAR(255) NOT NULL,
+    Last_Name VARCHAR(255),
+    Phone_Number VARCHAR(15) NOT NULL,
+    NIC VARCHAR(20) UNIQUE, -- NIC field is unique
+    Address VARCHAR(255) NOT NULL,
+    DOB DATE,  -- Date of Birth
+    Email VARCHAR(255) NOT NULL UNIQUE, -- email field is unique
+    Password VARCHAR(255) NOT NULL,
+    Preferred_Type INT,  ------------------------------------------------------------------------------------
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Hospital (
+    Hospital_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Location VARCHAR(255) NOT NULL,
+    Type ENUM('Government', 'Private') NOT NULL,
+    No_Of_Ambulance INT NOT NULL,
+    Website VARCHAR(255),
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Contact_Number VARCHAR(15) NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Ambulance (
+    Ambulance_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Ambulance_Number VARCHAR(20) NOT NULL UNIQUE, -- Ambulance_Number field is unique
+    Hospital_ID INT NOT NULL,
+    Ambulance_Location VARCHAR(255) NOT NULL,
+    Is_Available BOOLEAN NOT NULL DEFAULT 0,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID)
+);
+
+CREATE TABLE Emergency_Request (
+    Request_ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT NOT NULL,
+    Requested_Time DATETIME,
+    Status ENUM('Pending', 'Dispatched', 'Completed') NOT NULL,
+    Ambulance_ID INT NOT NULL,
+    Additional_Details TEXT,
+    User_Location VARCHAR(255) NOT NULL,
+    Hospital_ID int,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES User(User_ID),
+    FOREIGN KEY (Ambulance_ID) REFERENCES Ambulance(Ambulance_ID),
+    FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID)
+);
+
+CREATE TABLE Feedback (
+    Feedback_ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT,
+    Hospital_ID INT,
+    Ambulance_ID INT,
+    Feedback_Message TEXT,
+    Feedback_Type VARCHAR(50),
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES User(User_ID),
+    FOREIGN KEY (Ambulance_ID) REFERENCES Ambulance(Ambulance_ID),
+    FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID)
+);
+
+CREATE TABLE Driver (
+    Driver_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Hospital_ID int NOT NULL,
+    First_Name VARCHAR(255) NOT NULL,
+    Last_Name VARCHAR(255),
+    Phone_Number VARCHAR(15) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    NIC VARCHAR(20) UNIQUE, -- NIC field is unique
+    Address VARCHAR(255) NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID)
+);
+
+CREATE TABLE Ambulance_Driver_Connection (
+    Driver_Connection_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Driver_ID INT NOT NULL,
+    Ambulance_ID int NOT NULL,
+    Connected_Time DATETIME NOT NULL,
+    Disconnected_Time DATETIME NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (Driver_ID) REFERENCES Driver(Driver_ID),
+    FOREIGN KEY (Ambulance_ID) REFERENCES Ambulance(Ambulance_ID),
+);
+
+
+CREATE TABLE User_Ambulance_Connection (
+    Connection_ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT NOT NULL,
+    Ambulance_ID INT NOT NULL,
+    Connected_Time DATETIME NOT NULL,
+    Disconnected_Time DATETIME NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES User(User_ID),
+    FOREIGN KEY (Ambulance_ID) REFERENCES Ambulance(Ambulance_ID)
+);
