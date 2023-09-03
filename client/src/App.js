@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useRef, ReactElement } from "react";
+import ReactDOM from "react-dom";
+import { Wrapper, Status } from "../src";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+function MyMapComponent(center,zoom) {
+  const ref = useRef();
+
+  useEffect(() => {
+    new window.google.maps.Map(ref.current, {
+      center,
+      zoom,
+    });
+  });
+
+  return <div ref={ref} id="map" />;
 }
 
-export default App;
+function App() {
+  const center = { lat: -34.397, lng: 150.644 };
+  const zoom = 4;
+
+  return (
+    <Wrapper apiKey="" render={render}>
+      <MyMapComponent center={center} zoom={zoom} />
+    </Wrapper>
+  );
+}

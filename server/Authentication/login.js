@@ -1,15 +1,14 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const generateSessionToken = require("./generateSessionToken");
-const database = require("../components/database");
-const database = require("../components/database");
-
+const database = require("../utils/databaseUtils");
 const router = express.Router();
-const database = new database();
 
-database.connectDatabase("Login");
-const connection = database.connection;
+const databaseObj = new database();
 
+databaseObj.connectDatabase("Login");
+
+const connection = databaseObj.connection;
 
 router.post("/", (req, res) => {
   body = req.body;
@@ -19,17 +18,13 @@ router.post("/", (req, res) => {
   const getQuery =
     "select employee_id, password, type_id from accountmanagement.employees where nic = ? ;";
 
-  // response has 3 field
-  // error occur then error = true , otherwise error = false
-  // exist => if the employee nic alredy regiterd exist = true else exist = false
-  // employee regeister is sucess then sucess=true
   connection.query(getQuery, [body.nic], (err, result) => {
     if (err) {
       res.send({
         sucess: false,
         isExist: false,
         error: err,
-        result: null
+        result: null,
       });
     } else {
       if (result.length == 0) {
@@ -37,7 +32,7 @@ router.post("/", (req, res) => {
           sucess: false,
           isExist: false,
           error: null,
-          result: result
+          result: result,
         });
       } else {
         const employee_id = result[0].employee_id;
@@ -53,14 +48,14 @@ router.post("/", (req, res) => {
               isExist: true,
               error: null,
               result: result,
-              sessionToken: sessionToken
+              sessionToken: sessionToken,
             });
           } else {
             res.send({
               sucess: false,
               isExist: true,
               error: null,
-              result: result
+              result: result,
             });
           }
         });
