@@ -1,109 +1,113 @@
-CREATE TABLE User (
-    User_ID INT AUTO_INCREMENT PRIMARY KEY,
-    First_Name VARCHAR(255) NOT NULL,
-    Last_Name VARCHAR(255),
-    Phone_Number VARCHAR(15) NOT NULL,
+CREATE TABLE user (
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255),
+    phoneNumber VARCHAR(15) NOT NULL,
     NIC VARCHAR(20) UNIQUE, -- NIC field is unique
-    Address VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
     DOB DATE,  -- Date of Birth
-    Email VARCHAR(255) NOT NULL UNIQUE, -- email field is unique
-    Password VARCHAR(255) NOT NULL,
-    Preferred_Type INT,  ------------------------------------------------------------------------------------
-    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    email VARCHAR(255) NOT NULL UNIQUE, -- email field is unique
+    password VARCHAR(255) NOT NULL,
+    preferredType INT,  -- ==============================================================================
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Hospital (
-    Hospital_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    Location VARCHAR(255) NOT NULL,
-    Type ENUM('Government', 'Private') NOT NULL,
-    No_Of_Ambulance INT NOT NULL,
-    Website VARCHAR(255),
-    Email VARCHAR(255) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
-    Contact_Number VARCHAR(15) NOT NULL,
-    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE hospital (
+    hospitalID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    type ENUM('Government', 'Private') NOT NULL,
+    noOfAmbulance INT NOT NULL,
+    website VARCHAR(255),
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contactNumber VARCHAR(15) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Ambulance (
-    Ambulance_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Ambulance_Number VARCHAR(20) NOT NULL UNIQUE, -- Ambulance_Number field is unique
-    Hospital_ID INT NOT NULL,
-    Ambulance_Location VARCHAR(255) NOT NULL,
-    Is_Available BOOLEAN NOT NULL DEFAULT 0,
-    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID)
+CREATE TABLE ambulance (
+    ambulanceID INT AUTO_INCREMENT PRIMARY KEY,
+    ambulanceNumber VARCHAR(20) NOT NULL UNIQUE, -- Ambulance_Number field is unique
+    hospitalID INT NOT NULL,
+    ambulanceLocation VARCHAR(255) NOT NULL,
+    isAvailable BOOLEAN NOT NULL DEFAULT 0,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (hospitalID) REFERENCES hospital(hospitalID) on delete cascade on update cascade
 );
 
-CREATE TABLE Emergency_Request (
-    Request_ID INT AUTO_INCREMENT PRIMARY KEY,
-    User_ID INT NOT NULL,
-    Requested_Time DATETIME,
-    Status ENUM('Pending', 'Dispatched', 'Completed') NOT NULL,
-    Ambulance_ID INT NOT NULL,
-    Additional_Details TEXT,
-    User_Location VARCHAR(255) NOT NULL,
-    Hospital_ID int,
-    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (User_ID) REFERENCES User(User_ID),
-    FOREIGN KEY (Ambulance_ID) REFERENCES Ambulance(Ambulance_ID),
-    FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID)
-);
 
-CREATE TABLE Feedback (
-    Feedback_ID INT AUTO_INCREMENT PRIMARY KEY,
-    User_ID INT,
-    Hospital_ID INT,
-    Ambulance_ID INT,
-    Feedback_Message TEXT,
-    Feedback_Type VARCHAR(50),
-    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (User_ID) REFERENCES User(User_ID),
-    FOREIGN KEY (Ambulance_ID) REFERENCES Ambulance(Ambulance_ID),
-    FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID)
-);
-
-CREATE TABLE Driver (
-    Driver_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Hospital_ID int NOT NULL,
-    First_Name VARCHAR(255) NOT NULL,
-    Last_Name VARCHAR(255),
-    Phone_Number VARCHAR(15) NOT NULL,
-    Email VARCHAR(255) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
+CREATE TABLE driver (
+    driverID INT AUTO_INCREMENT PRIMARY KEY,
+    hospitalID int NOT NULL,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255),
+    phoneNumber VARCHAR(15) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     NIC VARCHAR(20) UNIQUE, -- NIC field is unique
-    Address VARCHAR(255) NOT NULL,
-    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID)
-);
-
-CREATE TABLE Ambulance_Driver_Connection (
-    Driver_Connection_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Driver_ID INT NOT NULL,
-    Ambulance_ID int NOT NULL,
-    Connected_Time DATETIME NOT NULL,
-    Disconnected_Time DATETIME NOT NULL,
-    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (Driver_ID) REFERENCES Driver(Driver_ID),
-    FOREIGN KEY (Ambulance_ID) REFERENCES Ambulance(Ambulance_ID),
+    address VARCHAR(255) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (hospitalID) REFERENCES hospital(hospitalID) on delete cascade on update cascade
 );
 
 
-CREATE TABLE User_Ambulance_Connection (
-    Connection_ID INT AUTO_INCREMENT PRIMARY KEY,
-    User_ID INT NOT NULL,
-    Ambulance_ID INT NOT NULL,
-    Connected_Time DATETIME NOT NULL,
-    Disconnected_Time DATETIME NOT NULL,
-    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (User_ID) REFERENCES User(User_ID),
-    FOREIGN KEY (Ambulance_ID) REFERENCES Ambulance(Ambulance_ID)
+CREATE TABLE emergency_request (
+    requestID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    requestedTime DATETIME,
+    status ENUM('Pending', 'Dispatched', 'Completed') NOT NULL,
+    ambulanceID INT NOT NULL,
+    userLocation VARCHAR(255) NOT NULL,
+    hospitalID int,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES user(userID) on delete cascade on update cascade,
+    FOREIGN KEY (ambulanceID) REFERENCES ambulance(ambulanceID) on delete cascade on update cascade,
+    FOREIGN KEY (hospitalID) REFERENCES hospital(hospitalID) on delete cascade on update cascade
+);
+
+CREATE TABLE feedback (
+    feedbackID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT,
+    hospitalID INT,
+    ambulanceID INT,
+    feedbackMessage TEXT,
+    feedbackType VARCHAR(50),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES user(userID) on delete cascade on update cascade,
+    FOREIGN KEY (ambulanceID) REFERENCES ambulance(ambulanceID) on delete cascade on update cascade,
+    FOREIGN KEY (hospitalID) REFERENCES hospital(hospitalID) on delete cascade on update cascade
+);
+
+
+CREATE TABLE ambulance_driver_connection (
+    driverConnectionID INT AUTO_INCREMENT PRIMARY KEY,
+    driverID INT NOT NULL,
+    ambulanceID int NOT NULL,
+    connectedTime DATETIME NOT NULL,
+    disconnectedTime DATETIME NOT NULL,
+    date date,
+    workingHours time default "00:00:00",
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (driverID) REFERENCES driver(driverID) on delete cascade on update cascade,
+    FOREIGN KEY (ambulanceID) REFERENCES ambulance(ambulanceID) on delete cascade on update cascade
+);
+
+
+CREATE TABLE user_ambulance_connection (
+    connectionID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    ambulanceID INT NOT NULL,
+    connectedTime DATETIME NOT NULL,
+    disconnectedTime DATETIME NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES user(userID) on delete cascade on update cascade,
+    FOREIGN KEY (ambulanceID) REFERENCES ambulance(ambulanceID) on delete cascade on update cascade
 );
