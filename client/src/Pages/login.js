@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import './login.css';
+import React, { useState } from "react";
+import "./login.css";
 
 // Import your SVG icons from the public directory
-import usernameIcon from '../images/user.svg';
-import passwordIcon from '../images/lock.svg';
-
+import usernameIcon from "../images/user.svg";
+import passwordIcon from "../images/lock.svg";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -58,14 +57,13 @@ function LoginPage() {
                 placeholder="Password"
               />
             </div>
-
             <div className="form-group">
               <button type="submit">Login</button>
+              <a href="#" className="forgot-password">
+                Forgot Password?
+              </a>
             </div>
           </form>
-          <div className="forgot-password">
-            <a href="#">Forgot Password?</a>
-          </div>
           <div className="register">
             <p>Don't have an account?</p>
             <a href="#" className="blue-link">

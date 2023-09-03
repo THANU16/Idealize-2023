@@ -22,7 +22,9 @@
 }
 
 h2 {
-  text-align: center;
+  text-align: left;
+  margin-left: 30px;
+  font-size: 40px;
 }
 
 /* Styling for form elements */
@@ -37,16 +39,19 @@ label {
 
 input[type="text"],
 input[type="password"] {
-  width: 100%;
+  width: 442.51px;
+  height: 30px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 10px;
+  border: 4px solid #19295A;
+  background: #FFF;
+  font-size: 20px;
 }
 
 button[type="submit"] {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #1c316A;
   color: #fff;
   border: none;
   border-radius: 3px;
@@ -54,14 +59,16 @@ button[type="submit"] {
   transition: background-color 0.3s;
 }
 
+
 button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #326dac;
 }
 
 /* Styling for the "Forgot Password?" link */
 .forgot-password {
-  text-align: right;
+  text-align: left;
   margin-bottom: 10px;
+  margin-left: 20px;
 }
 
 .forgot-password a {
@@ -71,13 +78,13 @@ button[type="submit"]:hover {
 
 /* Styling for the "Don't have an account?" section */
 .register {
+  padding-left:30px ;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 0px;
+  display: flex;
+  align-items: center; /* Vertically align the elements */
 }
 
-.register p {
-  margin-bottom: 10px;
-}
 
 .blue-link {
   color: #007bff;
@@ -99,13 +106,37 @@ button[type="submit"]:hover {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-top: 15px;
   display: flex;
   align-items: center; /* Vertically align the icon and input field */
 }
 
 .icon {
-  width: 20px; /* Adjust the width as needed */
-  height: 20px; /* Adjust the height as needed */
-  margin-right: 10px; /* Add spacing between the icon and input field */
+  width: 45px; /* Adjust the width as needed */
+  height: 45px; /* Adjust the height as needed */
+  margin: 10px; /* Add spacing between the icon and input field */
+}
+
+.form-group button {
+  margin: 0px 65px; /* Push the button to the right */
+  width: 15%;
+  border-radius: 10px;
+  padding: 5px 8px;
+}
+/* Styling for the "Don't have an account?" and "Register" container */
+.register {
+  display: flex;
+  align-items: center; /* Vertically align the elements */
+  margin-top: auto; /* Adjust the top margin as needed */
+}
+
+.submit{
+  flex: auto;
+}
+
+/* Styling for the "Forgot Password?" link */
+.forgot-password {
+  text-decoration: none;
+  color: #007bff;
+  margin-left: 10px; /* Adjust the left margin to separate it from the login button */
 }
