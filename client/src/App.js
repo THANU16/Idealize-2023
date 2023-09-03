@@ -2,8 +2,7 @@ import React, { useEffect, useRef, ReactElement } from "react";
 import ReactDOM from "react-dom";
 import { Wrapper, Status } from "../src";
 
-
-function MyMapComponent(center,zoom) {
+function MyMapComponent(center, zoom) {
   const ref = useRef();
 
   useEffect(() => {
