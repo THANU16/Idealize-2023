@@ -111,17 +111,17 @@ function OwnerDetailsPage({ onNext }) {
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="address">Address:</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
-          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="address">Address:</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
         </div>
         <div className="form-row">
           <div className="form-group">
@@ -147,18 +147,16 @@ function OwnerDetailsPage({ onNext }) {
             />
           </div>
         </div>
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="postalCode">Postal Code:</label>
-            <input
-              type="text"
-              id="postalCode"
-              name="postalCode"
-              value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
-              required
-            />
-          </div>
+        <div className="form-group">
+          <label htmlFor="postalCode">Postal Code:</label>
+          <input
+            type="text"
+            id="postalCode"
+            name="postalCode"
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)}
+            required
+          />
         </div>
         <button type="submit">Next</button>
       </form>
