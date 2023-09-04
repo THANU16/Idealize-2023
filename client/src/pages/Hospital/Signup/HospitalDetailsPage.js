@@ -176,7 +176,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
           </div>
         </div>
         <div className="button-group">
-          <button type="submit">Next</button>
+          <button type="next">Next</button>
         </div>
       </form>
     </div>
