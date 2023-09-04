@@ -125,3 +125,8 @@ h2 {
   background-color: #45a049; /* Use your desired hover color */
 }
 
+.upload-icon {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  margin-bottom: 20px; /* Add spacing below the SVG */
+}
