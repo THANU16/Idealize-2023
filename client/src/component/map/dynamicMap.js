@@ -1,6 +1,6 @@
 import React from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-import TraverseLocation from "./travarseLocations";
+import ambulanceMarkerIcon from "./picture/ambulanceIcon.jpeg";
 
 function DynamicMap(props) {
   const locations = [
@@ -109,6 +109,10 @@ function DynamicMap(props) {
           <Marker
             key={index}
             position={{ lat: location.lat, lng: location.lng }}
+            icon={{
+              url: ambulanceMarkerIcon, // Path to your ambulance marker icon
+              scaledSize: new window.google.maps.Size(40, 40), // Adjust the size as needed
+            }}
           />
         ))}
       </Map>
