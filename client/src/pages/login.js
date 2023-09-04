@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.css";
+import "./Login.css";
 
 // Import your SVG icons from the public directory
 import usernameIcon from "../images/user.svg";
