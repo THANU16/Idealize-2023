@@ -1,27 +1,18 @@
 import React, { useEffect, useRef, ReactElement } from "react";
 import ReactDOM from "react-dom";
-import { Wrapper, Status } from "../src";
+import SearchMap from "./component/map/search";
+import DynamicMap from "./component/map/dynamicMap";
+import EmergencyMap from "./component/map/CurrentLocation";
+import GetPath from "./component/map/GetPath"; // Update the import statement
 
-function MyMapComponent(center, zoom) {
-  const ref = useRef();
-
-  useEffect(() => {
-    new window.google.maps.Map(ref.current, {
-      center,
-      zoom,
-    });
-  });
-
-  return <div ref={ref} id="map" />;
-}
 
 function App() {
-  const center = { lat: -34.397, lng: 150.644 };
-  const zoom = 4;
-
   return (
-    <Wrapper apiKey="" render={render}>
-      <MyMapComponent center={center} zoom={zoom} />
-    </Wrapper>
+    // <SearchMap />;
+    // <DynamicMap/>
+    // <EmergencyMap/>
+    <GetPath />
   );
 }
+
+export default App;
