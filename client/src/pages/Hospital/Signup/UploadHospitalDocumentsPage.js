@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./UploadHospitalDocumentsPage.css";
 import uploadSvg from "./upload.svg"; // Import the SVG file
 
-function FileUpload() {
+function UploadHospitalDocumentsPage() {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleFileSelect = (e) => {
@@ -34,18 +34,27 @@ function FileUpload() {
   return (
     <div className="upload">
       <h2>Upload Hospital Documents</h2>
-      <div className="file-upload-container">
+      <div className="upload-container">
         {/* Display the SVG image */}
         <img src={uploadSvg} alt="Upload Icon" className="upload-icon" />
-
         <div
           className={`drop-zone ${selectedFiles.length > 0 ? "active" : ""}`}
           onDrop={handleDrop}
           onDragOver={handleDragOver}
         >
           {selectedFiles.length > 0 ? (
-            <div>
-              {/* ... (selected files list) */}
+            <div className="selected-files">
+              {selectedFiles.map((file, index) => (
+                <div key={index} className="selected-file">
+                  <span>{file.name}</span>
+                  <button
+                    className="remove-button"
+                    onClick={() => removeFile(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
             </div>
           ) : (
             <p>Drag & Drop Files</p>
@@ -66,10 +75,12 @@ function FileUpload() {
       </div>
       <div className="navigation-buttons">
         <button className="prev-button">Prev</button>
-        <button className="finish-button">Finish</button>
+        <button className="finish-button" onClick={handleUpload}>
+          Finish
+        </button>
       </div>
     </div>
   );
 }
 
-export default FileUpload;
+export default UploadHospitalDocumentsPage;
