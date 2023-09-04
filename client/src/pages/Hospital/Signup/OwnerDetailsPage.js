@@ -158,7 +158,8 @@ function OwnerDetailsPage({ onNext }) {
             required
           />
         </div>
-        <button type="submit">Next</button>
+        <button type="prev">Prev</button>
+        <button type="next">Next</button>
       </form>
     </div>
   );
