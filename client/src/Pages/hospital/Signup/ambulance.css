@@ -1,0 +1,97 @@
+.emergency-request-modal {
+  background-color: rgba(255, 0, 0, 0.2); /* Red background */
+  color: red;
+  width: 800px; /* Increase the width */
+  height: 500px; /* Increase the height */
+  border-radius: 20px;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.emergency-header {
+  text-align: center;
+}
+
+.selected-ambulance {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #00cc00; /* Green background for selected ambulance display */
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.small-request-modal {
+  background-color: rgb(255, 255, 255);
+  color: green;
+  width: 400px; /* Increase the width */
+  height: 200px; /* Increase the height */
+  border-radius: 20px;
+  padding: 20px;
+  position: absolute;
+  bottom: 20px; /* Adjust this value as needed to position it at the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ambulance-request-modal {
+  background-color: gray;
+  color: green;
+  width: 350px; /* Increase the width */
+  height: 10px; /* Increase the height */
+  border-radius: 20px;
+  padding: 20px;
+  position: absolute;
+  bottom: 20px; /* Adjust this value as needed to position it at the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ambulancered-request-modal {
+  background-color: rgba(255, 0, 0, 0.2);
+  color: green;
+  width: 100px; /* Increase the width */
+  height: 70px; /* Increase the height */
+  border-radius: 20px;
+  padding: 20px;
+  position: absolute;
+  bottom: 20px; /* Adjust this value as needed to position it at the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ambulance-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Adjust the spacing as needed */
+}
+
+.left-header {
+  text-align: left;
+  padding-left: 10px; /* Adjust the padding as needed */
+  font-size: 30px; /* Adjust the font size as needed */
+}
+
+.right-header {
+  text-align: right;
+  padding-right: 10px; /* Adjust the padding as needed */
+  font-size: 30px; /* Adjust the font size as needed */
+}
+
+.ambulance-row:hover {
+  background-color: #efefef; /* Change the background color on hover */
+  cursor: pointer;
+  color: blue; /* Change the cursor color to blue on hover */
+}
