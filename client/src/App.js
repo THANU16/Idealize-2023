@@ -49,6 +49,10 @@ const App = () => {
 
           <Route path="/login" element={<Login />} />
           <Route path='/signup' element={<Signup />}></Route>
+          <Route path="/ambulanceForm" element={<AmbulanceForm />} />
+          <Route path="/driverForm" element={<DriverForm />} />
+          <Route path="/login" element={<Login />} />
+
         </Routes>
       </Sidebar>
     </BrowserRouter>
