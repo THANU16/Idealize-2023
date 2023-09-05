@@ -24,8 +24,9 @@ function OwnerDetailsPage({ onNext }) {
   };
 
   return (
-    <div className="owner-details-container">
+    <div className="OwnerDetailsPage">
       <h2>Owner Details</h2>
+      <div className="owner-details-container">
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-group">
@@ -162,7 +163,9 @@ function OwnerDetailsPage({ onNext }) {
         <button type="next">Next</button>
       </form>
     </div>
-  );
+
+    </div>
+      );
 }
 
 export default OwnerDetailsPage;
