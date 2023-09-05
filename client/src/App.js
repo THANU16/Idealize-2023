@@ -14,6 +14,8 @@ import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
 import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
 import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
 import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
+import Login from "./pages/Login.jsx";
+
 import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
 import Signup from "./pages/Signup";
 // Login
@@ -27,6 +29,7 @@ import DriverForm from "./pages/Hospital/DriverDetails";
 
 const App = () => {
   return (
+    // <Search />
     <BrowserRouter>
       <Routes></Routes>
       <Sidebar path="/dashboard">
@@ -46,12 +49,17 @@ const App = () => {
             element={<UploadHospitalDocuments />}
           />
           <Route path="/HospitalSearch" element={<HospitalSearch />} />
-
           <Route path="/login" element={<Login />} />
           <Route path='/signup' element={<Signup />}></Route>
           <Route path="/ambulanceForm" element={<AmbulanceForm />} />
           <Route path="/driverForm" element={<DriverForm />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/ambulanceForm" element={<AmbulanceForm />} />
+          <Route path="/driverForm" element={<DriverForm />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/HospitalSearch" element={<HospitalSearch />} />
+          <Route path="/login" element={<Login />} />
+          <Route path='/signup' element={<Signup />}></Route>
 
         </Routes>
       </Sidebar>
