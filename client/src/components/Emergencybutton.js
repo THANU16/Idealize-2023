@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./EmergencyRequest.css";
+import Home from "../pages/Home.jsx";
 
 function EmergencyRequest({ onRequest, onCancel }) {
+  const [request, setRequest] = useState(false);
   return (
     <div className="emergency-request-modal">
       <div className="emergency-request-content">

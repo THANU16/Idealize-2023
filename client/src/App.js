@@ -14,7 +14,7 @@ import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
 import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
 import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
 import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
-// import Login from "./pages/LoginBoot";
+import Login from "./pages/Login.jsx";
 import Emergency from "./components/Emergencybutton";
 import Request from "./components/ambulance";
 
