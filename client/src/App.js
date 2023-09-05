@@ -8,8 +8,6 @@ import Ambulance from "./pages/Amblance.jsx";
 import Drivers from "./pages/Drivers.jsx";
 import Help from "./pages/Help.jsx";
 import Logut from "./pages/Logout.jsx";
-// Login
-import Login from "./pages/login.js";
 
 //signup
 import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
