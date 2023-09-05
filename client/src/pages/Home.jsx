@@ -7,7 +7,6 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import Search from "../components/Search.jsx";
 
 const DynamicMap = (props) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -122,9 +121,6 @@ const DynamicMap = (props) => {
 
       {/* TABLES */}
       <div className="controls">
-        <div className="tables">
-          <Search />
-        </div>
         <div className="tables">
           <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3>
           <Table striped bordered hover variant="dark">
