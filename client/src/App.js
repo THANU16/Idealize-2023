@@ -14,15 +14,19 @@ import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
 import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
 import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
 import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
-import Login from "./pages/Login.jsx";
+import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
+import Signup from "./pages/Signup";
+// Login
+import Login from "./pages/Login";
+
 import Emergency from "./components/Emergencybutton";
 import Request from "./components/ambulance";
 import AmbulanceForm from "./pages/Hospital/AmbulanceForm";
 import DriverForm from "./pages/Hospital/DriverDetails";
 
+
 const App = () => {
   return (
-    // <Search />
     <BrowserRouter>
       <Routes></Routes>
       <Sidebar path="/dashboard">
@@ -41,9 +45,10 @@ const App = () => {
             path="/UploadHospitalDocuments"
             element={<UploadHospitalDocuments />}
           />
-          <Route path="/ambulanceForm" element={<AmbulanceForm />} />
-          <Route path="/driverForm" element={<DriverForm />} />
+          <Route path="/HospitalSearch" element={<HospitalSearch />} />
+
           <Route path="/login" element={<Login />} />
+          <Route path='/signup' element={<Signup />}></Route>
         </Routes>
       </Sidebar>
     </BrowserRouter>
@@ -51,31 +56,3 @@ const App = () => {
 };
 
 export default App;
-
-// import React, { useEffect, useRef, ReactElement } from "react";
-// import ReactDOM from "react-dom";
-// import { Wrapper, Status } from "../src";
-
-// function MyMapComponent(center, zoom) {
-//   const ref = useRef();
-
-//   useEffect(() => {
-//     new window.google.maps.Map(ref.current, {
-//       center,
-//       zoom,
-//     });
-//   });
-
-//   return <div ref={ref} id="map" />;
-// }
-
-// function App() {
-//   const center = { lat: -34.397, lng: 150.644 };
-//   const zoom = 4;
-
-//   return (
-//     <Wrapper apiKey="" render={render}>
-//       <MyMapComponent center={center} zoom={zoom} />
-//     </Wrapper>
-//   );
-// }
