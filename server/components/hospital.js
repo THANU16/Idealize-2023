@@ -78,122 +78,189 @@ router.post("/add", (req, res) => {
   });
 });
 
-
-router.post('/showDetail', (req, res) => {
+router.post("/showDetail", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ");
 
   const hospitalID = decodedUserId(sessionToken);
-  
-  const getQuery = "select * from lifeserver.hospital where hospitalID = ?;"
+
+  const getQuery = "select * from lifeserver.hospital where hospitalID = ?;";
 
   connection.query(getQuery, hospitalID, (err, result) => {
-    if (err){
+    if (err) {
       res.send({
         sucess: false,
         isExist: false,
         error: err,
-        result: null
-      })
-    } else{
-      if (result.length > 0){
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
         res.send({
           sucess: true,
           isExist: true,
           error: null,
-          result: result
-        })
-      }
-      else{
+          result: result,
+        });
+      } else {
         res.send({
           sucess: false,
           isExist: false,
           error: null,
-          result: result
-        })
+          result: result,
+        });
       }
     }
-  })
+  });
 });
 
-
-
-router.post('/showAllDrivers', (req, res) => {
+router.post("/getAllHospitalsLocations", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ");
 
   const hospitalID = decodedUserId(sessionToken);
-  
-  const getQuery = "select * from lifeserver.driver where hospitalID = ?;"
+
+  const getQuery =
+    "select hospitalID, name, lat, lng from lifeserver.hospital;";
 
   connection.query(getQuery, hospitalID, (err, result) => {
-    if (err){
+    if (err) {
       res.send({
         sucess: false,
         isExist: false,
         error: err,
-        result: null
-      })
-    } else{
-      if (result.length > 0){
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
         res.send({
           sucess: true,
           isExist: true,
           error: null,
-          result: result
-        })
-      }
-      else{
+          result: result,
+        });
+      } else {
         res.send({
           sucess: false,
           isExist: false,
           error: null,
-          result: result
-        })
+          result: result,
+        });
       }
     }
-  })
+  });
 });
 
-
-
-
-router.post('/showAllDrivers', (req, res) => {
+router.post("/getAllHospitalAmbulance", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ");
 
   const hospitalID = decodedUserId(sessionToken);
-  
-  const getQuery = "select * from lifeserver.ambulance where hospitalID = ?;"
+
+  const getQuery =
+    "select ambulanceID, lat, lng from lifeserver.hospital where hospitalID = hospitalID;";
 
   connection.query(getQuery, hospitalID, (err, result) => {
-    if (err){
+    if (err) {
       res.send({
         sucess: false,
         isExist: false,
         error: err,
-        result: null
-      })
-    } else{
-      if (result.length > 0){
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
         res.send({
           sucess: true,
           isExist: true,
           error: null,
-          result: result
-        })
-      }
-      else{
+          result: result,
+        });
+      } else {
         res.send({
           sucess: false,
           isExist: false,
           error: null,
-          result: result
-        })
+          result: result,
+        });
       }
     }
-  })
+  });
 });
+
+router.post("/showAllDrivers", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ");
+
+  const hospitalID = decodedUserId(sessionToken);
+
+  const getQuery = "select * from lifeserver.driver where hospitalID = ?;";
+
+  connection.query(getQuery, hospitalID, (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        isExist: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
+        res.send({
+          sucess: true,
+          isExist: true,
+          error: null,
+          result: result,
+        });
+      } else {
+        res.send({
+          sucess: false,
+          isExist: false,
+          error: null,
+          result: result,
+        });
+      }
+    }
+  });
+});
+
+
+router.post("/AvailabileAmbulance", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ");
+
+  const hospitalID = decodedUserId(sessionToken);
+
+  const getQuery = "select * from lifeserver.ambulance where hospitalID = ? and isAvailabile = true;";
+
+  connection.query(getQuery, hospitalID, (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        isExist: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
+        res.send({
+          sucess: true,
+          isExist: true,
+          error: null,
+          result: result,
+        });
+      } else {
+        res.send({
+          sucess: false,
+          isExist: false,
+          error: null,
+          result: result,
+        });
+      }
+    }
+  });
+});
+
 
 
 module.exports = router;

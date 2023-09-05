@@ -106,4 +106,76 @@ router.post("/showDetail", (req, res) => {
   });
 });
 
+router.post("/getLocation", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ");
+
+  const ambulanceID = decodedUserId(sessionToken);
+
+  const getQuery = "select ambulanceID, lat, lng  from lifeserver.ambulance where ambulanceID = ?;";
+
+  connection.query(getQuery, ambulanceID, (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        isExist: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
+        res.send({
+          sucess: true,
+          isExist: true,
+          error: null,
+          result: result,
+        });
+      } else {
+        res.send({
+          sucess: false,
+          isExist: false,
+          error: null,
+          result: result,
+        });
+      }
+    }
+  });
+});
+
+router.post("/setLocation", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ");
+
+  const ambulanceID = decodedUserId(sessionToken);
+
+  const setQuery = "insert into ambulanceLocation (ambulanceID, lat, lng) values (?, ?, ?);";
+
+  connection.query(setQuery, [ambulanceID, body.lat, body.lng], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        isExist: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
+        res.send({
+          sucess: true,
+          isExist: true,
+          error: null,
+          result: result,
+        });
+      } else {
+        res.send({
+          sucess: false,
+          isExist: false,
+          error: null,
+          result: result,
+        });
+      }
+    }
+  });
+});
+
 module.exports = router;
