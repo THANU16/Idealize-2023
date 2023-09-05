@@ -1,0 +1,100 @@
+/* HospitalDetailsPage.css */
+.hospital-details-container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow:4px 4px 4px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Add this to establish a positioning context */
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    flex: 1;
+    margin-right: 10px;
+    max-width: calc(50% - 5px); /* Equal width for labels and input fields */
+  }
+  
+  /* Adjust the width of the label for two input fields in one row */
+  label {
+    display: block;
+    font-weight: bold;
+    width: 20%; /* Adjust the width as needed */
+    text-align: left;
+    margin-bottom: 5px;
+  }
+  
+  /* Apply this style to every second form-group to ensure two fields in one row */
+  .form-group:nth-child(even) {
+    margin-right: 0; /* Remove the right margin for every second form-group */
+  }
+  
+  /* Style for input fields */
+  input[type="text"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="url"],
+  select {
+    width: 70%;
+    height: 40px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 3px solid #19295A;
+    background: #FFF;
+    font-size: 15px;
+  }
+  
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  /* Adjust the position of the buttons */
+  button[type="next"] {
+    width: 10%;
+    padding: 10px;
+    background-color:  #2e427e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    bottom: 0;
+    right: 150px;
+  }
+  
+  button[type="next"]{
+    margin-right: 0px;
+    margin-left: 85%;
+  }
+  
+  /* Style for button hover state */
+  button[type="next"]:hover {
+    background-color: #0056b3;
+ 
+  }
+
+  NavLink{
+    color: #ffffff;
+  }
+  
+  /* You can add more styling as needed */
+  

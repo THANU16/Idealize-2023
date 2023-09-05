@@ -9,8 +9,8 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 
-
-const DynamicMap = (props) => {
+const Home = (props) => {
+  // const { onRequest, onCancel } = props;
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
   const [address, setAddress] = useState("");
@@ -59,7 +59,14 @@ const DynamicMap = (props) => {
     //     console.error('Error sending location data:', error);
     //   });
   };
+  const [request, setRequest] = useState(false);
+  const onCancel = () => {
+    setRequest(false);
+  };
 
+  const onRequest = () => {
+    setRequest(false);
+  };
   const locations = [
     {
       lat: 9.6638,
@@ -97,6 +104,49 @@ const DynamicMap = (props) => {
       bearing: 0,
     },
   ];
+
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  // Function to toggle the visibility of notifications
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+  };
+
+  // Show the emergency request modal if request is true
+  if (request)
+    return (
+      <div className="emergency-request-modal">
+        <div className="emergency-request-content">
+          <div className="emergency-header">
+            <h1>
+              There is an emergency{" "}
+              <div className="emergency-center">
+                <img
+                  src="https://media.istockphoto.com/photos/emergency-symbol-picture-id453100595?k=6&m=453100595&s=170667a&w=0&h=Bi6sk8KHGJLcqZ5awSX7_i0esgjsWTMIdVn_EOaS2xo="
+                  alt="Emergency"
+                  width="100"
+                  height="100"
+                />
+              </div>
+            </h1>{" "}
+            {/* Add the ambulance emoji */}
+          </div>
+          <p>
+            <h2>Please accept request and send the ambulance</h2>
+          </p>
+          <div className="emergency-button-container">
+            <button className="reject-button" onClick={onCancel}>
+              Reject
+            </button>
+            <button className="accept-button" onClick={onRequest}>
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+
+  // Show the map if request is false
   return (
     <div className="container">
       <div className="map">
@@ -120,12 +170,11 @@ const DynamicMap = (props) => {
           ))}
         </Map>
       </div>
-
-      {/* TABLES */}
+      {/*Active ambulance details */}
       <div className="controls">
         <div className="tables">
           <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3>
-          <Table striped bordered hover variant="dark">
+          <table className="table table-bordered table-striped table-hover ">
             <thead>
               <tr>
                 <th>Amb.No</th>
@@ -133,16 +182,45 @@ const DynamicMap = (props) => {
               </tr>
             </thead>
             <tbody>
+              {/* {transactionData.map((data) => ( */}
               <tr>
-                <td>LO-4576</td>
+                <td>L0142</td>
                 <td>5</td>
               </tr>
               <tr>
-                <td>LL-8715</td>
-                <td>3</td>
+                <td>L0142</td>
+                <td>4</td>
               </tr>
             </tbody>
-          </Table>
+          </table>
+        </div>
+
+        <div className="notifications">
+          <button className="white-button" onClick={toggleNotifications}>
+            <h3>Notification</h3>
+          </button>
+
+          {/* Render notifications based on the state */}
+          {showNotifications && (
+            <div className="notification-container">
+              {/* Notification content goes here */}
+              <div className="notification">
+                Notification 1
+                <span>
+                  <button style={{ backgroundColor: "green", margin: "10px" }}>
+                    Accept
+                  </button>
+                </span>
+                <span>
+                  <button style={{ backgroundColor: "red" }}>Reject</button>
+                </span>
+              </div>
+              <div className="notification">Notification 2</div>
+              <div className="notification">Notification 3</div>
+            </div>
+          )}
+
+          {/* Render other components as needed */}
         </div>
       </div>
     </div>
@@ -151,4 +229,4 @@ const DynamicMap = (props) => {
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyAl5YvfOlFxEH09-MkWNh9OhYoQdN3uJOs", // Replace with your API key
-})(DynamicMap);
+})(Home);

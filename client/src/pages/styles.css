@@ -88,7 +88,7 @@ h3 {
   padding: 10px;
   font-size: 16px;
   border: none;
-  border-bottom: 2px solid #007bff; /* Add a bottom border with a blue color */
+  border-bottom: 2px solid #b6b6b6; /* Add a bottom border with a blue color */
   outline: none;
   transition: border-bottom 0.3s ease; /* Smooth transition for the border */
   border-radius: 6px;
@@ -124,6 +124,28 @@ h3 {
 }
 
 .suggestion-item--active {
-  background-color: #007bff; /* Change background color for the active suggestion */
+  background-color: #c8c8c8; /* Change background color for the active suggestion */
   color: #fff; /* Change text color for the active suggestion */
+}
+
+.white-button{
+  background-color: #ffffff;
+  color: #333;
+  
+}
+
+.notifications{
+
+  flex: 1; /* Adjust the flex value based on your layout needs */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  text-align: center; /* Align text at the top */
+  background-color: #f6caca;
+  border-radius: 12px;
+  height: 50%; /* Change to 50% to make the box half of the web page size */
+  width: 291px;
+  
+  /* padding: 20px; Increased padding for more space */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+
 }
