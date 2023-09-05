@@ -59,7 +59,7 @@ const Home = (props) => {
     //     console.error('Error sending location data:', error);
     //   });
   };
-  const [request, setRequest] = useState(true);
+  const [request, setRequest] = useState(false);
   const onCancel = () => {
     setRequest(false);
   };
@@ -104,6 +104,13 @@ const Home = (props) => {
       bearing: 0,
     },
   ];
+
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  // Function to toggle the visibility of notifications
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+  };
 
   // Show the emergency request modal if request is true
   if (request)
@@ -185,6 +192,34 @@ const Home = (props) => {
               </tr>
             </tbody>
           </Table>
+        </div>
+
+        <div className="notifications">
+          <button className="white-button" onClick={toggleNotifications}>
+            <h3>Notification</h3>
+          </button>
+
+          {/* Render notifications based on the state */}
+          {showNotifications && (
+            <div className="notification-container">
+              {/* Notification content goes here */}
+              <div className="notification">
+                Notification 1
+                <span>
+                  <button style={{ backgroundColor: "green", margin: "10px" }}>
+                    Accept
+                  </button>
+                </span>
+                <span>
+                  <button style={{ backgroundColor: "red" }}>Reject</button>
+                </span>
+              </div>
+              <div className="notification">Notification 2</div>
+              <div className="notification">Notification 3</div>
+            </div>
+          )}
+
+          {/* Render other components as needed */}
         </div>
       </div>
     </div>

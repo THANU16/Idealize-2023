@@ -128,3 +128,24 @@ h3 {
   color: #fff; /* Change text color for the active suggestion */
 }
 
+.white-button{
+  background-color: #ffffff;
+  color: #333;
+  
+}
+
+.notifications{
+
+  flex: 1; /* Adjust the flex value based on your layout needs */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  text-align: center; /* Align text at the top */
+  background-color: #f6caca;
+  border-radius: 12px;
+  height: 50%; /* Change to 50% to make the box half of the web page size */
+  width: 291px;
+  
+  /* padding: 20px; Increased padding for more space */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+
+}
