@@ -68,7 +68,8 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
       Longitude: Longitude,
     };
     // Navigate to the next page
-    console.log(formData);
+
+    sessionStorage.removeItem("coordinates");
 
     axios
       .post("http://localhost:8000/hospital/add", formData)

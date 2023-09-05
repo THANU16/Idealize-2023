@@ -17,11 +17,11 @@ import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
 
 import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
 import Signup from "./pages/Signup";
-// Login
-import Login from "./pages/Login.jsx";
 
+import Login from "./pages/login";
 import AmbulanceForm from "./pages/Hospital/AmbulanceForm";
 import DriverForm from "./pages/Hospital/DriverDetails";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   return (
@@ -30,6 +30,7 @@ const App = () => {
       <Routes></Routes>
       <Sidebar path="/dashboard">
         <Routes>
+          <Route path="/loginPage" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/ambulance" element={<Ambulance />} />
           <Route path="/drivers" element={<Drivers />} />
@@ -49,12 +50,10 @@ const App = () => {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/ambulanceForm" element={<AmbulanceForm />} />
           <Route path="/driverForm" element={<DriverForm />} />
-          <Route path="/login" element={<Login />} />
+
           <Route path="/ambulanceForm" element={<AmbulanceForm />} />
           <Route path="/driverForm" element={<DriverForm />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/HospitalSearch" element={<HospitalSearch />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />}></Route>
         </Routes>
       </Sidebar>
