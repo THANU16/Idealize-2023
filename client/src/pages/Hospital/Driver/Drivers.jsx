@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./ambulance.css";
+import "../Ambulance/ambulance.css";
 import Add from "../../../assets/icons/add.png";
 import { NavLink } from "react-router-dom";
 
