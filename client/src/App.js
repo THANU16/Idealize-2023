@@ -15,8 +15,9 @@ import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
 import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
 import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
 import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
+import Signup from "./pages/Signup";
 // Login
-// import Login from "./pages/Login";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
@@ -40,7 +41,8 @@ const App = () => {
           />
           <Route path="/HospitalSearch" element={<HospitalSearch />} />
 
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path='/signup' element={<Signup />}></Route>
         </Routes>
       </Sidebar>
     </BrowserRouter>
