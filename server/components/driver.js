@@ -78,45 +78,77 @@ router.post("/add", (req, res) => {
   });
 });
 
-
-
-router.post('/showDetail', (req, res) => {
+router.post("/showDetail", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ");
 
   const driverID = decodedUserId(sessionToken);
-  
-  const getQuery = "select * from lifeserver.driver where driverID = ?;"
+
+  const getQuery = "select * from lifeserver.driver where driverID = ?;";
 
   connection.query(getQuery, driverID, (err, result) => {
-    if (err){
+    if (err) {
       res.send({
         sucess: false,
         isExist: false,
         error: err,
-        result: null
-      })
-    } else{
-      if (result.length > 0){
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
         res.send({
           sucess: true,
           isExist: true,
           error: null,
-          result: result
-        })
-      }
-      else{
+          result: result,
+        });
+      } else {
         res.send({
           sucess: false,
           isExist: false,
           error: null,
-          result: result
-        })
+          result: result,
+        });
       }
     }
-  })
+  });
 });
 
+router.post("/setAmbulance", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ");
 
+  const driverID = decodedUserId(sessionToken);
+
+  const setQuery =
+    "insert into lifeserver.ambulanceDriverConnection (ambulance_ID, driverID);"; //=================================================
+
+  connection.query(setQuery, [body.ambulance_ID, driverID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        isExist: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
+        res.send({
+          sucess: true,
+          isExist: true,
+          error: null,
+          result: result,
+        });
+      } else {
+        res.send({
+          sucess: false,
+          isExist: false,
+          error: null,
+          result: result,
+        });
+      }
+    }
+  });
+});
 
 module.exports = router;
