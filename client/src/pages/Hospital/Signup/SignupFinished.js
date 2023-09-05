@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SignupFinished.css";
+import { NavLink } from "react-router-dom";
 
 function SignupFinished() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -9,7 +10,7 @@ function SignupFinished() {
         <h3>Documents have been submitted successfully!</h3>
         <p>We will send the username and password to your email after verification.</p>
         <p>Thank you.</p>
-        <button type='button'>Go to Login Page</button>
+        <button type='button'><NavLink to='/login'> Go to Login Page</NavLink></button>
       </div>
     </div>
   );

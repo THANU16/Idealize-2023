@@ -90,6 +90,7 @@ button[type="submit"]:hover {
   color: #007bff;
   text-decoration: none;
   font-weight: bold;
+  background-color: #f4f4f4;
 }
 
 /* Styling for the login-right (image) */

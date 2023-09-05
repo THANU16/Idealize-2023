@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./UploadHospitalDocumentsPage.css";
 import uploadSvg from "./upload.svg"; // Import the SVG file
+import { NavLink } from "react-router-dom";
 
 function UploadHospitalDocumentsPage() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -74,9 +75,11 @@ function UploadHospitalDocumentsPage() {
         </label>
       </div>
       <div className="navigation-buttons">
-        <button className="prev-button">Prev</button>
+        <button className="prev-button">
+          <NavLink to="/OwnerDetails">Prev</NavLink>{" "}
+        </button>
         <button className="finish-button" onClick={handleUpload}>
-          Finish
+          <NavLink to="/SignupFinished">Finish</NavLink>
         </button>
       </div>
     </div>

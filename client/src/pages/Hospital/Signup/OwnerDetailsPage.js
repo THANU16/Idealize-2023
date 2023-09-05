@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './OwnerDetailsPage.css'; // Import your CSS file
+import { NavLink } from "react-router-dom";
 
 function OwnerDetailsPage({ onNext }) {
   const [firstName, setFirstName] = useState('');
@@ -24,8 +25,9 @@ function OwnerDetailsPage({ onNext }) {
   };
 
   return (
-    <div className="owner-details-container">
+    <div className="OwnerDetailsPage">
       <h2>Owner Details</h2>
+      <div className="owner-details-container">
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-group">
@@ -158,11 +160,13 @@ function OwnerDetailsPage({ onNext }) {
             required
           />
         </div>
-        <button type="prev">Prev</button>
-        <button type="next">Next</button>
+        <button type="prev"><NavLink to='/HospitalDetails'>Prev</NavLink> </button>
+        <button type="next"><NavLink to='/UploadHospitalDocuments'> Next</NavLink></button>
       </form>
     </div>
-  );
+
+    </div>
+      );
 }
 
 export default OwnerDetailsPage;
