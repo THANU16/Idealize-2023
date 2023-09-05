@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
-import { NavLink } from "react-router-dom";
+import { NavLink ,useNavigate} from "react-router-dom";
 
 // Import your SVG icons from the public directory
 import usernameIcon from "../images/user.svg";
@@ -9,9 +9,11 @@ import passwordIcon from "../images/lock.svg";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
+
   };
 
   const handlePasswordChange = (e) => {
@@ -21,6 +23,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // You can add your login logic here, e.g., sending a request to a server.
+    navigate("/HospitalDetails");
     console.log(`Username/Email: ${username}, Password: ${password}`);
   };
 
