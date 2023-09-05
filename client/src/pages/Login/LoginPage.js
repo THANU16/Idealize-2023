@@ -4,8 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Import your SVG icons from the public directory
-import usernameIcon from "../images/user.svg";
-import passwordIcon from "../images/lock.svg";
+import usernameIcon from "../../images/user.svg";
+import passwordIcon from "../../images/lock.svg";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -43,7 +43,7 @@ function LoginPage() {
             alert("please check your email and password");
           }
         } else {
-          navigate("/hospitalDetails");
+          navigate("/login");
         }
       })
       .catch((err) => console.log(err));
@@ -92,7 +92,7 @@ function LoginPage() {
           </form>
           <div className="register">
             <p>Don't have an account?</p>
-            <NavLink to="/HospitalDetails" className="blue-link">
+            <NavLink to="/signup" className="blue-link">
               Register
             </NavLink>
           </div>
