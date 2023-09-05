@@ -16,11 +16,8 @@ const SearchLocationDetails = ({ selectedPlace, coordinates, confirm }) => {
 
   const handleConfirm = () => {
     const data = {
-      placeID: placeID,
       latitude: latitude,
-      longitude: longitude,
-      address: address,
-      locationURL: googleMapsUrl,
+      longitude: longitude
     };
     //  send the data to backend
     console.log(data);
