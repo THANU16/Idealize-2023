@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./HospitalDetailsPage.css"; // Import your CSS file
+
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
   const Navigate = useNavigate(); // Use the navigate function for navigation
@@ -43,13 +45,13 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
       setLatitude(savedCoordinates.latitude);
       setLongitude(savedCoordinates.longitude);
     }
-
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Validate and handle form submission logic here
     // You can also store the entered data in a state or context for later use
+
     const formData = {
       hospitalName: hospitalName,
       ownership: ownership,
@@ -67,8 +69,18 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
     };
     // Navigate to the next page
     console.log(formData);
-    Navigate("/OwnerDetails");
 
+    axios
+      .post("http://localhost:8000/hospital/add", formData)
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data.isExist) {
+          alert("email already exist. Please check your email!!!");
+        } else if (res.data.sucess) {
+          Navigate("/OwnerDetails");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleSetLocation = () => {

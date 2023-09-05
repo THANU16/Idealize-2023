@@ -11,6 +11,7 @@ databaseObj.connectDatabase("Hospital");
 const connection = databaseObj.connection;
 
 router.post("/add", (req, res) => {
+  console.log(req.body);
   body = req.body;
   const password = body.password;
 
@@ -52,7 +53,7 @@ router.post("/add", (req, res) => {
               body.website,
               body.email,
               hash,
-              contactNumber,
+              body.hotline,
             ],
             (err, result) => {
               if (err) {
