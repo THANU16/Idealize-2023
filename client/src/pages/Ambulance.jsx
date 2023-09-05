@@ -3,8 +3,6 @@ import { NavLink } from "react-router-dom";
 import "../pages/ambulance.css";
 import Add from "../assets/icons/add.png";
 
-const onAddAmbulance = () => {};
-
 const Analytics = () => {
   return (
     <div>

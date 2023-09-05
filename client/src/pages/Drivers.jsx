@@ -4,8 +4,6 @@ import "../pages/ambulance.css";
 import Add from "../assets/icons/add.png";
 import { NavLink } from "react-router-dom";
 
-const onAddDriver = () => {};
-
 const Analytics = () => {
   return (
     <div>
