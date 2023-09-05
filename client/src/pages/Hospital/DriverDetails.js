@@ -5,13 +5,14 @@ import uploadSvg from "./upload.svg"; // Import the SVG file
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
   const [firstName, setFirstName] = useState("");
-  const [hospitalName, setHospitalName] = useState("");
-  const [ambulanceNo, setAmbulanceNo] = useState("");
-  const [ownership, setOwnership] = useState(""); // 'Government' or 'Private'
+  const [lastName, setLastName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [address, setAddress] = useState(""); // 'Government' or 'Private'
   const [registrationNo, setAmbulanceCompany] = useState("");
-  const [registeredDate, setRegisteredDate] = useState("");
-  const [address, setModelNo] = useState("");
-  const [webPage, setWebPage] = useState("");
+  const [password, setPassword] = useState("");
+  const [conformPassword, setConformPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [nic, setNIC] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,62 +43,62 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="hospitalName">First Name</label>
+                <label htmlFor="lastName">Last Name</label>
                 <input
                   type="text"
-                  id="hospitalName"
-                  name="hospitalName"
-                  value={hospitalName}
-                  onChange={(e) => setAmbulanceNo(e.target.value)}
+                  id="lastName"
+                  name="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   required
                 />
               </div>
             </div>
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="registrationNo">Phone Number</label>
+                <label htmlFor="phoneNo">Phone Number</label>
                 <input
                   type="text"
-                  id="registrationNo"
-                  name="registrationNo"
-                  value={registrationNo}
-                  onChange={(e) => setAmbulanceCompany(e.target.value)}
+                  id="phoneNo"
+                  name="phoneNo"
+                  value={phoneNo}
+                  onChange={(e) => setPhoneNo(e.target.value)}
                   required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="registrationNo">Email</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
-                  id="registrationNo"
-                  name="registrationNo"
-                  value={registrationNo}
-                  onChange={(e) => setAmbulanceCompany(e.target.value)}
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
             </div>
 
             <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="registrationNo">NIC</label>
+              <div className="nic">
+                <label htmlFor="nic">NIC</label>
                 <input
                   type="text"
-                  id="registrationNo"
-                  name="registrationNo"
-                  value={registrationNo}
-                  onChange={(e) => setAmbulanceCompany(e.target.value)}
+                  id="nic"
+                  name="nic"
+                  value={nic}
+                  onChange={(e) => setNIC(e.target.value)}
                   required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="registrationNo">Address</label>
+                <label htmlFor="address">Address</label>
                 <input
                   type="text"
-                  id="registrationNo"
-                  name="registrationNo"
-                  value={registrationNo}
-                  onChange={(e) => setAmbulanceCompany(e.target.value)}
+                  id="address"
+                  name="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   required
                 />
               </div>
@@ -106,24 +107,24 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             {/* Center the upload input */}
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="registrationNo">Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                   type="password"
-                  id="registrationNo"
-                  name="registrationNo"
-                  value={registrationNo}
-                  onChange={(e) => setAmbulanceCompany(e.target.value)}
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="registrationNo">Confirm Password</label>
+                <label htmlFor="conformPassword">Confirm Password</label>
                 <input
                   type="text"
-                  id="registrationNo"
-                  name="registrationNo"
-                  value={registrationNo}
-                  onChange={(e) => setAmbulanceCompany(e.target.value)}
+                  id="conformPassword"
+                  name="conformPassword"
+                  value={conformPassword}
+                  onChange={(e) => setConformPassword(e.target.value)}
                   required
                 />
               </div>

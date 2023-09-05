@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // Navbar
 import Sidebar from "./components/Sidebar.jsx";
 import Home from "./pages/Home.jsx";
-import Ambulance from "./pages/Amblance.jsx";
+import Ambulance from "./pages/Ambulance.jsx";
 import Drivers from "./pages/Drivers.jsx";
 import Help from "./pages/Help.jsx";
 import Logut from "./pages/Logout.jsx";
