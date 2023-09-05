@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./EmergencyRequest.css";
-import Home from "../pages/Home.jsx";
+import Home from "../pages/Hospital/Home.jsx";
 
 function EmergencyRequest({ onRequest, onCancel }) {
   const [request, setRequest] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AmbulanceForm.css"; // Import your CSS file
 import { NavLink } from "react-router-dom";
-import uploadSvg from "./upload.svg"; // Import the SVG file
+import uploadSvg from "../upload.svg"; // Import the SVG file
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
   const [hospitalName, setAmbulanceNo] = useState("");
