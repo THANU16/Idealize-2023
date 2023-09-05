@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./HospitalDetailsPage.css"; // Import your CSS file
 
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
   const Navigate = useNavigate(); // Use the navigate function for navigation
@@ -45,7 +45,6 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
       setLatitude(savedCoordinates.latitude);
       setLongitude(savedCoordinates.longitude);
     }
-
   });
 
   const handleSubmit = (e) => {
@@ -71,19 +70,17 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
     // Navigate to the next page
     console.log(formData);
 
-    axios.post(import.meta.env.VITE_API_URL + '/employee/add', form)
-			.then(res => {
-				// console.log(res.data);
-				if (res.data.isExist) {
-					alert("email already exist. Please check your email!!!")
-				}
-
-				else if (res.data.sucess) {
+    axios
+      .post("http://localhost:8000/hospital/add", formData)
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data.isExist) {
+          alert("email already exist. Please check your email!!!");
+        } else if (res.data.sucess) {
           Navigate("/OwnerDetails");
-				}
-			})
-			.catch(err => console.log(err));
-
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleSetLocation = () => {

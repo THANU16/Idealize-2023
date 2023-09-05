@@ -18,11 +18,11 @@ server = http.createServer((req, res) => {
 app.use(express.json());
 
 app.use("/user", user);
-app.use("/login", login);
+// app.use("/login", login);
 app.use("/hospital", hospital);
 app.use("/driver", driver);
 app.use("/ambulance", ambulance);
 
-app.listen(6000, () => {
-  console.log("Listen port 6000");
+app.listen(8000, () => {
+  console.log("Listen port 8000");
 });
