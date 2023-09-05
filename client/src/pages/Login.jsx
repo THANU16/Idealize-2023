@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./login.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom"; // Import useNavigate
+import axios from "axios";
+import { UserContext } from "./UserContext";
 
 // Import your SVG icons from the public directory
 import usernameIcon from "../images/user.svg";
@@ -10,18 +12,44 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  // const { setUser } = useContext(UserContext);
+  const navigate = useNavigate(); // Initialize navigate from react-router-dom
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
+
+  const [error, setError] = useState("");
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // You can add your login logic here, e.g., sending a request to a server.
-    console.log(`Username/Email: ${username}, Password: ${password}`);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    navigate("/home");
+    // axios
+    //   .post("localhost:5000", {
+    //     username: username, // Pass username and password as an object
+    //     password: password,
+    //   })
+    //   .then((res) => {
+    //     // console.log(res.data);
+    //     if (res.data.success) {
+    //       // store the session token in the local storage
+    //       sessionStorage.setItem("sessionToken", res.data.sessionToken);
+    //       sessionStorage.setItem("type_id", res.data.type_id);
+    //       // setUser(res.data.sessionToken);
+
+    //       navigate("/dashboard", { state: { show: true, onHide: true } });
+    //     } else {
+    //       alert("Incorrect Username or Password");
+
+    //       setError(res.data.Error);
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   return (

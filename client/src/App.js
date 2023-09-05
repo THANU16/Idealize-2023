@@ -15,10 +15,22 @@ import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
 import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
 import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
 
+import UserDetailsPage from "./pages/User/SignUp/UserDetails";
+
 // Login
-import Login from "./pages/login";
+import Login from "./pages/Login";
 
 const App = () => {
+  // const [user, setUser] = useState(null);
+  // const [typeID, setTypeID] = useState(null);
+
+  // useEffect(() => {
+  //   const sessionToken = localStorage.getItem("sessionToken");
+  //   const typeID = localStorage.getItem("type_id");
+  //   setUser(sessionToken);
+  //   setTypeID(typeID);
+  // });
+
   return (
     <BrowserRouter>
       <Routes></Routes>
@@ -38,6 +50,8 @@ const App = () => {
             path="/UploadHospitalDocuments"
             element={<UploadHospitalDocuments />}
           />
+
+          <Route path="/UserDetails" element={<UserDetailsPage />} />
 
           <Route path="/login" element={<Login />} />
         </Routes>
