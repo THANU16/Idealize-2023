@@ -151,4 +151,40 @@ router.post("/setAmbulance", (req, res) => {
   });
 });
 
+router.post("/setLocation", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ");
+
+  const ambulanceID = decodedUserId(sessionToken);
+
+  const setQuery = "insert into ambulanceLocation (ambulanceID, lat, lng) values (?, ?, ?);";
+
+  connection.query(setQuery, [ambulanceID, body.lat, body.lng], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        isExist: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
+        res.send({
+          sucess: true,
+          isExist: true,
+          error: null,
+          result: result,
+        });
+      } else {
+        res.send({
+          sucess: false,
+          isExist: false,
+          error: null,
+          result: result,
+        });
+      }
+    }
+  });
+});
+
 module.exports = router;
