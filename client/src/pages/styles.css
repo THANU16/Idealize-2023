@@ -88,7 +88,7 @@ h3 {
   padding: 10px;
   font-size: 16px;
   border: none;
-  border-bottom: 2px solid #007bff; /* Add a bottom border with a blue color */
+  border-bottom: 2px solid #b6b6b6; /* Add a bottom border with a blue color */
   outline: none;
   transition: border-bottom 0.3s ease; /* Smooth transition for the border */
   border-radius: 6px;
@@ -124,7 +124,7 @@ h3 {
 }
 
 .suggestion-item--active {
-  background-color: #007bff; /* Change background color for the active suggestion */
+  background-color: #c8c8c8; /* Change background color for the active suggestion */
   color: #fff; /* Change text color for the active suggestion */
 }
 

@@ -174,7 +174,7 @@ const Home = (props) => {
       <div className="controls">
         <div className="tables">
           <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3>
-          <Table striped bordered hover variant="dark">
+          <table className="table table-bordered table-striped table-hover ">
             <thead>
               <tr>
                 <th>Amb.No</th>
@@ -182,16 +182,17 @@ const Home = (props) => {
               </tr>
             </thead>
             <tbody>
+              {/* {transactionData.map((data) => ( */}
               <tr>
-                <td>LO-4576</td>
+                <td>L0142</td>
                 <td>5</td>
               </tr>
               <tr>
-                <td>LL-8715</td>
-                <td>3</td>
+                <td>L0142</td>
+                <td>4</td>
               </tr>
             </tbody>
-          </Table>
+          </table>
         </div>
 
         <div className="notifications">

@@ -17,6 +17,8 @@ import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
 import Login from "./pages/Login.jsx";
 import Emergency from "./components/Emergencybutton";
 import Request from "./components/ambulance";
+import AmbulanceForm from "./pages/Hospital/AmbulanceForm";
+import DriverForm from "./pages/Hospital/DriverDetails";
 
 const App = () => {
   return (
@@ -39,7 +41,8 @@ const App = () => {
             path="/UploadHospitalDocuments"
             element={<UploadHospitalDocuments />}
           />
-
+          <Route path="/ambulanceForm" element={<AmbulanceForm />} />
+          <Route path="/driverForm" element={<DriverForm />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Sidebar>
