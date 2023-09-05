@@ -21,6 +21,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/login";
 import AmbulanceForm from "./pages/Hospital/AmbulanceForm";
 import DriverForm from "./pages/Hospital/DriverDetails";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
       <Routes></Routes>
       <Sidebar path="/dashboard">
         <Routes>
+          <Route path="/loginPage" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/ambulance" element={<Ambulance />} />
           <Route path="/drivers" element={<Drivers />} />

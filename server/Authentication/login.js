@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
   // check the employee already exist or not
   const getQuery = "select * from lifeserver.all_user where email = ? ;";
 
-  connection.query(getQuery, [body.nic], (err, result) => {
+  connection.query(getQuery, [body.email], (err, result) => {
     if (err) {
       res.send({
         sucess: false,
