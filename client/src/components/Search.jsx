@@ -4,7 +4,8 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import LocationDetails from "./locationDetails";
+import LocationDetails from "./LocationDetails";
+import "../pages/styles.css";
 
 const Search = (props) => {
   const [selectedPlace, setSelectedPlace] = useState(null);

@@ -1,38 +1,129 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+styles.css
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* 100% of the viewport height */
+}
+
+.map {
+  flex: 4; /* 3/4 of the available height */
+  position: relative;
+  height: 100vh;
   
-  /* #root {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1em;
-    font-family: sans-serif;
-    color: #333;
-    background-color: #f3e4d7;
-  }
-   */
-  /* height of the container */
-  .leaflet-container {
-    height: 90vh;
-    width: 90%;
-    border-radius: 2rem;
-  }
+}
+
+.controls {
+  flex: 1; /* Adjust the flex value based on your layout needs */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center;
+  text-align: center;
+  background-color: #f6caca;
+  border-radius: 12px;
+  width: 291px;
+  padding: 20px; /* Increased padding for more space */
+  justify-content: center;
+  border: 2px solid #e57373; /* Thicker border with a different color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
   
-  .cluster-icon {
-    background-color: #333;
-    height: 2em;
-    width: 2em;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    box-shadow: 0 0 0px 5px #fff;
-  }
-  
+}
+
+.tables {
+  flex: 1; /* Adjust the flex value based on your layout needs */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  text-align: center; /* Align text at the top */
+  background-color: #f6caca;
+  border-radius: 12px;
+  height: 50%; /* Change to 50% to make the box half of the web page size */
+  width: 291px;
+  padding: 20px; /* Increased padding for more space */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+/* Add this style to target the table */
+.tables table {
+  margin-top: 0; /* Remove the default top margin on the table */
+}
+table, th, td {
+  border: 1px solid #ff0000; /* Add a 1px black border to the table, header cells, and data cells */
+  text-align: left; /* Align text to the left in cells */
+  padding: 8px; /* Add padding for spacing inside cells */
+}
+
+.controls h3 {
+  margin: 0; /* Remove margin for the heading */
+}
+
+/* Add more specific CSS rules for child elements as needed */
+
+
+.box.col-titles-BG {
+  /* Styles for the text inside the box */
+  font-size: 1.5rem; /* Adjust the font size as needed */
+  color: #333; /* Text color */
+}
+
+h3 {
+  /* Styles for the text */
+  font-size: 1.5rem; /* Adjust the font size as needed */
+  color: #333; /* Text color */
+  border-radius: 6px;
+}
+
+.textbox{
+  background-color: #ffffff;
+  border-radius: 4px;
+  width: 90%;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* Set a maximum width for the search box */
+}
+
+.location-search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #007bff; /* Add a bottom border with a blue color */
+  outline: none;
+  transition: border-bottom 0.3s ease; /* Smooth transition for the border */
+  border-radius: 6px;
+}
+
+.location-search-input:focus {
+  border-bottom: 2px solid #e57373; /* Change the border color on focus */
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  max-height: 200px;
+  overflow-y: auto; /* Add scroll if there are many suggestions */
+  border-radius: 6px;
+
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.suggestion-item:hover {
+  background-color: #f6f6f6; /* Change background color on hover */
+}
+
+.suggestion-item--active {
+  background-color: #007bff; /* Change background color for the active suggestion */
+  color: #fff; /* Change text color for the active suggestion */
+}

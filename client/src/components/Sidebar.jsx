@@ -40,7 +40,7 @@ const Sidebar = ({ children }) => {
   return (
     <div className="container">
       <div
-        style={{ width: isOpen ? "283.179px" : "87.418px", height: "973px" }}
+        style={{ width: isOpen ? "283.179px" : "87.418px" }}
         className="sidebar"
       >
         <div className="top_section">
