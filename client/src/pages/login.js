@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
+import { NavLink } from "react-router-dom";
 
 // Import your SVG icons from the public directory
 import usernameIcon from "../images/user.svg";
@@ -66,9 +67,9 @@ function LoginPage() {
           </form>
           <div className="register">
             <p>Don't have an account?</p>
-            <a href="#" className="blue-link">
+            <NavLink to="/HospitalDetails" className="blue-link">
               Register
-            </a>
+            </NavLink>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./HospitalDetailsPage.css"; // Import your CSS file
+import { NavLink } from "react-router-dom";
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
   const [hospitalName, setHospitalName] = useState("");
@@ -178,7 +179,8 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             </div>
           </div>
           <div className="button-group">
-            <button type="next">Next</button>
+            
+            <button type="next"><NavLink to="/OwnerDetails">Next</NavLink></button>
           </div>
         </form>
       </div>

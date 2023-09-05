@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './OwnerDetailsPage.css'; // Import your CSS file
+import { NavLink } from "react-router-dom";
 
 function OwnerDetailsPage({ onNext }) {
   const [firstName, setFirstName] = useState('');
@@ -159,8 +160,8 @@ function OwnerDetailsPage({ onNext }) {
             required
           />
         </div>
-        <button type="prev">Prev</button>
-        <button type="next">Next</button>
+        <button type="prev"><NavLink to='/HospitalDetails'>Prev</NavLink> </button>
+        <button type="next"><NavLink to='/UploadHospitalDocuments'> Next</NavLink></button>
       </form>
     </div>
 
