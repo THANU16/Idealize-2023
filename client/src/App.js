@@ -8,27 +8,37 @@ import Ambulance from "./pages/Amblance.jsx";
 import Drivers from "./pages/Drivers.jsx";
 import Help from "./pages/Help.jsx";
 import Logut from "./pages/Logout.jsx";
-import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
 // Login
-// import Login from "./pages/Login";
+import Login from "./pages/login.js";
+
+//signup
+import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
+import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
+import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
+import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
 // import Login from "./pages/LoginBoot";
 
 const App = () => {
   return (
-    // <Search />
     <BrowserRouter>
+      <Routes></Routes>
+      <Sidebar path="/dashboard">
       <Routes>
-        <Route path="/hospitalSerch" element={<HospitalSearch />} />
-      </Routes>
-      {/* <Sidebar path="/dashboard">
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/ambulance" element={<Ambulance />} />
-          <Route path="/drivers" element={<Drivers />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/logout" element={<Logut />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/ambulance" element={<Ambulance />} />
+        <Route path="/drivers" element={<Drivers />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/logout" element={<Logut />} />
+
+        {/* signup */}
+        <Route path="/SignupFinished" element={<SignupFinished />} />
+        <Route path="/HospitalDetails" element={<HospitalDetails />} />
+        <Route path="/OwnerDetails" element={<OwnerDetails />} />
+        <Route path="/UploadHospitalDocuments" element={<UploadHospitalDocuments />}/> 
+        
+        <Route path="/login" element={<Login />} />
         </Routes>
-      </Sidebar> */}
+      </Sidebar>
     </BrowserRouter>
   );
 };
@@ -37,18 +47,28 @@ export default App;
 
 // import React, { useEffect, useRef, ReactElement } from "react";
 // import ReactDOM from "react-dom";
-// import SearchMap from "./component/map/search";
-// import DynamicMap from "./component/map/dynamicMap";
-// import EmergencyMap from "./component/map/CurrentLocation";
-// import GetPath from "./component/map/GetPath"; // Update the import statement
+// import { Wrapper, Status } from "../src";
 
-// function App() {
-//   return (
-//     // <SearchMap />;
-//     <DynamicMap />
-//     // <EmergencyMap/>
-//     // <GetPath />
-//   );
+// function MyMapComponent(center, zoom) {
+//   const ref = useRef();
+
+//   useEffect(() => {
+//     new window.google.maps.Map(ref.current, {
+//       center,
+//       zoom,
+//     });
+//   });
+
+//   return <div ref={ref} id="map" />;
 // }
 
-// export default App;
+// function App() {
+//   const center = { lat: -34.397, lng: 150.644 };
+//   const zoom = 4;
+
+//   return (
+//     <Wrapper apiKey="" render={render}>
+//       <MyMapComponent center={center} zoom={zoom} />
+//     </Wrapper>
+//   );
+// }
