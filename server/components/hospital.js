@@ -12,17 +12,18 @@ const connection = databaseObj.connection;
 
 router.post("/add", (req, res) => {
   console.log(req.body);
-  body = req.body;
+  const body = req.body;
+  const typeID = "ho";
   const password = body.password;
 
   // check the employee already exist or not
-  const checkQuery = "select * from lifeserver.hospital where email = ? ;";
+  const checkQuery = "select * from lifeserver.all_user where email = ? ;";
 
   // type id is the forigen key so we set the forigen key correctly
   const insertQuery =
-    "insert into lifeserver.hospital (name, location, type, noOfAmbulance, website, email, password, contactNumber) values(?,?,?,?,?,?,?,?);";
+    "INSERT INTO hospital (Latitude, Longitude, district, email, name, contactNumber, type, password, postalCode, province, registeredDate, registrationNo, website, typeID) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?);";
 
-  connection.query(checkQuery, [body.Email], (err, result) => {
+  connection.query(checkQuery, [body.email], (err, result) => {
     if (err) {
       console.log(err);
       res.send({
@@ -46,14 +47,20 @@ router.post("/add", (req, res) => {
           connection.query(
             insertQuery,
             [
-              body.name,
-              body.location,
-              body.type,
-              body.noOfAmbulance,
-              body.website,
+              body.Latitude,
+              body.Longitude,
+              body.district,
               body.email,
-              hash,
+              body.hospitalName,
               body.hotline,
+              body.ownership,
+              hash,
+              body.postalCode,
+              body.province,
+              body.registeredDate,
+              body.registrationNo,
+              body.webPage,
+              typeID,
             ],
             (err, result) => {
               if (err) {
