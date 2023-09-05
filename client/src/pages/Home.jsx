@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../assets/icons/map_ambulance.svg";
 import "./styles.css";
+
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+
 
 const DynamicMap = (props) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
