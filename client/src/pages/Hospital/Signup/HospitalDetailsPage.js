@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./HospitalDetailsPage.css"; // Import your CSS file
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
   const [hospitalName, setHospitalName] = useState("");
@@ -22,14 +22,13 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
     // You can also store the entered data in a state or context for later use
 
     // Navigate to the next page
-    onNext();
+    Navigate("/OwnerDetails");
   };
 
   return (
     <div className="HospitalDetailsPage">
       <h2>Hospital Details</h2>
       <div className="hospital-details-container">
-        
         <form onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-group">
@@ -179,8 +178,9 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             </div>
           </div>
           <div className="button-group">
-            
-            <button type="next"><NavLink to="/OwnerDetails">Next</NavLink></button>
+            <button type="next">
+              <NavLink to="/OwnerDetails">Next</NavLink>
+            </button>
           </div>
         </form>
       </div>

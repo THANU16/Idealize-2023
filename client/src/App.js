@@ -14,27 +14,32 @@ import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
 import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
 import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
 import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
-// import Login from "./pages/LoginBoot";
+
+// Login
+import Login from "./pages/login";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes></Routes>
       <Sidebar path="/dashboard">
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/ambulance" element={<Ambulance />} />
-        <Route path="/drivers" element={<Drivers />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/logout" element={<Logut />} />
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/ambulance" element={<Ambulance />} />
+          <Route path="/drivers" element={<Drivers />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/logout" element={<Logut />} />
 
-        {/* signup */}
-        <Route path="/SignupFinished" element={<SignupFinished />} />
-        <Route path="/HospitalDetails" element={<HospitalDetails />} />
-        <Route path="/OwnerDetails" element={<OwnerDetails />} />
-        <Route path="/UploadHospitalDocuments" element={<UploadHospitalDocuments />}/> 
-        
-        <Route path="/login" element={<Login />} />
+          {/* signup */}
+          <Route path="/SignupFinished" element={<SignupFinished />} />
+          <Route path="/HospitalDetails" element={<HospitalDetails />} />
+          <Route path="/OwnerDetails" element={<OwnerDetails />} />
+          <Route
+            path="/UploadHospitalDocuments"
+            element={<UploadHospitalDocuments />}
+          />
+
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Sidebar>
     </BrowserRouter>
@@ -42,31 +47,3 @@ const App = () => {
 };
 
 export default App;
-
-// import React, { useEffect, useRef, ReactElement } from "react";
-// import ReactDOM from "react-dom";
-// import { Wrapper, Status } from "../src";
-
-// function MyMapComponent(center, zoom) {
-//   const ref = useRef();
-
-//   useEffect(() => {
-//     new window.google.maps.Map(ref.current, {
-//       center,
-//       zoom,
-//     });
-//   });
-
-//   return <div ref={ref} id="map" />;
-// }
-
-// function App() {
-//   const center = { lat: -34.397, lng: 150.644 };
-//   const zoom = 4;
-
-//   return (
-//     <Wrapper apiKey="" render={render}>
-//       <MyMapComponent center={center} zoom={zoom} />
-//     </Wrapper>
-//   );
-// }
