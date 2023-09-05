@@ -1,28 +1,97 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./HospitalDetailsPage.css"; // Import your CSS file
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
+  const Navigate = useNavigate(); // Use the navigate function for navigation
+
   const [hospitalName, setHospitalName] = useState("");
   const [ownership, setOwnership] = useState(""); // 'Government' or 'Private'
   const [registrationNo, setRegistrationNo] = useState("");
   const [registeredDate, setRegisteredDate] = useState("");
-  const [address, setAddress] = useState("");
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [hotline1, setHotline1] = useState("");
-  const [hotline2, setHotline2] = useState("");
+  const [hotline, setHotline] = useState(""); // Changed from hotline1 to hotline
+  const [webPage, setWebPage] = useState(""); // Changed from webPageAddress to password
   const [email, setEmail] = useState("");
-  const [webPage, setWebPage] = useState("");
+  const [password, setPassword] = useState(""); // New password field
+  const [Latitude, setLatitude] = useState(null);
+  const [Longitude, setLongitude] = useState(null);
+
+  useEffect(() => {
+    var savedData = JSON.parse(sessionStorage.getItem("formData"));
+    if (savedData) {
+      setHospitalName(savedData.hospitalName);
+      setOwnership(savedData.ownership);
+      setRegistrationNo(savedData.registrationNo);
+      setRegisteredDate(savedData.registeredDate);
+      setProvince(savedData.province);
+      setDistrict(savedData.district);
+      setPostalCode(savedData.postalCode);
+      setHotline(savedData.hotline);
+      setWebPage(savedData.webPage);
+      setEmail(savedData.email);
+      setPassword(savedData.password);
+
+      savedData = null;
+      sessionStorage.removeItem("formData");
+    }
+
+    const savedCoordinates = JSON.parse(sessionStorage.getItem("coordinates"));
+    if (savedCoordinates) {
+      setLatitude(savedCoordinates.latitude);
+      setLongitude(savedCoordinates.longitude);
+    }
+
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Validate and handle form submission logic here
     // You can also store the entered data in a state or context for later use
-
+    const formData = {
+      hospitalName: hospitalName,
+      ownership: ownership,
+      registrationNo: registrationNo,
+      registeredDate: registeredDate,
+      province: province,
+      district: district,
+      postalCode: postalCode,
+      hotline: hotline,
+      webPage: webPage,
+      email: email,
+      password: password,
+      Latitude: Latitude,
+      Longitude: Longitude,
+    };
     // Navigate to the next page
+    console.log(formData);
     Navigate("/OwnerDetails");
+
+  };
+
+  const handleSetLocation = () => {
+    const formData = {
+      hospitalName: hospitalName,
+      ownership: ownership,
+      registrationNo: registrationNo,
+      registeredDate: registeredDate,
+      province: province,
+      district: district,
+      postalCode: postalCode,
+      hotline: hotline,
+      webPage: webPage,
+      email: email,
+      password: password,
+      Latitude: Latitude,
+      Longitude: Longitude,
+    };
+
+    // console.log(formData)
+
+    sessionStorage.setItem("formData", JSON.stringify(formData));
+    Navigate("/HospitalSearch");
   };
 
   return (
@@ -83,15 +152,10 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
           </div>
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="address">Address:</label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
+              <label>Location:</label>
+              <button type="button" onClick={handleSetLocation}>
+                Select Location
+              </button>
             </div>
             <div className="form-group">
               <label htmlFor="province">Province:</label>
@@ -131,28 +195,32 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
           </div>
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="hotline1">Hotline 1:</label>
+              <label htmlFor="hotline">Hotline:</label>{" "}
+              {/* Changed from hotline1 */}
               <input
                 type="tel"
-                id="hotline1"
-                name="hotline1"
-                value={hotline1}
-                onChange={(e) => setHotline1(e.target.value)}
+                id="hotline"
+                name="hotline"
+                value={hotline}
+                onChange={(e) => setHotline(e.target.value)}
                 required
               />
             </div>
             <div className="form-group">
-              <label htmlFor="hotline2">Hotline 2:</label>
+              <label htmlFor="webPage">Webpage:</label>{" "}
+              {/* Added for the webpage URL */}
               <input
-                type="tel"
-                id="hotline2"
-                name="hotline2"
-                value={hotline2}
-                onChange={(e) => setHotline2(e.target.value)}
+                type="url"
+                id="webPage"
+                name="webPage"
+                value={webPage}
+                onChange={(e) => setWebPage(e.target.value)}
                 required
               />
             </div>
           </div>
+          {/* Add a line to separate email and password */}
+          <hr />
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="email">Email Address:</label>
@@ -166,21 +234,21 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="webPage">Web Page Address:</label>
+              <label htmlFor="webPage">Password:</label>{" "}
+              {/* Changed from webPageAddress */}
               <input
-                type="url"
+                type="password"
                 id="webPage"
                 name="webPage"
-                value={webPage}
-                onChange={(e) => setWebPage(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
           </div>
+
           <div className="button-group">
-            <button type="next">
-              <NavLink to="/OwnerDetails">Next</NavLink>
-            </button>
+            <button type="submit">Next</button>
           </div>
         </form>
       </div>
