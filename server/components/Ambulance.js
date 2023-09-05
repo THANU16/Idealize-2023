@@ -8,20 +8,21 @@ const router = express.Router();
 
 databaseObj.connectDatabase("Ambulance");
 
-const connection = database.connection;
+const connection = databaseObj.connection;
 
 router.post("/add", (req, res) => {
-  body = req.body;
-  const password = body.password;
-
+  const ambulanceNumber = req.body.ambulanceNo;
+  const sessionToken = req.headers.authorization.replace("key ", "");
+  const hospitalID = decodedUserId(sessionToken);
   // check the employee already exist or not
-  const checkQuery = "select * from lifeserver.ambulance where Email = ? ;";
+  const checkQuery =
+    "SELECT * FROM lifeserver.ambulance where ambulanceNumber = ?;";
 
   // type id is the forigen key so we set the forigen key correctly
   const insertQuery =
-    "insert into lifeserver.ambulance (Ambulance_Number, Hospital_ID, Ambulance_Location, Is_Available) values(?,?,?,?);";
+    "insert into lifeserver.ambulance (ambulanceNumber, hospitalID) values(?,?);";
 
-  connection.query(checkQuery, [body.Email], (err, result) => {
+  connection.query(checkQuery, [ambulanceNumber], (err, result) => {
     if (err) {
       console.log(err);
       res.send({
@@ -41,12 +42,7 @@ router.post("/add", (req, res) => {
       } else {
         connection.query(
           insertQuery,
-          [
-            body.Ambulance_Number,
-            body.Hospital_ID,
-            body.Ambulance_Location,
-            body.Is_Available,
-          ],
+          [ambulanceNumber, hospitalID],
           (err, result) => {
             if (err) {
               res.send({
@@ -112,7 +108,8 @@ router.post("/getLocation", (req, res) => {
 
   const ambulanceID = decodedUserId(sessionToken);
 
-  const getQuery = "select ambulanceID, lat, lng  from lifeserver.ambulance where ambulanceID = ?;";
+  const getQuery =
+    "select ambulanceID, lat, lng  from lifeserver.ambulance where ambulanceID = ?;";
 
   connection.query(getQuery, ambulanceID, (err, result) => {
     if (err) {
@@ -148,34 +145,39 @@ router.post("/setLocation", (req, res) => {
 
   const ambulanceID = decodedUserId(sessionToken);
 
-  const setQuery = "insert into ambulanceLocation (ambulanceID, lat, lng) values (?, ?, ?);";
+  const setQuery =
+    "insert into ambulanceLocation (ambulanceID, lat, lng) values (?, ?, ?);";
 
-  connection.query(setQuery, [ambulanceID, body.lat, body.lng], (err, result) => {
-    if (err) {
-      res.send({
-        sucess: false,
-        isExist: false,
-        error: err,
-        result: null,
-      });
-    } else {
-      if (result.length > 0) {
-        res.send({
-          sucess: true,
-          isExist: true,
-          error: null,
-          result: result,
-        });
-      } else {
+  connection.query(
+    setQuery,
+    [ambulanceID, body.lat, body.lng],
+    (err, result) => {
+      if (err) {
         res.send({
           sucess: false,
           isExist: false,
-          error: null,
-          result: result,
+          error: err,
+          result: null,
         });
+      } else {
+        if (result.length > 0) {
+          res.send({
+            sucess: true,
+            isExist: true,
+            error: null,
+            result: result,
+          });
+        } else {
+          res.send({
+            sucess: false,
+            isExist: false,
+            error: null,
+            result: result,
+          });
+        }
       }
     }
-  });
+  );
 });
 
 module.exports = router;

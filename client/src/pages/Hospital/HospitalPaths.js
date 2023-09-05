@@ -6,11 +6,11 @@ import UploadHospitalDocuments from "./Signup/UploadHospitalDocumentsPage";
 import SignupFinished from "./Signup/SignupFinished";
 import HospitalSearch from "./Signup/HospitalSearch";
 
-import AmbulanceForm from "./Pages/AmbulanceForm";
-import DriverForm from "./Pages/DriverDetails";
-import Home from "./Home.jsx";
-import Ambulance from "./Pages/Ambulance";
-import Drivers from "./Pages/Drivers";
+import AmbulanceForm from "./Ambulance/AmbulanceForm";
+import DriverForm from "./Driver/DriverDetails";
+import Home from "./Home";
+import Ambulance from "./Ambulance/Ambulance";
+import Drivers from "./Driver/Drivers";
 import Help from "./Pages/Help.jsx";
 import Logut from "./Pages/Logout.jsx";
 import Sidebar from "./SideBar/Sidebar";
