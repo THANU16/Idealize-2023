@@ -8,7 +8,7 @@ import Ambulance from "./pages/Amblance.jsx";
 import Drivers from "./pages/Drivers.jsx";
 import Help from "./pages/Help.jsx";
 import Logut from "./pages/Logout.jsx";
-import Search from "./component/map/search";
+import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
 // Login
 // import Login from "./pages/Login";
 // import Login from "./pages/LoginBoot";
@@ -17,8 +17,10 @@ const App = () => {
   return (
     // <Search />
     <BrowserRouter>
-      <Routes></Routes>
-      <Sidebar path="/dashboard">
+      <Routes>
+        <Route path="/hospitalSerch" element={<HospitalSearch />} />
+      </Routes>
+      {/* <Sidebar path="/dashboard">
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/ambulance" element={<Ambulance />} />
@@ -26,7 +28,7 @@ const App = () => {
           <Route path="/help" element={<Help />} />
           <Route path="/logout" element={<Logut />} />
         </Routes>
-      </Sidebar>
+      </Sidebar> */}
     </BrowserRouter>
   );
 };
