@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./HospitalDetailsPage.css"; // Import your CSS file
 import { NavLink, Navigate } from "react-router-dom";
+import axios from 'axios';
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
   const [hospitalName, setHospitalName] = useState("");
@@ -21,8 +22,22 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
     // Validate and handle form submission logic here
     // You can also store the entered data in a state or context for later use
 
-    // Navigate to the next page
-    Navigate("/OwnerDetails");
+
+    axios.post(import.meta.env.VITE_API_URL + '/employee/add', form)
+			.then(res => {
+				// console.log(res.data);
+				if (res.data.isExist) {
+					alert("email already exist. Please check your email!!!")
+				}
+
+				else if (res.data.sucess) {
+          Navigate("/OwnerDetails");
+				}
+			})
+			.catch(err => console.log(err));
+	
+
+    
   };
 
   return (
