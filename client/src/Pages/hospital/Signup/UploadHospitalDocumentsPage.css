@@ -1,0 +1,82 @@
+/* UploadHospitalDocumentsPage.css */
+.upload-hospital-docs-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  width: 120px;
+  color: #555;
+  align-items: center;
+}
+
+input[type="file"] {
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.file-preview {
+  margin-top: 10px;
+  color: #777;
+  font-size: 18px;
+}
+
+.upload-options {
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.upload-options p {
+  margin: 0 20px;
+  color: #777;
+  font-size: 18px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+button[type="submit"],
+button[type="button"] {
+  flex: 1;
+  padding: 12px 0;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+  background-color: #0056b3;
+}
