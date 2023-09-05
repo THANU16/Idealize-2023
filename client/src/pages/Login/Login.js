@@ -7,7 +7,7 @@ import axios from "axios";
 import usernameIcon from "../../images/user.svg";
 import passwordIcon from "../../images/lock.svg";
 
-function LoginPage() {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -110,4 +110,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;
