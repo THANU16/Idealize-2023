@@ -1,0 +1,25 @@
+create VIEW all_user AS
+SELECT
+    u.userID AS id,
+    u.type_id,
+    u.email,
+    u.password
+FROM user u
+
+UNION ALL
+
+SELECT
+    h.hospitalID AS id,
+    h.type_id,
+    h.email,
+    h.password
+FROM hospital h
+
+UNION ALL
+
+SELECT
+    d.driverID AS id,
+    d.type_id AS type_id,
+    d.email,
+    d.password
+FROM driver d;

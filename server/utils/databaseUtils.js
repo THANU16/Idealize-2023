@@ -1,5 +1,5 @@
+// database.js
 const mysql = require("mysql");
-const { connect } = require("../Authentication/login");
 
 class database {
   constructor() {
@@ -28,5 +28,4 @@ class database {
   }
 }
 
-
-module.exports = database;
+module.exports = database; // Export the database class

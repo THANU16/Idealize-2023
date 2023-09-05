@@ -8,9 +8,10 @@ const router = express.Router();
 
 databaseObj.connectDatabase("Hospital");
 
-const connection = database.connection;
+const connection = databaseObj.connection;
 
 router.post("/add", (req, res) => {
+  console.log(req.body);
   body = req.body;
   const password = body.password;
 
@@ -52,7 +53,7 @@ router.post("/add", (req, res) => {
               body.website,
               body.email,
               hash,
-              contactNumber,
+              body.hotline,
             ],
             (err, result) => {
               if (err) {
@@ -224,14 +225,14 @@ router.post("/showAllDrivers", (req, res) => {
   });
 });
 
-
 router.post("/AvailabileAmbulance", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ");
 
   const hospitalID = decodedUserId(sessionToken);
 
-  const getQuery = "select * from lifeserver.ambulance where hospitalID = ? and isAvailabile = true;";
+  const getQuery =
+    "select * from lifeserver.ambulance where hospitalID = ? and isAvailabile = true;";
 
   connection.query(getQuery, hospitalID, (err, result) => {
     if (err) {
@@ -260,7 +261,5 @@ router.post("/AvailabileAmbulance", (req, res) => {
     }
   });
 });
-
-
 
 module.exports = router;
