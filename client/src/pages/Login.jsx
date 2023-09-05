@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import usernameIcon from "../images/user.svg";
 import passwordIcon from "../images/lock.svg";
 
-function Login() {
+function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -85,4 +85,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;
