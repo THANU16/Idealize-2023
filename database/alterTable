@@ -1,0 +1,3 @@
+ALTER TABLE `lifeserver`.`emergency_request` 
+ADD COLUMN `lng` VARCHAR(100) NOT NULL AFTER `lat`,
+CHANGE COLUMN `userLocation` `lat` VARCHAR(100) NOT NULL ;

@@ -17,12 +17,7 @@ function OwnerDetailsPage({ onNext }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validate and handle form submission logic here
-    // You can also store the entered data in a state or context for later use
-
-    // Navigate to the next page
-    onNext();
-  };
+  }
 
   return (
     <div className="OwnerDetailsPage">
