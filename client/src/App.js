@@ -12,10 +12,15 @@ import Search from "./component/map/search";
 // Login
 // import Login from "./pages/Login";
 // import Login from "./pages/LoginBoot";
+import Emergency from "./components/Emergencybutton";
+import Request from "./components/ambulance";
 
 const App = () => {
   return (
     // <Search />
+    // <Emergency />
+    // <Request />
+
     <BrowserRouter>
       <Routes></Routes>
       <Sidebar path="/dashboard">

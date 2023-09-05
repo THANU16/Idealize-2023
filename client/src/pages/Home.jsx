@@ -7,7 +7,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-
+import ReqAlert from "../components/Emergencybutton";
 const DynamicMap = (props) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
@@ -95,6 +95,7 @@ const DynamicMap = (props) => {
       bearing: 0,
     },
   ];
+
   return (
     <div className="container">
       <div className="map">
