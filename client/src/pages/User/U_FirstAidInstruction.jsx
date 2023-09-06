@@ -19,4 +19,14 @@ YoutubeEmbed.propTypes = {
   embedId: PropTypes.string.isRequired,
 };
 
-export default YoutubeEmbed;
+const videoIds = ["Ovsw7tdneqE", "ErxKDbH-iiI", "eBINwvHFTnw", "8pTaqY40-Rs"];
+
+const VideoGallery = () => (
+  <div className="video-gallery">
+    {videoIds.map((id) => (
+      <YoutubeEmbed key={id} embedId={id} />
+    ))}
+  </div>
+);
+
+export default VideoGallery;

@@ -19,3 +19,23 @@
     cursor: pointer; /* Change cursor to a pointer on hover */
   }
   
+  .video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+  }
+  
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 80%;
+    width: 100%;
+    position: absolute;
+  }
+
+  .video-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
+    gap: 10px; /* Adjust the gap between videos as needed */
+  }
