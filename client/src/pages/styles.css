@@ -21,6 +21,7 @@ styles.css
   background-color: #f6caca;
   border-radius: 12px;
   width: 291px;
+  height: 70%;
   padding: 20px; /* Increased padding for more space */
   justify-content: center;
   border: 2px solid #e57373; /* Thicker border with a different color */
@@ -38,7 +39,6 @@ styles.css
   height: 50%; /* Change to 50% to make the box half of the web page size */
   width: 291px;
   padding: 20px; /* Increased padding for more space */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
 
 /* Add this style to target the table */
@@ -105,7 +105,6 @@ h3 {
   right: 0;
   background-color: #fff;
   border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 999;
   max-height: 200px;
   overflow-y: auto; /* Add scroll if there are many suggestions */
@@ -146,6 +145,5 @@ h3 {
   width: 291px;
   
   /* padding: 20px; Increased padding for more space */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 
 }

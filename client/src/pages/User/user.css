@@ -1,0 +1,41 @@
+/* Center the button vertically and horizontally */
+
+
+
+.emergency {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+  /* Add a hover effect */
+  img {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  img:hover {
+    transform: scale(1.1); /* Scale the image on hover */
+    cursor: pointer; /* Change cursor to a pointer on hover */
+  }
+  
+  .video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+  }
+  
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 90%;
+    width: 100%;
+    position: absolute;
+  }
+
+  .video-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
+    gap: 10px; /* Adjust the gap between videos as needed */
+  }

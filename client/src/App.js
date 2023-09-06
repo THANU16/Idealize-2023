@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import HospitalPaths from "./pages/Hospital/HospitalPaths";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
+import UserPath from "./UserPath";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -25,6 +26,8 @@ const App = () => {
     <BrowserRouter>
       {typeID === "ho" ? (
         <HospitalPaths></HospitalPaths>
+      ) : typeID === "us" ? (
+        <UserPath></UserPath>
       ) : (
         <Routes>
           <Route path="/login" element={<Login />} />
