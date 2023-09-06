@@ -24,43 +24,46 @@ import Emergency from "./components/Emergencybutton";
 import Request from "./components/ambulance";
 import AmbulanceForm from "./pages/Hospital/AmbulanceForm";
 import DriverForm from "./pages/Hospital/DriverDetails";
+import UserPath from "./UserPath";
 
 const App = () => {
   return (
+    <UserPath />
     // <Search />
-    <BrowserRouter>
-      <Routes></Routes>
-      <Sidebar path="/dashboard">
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/ambulance" element={<Ambulance />} />
-          <Route path="/drivers" element={<Drivers />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/logout" element={<Logut />} />
 
-          {/* signup */}
-          <Route path="/SignupFinished" element={<SignupFinished />} />
-          <Route path="/HospitalDetails" element={<HospitalDetails />} />
-          <Route path="/OwnerDetails" element={<OwnerDetails />} />
-          <Route
-            path="/UploadHospitalDocuments"
-            element={<UploadHospitalDocuments />}
-          />
-          <Route path="/HospitalSearch" element={<HospitalSearch />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/ambulanceForm" element={<AmbulanceForm />} />
-          <Route path="/driverForm" element={<DriverForm />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/ambulanceForm" element={<AmbulanceForm />} />
-          <Route path="/driverForm" element={<DriverForm />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/HospitalSearch" element={<HospitalSearch />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />}></Route>
-        </Routes>
-      </Sidebar>
-    </BrowserRouter>
+    // <BrowserRouter>
+    //   <Routes></Routes>
+    //   <Sidebar path="/dashboard">
+    //     <Routes>
+    //       <Route path="/home" element={<Home />} />
+    //       <Route path="/ambulance" element={<Ambulance />} />
+    //       <Route path="/drivers" element={<Drivers />} />
+    //       <Route path="/help" element={<Help />} />
+    //       <Route path="/logout" element={<Logut />} />
+
+    //       {/* signup */}
+    //       <Route path="/SignupFinished" element={<SignupFinished />} />
+    //       <Route path="/HospitalDetails" element={<HospitalDetails />} />
+    //       <Route path="/OwnerDetails" element={<OwnerDetails />} />
+    //       <Route
+    //         path="/UploadHospitalDocuments"
+    //         element={<UploadHospitalDocuments />}
+    //       />
+    //       <Route path="/HospitalSearch" element={<HospitalSearch />} />
+    //       <Route path="/login" element={<Login />} />
+    //       <Route path="/signup" element={<Signup />}></Route>
+    //       <Route path="/ambulanceForm" element={<AmbulanceForm />} />
+    //       <Route path="/driverForm" element={<DriverForm />} />
+    //       <Route path="/login" element={<Login />} />
+    //       <Route path="/ambulanceForm" element={<AmbulanceForm />} />
+    //       <Route path="/driverForm" element={<DriverForm />} />
+    //       <Route path="/login" element={<Login />} />
+    //       <Route path="/HospitalSearch" element={<HospitalSearch />} />
+    //       <Route path="/login" element={<Login />} />
+    //       <Route path="/signup" element={<Signup />}></Route>
+    //     </Routes>
+    //   </Sidebar>
+    // </BrowserRouter>
   );
 };
 
