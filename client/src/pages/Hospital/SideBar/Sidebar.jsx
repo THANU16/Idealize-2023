@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import home from "../assets/icons/home.svg";
-import ambulance from "../assets/icons/ambulance.svg";
-import drivers from "../assets/icons/drivers.svg";
-import help from "../assets/icons/help.svg";
-import logout from "../assets/icons/logout.svg";
-import logo from "../assets/icons/logo.svg";
+import home from "../../../assets/icons/home.svg";
+import ambulance from "../../../assets/icons/ambulance.svg";
+import drivers from "../../../assets/icons/drivers.svg";
+import help from "../../../assets/icons/help.svg";
+import logout from "../../../assets/icons/logout.svg";
+import logo from "../../../assets/icons/logo.svg";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ children }) => {

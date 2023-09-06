@@ -1,69 +1,105 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// Navbar
-import Sidebar from "./components/Sidebar.jsx";
-import Home from "./pages/Home.jsx";
-import Ambulance from "./pages/Ambulance.jsx";
-import Drivers from "./pages/Drivers.jsx";
-import Help from "./pages/Help.jsx";
-import Logut from "./pages/Logout.jsx";
+import { useEffect } from "react";
 
-//signup
-import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
-import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
-import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
-import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
-
-import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
-import Signup from "./pages/Signup";
-// Login
-import Login from "./pages/Login";
-
-import Emergency from "./components/Emergencybutton";
-import Request from "./components/ambulance";
-import AmbulanceForm from "./pages/Hospital/AmbulanceForm";
-import DriverForm from "./pages/Hospital/DriverDetails";
+// Paths pages
+import HospitalPaths from "./pages/Hospital/HospitalPaths";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
 import UserPath from "./UserPath";
 
 const App = () => {
+  const [user, setUser] = useState(null);
+  const [typeID, setTypeID] = useState(null);
+
+  useEffect(() => {
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+    const typeID = JSON.parse(sessionStorage.getItem("typeID"));
+
+    setUser(sessionToken);
+    setTypeID(typeID);
+    console.log(user);
+  });
+
   return (
-    // <Search />
-    <UserPath />
+    <BrowserRouter>
+      {typeID === "ho" ? (
+        <HospitalPaths></HospitalPaths>
+      ) : typeID === "us" ? (
+        <UserPath></UserPath>
+      ) : (
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="*"
+            element={<p>This page isn't available. Sorry about that.</p>}
+          ></Route>
+        </Routes>
+      )}
+    </BrowserRouter>
 
     // <BrowserRouter>
-    //   <Sidebar path="/dashboard">
+    //   {!user ? (
     //     <Routes>
-    //       <Route path="/home" element={<Home />} />
-    //       <Route path="/ambulance" element={<Ambulance />} />
-    //       <Route path="/drivers" element={<Drivers />} />
-    //       <Route path="/help" element={<Help />} />
-    //       <Route path="/logout" element={<Logut />} />
-
-    //       {/* signup */}
-    //       <Route path="/SignupFinished" element={<SignupFinished />} />
-    //       <Route path="/HospitalDetails" element={<HospitalDetails />} />
-    //       <Route path="/OwnerDetails" element={<OwnerDetails />} />
+    //       <Route path="/login" element={<Login />} />
+    //       <Route path="/signup" element={<Signup />} />
     //       <Route
-    //         path="/UploadHospitalDocuments"
-    //         element={<UploadHospitalDocuments />}
-    //       />
-    //       <Route path="/HospitalSearch" element={<HospitalSearch />} />
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/signup" element={<Signup />}></Route>
-    //       <Route path="/ambulanceForm" element={<AmbulanceForm />} />
-    //       <Route path="/driverForm" element={<DriverForm />} />
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/ambulanceForm" element={<AmbulanceForm />} />
-    //       <Route path="/driverForm" element={<DriverForm />} />
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/HospitalSearch" element={<HospitalSearch />} />
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/signup" element={<Signup />}></Route>
+    //         path="*"
+    //         element={<p>This page isn't available. Sorry about that.</p>}
+    //       ></Route>
     //     </Routes>
-    //   </Sidebar>
+    //   ) : (
+    //     // : typeID === "ho" ? (
+    //     //   <HospitalPaths></HospitalPaths>
+    //     // ) : typeID === "dr" ? (
+    //     //   <DriverPath></DriverPath>
+    //     // ) : typeID === "us" ? (
+    //     //   <UserPath></UserPath>
+    //     // )
+    //     <Routes>
+    //       <Route path="/login" element={<Login />} />
+    //       <Route path="/signup" element={<Signup />} />
+    //       <Route
+    //         path="*"
+    //         element={<p>This page isn't available. Sorry about that.</p>}
+    //       ></Route>
+    //     </Routes>
+    //   )}
     // </BrowserRouter>
   );
 };
 
 export default App;
+
+// <BrowserRouter>
+//   <UserContext.Provider value={{ user, setUser }}>
+//     {!user ? (
+//       <Routes>
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//         <Route
+//           path="*"
+//           element={<p>This page isn't available. Sorry about that.</p>}
+//         ></Route>
+//       </Routes>
+//     ) : typeID === "ho" ? (
+//       <HospitalPaths></HospitalPaths>
+//     // ) : typeID === "dr" ? (
+//     //   <EmployeePath></EmployeePath>
+//     // ) : typeID === "us" ? (
+//     //   <EmployeePath></EmployeePath>
+//     ): (
+//       <Routes>
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//         <Route
+//           path="*"
+//           element={<p>This page isn't available. Sorry about that.</p>}
+//         ></Route>
+//       </Routes>
+
+//     )}
+//   </UserContext.Provider>
+// </BrowserRouter>

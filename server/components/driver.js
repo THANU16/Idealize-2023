@@ -8,20 +8,24 @@ const router = express.Router();
 
 databaseObj.connectDatabase("Driver");
 
-const connection = database.connection;
+const connection = databaseObj.connection;
 
+// connected
 router.post("/add", (req, res) => {
   body = req.body;
   const password = body.password;
+  const sessionToken = req.headers.authorization.replace("key ", "");
+  const hospitalID = decodedUserId(sessionToken);
 
   // check the employee already exist or not
-  const checkQuery = "select * from lifeserver.driver where email = ? ;";
+  const checkQuery =
+    "select id as id, typeID as TypeID, email as email from lifeserver.all_user where email = ? union all select driverID as id, typeID as TypeID, email as email from lifeserver.driver where NIC = ?  limit 2;";
 
   // type id is the forigen key so we set the forigen key correctly
   const insertQuery =
-    "insert into lifeserver.driver (hospitalID, firstName, lastName, phoneNumber, email, password, NIC, address) values(?,?,?,?,?,?,?,?);";
+    "insert into lifeserver.driver (hospitalID, firstName, lastName, phoneNumber, email, password, NIC, address, typeID) values(?,?,?,?,?,?,?,?,?);";
 
-  connection.query(checkQuery, [body.Email], (err, result) => {
+  connection.query(checkQuery, [body.email, body.nic], (err, result) => {
     if (err) {
       console.log(err);
       res.send({
@@ -45,14 +49,15 @@ router.post("/add", (req, res) => {
           connection.query(
             insertQuery,
             [
-              body.hospitalID,
+              hospitalID,
               body.firstName,
               body.lastName,
-              body.phoneNumber,
+              body.phoneNo,
               body.email,
               hash,
-              body.NIC,
+              body.nic,
               body.address,
+              "dr",
             ],
             (err, result) => {
               if (err) {
@@ -149,6 +154,47 @@ router.post("/setAmbulance", (req, res) => {
       }
     }
   });
+});
+
+router.post("/setLocation", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ");
+
+  const ambulanceID = decodedUserId(sessionToken);
+
+  const setQuery =
+    "insert into ambulanceLocation (ambulanceID, lat, lng) values (?, ?, ?);";
+
+  connection.query(
+    setQuery,
+    [ambulanceID, body.lat, body.lng],
+    (err, result) => {
+      if (err) {
+        res.send({
+          sucess: false,
+          isExist: false,
+          error: err,
+          result: null,
+        });
+      } else {
+        if (result.length > 0) {
+          res.send({
+            sucess: true,
+            isExist: true,
+            error: null,
+            result: result,
+          });
+        } else {
+          res.send({
+            sucess: false,
+            isExist: false,
+            error: null,
+            result: result,
+          });
+        }
+      }
+    }
+  );
 });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React from "react";
 
-import "../pages/ambulance.css";
-import Add from "../assets/icons/add.png";
+import "../Ambulance/ambulance.css";
+import Add from "../../../assets/icons/add.png";
 import { NavLink } from "react-router-dom";
 
 const Analytics = () => {

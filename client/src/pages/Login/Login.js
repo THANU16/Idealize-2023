@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./login.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // Import your SVG icons from the public directory
-import usernameIcon from "../images/user.svg";
-import passwordIcon from "../images/lock.svg";
+import usernameIcon from "../../images/user.svg";
+import passwordIcon from "../../images/lock.svg";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -21,7 +23,30 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // You can add your login logic here, e.g., sending a request to a server.
-    console.log(`Username/Email: ${username}, Password: ${password}`);
+    // console.log(`Username/Email: ${username}, Password: ${password}`);
+    const data = { email: username, password: password };
+    axios
+      .post("http://localhost:8000/login", data)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.isExist) {
+          if (res.data.sucess) {
+            const sessionToken = res.data.sessionToken;
+            const typeID = res.data.typeID;
+            sessionStorage.setItem(
+              "sessionToken",
+              JSON.stringify(sessionToken)
+            );
+            sessionStorage.setItem("typeID", JSON.stringify(typeID));
+            navigate("/home");
+          } else {
+            alert("please check your email and password");
+          }
+        } else {
+          navigate("/login");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -59,7 +84,7 @@ function Login() {
               />
             </div>
             <div className="form-group">
-              <button type="login">Login</button>
+              <button type="submit">Login</button>
               <a href="#" className="forgot-password">
                 Forgot Password?
               </a>
@@ -67,7 +92,7 @@ function Login() {
           </form>
           <div className="register">
             <p>Don't have an account?</p>
-            <NavLink to="/HospitalDetails" className="blue-link">
+            <NavLink to="/signup" className="blue-link">
               Register
             </NavLink>
           </div>

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import HospitalIcon from "../images/Hospital.svg";
-import PeopleIcon from "../images/People.svg";
-import PharmacyIcon from "../images/Pharmacy.svg";
+import HospitalIcon from "../../images/Hospital.svg";
+import PeopleIcon from "../../images/People.svg";
+import PharmacyIcon from "../../images/Pharmacy.svg";
 import "./Signup.css";
 
 const Signup = () => {

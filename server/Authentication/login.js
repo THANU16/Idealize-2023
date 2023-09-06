@@ -1,12 +1,12 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const generateSessionToken = require("./generateSessionToken");
-const database = require("../utils/databaseUtils");
-const router = express.Router();
+const database = require("../utils/databaseUtils"); // Import the database class
 
 const databaseObj = new database();
+databaseObj.connectDatabase("login");
 
-databaseObj.connectDatabase("Login");
+const router = express.Router();
 
 const connection = databaseObj.connection;
 
@@ -15,10 +15,9 @@ router.post("/", (req, res) => {
   const password = body.password;
 
   // check the employee already exist or not
-  const getQuery =
-    "select employee_id, password, type_id from accountmanagement.employees where nic = ? ;";
+  const getQuery = "select * from lifeserver.all_user where email = ? ;";
 
-  connection.query(getQuery, [body.nic], (err, result) => {
+  connection.query(getQuery, [body.email], (err, result) => {
     if (err) {
       res.send({
         sucess: false,
@@ -35,20 +34,22 @@ router.post("/", (req, res) => {
           result: result,
         });
       } else {
-        const employee_id = result[0].employee_id;
+        const userID = result[0].id;
+        const typeID = result[0].typeID;
         const hash = result[0].password;
 
         bcrypt.compare(password, hash, function (err, result) {
           if (result) {
             // password is valid
             // create the session token
-            const sessionToken = generateSessionToken(employee_id);
+            const sessionToken = generateSessionToken(userID);
             res.send({
               sucess: true,
               isExist: true,
               error: null,
               result: result,
               sessionToken: sessionToken,
+              typeID: typeID,
             });
           } else {
             res.send({

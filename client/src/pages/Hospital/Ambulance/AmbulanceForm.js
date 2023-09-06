@@ -1,23 +1,34 @@
 import React, { useState } from "react";
 import "./AmbulanceForm.css"; // Import your CSS file
-import { NavLink } from "react-router-dom";
-import uploadSvg from "./upload.svg"; // Import the SVG file
+import { NavLink, useNavigate } from "react-router-dom";
+import uploadSvg from "../upload.svg"; // Import the SVG file
+import axios from "axios";
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
-  const [hospitalName, setAmbulanceNo] = useState("");
+  const [ambulanceNo, setAmbulanceNo] = useState("");
   const [ownership, setOwnership] = useState(""); // 'Government' or 'Private'
   const [registrationNo, setAmbulanceCompany] = useState("");
   const [registeredDate, setRegisteredDate] = useState("");
-  const [address, setModelNo] = useState("");
-  const [webPage, setWebPage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validate and handle form submission logic here
-    // You can also store the entered data in a state or context for later use
+    const data = { ambulanceNo: ambulanceNo };
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
 
-    // Navigate to the next page
-    onNext();
+    axios
+      .post("http://localhost:8000/ambulance/add", data, {
+        headers: { Authorization: "key " + sessionToken },
+      })
+      .then((res) => {
+        if (res.data.isExist) {
+          alert("Please check your ambulance number");
+          navigate("/ambulanceForm");
+        } else if (res.data.sucess) {
+          navigate("/ambulance");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -29,12 +40,12 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
           <form onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="hospitalName">Ambulance No:</label>
+                <label htmlFor="ambulanceNo">Ambulance No:</label>
                 <input
                   type="text"
-                  id="hospitalName"
-                  name="hospitalName"
-                  value={hospitalName}
+                  id="ambulanceNo"
+                  name="ambulanceNo"
+                  value={ambulanceNo}
                   onChange={(e) => setAmbulanceNo(e.target.value)}
                   required
                 />
@@ -103,9 +114,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             </div>
 
             <div className="button-group" style={{ color: "white" }}>
-              <button type="next">
-                <NavLink to="/OwnerDetails">Next</NavLink>
-              </button>
+              <button type="submit">Next</button>
             </div>
           </form>
         </div>

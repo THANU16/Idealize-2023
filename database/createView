@@ -1,0 +1,22 @@
+CREATE VIEW `all_user` AS
+    SELECT 
+        `u`.`userID` AS `id`,
+        `u`.`typeID` AS `typeID`,
+        `u`.`email` AS `email`,
+        `u`.`password` AS `password`
+    FROM
+        `user` `u` 
+    UNION ALL SELECT 
+        `h`.`hospitalID` AS `id`,
+        `h`.`typeID` AS `typeID`,
+        `h`.`email` AS `email`,
+        `h`.`password` AS `password`
+    FROM
+        `hospital` `h` 
+    UNION ALL SELECT 
+        `d`.`driverID` AS `id`,
+        `d`.`typeID` AS `typeID`,
+        `d`.`email` AS `email`,
+        `d`.`password` AS `password`
+    FROM
+        `driver` `d`

@@ -8,20 +8,23 @@ const router = express.Router();
 
 databaseObj.connectDatabase("Hospital");
 
-const connection = database.connection;
+const connection = databaseObj.connection;
 
+// connected
 router.post("/add", (req, res) => {
-  body = req.body;
+  console.log(req.body);
+  const body = req.body;
+  const typeID = "ho";
   const password = body.password;
 
   // check the employee already exist or not
-  const checkQuery = "select * from lifeserver.hospital where email = ? ;";
+  const checkQuery = "select * from lifeserver.all_user where email = ? ;";
 
   // type id is the forigen key so we set the forigen key correctly
   const insertQuery =
-    "insert into lifeserver.hospital (name, location, type, noOfAmbulance, website, email, password, contactNumber) values(?,?,?,?,?,?,?,?);";
+    "INSERT INTO hospital (Latitude, Longitude, district, email, name, contactNumber, type, password, postalCode, province, registeredDate, registrationNo, website, typeID) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?);";
 
-  connection.query(checkQuery, [body.Email], (err, result) => {
+  connection.query(checkQuery, [body.email], (err, result) => {
     if (err) {
       console.log(err);
       res.send({
@@ -45,14 +48,20 @@ router.post("/add", (req, res) => {
           connection.query(
             insertQuery,
             [
-              body.name,
-              body.location,
-              body.type,
-              body.noOfAmbulance,
-              body.website,
+              body.Latitude,
+              body.Longitude,
+              body.district,
               body.email,
+              body.hospitalName,
+              body.hotline,
+              body.ownership,
               hash,
-              contactNumber,
+              body.postalCode,
+              body.province,
+              body.registeredDate,
+              body.registrationNo,
+              body.webPage,
+              typeID,
             ],
             (err, result) => {
               if (err) {
@@ -224,14 +233,14 @@ router.post("/showAllDrivers", (req, res) => {
   });
 });
 
-
 router.post("/AvailabileAmbulance", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ");
 
   const hospitalID = decodedUserId(sessionToken);
 
-  const getQuery = "select * from lifeserver.ambulance where hospitalID = ? and isAvailabile = true;";
+  const getQuery =
+    "select * from lifeserver.ambulance where hospitalID = ? and isAvailabile = true;";
 
   connection.query(getQuery, hospitalID, (err, result) => {
     if (err) {
@@ -260,7 +269,5 @@ router.post("/AvailabileAmbulance", (req, res) => {
     }
   });
 });
-
-
 
 module.exports = router;

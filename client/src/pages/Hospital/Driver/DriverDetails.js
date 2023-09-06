@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./DriverDetails.css"; // Import your CSS file
-import { NavLink } from "react-router-dom";
-import uploadSvg from "./upload.svg"; // Import the SVG file
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function HospitalDetailsPage({ onPrevious, onNext }) {
   const [firstName, setFirstName] = useState("");
@@ -13,14 +13,39 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
   const [conformPassword, setConformPassword] = useState("");
   const [email, setEmail] = useState("");
   const [nic, setNIC] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Validate and handle form submission logic here
     // You can also store the entered data in a state or context for later use
 
-    // Navigate to the next page
-    onNext();
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      phoneNo: phoneNo,
+      address: address,
+      registrationNo: registrationNo,
+      password: password,
+      conformPassword: conformPassword,
+      email: email,
+      nic: nic,
+    };
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+
+    axios
+      .post("http://localhost:8000/driver/add", data, {
+        headers: { Authorization: "key " + sessionToken },
+      })
+      .then((res) => {
+        if (res.data.isExist) {
+          alert("Please check your details");
+          navigate("/driverForm");
+        } else if (res.data.sucess) {
+          navigate("/drivers");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -131,9 +156,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             </div>
 
             <div className="button-group">
-              <button style={{ color: "white" }}>
-                <NavLink to="/OwnerDetails">Next</NavLink>
-              </button>
+              <button style={{ color: "white" }}>Next</button>
             </div>
           </form>
         </div>
