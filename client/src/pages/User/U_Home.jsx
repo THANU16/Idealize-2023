@@ -7,7 +7,9 @@ import pending from "./usericons/pending.png";
 import cancel from "./usericons/cancel.png";
 
 const Home = (props) => {
-  const [request, setRequest] = useState(true);
+  const [request, setRequest] = useState(false);
+  const [notRequest, setNotRequest] = useState(true);
+  const [cancelRequest, setCancelRequest] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [req_sent_hospitals, setReq_sent_hospitals] = useState([]);
   const [req_sent_ambulances, setReq_sent_ambulances] = useState([]);
@@ -29,9 +31,43 @@ const Home = (props) => {
   const [showNotifications, setShowNotifications] = useState(false);
 
   const handleCancelRequest = () => {
-    return "Hello";
+    setCancelRequest(true);
   };
 
+  const onYes = () => {
+    setRequest(false);
+    setCancelRequest(false);
+  };
+
+  const onNo = () => {
+    setCancelRequest(false);
+  };
+
+  if (cancelRequest)
+    return (
+      <div
+        className="emergency-request-modal"
+        style={{ padding: "10px", maxWidth: "80vh  ", height: "50vh" }}
+      >
+        <div className="emergency-request-content">
+          <div className="emergency-header">
+            <h2 style={{ textAlign: "center" }}>Are you sure?</h2>{" "}
+            {/* Add the ambulance emoji */}
+          </div>
+          <p>
+            <h1>The requests are sent to the hospitals and ambulances</h1>
+          </p>
+          <div className="emergency-button-container">
+            <button className="reject-button" onClick={onYes}>
+              Yes
+            </button>
+            <button className="accept-button" onClick={onNo}>
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   if (request)
     return (
       <div className="container">
@@ -105,35 +141,36 @@ const Home = (props) => {
         </div>
       </div>
     );
-  return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "70vh",
-        }}
-      >
-        <div>
-          <h2 style={{ color: "red" }}>Are you in an emergency?</h2>
-          <h1 style={{ color: "red" }}>
-            Tap the button below to request for help.
-          </h1>
-        </div>
-        <div className="emergency">
-          {/* <NavLink to="/user/firstaid"> */}
-          <img
-            src={emgbtn}
-            alt="emergency"
-            onClick={handleEmergencyButtonClick}
-          />
-          {/* </NavLink> */}
+  if (!request)
+    return (
+      <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "70vh",
+          }}
+        >
+          <div>
+            <h2 style={{ color: "red" }}>Are you in an emergency?</h2>
+            <h1 style={{ color: "red" }}>
+              Tap the button below to request for help.
+            </h1>
+          </div>
+          <div className="emergency">
+            {/* <NavLink to="/user/firstaid"> */}
+            <img
+              src={emgbtn}
+              alt="emergency"
+              onClick={handleEmergencyButtonClick}
+            />
+            {/* </NavLink> */}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default GoogleApiWrapper({
