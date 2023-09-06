@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 // Import your SVG icons from the public directory
 import usernameIcon from "./user.svg";
-import passwordIcon from "  ./lock.svg";
+import passwordIcon from "./lock.svg";
 
 function Login() {
   const [username, setUsername] = useState("");
