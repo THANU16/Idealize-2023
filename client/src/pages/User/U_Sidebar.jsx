@@ -7,6 +7,7 @@ import logout from "./usericons/logout.svg";
 import logo from "./usericons/logo.svg";
 import firstaid from "./usericons/firstaid.svg";
 import { NavLink } from "react-router-dom";
+import "../../App.css";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);

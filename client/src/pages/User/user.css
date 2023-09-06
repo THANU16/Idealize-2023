@@ -1,0 +1,21 @@
+/* Center the button vertically and horizontally */
+
+
+
+.emergency {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+  /* Add a hover effect */
+  img {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  img:hover {
+    transform: scale(1.1); /* Scale the image on hover */
+    cursor: pointer; /* Change cursor to a pointer on hover */
+  }
+  
