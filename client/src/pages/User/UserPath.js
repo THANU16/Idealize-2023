@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./U_Home";
-import FirstAidInstruction from "./U_FirstAidInstruction";
-import Sidebar from "./U_Sidebar";
-import Hospital from "./U_Hospital";
-import Help from "./U_Help";
-import Logout from "./Logout";
-import UserSignup from "./U_Signup";
-import U_SignupFinished from "./U_SignupFinished";
+import Home from "./pages/Home";
+import FirstAidInstruction from "./pages/FirstAidInstruction";
+import Sidebar from "./SideBar/Sidebar";
+import Hospital from "./pages/Hospital";
+import Help from "./pages/Help";
+import Logout from "./pages/Logout";
+import UserSignup from "./Signup/Signup";
+import U_SignupFinished from "./Signup/SignupFinished";
 
 const UserPath = () => {
   return (
@@ -17,15 +17,15 @@ const UserPath = () => {
     // <Route path="/user/signUp" element={<UserSignup />}></Route>
     //   <Route path="/user/registered" element={<U_SignupFinished />}></Route>
 
-    <Sidebar path="/user/dashboard">
+    <Sidebar path="/dashboard">
       <Routes>
-        <Route path="/user/signUp" element={<UserSignup />}></Route>
-        <Route path="/user/registered" element={<U_SignupFinished />}></Route>
-        <Route path="/user/home" element={<Home />}></Route>
-        <Route path="/user/firstaid" element={<FirstAidInstruction />}></Route>
-        <Route path="/user/hospital" element={<Hospital />}></Route>
-        <Route path="/user/help" element={<Help />}></Route>
-        <Route path="/user/logout" element={<Logout />}></Route>
+        <Route path="/user/signup" element={<UserSignup />}></Route>
+        <Route path="/registered" element={<U_SignupFinished />}></Route>
+        <Route path="/home" element={<Home />}></Route>
+        <Route path="/firstaid" element={<FirstAidInstruction />}></Route>
+        <Route path="/hospital" element={<Hospital />}></Route>
+        <Route path="/help" element={<Help />}></Route>
+        <Route path="/logout" element={<Logout />}></Route>
       </Routes>
     </Sidebar>
   );

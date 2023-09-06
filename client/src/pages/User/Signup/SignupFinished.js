@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./U_FirstAidInstruction";
 import { NavLink } from "react-router-dom";
 
 function SignupFinished() {
