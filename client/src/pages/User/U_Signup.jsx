@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./UserSignup.css"; // Import your CSS file
 import { NavLink } from "react-router-dom";
 
-function OwnerDetailsPage({ onNext }) {
+function OwnerDetailsPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [occupation, setOccupation] = useState("");
@@ -21,7 +21,6 @@ function OwnerDetailsPage({ onNext }) {
     // You can also store the entered data in a state or context for later use
 
     // Navigate to the next page
-    onNext();
   };
 
   return (
@@ -160,8 +159,8 @@ function OwnerDetailsPage({ onNext }) {
               required
             />
           </div>
-          <button type="next">
-            <NavLink to="/UploadHospitalDocuments"> Next</NavLink>
+          <button type="submit" onClick={handleSubmit}>
+            <NavLink to="/user/registered"> Submit</NavLink>
           </button>
         </form>
       </div>

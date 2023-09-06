@@ -28,11 +28,10 @@ import UserPath from "./UserPath";
 
 const App = () => {
   return (
-    <UserPath />
     // <Search />
+    <UserPath />
 
     // <BrowserRouter>
-    //   <Routes></Routes>
     //   <Sidebar path="/dashboard">
     //     <Routes>
     //       <Route path="/home" element={<Home />} />

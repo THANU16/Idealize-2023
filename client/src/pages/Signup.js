@@ -14,11 +14,11 @@ const Signup = () => {
           <Link to="/HospitalDetails">
             <img src={HospitalIcon} alt="Image 1" className="category" />
           </Link>
-          <Link to="/">
-            <img src={PeopleIcon} alt="Image 2" className="category"/>
+          <Link to="/user/signUp">
+            <img src={PeopleIcon} alt="Image 2" className="category" />
           </Link>
           <Link to="/">
-            <img src={PharmacyIcon} alt="Image 3" className="category"/>
+            <img src={PharmacyIcon} alt="Image 3" className="category" />
           </Link>
         </div>
       </div>

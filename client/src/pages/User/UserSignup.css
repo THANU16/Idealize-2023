@@ -44,6 +44,7 @@ input[type="email"] {
   border-radius: 10px;
   border: 3px solid #19295A;
   background: #FFF;
+
   font-size: 20px;
 }
 
@@ -78,7 +79,8 @@ label {
 
 /* Move the "Next" button to the bottom left */
 button[type="prev"],
-button[type="next"] {
+button[type="next"],
+button[type="submit"] {
   width: 10%;
   padding: 10px;
   background-color:  #2e427e;
@@ -89,14 +91,22 @@ button[type="next"] {
   transition: background-color 0.3s;
   bottom: 0;
   right: 150px;
+  -webkit-text-fill-color: #FFF;
+  font-size: 20px;
 }
 
-button[type="next"]{
+
+button[type="next"],
+button[type="submit"]{
   margin-right: 0px;
   margin-left: 80%;
+
 }
 
 button[type="prev"]:hover,
 button[type="next"]:hover {
   background-color: #0056b3;
+  -webkit-text-fill-color: #FFF;
+
+  
 }

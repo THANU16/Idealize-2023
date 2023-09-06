@@ -8,7 +8,8 @@ import Sidebar from "./pages/User/U_Sidebar";
 import Hospital from "./pages/User/U_Hospital";
 import Help from "./pages/User/U_Help";
 import Logout from "./pages/User/Logout";
-import UserSignup from "./pages/User/UserSignup";
+import UserSignup from "./pages/User/U_Signup";
+import U_SignupFinished from "./pages/User/U_SignupFinished";
 
 const App = () => {
   return (
@@ -16,9 +17,10 @@ const App = () => {
     // <Route path="/user/login" element={<Login />}></Route>
 
     <BrowserRouter>
-      {/* <Routes>
+      <Routes>
         <Route path="/user/signUp" element={<UserSignup />}></Route>
-      </Routes> */}
+        <Route path="/user/registered" element={<U_SignupFinished />}></Route>
+      </Routes>
 
       <Sidebar path="/user/dashboard">
         <Routes>
