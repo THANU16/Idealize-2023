@@ -18,28 +18,26 @@ import Sidebar from "./SideBar/Sidebar";
 function HospitalPaths() {
   console.log();
   return (
-    <div>
-      <Sidebar path="/">
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/ambulance" element={<Ambulance />} />
-          <Route path="/drivers" element={<Drivers />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/logout" element={<Logut />} />
-          {/* signup */}
-          <Route path="/SignupFinished" element={<SignupFinished />} />
-          <Route path="/HospitalDetails" element={<HospitalDetails />} />
-          <Route path="/OwnerDetails" element={<OwnerDetails />} />
-          <Route
-            path="/UploadHospitalDocuments"
-            element={<UploadHospitalDocuments />}
-          />
-          <Route path="/HospitalSearch" element={<HospitalSearch />} />
-          <Route path="/ambulanceForm" element={<AmbulanceForm />} />
-          <Route path="/driverForm" element={<DriverForm />} />/
-        </Routes>
-      </Sidebar>
-    </div>
+    <Sidebar path="/">
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/ambulance" element={<Ambulance />} />
+        <Route path="/drivers" element={<Drivers />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/logout" element={<Logut />} />
+        {/* signup */}
+        <Route path="/SignupFinished" element={<SignupFinished />} />
+        <Route path="/HospitalDetails" element={<HospitalDetails />} />
+        <Route path="/OwnerDetails" element={<OwnerDetails />} />
+        <Route
+          path="/UploadHospitalDocuments"
+          element={<UploadHospitalDocuments />}
+        />
+        <Route path="/HospitalSearch" element={<HospitalSearch />} />
+        <Route path="/ambulanceForm" element={<AmbulanceForm />} />
+        <Route path="/driverForm" element={<DriverForm />} />/
+      </Routes>
+    </Sidebar>
   );
 }
 

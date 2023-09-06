@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import HospitalPaths from "./pages/Hospital/HospitalPaths";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
-import UserPath from "./UserPath";
+import UserPath from "./pages/User/UserPath";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -27,9 +27,10 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <HospitalPaths></HospitalPaths>
-        <UserPath></UserPath>
       </Routes>
+      {/* <HospitalPaths></HospitalPaths> */}
+      <UserPath></UserPath>
+
       {/* {typeID === "ho" ? (
         <HospitalPaths></HospitalPaths>
       ) : typeID === "us" ? (
