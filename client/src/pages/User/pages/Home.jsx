@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import emgbtn from "../User/usericons/emergency.png";
+import emgbtn from "../usericons/emergency.png";
 import "./user.css";
 import { NavLink } from "react-router-dom";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-import pending from "./usericons/pending.png";
-import cancel from "./usericons/cancel.png";
+import pending from "../usericons/pending.png";
+import cancel from "../usericons/cancel.png";
 
 const Home = (props) => {
   const [request, setRequest] = useState(false);

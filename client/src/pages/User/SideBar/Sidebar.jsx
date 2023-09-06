@@ -1,40 +1,40 @@
 import React, { useState } from "react";
 
-import home from "./usericons/home.svg";
-import drivers from "./usericons/drivers.svg";
-import help from "./usericons/help.svg";
-import logout from "./usericons/logout.svg";
-import logo from "./usericons/logo.svg";
-import firstaid from "./usericons/firstaid.svg";
+import home from "../usericons/home.svg";
+import drivers from "../usericons/drivers.svg";
+import help from "../usericons/help.svg";
+import logout from "../usericons/logout.svg";
+import logo from "../usericons/logo.svg";
+import firstaid from "../usericons/firstaid.svg";
 import { NavLink } from "react-router-dom";
-import "../../App.css";
+import "../../../App.css";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const menuItem = [
     {
-      path: "/user/home",
+      path: "/home",
       name: "Home",
       icon: <img src={home} alt="" />,
     },
     {
-      path: "/user/firstaid",
+      path: "/firstaid",
       name: "First Aid Instructions",
       icon: <img src={firstaid} alt="" />,
     },
     {
-      path: "/user/hospital",
+      path: "/hospital",
       name: "Hospital",
       icon: <img src={drivers} alt="" />,
     },
     {
-      path: "/user/help",
+      path: "/help",
       name: "Help",
       icon: <img src={help} alt="" />,
     },
     {
-      path: "/user/logout",
+      path: "logout",
       name: "Logout",
       icon: <img src={logout} alt="" />,
     },
