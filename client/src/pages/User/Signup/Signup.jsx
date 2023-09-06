@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./UserSignup.css"; // Import your CSS file
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function OwnerDetailsPage() {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +15,11 @@ function OwnerDetailsPage() {
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [preferredType, setPreferredType] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +27,31 @@ function OwnerDetailsPage() {
     // You can also store the entered data in a state or context for later use
 
     // Navigate to the next page
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      occupation: occupation,
+      dob: dob,
+      nic: nicNumber,
+      phoneNo: phoneNumber,
+      email: email,
+      address: address,
+      province: province,
+      password: password,
+      district: district,
+      postalCode: postalCode,
+    };
+
+    axios
+      .post("http://localhost:8000/user/add", data)
+      .then((res) => {
+        if (res.data.isExist) {
+          alert("Please check your details");
+        } else if (res.data.sucess) {
+          navigate("/login");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -112,17 +143,42 @@ function OwnerDetailsPage() {
                 required
               />
             </div>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="text"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="address">Address:</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="address">Address:</label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <input
+                type="text"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
           </div>
           <div className="form-row">
             <div className="form-group">
@@ -148,19 +204,33 @@ function OwnerDetailsPage() {
               />
             </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="postalCode">Postal Code:</label>
-            <input
-              type="text"
-              id="postalCode"
-              name="postalCode"
-              value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
-              required
-            />
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="postalCode">Postal Code:</label>
+              <input
+                type="text"
+                id="postalCode"
+                name="postalCode"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="preferredType">Preferred Type:</label>
+              <input
+                type="int"
+                id="preferredType"
+                name="preferredType"
+                value={preferredType}
+                onChange={(e) => setPreferredType(e.target.value)}
+                required
+              />
+            </div>
           </div>
+
           <button type="submit" onClick={handleSubmit}>
-            <NavLink to="/user/registered"> Submit</NavLink>
+            Submit
           </button>
         </form>
       </div>
