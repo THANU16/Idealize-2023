@@ -10,6 +10,7 @@ databaseObj.connectDatabase("Ambulance");
 
 const connection = databaseObj.connection;
 
+// connected
 router.post("/add", (req, res) => {
   const ambulanceNumber = req.body.ambulanceNo;
   const sessionToken = req.headers.authorization.replace("key ", "");

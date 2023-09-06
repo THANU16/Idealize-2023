@@ -16,9 +16,10 @@ import Logut from "./Pages/Logout.jsx";
 import Sidebar from "./SideBar/Sidebar";
 
 function HospitalPaths() {
+  console.log();
   return (
     <div>
-      <Sidebar path="/dashboard">
+      <Sidebar path="/">
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/ambulance" element={<Ambulance />} />

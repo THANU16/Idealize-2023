@@ -10,6 +10,7 @@ databaseObj.connectDatabase("Driver");
 
 const connection = databaseObj.connection;
 
+// connected
 router.post("/add", (req, res) => {
   body = req.body;
   const password = body.password;

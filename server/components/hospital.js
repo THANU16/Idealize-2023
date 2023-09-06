@@ -10,6 +10,7 @@ databaseObj.connectDatabase("Hospital");
 
 const connection = databaseObj.connection;
 
+// connected
 router.post("/add", (req, res) => {
   console.log(req.body);
   const body = req.body;
