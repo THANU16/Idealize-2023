@@ -8,6 +8,7 @@ import Sidebar from "./pages/User/U_Sidebar";
 import Hospital from "./pages/User/U_Hospital";
 import Help from "./pages/User/U_Help";
 import Logout from "./pages/User/Logout";
+import UserSignup from "./pages/User/UserSignup";
 
 const App = () => {
   return (
@@ -15,6 +16,10 @@ const App = () => {
     // <Route path="/user/login" element={<Login />}></Route>
 
     <BrowserRouter>
+      {/* <Routes>
+        <Route path="/user/signUp" element={<UserSignup />}></Route>
+      </Routes> */}
+
       <Sidebar path="/user/dashboard">
         <Routes>
           <Route path="/user/home" element={<Home />}></Route>
