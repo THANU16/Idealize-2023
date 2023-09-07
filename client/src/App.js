@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
-
+import { UserContext } from "./UserContext";
 // Paths pages
 import HospitalPaths from "./pages/Hospital/HospitalPaths";
 import Login from "./pages/Login/Login";
@@ -25,28 +25,35 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-      {/* <HospitalPaths></HospitalPaths> */}
-      {/* <UserPath></UserPath> */}
+      <UserContext.Provider value={{ user, setUser }}>
+        {!user ? (
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="*"
+              element={<p>This page isn't available. Sorry about that.</p>}
+            ></Route>
+          </Routes>
+          // {/* <HospitalPaths></HospitalPaths> */}
+          // {/* <UserPath></UserPath> */}
 
-// <DriverPaths></DriverPaths>
-      {typeID === "ho" ? (
-        <HospitalPaths></HospitalPaths>
-      ) : typeID === "us" ? (
-        <UserPath></UserPath>
-      ) : (
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="*"
-            element={<p>This page isn't available. Sorry about that.</p>}
-          ></Route>
-        </Routes>
-      )}
+          // {/* // <DriverPaths></DriverPaths> */}
+        ) : typeID === "ho" ? (
+          <HospitalPaths></HospitalPaths>
+        ) : typeID === "us" ? (
+          <UserPath></UserPath>
+        ) : (
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="*"
+              element={<p>This page isn't available. Sorry about that.</p>}
+            ></Route>
+          </Routes>
+        )}
+      </UserContext.Provider>
     </BrowserRouter>
 
     // <BrowserRouter>
@@ -78,7 +85,7 @@ const App = () => {
     //   )}
     // </BrowserRouter>
   );
-};
+}
 
 export default App;
 
