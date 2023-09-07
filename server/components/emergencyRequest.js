@@ -75,14 +75,23 @@ function createEmergencyRouter(server) {
   // Handle emergency requests from users
   router.post("/", (req, res) => {
     const requestData = req.body; // Assuming you receive the emergency request data from the user
+    console.log(requestData);
     const sessionToken = req.headers.authorization.replace("key ", "");
     const userID = decodedUserId(sessionToken);
     const setQuery =
-      "insert into emergency_request (userID, status, lat, lng) values(?,?,?,?);";
+      "insert into emergency_request (userID, status, lat, lng, requestedTime) values(?,?,?,?,?);";
+    const getIDQuery =
+      "select * from emergency_request where (userID = ? and status = ? and lat = ? and lng = ? and requestedTime = ?);";
 
     connection.query(
       setQuery,
-      [userID, "Pending", requestData.lat, requestData.lng],
+      [
+        userID,
+        "Pending",
+        requestData.lat,
+        requestData.lng,
+        requestData.dateTime,
+      ],
       (err, result) => {
         if (err) {
           res.send({
@@ -92,21 +101,33 @@ function createEmergencyRouter(server) {
             result: null,
           });
         } else {
-          if (result.length > 0) {
-            res.send({
-              sucess: true,
-              isExist: true,
-              error: null,
-              result: result,
-            });
-          } else {
-            res.send({
-              sucess: false,
-              isExist: false,
-              error: null,
-              result: result,
-            });
-          }
+          connection.query(
+            getIDQuery,
+            [
+              userID,
+              "Pending",
+              requestData.lat,
+              requestData.lng,
+              requestData.dateTime,
+            ],
+            (err, result) => {
+              if (err) {
+                res.send({
+                  sucess: false,
+                  isExist: false,
+                  error: err,
+                  result: null,
+                });
+              } else {
+                res.send({
+                  sucess: true,
+                  isExist: true,
+                  error: null,
+                  result: result,
+                });
+              }
+            }
+          );
         }
       }
     );
