@@ -165,6 +165,7 @@ router.post("/getAllHospitalAmbulance", (req, res) => {
   const sessionToken = req.headers.authorization.replace("key ", "");
 
   const hospitalID = decodedUserId(sessionToken);
+  console.log(hospitalID);
 
   const getQuery =
     "select * from lifeserver.ambulance_driver where hospitalID = ?;";
@@ -218,7 +219,7 @@ router.post("/getHospitalAmbulanceLocation", (req, res) => {
 
   console.log(hospitalID);
   const getQuery =
-    "select * from lifeserver.ambulance_and_location where hospitalID = ?;";
+    "select * from lifeserver.ambulance_and_location where hospitalID = 2;";
 
   connection.query(getQuery, [hospitalID], (err, result) => {
     if (err) {
@@ -238,7 +239,6 @@ router.post("/getHospitalAmbulanceLocation", (req, res) => {
 });
 
 router.get("/getRequest", (req, res) => {
-  
   const getQuery =
     "SELECT * FROM lifeserver.emergency_request where ( ambulanceID  is null and hospitalID is null and status = 'Pending');";
 

@@ -16,8 +16,8 @@ const Home = (props) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
   const [address, setAddress] = useState("");
-  const [ambulanceLocation, setAmbulanceLocation] = useState({});
-  const [requestData, setRequestData] = useState({});
+  const [ambulanceLocation, setAmbulanceLocation] = useState([]);
+  const [requestData, setRequestData] = useState([]);
   // useEffect(() => {
   //   if (coordinates) {
   //     sendLocationDataToBackend(coordinates.latitude, coordinates.longitude);
@@ -64,7 +64,9 @@ const Home = (props) => {
       )
       .then((res) => {
         if (res.data.sucess) {
-          setAmbulanceLocation(res.data.results);
+          console.log("======", res.data);
+
+          setAmbulanceLocation(res.data.result);
         }
       })
       .catch((err) => console.log(err));
@@ -73,7 +75,7 @@ const Home = (props) => {
       .get("http://localhost:8000/hospital/getRequest")
       .then((res) => {
         if (res.data.sucess) {
-          setRequestData(res.data.results);
+          setRequestData(res.data.result);
         }
       })
       .catch((err) => console.log(err));
@@ -125,43 +127,6 @@ const Home = (props) => {
   const onRequest = () => {
     setRequest(false);
   };
-  const locations = [
-    {
-      lat: 9.6638,
-      lng: 80.0208, // Jaffna Town
-      bearing: 0, // Bearing is set to 0 for reference
-    },
-    {
-      lat: 9.6825,
-      lng: 80.0054, // Nallur
-      bearing: 0,
-    },
-    {
-      lat: 9.7651,
-      lng: 80.0003, // Point Pedro
-      bearing: 0,
-    },
-    {
-      lat: 9.6555,
-      lng: 80.0754, // Chavakachcheri
-      bearing: 0,
-    },
-    {
-      lat: 9.7486,
-      lng: 80.0164, // Valvettithurai
-      bearing: 0,
-    },
-    {
-      lat: 9.7178,
-      lng: 80.0081, // Kayts
-      bearing: 0,
-    },
-    {
-      lat: 9.6809,
-      lng: 80.2526, // Delft Island
-      bearing: 0,
-    },
-  ];
 
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -183,10 +148,10 @@ const Home = (props) => {
           mapContainerClassName="map-container"
         >
           {/* Map each location to a Marker */}
-          {locations.map((location, index) => (
+          {ambulanceLocation.map((location) => (
             <Marker
-              key={index}
-              position={{ lat: location.lat, lng: location.lng }}
+              key={location.locationID}
+              position={{ lat: location.latitude, lng: location.longitude }}
               icon={{
                 url: ambulanceMarkerIcon,
                 scaledSize: new window.google.maps.Size(100, 100),
@@ -229,7 +194,7 @@ const Home = (props) => {
           {showNotifications && (
             <div className="notification-container">
               {/* Notification content goes here */}
-              <div className="notification">
+              {/* <div className="notification">
                 Notification 1
                 <span>
                   <button style={{ backgroundColor: "green", margin: "10px" }}>
@@ -239,9 +204,30 @@ const Home = (props) => {
                 <span>
                   <button style={{ backgroundColor: "red" }}>Reject</button>
                 </span>
+              </div> */}
+              <div>
+                <ul style={{ maxHeight: "300px", overflowY: "scroll" }}>
+                  {requestData.map((req) => (
+                    <li key={req.requestID}>
+                      {req.status}
+                      <span>
+                        <button
+                          style={{ backgroundColor: "green", margin: "10px" }}
+                        >
+                          Accept
+                        </button>
+                      </span>
+                      <span>
+                        <button style={{ backgroundColor: "red" }}>
+                          Reject
+                        </button>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="notification">Notification 2</div>
-              <div className="notification">Notification 3</div>
+              {/* <div className="notification">Notification 2</div>
+              <div className="notification">Notification 3</div> */}
             </div>
           )}
 
