@@ -10,12 +10,8 @@ import axios from "axios";
 
 const Home = (props) => {
   const [request, setRequest] = useState(false);
-  const [notRequest, setNotRequest] = useState(true);
-  const [cancelRequest, setCancelRequest] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(null);
   const navigate = useNavigate();
-  const [req_sent_hospitals, setReq_sent_hospitals] = useState([]);
-  const [req_sent_ambulances, setReq_sent_ambulances] = useState([]);
 
   // Use useEffect to log currentLocation when it changes
   useEffect(() => {
