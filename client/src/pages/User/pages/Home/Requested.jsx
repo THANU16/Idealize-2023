@@ -13,6 +13,8 @@ const RequestCancel = (props) => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [status, setStatus] = useState(null);
   const requestData = JSON.parse(sessionStorage.getItem("requestData"));
+  
+  
   const navigate = useNavigate();
 
   useEffect(() => {

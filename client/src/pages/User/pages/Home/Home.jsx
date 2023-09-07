@@ -46,6 +46,7 @@ const Home = (props) => {
         .then((res) => {
           if (res.data.sucess) {
             sessionStorage.setItem("requestData", JSON.stringify(res.data.result));
+
             navigate("/requested");
           }
         })
