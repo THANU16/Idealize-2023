@@ -32,7 +32,7 @@ const App = () => {
       {/* <HospitalPaths></HospitalPaths> */}
       {/* <UserPath></UserPath> */}
 
-// <DriverPaths></DriverPaths>
+      {/* // <DriverPaths></DriverPaths> */}
       {typeID === "ho" ? (
         <HospitalPaths></HospitalPaths>
       ) : typeID === "us" ? (
