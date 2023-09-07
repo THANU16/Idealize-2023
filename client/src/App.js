@@ -29,9 +29,9 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
       </Routes>
       {/* <HospitalPaths></HospitalPaths> */}
-      <UserPath></UserPath>
+      {/* <UserPath></UserPath> */}
 
-      {/* {typeID === "ho" ? (
+      {typeID === "ho" ? (
         <HospitalPaths></HospitalPaths>
       ) : typeID === "us" ? (
         <UserPath></UserPath>
@@ -44,7 +44,7 @@ const App = () => {
             element={<p>This page isn't available. Sorry about that.</p>}
           ></Route>
         </Routes>
-      )} */}
+      )}
     </BrowserRouter>
 
     // <BrowserRouter>

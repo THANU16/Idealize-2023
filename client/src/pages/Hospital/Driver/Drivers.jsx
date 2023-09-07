@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "../Ambulance/ambulance.css";
 import Add from "../../../assets/icons/add.png";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Analytics = () => {
+  const [driverData, setDriverData] = useState({});
+
+  useEffect(() => {
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+    axios
+      .post(
+        "http://localhost:8000/hospital/getAllHospitalDrivers",
+        {},
+        { headers: { Authorization: "key " + sessionToken } }
+      )
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.sucess) {
+          setDriverData(res.data.result);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div>
       <div>

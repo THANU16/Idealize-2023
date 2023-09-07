@@ -20,3 +20,22 @@ CREATE VIEW `all_user` AS
         `d`.`password` AS `password`
     FROM
         `driver` `d`
+
+
+        create VIEW `ambulance_driver` AS
+    SELECT 
+        `ambulance`.`ambulanceID` AS `ambulanceID`,
+        `ambulance`.`ambulanceNumber` AS `ambulanceNumber`,
+        `ambulance`.`hospitalID` AS `hospitalID`,
+        `ambulance`.`isAvailable` AS `isAvailable`,
+        `ambulance_driver_connection`.`driverConnectionID` AS `driverConnectionID`,
+        `ambulance_driver_connection`.`driverID` AS `driverID`,
+        `ambulance_driver_connection`.`connectedTime` AS `connectedTime`,
+        `ambulance_driver_connection`.`disconnectedTime` AS `disconnectedTime`,
+        `ambulance_driver_connection`.`date` AS `date`,
+        `ambulance_driver_connection`.`workingHours` AS `workingHours`
+    FROM
+        (`ambulance`
+	left JOIN `ambulance_driver_connection` ON ((`ambulance`.`ambulanceID` = `ambulance_driver_connection`.`ambulanceID`)))
+    WHERE
+        (`ambulance_driver_connection`.`disconnectedTime` <> NULL);
