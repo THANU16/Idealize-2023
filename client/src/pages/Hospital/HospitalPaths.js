@@ -9,11 +9,11 @@ import HospitalSearch from "./Signup/HospitalSearch";
 import AmbulanceForm from "./Ambulance/AmbulanceForm";
 import DriverForm from "./Driver/DriverDetails";
 import Home from "./Home";
-import Ambulance from "./Ambulance/Ambulance";
 import Drivers from "./Driver/Drivers";
 import Help from "./Pages/Help.jsx";
 import Logut from "./Pages/Logout.jsx";
 import Sidebar from "./SideBar/Sidebar";
+import Ambulance from "./Ambulance/Ambulance";
 
 function HospitalPaths() {
   console.log();

@@ -4,8 +4,9 @@ import "../Ambulance/ambulance.css";
 import Add from "../../../assets/icons/add.png";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import CommonTable from "../Table";
 
-const Analytics = () => {
+const Drivers = () => {
   const [driverData, setDriverData] = useState({});
 
   useEffect(() => {
@@ -25,6 +26,18 @@ const Analytics = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const driverColumns = [
+    "firstName",
+    "lastName",
+    "phoneNumber",
+    "email",
+    "password",
+    "NIC",
+    "address",
+    "createdAt",
+    "updatedAt",
+  ];
+
   return (
     <div>
       <div>
@@ -33,34 +46,7 @@ const Analytics = () => {
             <h1>Driver Details</h1>
           </div>
         </div>
-        <table className="table table-bordered table-striped table-hover ">
-          <thead>
-            <tr>
-              <th width="80">Driver Name</th>
-              <th width="80">Ambulance No</th>
-              <th width="80">Phone No</th>
-              <th width="40">Working Time</th>
-              <th width="40">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* {transactionData.map((data) => ( */}
-            <tr>
-              <td>L0142</td>
-              <td>Sangaran</td>
-              <td>Jancy</td>
-              <td>2</td>
-              <td>Active</td>
-            </tr>
-            <tr>
-              <td>L0142</td>
-              <td>Sangaran</td>
-              <td>Jancy</td>
-              <td>2</td>
-              <td>Active</td>
-            </tr>
-          </tbody>
-        </table>
+        <CommonTable data={driverData} columns={driverColumns} />
       </div>
 
       <div
@@ -86,4 +72,4 @@ const Analytics = () => {
   );
 };
 
-export default Analytics;
+export default Drivers;
