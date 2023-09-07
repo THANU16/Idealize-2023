@@ -14,6 +14,7 @@ import Drivers from "./Driver/Drivers";
 import Help from "./Pages/Help.jsx";
 import Logut from "./Pages/Logout.jsx";
 import Sidebar from "./SideBar/Sidebar";
+import IncomingRequest from "./Request";
 
 function HospitalPaths() {
   console.log();
@@ -36,6 +37,7 @@ function HospitalPaths() {
         <Route path="/HospitalSearch" element={<HospitalSearch />} />
         <Route path="/ambulanceForm" element={<AmbulanceForm />} />
         <Route path="/driverForm" element={<DriverForm />} />/
+        <Route path="/incomingrequest" ellemetn={<IncomingRequest />}></Route>
       </Routes>
     </Sidebar>
   );

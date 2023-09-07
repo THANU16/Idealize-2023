@@ -29,10 +29,12 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
+
+      <HospitalPaths />
       {/* <HospitalPaths></HospitalPaths> */}
       {/* <UserPath></UserPath> */}
 
-// <DriverPaths></DriverPaths>
+      {/* // <DriverPaths></DriverPaths>
       {typeID === "ho" ? (
         <HospitalPaths></HospitalPaths>
       ) : typeID === "us" ? (
@@ -46,7 +48,7 @@ const App = () => {
             element={<p>This page isn't available. Sorry about that.</p>}
           ></Route>
         </Routes>
-      )}
+      )} */}
     </BrowserRouter>
 
     // <BrowserRouter>
