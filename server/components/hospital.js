@@ -237,12 +237,10 @@ router.post("/getHospitalAmbulanceLocation", (req, res) => {
   });
 });
 
-
-
 router.post("/getRecentRequest", (req, res) => {
-  const requestID = req.body;
+  const requestID = req.body.data;
   const getQuery =
-    "SELECT * FROM lifeserver.emergency_request where ( requestID = ?);";
+    "SELECT * FROM lifeserver.emergency_request where  requestID = ?;";
 
   connection.query(getQuery, [requestID], (err, result) => {
     if (err) {
@@ -260,8 +258,6 @@ router.post("/getRecentRequest", (req, res) => {
     }
   });
 });
-
-
 
 router.get("/getRequest", (req, res) => {
   const getQuery =
@@ -283,8 +279,6 @@ router.get("/getRequest", (req, res) => {
     }
   });
 });
-
-
 
 router.post("/showAllDrivers", (req, res) => {
   const body = req.body;
