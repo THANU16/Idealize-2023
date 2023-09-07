@@ -41,6 +41,34 @@ CREATE VIEW `all_user` AS
         (`ambulance_driver_connection`.`disconnectedTime` is  NULL);
 
 
-create view  ambulance_and_location as SELECT ambulance.ambulanceID, locationID, latitude, longitude driverID, ambulanceNumber, hospitalID, isAvailable, createdAt FROM ambulance_location_history join ambulance using (ambulanceID);
+create VIEW `ambulance_and_location` AS
+    SELECT 
+        `ambulance`.`ambulanceID` AS `ambulanceID`,
+        `ambulance_location_history`.`locationID` AS `locationID`,
+        `ambulance_location_history`.`latitude` AS `latitude`,
+        `ambulance_location_history`.`longitude` AS `longitude`,
+        `ambulance`.`ambulanceNumber` AS `ambulanceNumber`,
+        `ambulance`.`hospitalID` AS `hospitalID`,
+        `ambulance`.`isAvailable` AS `isAvailable`,
+        `ambulance`.`createdAt` AS `createdAt`
+    FROM
+        (`ambulance_location_history`
+        JOIN `ambulance` ON ((`ambulance_location_history`.`ambulanceID` = `ambulance`.`ambulanceID`)))
 
-
+create VIEW `ambulance_driver` AS
+    SELECT 
+        `ambulance`.`ambulanceID` AS `ambulanceID`,
+        `ambulance`.`ambulanceNumber` AS `ambulanceNumber`,
+        `ambulance`.`hospitalID` AS `hospitalID`,
+        `ambulance`.`isAvailable` AS `isAvailable`,
+        `ambulance_driver_connection`.`driverConnectionID` AS `driverConnectionID`,
+        `ambulance_driver_connection`.`driverID` AS `driverID`,
+        `ambulance_driver_connection`.`connectedTime` AS `connectedTime`,
+        `ambulance_driver_connection`.`disconnectedTime` AS `disconnectedTime`,
+        `ambulance_driver_connection`.`date` AS `date`,
+        `ambulance_driver_connection`.`workingHours` AS `workingHours`
+    FROM
+        (`ambulance`
+        LEFT JOIN `ambulance_driver_connection` ON ((`ambulance`.`ambulanceID` = `ambulance_driver_connection`.`ambulanceID`)))
+    WHERE
+        (`ambulance_driver_connection`.`disconnectedTime` <> NULL)

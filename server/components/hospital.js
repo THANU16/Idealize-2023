@@ -237,8 +237,33 @@ router.post("/getHospitalAmbulanceLocation", (req, res) => {
   });
 });
 
+
+
+router.post("/getRecentRequest", (req, res) => {
+  const requestID = req.body;
+  const getQuery =
+    "SELECT * FROM lifeserver.emergency_request where ( requestID = ?);";
+
+  connection.query(getQuery, [requestID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      res.send({
+        sucess: true,
+        error: null,
+        result: result,
+      });
+    }
+  });
+});
+
+
+
 router.get("/getRequest", (req, res) => {
-  
   const getQuery =
     "SELECT * FROM lifeserver.emergency_request where ( ambulanceID  is null and hospitalID is null and status = 'Pending');";
 
@@ -258,6 +283,8 @@ router.get("/getRequest", (req, res) => {
     }
   });
 });
+
+
 
 router.post("/showAllDrivers", (req, res) => {
   const body = req.body;
