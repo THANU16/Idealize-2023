@@ -38,4 +38,9 @@ CREATE VIEW `all_user` AS
         (`ambulance`
 	left JOIN `ambulance_driver_connection` ON ((`ambulance`.`ambulanceID` = `ambulance_driver_connection`.`ambulanceID`)))
     WHERE
-        (`ambulance_driver_connection`.`disconnectedTime` <> NULL);
+        (`ambulance_driver_connection`.`disconnectedTime` is  NULL);
+
+
+create view  ambulance_and_location as SELECT ambulance.ambulanceID, locationID, latitude, longitude driverID, ambulanceNumber, hospitalID, isAvailable, createdAt FROM ambulance_location_history join ambulance using (ambulanceID);
+
+

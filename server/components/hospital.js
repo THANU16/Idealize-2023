@@ -166,7 +166,6 @@ router.post("/getAllHospitalAmbulance", (req, res) => {
 
   const hospitalID = decodedUserId(sessionToken);
 
-  console.log(hospitalID);
   const getQuery =
     "select * from lifeserver.ambulance_driver where hospitalID = ?;";
 
@@ -191,11 +190,59 @@ router.post("/getAllHospitalDrivers", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ", "");
   const hospitalID = decodedUserId(sessionToken);
-  console.log(hospitalID);
 
   const getQuery = "select * from lifeserver.driver where hospitalID = ?;";
 
   connection.query(getQuery, [hospitalID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      res.send({
+        sucess: true,
+        error: null,
+        result: result,
+      });
+    }
+  });
+});
+
+router.post("/getHospitalAmbulanceLocation", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ", "");
+
+  const hospitalID = decodedUserId(sessionToken);
+
+  console.log(hospitalID);
+  const getQuery =
+    "select * from lifeserver.ambulance_and_location where hospitalID = ?;";
+
+  connection.query(getQuery, [hospitalID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      res.send({
+        sucess: true,
+        error: null,
+        result: result,
+      });
+    }
+  });
+});
+
+router.get("/getRequest", (req, res) => {
+  
+  const getQuery =
+    "SELECT * FROM lifeserver.emergency_request where ( ambulanceID  is null and hospitalID is null and status = 'Pending');";
+
+  connection.query(getQuery, (err, result) => {
     if (err) {
       res.send({
         sucess: false,

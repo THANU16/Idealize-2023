@@ -8,7 +8,8 @@ import Help from "./pages/Help";
 import Logout from "./pages/Logout";
 import UserSignup from "./Signup/Signup";
 import U_SignupFinished from "./Signup/SignupFinished";
-
+import Requested from "./pages/Home/Requested";
+import CancelRequest from "./pages/Home/CancelRequest";
 const UserPath = () => {
   return (
     // <Search />
@@ -26,6 +27,8 @@ const UserPath = () => {
         <Route path="/hospital" element={<Hospital />}></Route>
         <Route path="/help" element={<Help />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
+        <Route path="/requested" element={<Requested />}></Route>
+        <Route path="/request/cancel" element={<CancelRequest />}></Route>
       </Routes>
     </Sidebar>
   );

@@ -50,7 +50,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
 
   return (
     <div className="HospitalDetailsPage">
-      <h2>Ambulance Details</h2>
+      <h2>Driver Details</h2>
       <div className="hospital-details-container">
         {/* Center the form content */}
         <div className="centered-form">
