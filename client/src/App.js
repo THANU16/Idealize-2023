@@ -54,6 +54,7 @@ const App = () => {
           </Routes>
         )}
       </UserContext.Provider>
+
     </BrowserRouter>
 
     // <BrowserRouter>
