@@ -61,7 +61,7 @@ button[type="login"] {
 }
 
 
-button[type="submit"]:hover {
+button[type="login"]:hover {
   background-color: #326dac;
 }
 
