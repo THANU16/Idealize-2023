@@ -37,7 +37,7 @@ label {
   display: block;
 }
 
-input[type="text"],
+input[name="username"],
 input[type="password"] {
   width: 442.51px;
   height: 45px;
@@ -61,7 +61,7 @@ button[type="login"] {
 }
 
 
-button[type="submit"]:hover {
+button[type="login"]:hover {
   background-color: #326dac;
 }
 
