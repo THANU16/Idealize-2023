@@ -19,7 +19,7 @@ const Home = (props) => {
   useEffect(() => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
     if (currentLocation) {
-      console.log(currentLocation);
+      sessionStorage.setItem("currentLocation", JSON.stringify(currentLocation));
 
       axios
         .post("http://localhost:8000/emergency", currentLocation, {headers :{Authorization : 'key '+sessionToken}})
