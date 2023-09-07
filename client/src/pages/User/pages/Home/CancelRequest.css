@@ -1,0 +1,44 @@
+.emergency-request-modal {
+  background-color: rgba(255, 0, 0, 0.2); /* Red background */
+  color: red;
+  width: 600px; /* Increase the width */
+  height: 300px; /* Increase the height */
+  border-radius: 20px;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.emergency-header {
+  text-align: center;
+}
+
+.emergency-button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.accept-button {
+  background-color: #00cc00; /* Green background for Accept button */
+  color: green;
+  border: none;
+  padding: 15px 30px; /* Increase the padding for button size */
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 25px; /* Increase the font size for button text */
+}
+
+.reject-button {
+  background-color: #ff6666; /* Light red background for Reject button */
+  color: red; /* Text color */
+  border: none;
+  padding: 15px 30px; /* Increase the padding for button size */
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 25px; /* Increase the font size for button text */
+}

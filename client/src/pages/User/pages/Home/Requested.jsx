@@ -8,13 +8,8 @@ import pending from "../../usericons/pending.png";
 import cancel from "../../usericons/cancel.png";
 import axios from "axios";
 
-const Home = (props) => {
-  const [request, setRequest] = useState(false);
-  const [notRequest, setNotRequest] = useState(true);
-  const [cancelRequest, setCancelRequest] = useState(false);
+const RequestCancel = (props) => {
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [req_sent_hospitals, setReq_sent_hospitals] = useState([]);
-  const [req_sent_ambulances, setReq_sent_ambulances] = useState([]);
   const navigate = useNavigate();
 
   const handleCancelRequest = () => {
@@ -100,4 +95,4 @@ const Home = (props) => {
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyAl5YvfOlFxEH09-MkWNh9OhYoQdN3uJOs", // Replace with your API key
-})(Home);
+})(RequestCancel);
