@@ -9,7 +9,12 @@ import cancel from "../../usericons/cancel.png";
 import axios from "axios";
 
 const RequestCancel = (props) => {
+
   const requestData = JSON.parse(sessionStorage.getItem("requestData"));
+
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [status, setStatus] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,6 +38,24 @@ const RequestCancel = (props) => {
     navigate("/request/cancel");
     // setCancelRequest(true);
   };
+
+  useEffect(() => {
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+    axios
+      .get("http://localhost:8000/xxxxxxxxxxxxxxx", {
+        headers: { Authorization: "key " + sessionToken },
+      })
+      .then((res) => {
+        if (res.data.sucess) {
+          setCurrentLocation(res.data[0]);
+          setStatus(res.data[1]);
+          if (status === "accepted") {
+            navigate("/show");
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  });
 
   // Use useEffect to log currentLocation when it changes
   return (

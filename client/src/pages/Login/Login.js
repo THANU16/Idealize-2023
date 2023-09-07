@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./login.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { UserContext } from "../../UserContext";
 // Import your SVG icons from the public directory
 import usernameIcon from "../../images/user.svg";
 import passwordIcon from "../../images/lock.svg";
@@ -11,7 +11,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const { setUser } = useContext(UserContext)
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -38,6 +38,7 @@ function Login() {
               JSON.stringify(sessionToken)
             );
             sessionStorage.setItem("typeID", JSON.stringify(typeID));
+            setUser(sessionToken)
             navigate("/home");
           } else {
             alert("please check your email and password");

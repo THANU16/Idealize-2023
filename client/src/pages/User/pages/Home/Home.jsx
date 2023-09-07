@@ -44,9 +44,9 @@ const Home = (props) => {
           headers: { Authorization: "key " + sessionToken },
         })
         .then((res) => {
-          console.log(res.data);
           if (res.data.sucess) {
             sessionStorage.setItem("requestData", JSON.stringify(res.data.result));
+
             navigate("/requested");
           }
         })
