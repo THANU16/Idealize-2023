@@ -84,7 +84,7 @@ function Login() {
               />
             </div>
             <div className="form-group">
-              <button type="submit">Login</button>
+              <button type="login">Login</button>
               <a href="#" className="forgot-password">
                 Forgot Password?
               </a>
