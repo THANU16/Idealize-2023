@@ -9,45 +9,74 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 
+import axios from "axios";
+
 const Home = (props) => {
   // const { onRequest, onCancel } = props;
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
   const [address, setAddress] = useState("");
-
+  const [ambulanceLocation, setAmbulanceLocation] = useState({});
+  const [requestData, setRequestData] = useState({});
   // useEffect(() => {
   //   if (coordinates) {
   //     sendLocationDataToBackend(coordinates.latitude, coordinates.longitude);
   //   }
   // }, [coordinates]);
 
+  // useEffect(() => {
+  // const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+  //   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
+  //   const socket = new WebSocket("ws://localhost:8000");
+
+  //   // Send the session token to the server for authentication
+  //   socket.onopen = () => {
+  //     console.log("WebSocket connection opened.");
+  //     socket.send(
+  //       JSON.stringify({ sessionToken: sessionToken, typeID: typeID })
+  //     );
+  //   };
+
+  //   socket.onerror = (error) => {
+  //     console.error("WebSocket error:", error);
+  //   };
+
+  //   // Handle incoming messages from the server
+  //   socket.onmessage = (event) => {
+  //     const message = JSON.parse(event.data);
+  //     // Handle incoming messages (e.g., display notifications)
+  //     console.log("message ", message);
+  //   };
+
+  //   return () => {
+  //     socket.close();
+  //   };
+  // }, []);
+
   useEffect(() => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-    const typeID = JSON.parse(sessionStorage.getItem("typeID"));
-    const socket = new WebSocket("ws://localhost:8000");
 
-    // Send the session token to the server for authentication
-    socket.onopen = () => {
-      console.log("WebSocket connection opened.");
-      socket.send(
-        JSON.stringify({ sessionToken: sessionToken, typeID: typeID })
-      );
-    };
+    axios
+      .post(
+        "http://localhost:8000/hospital/getHospitalAmbulanceLocation",
+        {},
+        { headers: { Authorization: "key " + sessionToken } }
+      )
+      .then((res) => {
+        if (res.data.sucess) {
+          setAmbulanceLocation(res.data.results);
+        }
+      })
+      .catch((err) => console.log(err));
 
-    socket.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-
-    // Handle incoming messages from the server
-    socket.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      // Handle incoming messages (e.g., display notifications)
-      console.log("message ", message);
-    };
-
-    return () => {
-      socket.close();
-    };
+    axios
+      .get("http://localhost:8000/hospital/getRequest")
+      .then((res) => {
+        if (res.data.sucess) {
+          setRequestData(res.data.results);
+        }
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const onMapClick = (mapProps, map, event) => {
