@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import emgbtn from "../usericons/emergency.png";
-import "./user.css";
+import React, { useState, useEffect } from "react";
+import emgbtn from "../../usericons/emergency.png";
+import "../user.css";
 import { NavLink } from "react-router-dom";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-import pending from "../usericons/pending.png";
-import cancel from "../usericons/cancel.png";
+import pending from "../../usericons/pending.png";
+import cancel from "../../usericons/cancel.png";
+import axios from "axios";
 
 const Home = (props) => {
   const [request, setRequest] = useState(false);
@@ -14,6 +15,24 @@ const Home = (props) => {
   const [req_sent_hospitals, setReq_sent_hospitals] = useState([]);
   const [req_sent_ambulances, setReq_sent_ambulances] = useState([]);
 
+  // Use useEffect to log currentLocation when it changes
+  useEffect(() => {
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+    if (currentLocation) {
+      console.log(currentLocation);
+
+      axios
+        .post("http://localhost:8000/emergency", currentLocation, {headers :{Authorization : 'key '+sessionToken}})
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.sucess) {
+            
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [currentLocation]);
+
   const handleEmergencyButtonClick = () => {
     setRequest(true);
     if ("geolocation" in navigator) {
@@ -21,7 +40,6 @@ const Home = (props) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         setCurrentLocation({ lat: latitude, lng: longitude });
-        console.log("Hi", currentLocation);
       });
     } else {
       console.error("Geolocation is not available in this browser.");
@@ -80,17 +98,18 @@ const Home = (props) => {
             mapContainerClassName="map-container"
           >
             {/* Map each location to a Marker */}
-            {/* {locations.map((location, index) => (
-              
-            ))} */}
-            <Marker
-              // key={index}
-              position={{ lat: 9.7486, lng: 80.0164 }}
-              icon={{
-                // url: ambulanceMarkerIcon,
-                scaledSize: new window.google.maps.Size(100, 100),
-              }}
-            />
+            {currentLocation && ( // Conditionally render the Marker when currentLocation is not null
+              <Marker
+                position={{
+                  lat: currentLocation.lat,
+                  lng: currentLocation.lng,
+                }}
+                icon={{
+                  // url: ambulanceMarkerIcon,
+                  scaledSize: new window.google.maps.Size(100, 100),
+                }}
+              />
+            )}
           </Map>
         </div>
         {/*Active ambulance details */}

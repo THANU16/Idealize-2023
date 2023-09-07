@@ -4,119 +4,133 @@ const decodedUserId = require("../Authentication/decodedToken");
 const WebSocket = require("ws");
 const database = require("../utils/databaseUtils");
 
+// Create a function that takes the 'server' as a parameter
+function createEmergencyRouter(server) {
+  const router = express.Router();
+  const wss = new WebSocket.Server({ server }); // Use the 'server' parameter
 
-const router = express.Router();
-const wss = new WebSocket.Server({ server });
-const databaseObj = new database();
-databaseObj.connectDatabase("Emergency Request");
+  const databaseObj = new database();
+  databaseObj.connectDatabase("Emergency Request");
 
-const connection = databaseObj.connection;
+  const connection = databaseObj.connection;
 
-// Maintain a list of WebSocket connections for hospitals and ambulances
-const hospitalConnections = new Map(); // Map to associate hospital IDs with connections
-const ambulanceConnections = new Map(); // Map to associate ambulance IDs with connections
+  // Maintain a list of WebSocket connections for hospitals and ambulances
+  const hospitalConnections = new Map(); // Map to associate hospital IDs with connections
+  const ambulanceConnections = new Map(); // Map to associate ambulance IDs with connections
 
-// Define an array of selected hospital IDs
-const selectedHospitalIDs = ["hospital123", "hospital456", "hospital789"]; // Replace with the actual hospital IDs
+  // Define an array of selected hospital IDs
+  const selectedHospitalIDs = ["1", "2"]; // Replace with the actual hospital IDs
 
-// WebSocket handling
-wss.on("connection", (ws) => {
-  ws.on("message", (message) => {
-    const data = JSON.parse(message);
+  // Selected ambulance ID
+  const selectedAmbulanceIDs = ["1", "2"]; // Replace with the actual ambulance ID
 
-    // Decode the session token to get the client's ID
-    const clientId = decodedUserId(data.token); // Implement your token decoding logic
-    const typeID = data.typeID
+  // WebSocket handling
+  wss.on("connection", (ws) => {
+    ws.on("message", (message) => {
+      const data = JSON.parse(message);
+      // Decode the session token to get the client's ID
+      const clientId = decodedUserId(data.sessionToken); // Implement your token decoding logic
+      const typeID = data.typeID;
+      console.log(`Received WebSocket message: ${JSON.stringify(data)}`);
 
-    // Check if the client ID matches any of the selected hospital IDs
-    if (selectedHospitalIDs.includes(clientId)) {
-      // Notify the selected hospital
-      hospitalConnections.set(clientId, ws); // Associate the WebSocket connection with the hospital ID
-      ws.send(
-        JSON.stringify({
-          type: "notification",
-          message: "Emergency request received.",
-        })
-      );
-    } else if (clientId === selectedAmbulanceID) {
-      // Notify the selected ambulance
-      ambulanceConnections.set(clientId, ws); // Associate the WebSocket connection with the ambulance ID
-      ws.send(
-        JSON.stringify({
-          type: "notification",
-          message: "Emergency request received.",
-        })
-      );
-    }
-  });
-});
-
-// Handle emergency requests from users
-router.post("/emergency", (req, res) => {
-  const requestData = req.body; // Assuming you receive the emergency request data from the user
-  const body = req.body;
-
-  const sessionToken = req.headers.authorization.replace("key ");
-
-  const hospitalID = decodedUserId(sessionToken);
-
-  const setQuery = "insert into ambulanceLocation (ambulanceID, lat, lng) values (?, ?, ?);";
-
-  connection.query(setQuery, [ambulanceID, body.lat, body.lng], (err, result) => {
-    if (err) {
-      res.send({
-        sucess: false,
-        isExist: false,
-        error: err,
-        result: null,
-      });
-    } else {
-      if (result.length > 0) {
-        res.send({
-          sucess: true,
-          isExist: true,
-          error: null,
-          result: result,
-        });
-      } else {
-        res.send({
-          sucess: false,
-          isExist: false,
-          error: null,
-          result: result,
-        });
+      // Check if the client ID matches any of the selected hospital IDs
+      if ((typeID = "ho")) {
+        if (selectedHospitalIDs.includes(clientId)) {
+          // Notify the selected hospital
+          hospitalConnections.set(clientId, ws); // Associate the WebSocket connection with the hospital ID
+          ws.send(
+            JSON.stringify({
+              type: "notification",
+              message: "Emergency request received.",
+            })
+          );
+        }
+      } else if ((typeID = dr)) {
+        if (selectedAmbulanceIDs.includes(clientId)) {
+          // Notify the selected ambulance
+          ambulanceConnections.set(clientId, ws); // Associate the WebSocket connection with the ambulance ID
+          ws.send(
+            JSON.stringify({
+              type: "notification",
+              message: "Emergency request received.",
+            })
+          );
+        }
       }
-    }
+    });
+
+    ws.on("close", (code, reason) => {
+      console.log(
+        `WebSocket connection closed with code ${code}, reason: ${reason}`
+      );
+      // Handle WebSocket connection closure if needed...
+    });
+
+    ws.on("error", (error) => {
+      console.error(`WebSocket error: ${error.message}`);
+      // Handle WebSocket errors if needed...
+    });
   });
 
-  
-  
-  // Notify the selected hospitals
-  selectedHospitalIDs.forEach((hospitalID) => {
-    const hospitalSocket = hospitalConnections.get(hospitalID);
-    if (hospitalSocket) {
-      hospitalSocket.send(JSON.stringify(requestData));
-    }
+  // Handle emergency requests from users
+  router.post("/", (req, res) => {
+    const requestData = req.body; // Assuming you receive the emergency request data from the user
+    const sessionToken = req.headers.authorization.replace("key ", "");
+    const userID = decodedUserId(sessionToken);
+    const setQuery =
+      "insert into emergency_request (userID, status, lat, lng) values(?,?,?,?);";
+
+    connection.query(
+      setQuery,
+      [userID, "Pending", requestData.lat, requestData.lng],
+      (err, result) => {
+        if (err) {
+          res.send({
+            sucess: false,
+            isExist: false,
+            error: err,
+            result: null,
+          });
+        } else {
+          if (result.length > 0) {
+            res.send({
+              sucess: true,
+              isExist: true,
+              error: null,
+              result: result,
+            });
+          } else {
+            res.send({
+              sucess: false,
+              isExist: false,
+              error: null,
+              result: result,
+            });
+          }
+        }
+      }
+    );
+
+    // Notify the selected hospitals
+    selectedHospitalIDs.forEach((hospitalID) => {
+      const hospitalSocket = hospitalConnections.get(hospitalID);
+      if (hospitalSocket) {
+        console.log(`Sending message to hospital ${hospitalID}`);
+        hospitalSocket.send(JSON.stringify(requestData));
+      }
+    });
+
+    // Notify the selected ambulance
+    selectedAmbulanceIDs.forEach((ambulanceID) => {
+      const ambulanceSocket = ambulanceConnections.get(ambulanceID);
+      if (ambulanceSocket) {
+        console.log(`Sending message to hospital ${ambulanceID}`);
+        ambulanceSocket.send(JSON.stringify(requestData));
+      }
+    });
   });
 
-  // Notify the selected ambulance
-  const ambulanceSocket = ambulanceConnections.get(selectedAmbulanceID);
-  if (ambulanceSocket) {
-    ambulanceSocket.send(JSON.stringify(requestData));
-  }
-
-  res.sendStatus(200); // Respond to the user's emergency request
-});
-
-server.listen(3000, () => {
-  console.log("WebSocket server is listening on port 3000");
-});
-
-// Function to decode the session token and return the client's ID
-function decodeSessionToken(token) {
-  // Implement your token decoding logic here
-  // Return the client's ID extracted from the token
+  return router;
 }
 
-// Selected ambulance ID
-const selectedAmbulanceID = "ambulance456"; // Replace with the actual ambulance ID
+module.exports = createEmergencyRouter;
