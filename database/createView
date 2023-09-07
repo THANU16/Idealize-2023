@@ -38,4 +38,4 @@ CREATE VIEW `all_user` AS
         (`ambulance`
 	left JOIN `ambulance_driver_connection` ON ((`ambulance`.`ambulanceID` = `ambulance_driver_connection`.`ambulanceID`)))
     WHERE
-        (`ambulance_driver_connection`.`disconnectedTime` <> NULL);
+        (`ambulance_driver_connection`.`disconnectedTime` is  NULL);
