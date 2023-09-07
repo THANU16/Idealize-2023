@@ -24,8 +24,8 @@ const Home = (props) => {
           headers: { Authorization: "key " + sessionToken },
         })
         .then((res) => {
-          console.log(res.data);
           if (res.data.sucess) {
+            navigate("/requested");
           }
         })
         .catch((err) => console.log(err));
@@ -43,7 +43,6 @@ const Home = (props) => {
     } else {
       console.error("Geolocation is not available in this browser.");
     }
-    navigate("/requested");
   };
 
   const [showNotifications, setShowNotifications] = useState(false);

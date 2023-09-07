@@ -77,6 +77,7 @@ function createEmergencyRouter(server) {
     const requestData = req.body; // Assuming you receive the emergency request data from the user
     const sessionToken = req.headers.authorization.replace("key ", "");
     const userID = decodedUserId(sessionToken);
+    console.log(userID);
     const setQuery =
       "insert into emergency_request (userID, status, lat, lng) values(?,?,?,?);";
 
@@ -92,21 +93,12 @@ function createEmergencyRouter(server) {
             result: null,
           });
         } else {
-          if (result.length > 0) {
-            res.send({
-              sucess: true,
-              isExist: true,
-              error: null,
-              result: result,
-            });
-          } else {
-            res.send({
-              sucess: false,
-              isExist: false,
-              error: null,
-              result: result,
-            });
-          }
+          res.send({
+            sucess: true,
+            isExist: true,
+            error: null,
+            result: result,
+          });
         }
       }
     );

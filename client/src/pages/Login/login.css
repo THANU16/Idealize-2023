@@ -37,18 +37,7 @@ label {
   display: block;
 }
 
-.username{
-  width: 442.51px;
-  height: 45px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 3px solid #19295A;
-  background: #FFF;
-  font-size: 20px;
-
-}
-
-input[type="text"],
+input[name="username"],
 input[type="password"] {
   width: 442.51px;
   height: 45px;
