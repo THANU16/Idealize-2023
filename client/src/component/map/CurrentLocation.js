@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+const React = require("react");
+const { useState, useEffect } = require("react");
+
+const { Map, GoogleApiWrapper, Marker } = require("google-maps-react");
 
 function EmergencyMap(props) {
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -10,12 +12,18 @@ function EmergencyMap(props) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         setCurrentLocation({ lat: latitude, lng: longitude });
-        console.log(currentLocation);
       });
     } else {
       console.error("Geolocation is not available in this browser.");
     }
   };
+
+  // Use useEffect to log currentLocation when it changes
+  useEffect(() => {
+    if (currentLocation) {
+      console.log(currentLocation);
+    }
+  }, [currentLocation]);
 
   return (
     <div>

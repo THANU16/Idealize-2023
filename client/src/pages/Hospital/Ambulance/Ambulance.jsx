@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./ambulance.css";
 import Add from "../../../assets/icons/add.png";
+import axios from "axios";
 
 const Analytics = () => {
+  const [ambulanceData, setAmbulanceData] = useState({});
+
+  useEffect(() => {
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+    axios
+      .post(
+        "http://localhost:8000/hospital/getAllHospitalAmbulance",
+        {},
+        { headers: { Authorization: "key " + sessionToken } }
+      )
+      .then((res) => {
+        if (res.data.sucess) {
+          setAmbulanceData(res.data.result);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div>
       <div>

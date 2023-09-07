@@ -14,7 +14,7 @@ const Signup = () => {
           <Link to="/HospitalDetails">
             <img src={HospitalIcon} alt="Image 1" className="category" />
           </Link>
-          <Link to="/user/signUp">
+          <Link to="/user/signup">
             <img src={PeopleIcon} alt="Image 2" className="category" />
           </Link>
           <Link to="/">
