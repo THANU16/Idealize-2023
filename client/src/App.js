@@ -8,6 +8,7 @@ import HospitalPaths from "./pages/Hospital/HospitalPaths";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import UserPath from "./pages/User/UserPath";
+import DriverPaths from "./pages/Driver/DriverPath";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -29,7 +30,8 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
       </Routes>
       {/* <HospitalPaths></HospitalPaths> */}
-      <UserPath></UserPath>
+      {/* <UserPath></UserPath> */}
+      <DriverPaths></DriverPaths>
 
       {/* {typeID === "ho" ? (
         <HospitalPaths></HospitalPaths>
