@@ -1,0 +1,23 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: . # Use the current directory as the build context
+      dockerfile: client/Dockerfile # Use the client Dockerfile
+    ports:
+      - "3000:3000" # Map host port 3000 to container port 3000
+    depends_on:
+      - backend # Ensure that the backend container is started first
+
+  backend:
+    build:
+      context: .
+      dockerfile: server/Dockerfile # Use the server Dockerfile
+    ports:
+      - "8000:8000" # Map host port 8000 to container port 8000
+    environment:
+      MYSQL_HOST: host.docker.internal # Use this host to connect to your local MySQL
+      MYSQL_PORT: 3306 # Use the default MySQL port
+      MYSQL_USER: your-mysql-username
+      MYSQL_PASSWORD: your-mysql-password
+      MYSQL_DATABASE: your-database-name
