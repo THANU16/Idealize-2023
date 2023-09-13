@@ -11,7 +11,7 @@ const Signup = () => {
       <div className="image-container">
         <h1>Categories...</h1>
         <div className="triangle">
-          <Link to="/HospitalDetails">
+          <Link to="/hospital/HospitalDetails">
             <img src={HospitalIcon} alt="Image 1" className="category" />
           </Link>
           <Link to="/user/signup">
