@@ -74,7 +74,25 @@ const App = () => {
         ) : (
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Signup />} />
+
+            {/* Hospital signup */}
+            <Route
+              path="/hospital/HospitalDetails"
+              element={<HospitalDetails />}
+            />
+            <Route path="/OwnerDetails" element={<OwnerDetails />} />
+            <Route
+              path="/UploadHospitalDocuments"
+              element={<UploadHospitalDocuments />}
+            />
+            <Route path="/SignupFinished" element={<SignupFinished />} />
+
+            {/* user signup */}
+
+            <Route path="/user/signup" element={<UserSignup />}></Route>
+            <Route path="/registered" element={<U_SignupFinished />}></Route>
+
             <Route
               path="*"
               element={<p>This page isn't available. Sorry about that.</p>}
