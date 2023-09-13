@@ -1,5 +1,6 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
+
 const generateSessionToken = require("./generateSessionToken");
 const database = require("../utils/databaseUtils"); // Import the database class
 
