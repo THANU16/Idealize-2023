@@ -8,6 +8,12 @@ class database {
     this.password = "root";
     this.database = "lifeserver";
 
+    // // this.host = "sql107.infinityfree.com";
+    // this.host = "192.168.219.247";
+    // this.user = "if0_35023243";
+    // this.password = "wmQYLUnlxQ7kaf";
+    // this.database = "if0_35023243_lifeserver";
+
     this.connection = mysql.createConnection({
       host: this.host,
       user: this.user,
