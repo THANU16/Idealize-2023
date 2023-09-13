@@ -75,10 +75,8 @@ function createEmergencyRouter(server) {
   // Handle emergency requests from users
   router.post("/", (req, res) => {
     const requestData = req.body; // Assuming you receive the emergency request data from the user
-    console.log(requestData);
     const sessionToken = req.headers.authorization.replace("key ", "");
     const userID = decodedUserId(sessionToken);
-    console.log(userID);
     const setQuery =
       "insert into emergency_request (userID, status, lat, lng, requestedTime) values(?,?,?,?,?);";
     const getIDQuery =
