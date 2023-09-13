@@ -17,11 +17,11 @@ router.post("/add", (req, res) => {
   const hospitalID = decodedUserId(sessionToken);
   // check the employee already exist or not
   const checkQuery =
-    "SELECT * FROM lifeserver.ambulance where ambulanceNumber = ?;";
+    "SELECT * FROM ambulance where ambulanceNumber = ?;";
 
   // type id is the forigen key so we set the forigen key correctly
   const insertQuery =
-    "insert into lifeserver.ambulance (ambulanceNumber, hospitalID) values(?,?);";
+    "insert into ambulance (ambulanceNumber, hospitalID) values(?,?);";
 
   connection.query(checkQuery, [ambulanceNumber], (err, result) => {
     if (err) {
@@ -73,7 +73,7 @@ router.post("/showDetail", (req, res) => {
 
   const ambulanceID = decodedUserId(sessionToken);
 
-  const getQuery = "select * from lifeserver.ambulance where ambulanceID = ?;";
+  const getQuery = "select * from ambulance where ambulanceID = ?;";
 
   connection.query(getQuery, ambulanceID, (err, result) => {
     if (err) {
@@ -110,7 +110,7 @@ router.post("/getLocation", (req, res) => {
   const ambulanceID = decodedUserId(sessionToken);
 
   const getQuery =
-    "select ambulanceID, lat, lng  from lifeserver.ambulance where ambulanceID = ?;";
+    "select ambulanceID, lat, lng  from ambulance where ambulanceID = ?;";
 
   connection.query(getQuery, ambulanceID, (err, result) => {
     if (err) {
