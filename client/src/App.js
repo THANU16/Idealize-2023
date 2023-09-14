@@ -15,6 +15,7 @@ import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
 import OwnerDetails from "./pages/Hospital/Signup/OwnerDetailsPage";
 import UploadHospitalDocuments from "./pages/Hospital/Signup/UploadHospitalDocumentsPage";
 import SignupFinished from "./pages/Hospital/Signup/SignupFinished";
+import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
 
 // User Signup
 import UserSignup from "./pages/User/Signup/Signup";
@@ -51,6 +52,7 @@ const App = () => {
               path="/UploadHospitalDocuments"
               element={<UploadHospitalDocuments />}
             />
+            <Route path="/HospitalSearch" element={<HospitalSearch />} />
             <Route path="/SignupFinished" element={<SignupFinished />} />
 
             {/* user signup */}
@@ -81,6 +83,7 @@ const App = () => {
               path="/hospital/HospitalDetails"
               element={<HospitalDetails />}
             />
+            <Route path="/HospitalSearch" element={<HospitalSearch />} />
             <Route path="/OwnerDetails" element={<OwnerDetails />} />
             <Route
               path="/UploadHospitalDocuments"
