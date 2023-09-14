@@ -146,7 +146,7 @@ const Home = (props) => {
         dateTime: formattedDateTime,
       };
       axios
-        .post("http://localhost:8000/emergency", data, {
+        .post("${process.env.REACT_APP_API_URL}/emergency", data, {
           headers: { Authorization: "key " + sessionToken },
         })
         .then((res) => {

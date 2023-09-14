@@ -58,7 +58,7 @@ const Home = (props) => {
 
     axios
       .post(
-        "http://localhost:8000/hospital/getHospitalAmbulanceLocation",
+        "${process.env.REACT_APP_API_URL}/hospital/getHospitalAmbulanceLocation",
         {},
         { headers: { Authorization: "key " + sessionToken } }
       )
@@ -70,7 +70,7 @@ const Home = (props) => {
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:8000/hospital/getRequest")
+      .get("${process.env.REACT_APP_API_URL}/hospital/getRequest")
       .then((res) => {
         if (res.data.sucess) {
           setRequestData(res.data.results);

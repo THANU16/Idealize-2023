@@ -17,7 +17,7 @@ class ShowPath extends Component {
     // Call the API to fetch origin and destination data
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
     axios
-      .get("http://localhost:8000/xxxxxxxxxxxxxxx", {
+      .get("${process.env.REACT_APP_API_URL}/xxxxxxxxxxxxxxx", {
         headers: { Authorization: "key " + sessionToken },
       })
       .then((res) => {

@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const decodedUserId = require("../Authentication/decodedToken");
 const database = require("../utils/databaseUtils");
 
@@ -12,7 +12,6 @@ const connection = databaseObj.connection;
 
 // connected
 router.post("/add", (req, res) => {
-  console.log(req.body);
   const body = req.body;
   const typeID = "ho";
   const password = body.password;
@@ -129,8 +128,7 @@ router.post("/getAllHospitalsLocations", (req, res) => {
 
   const hospitalID = decodedUserId(sessionToken);
 
-  const getQuery =
-    "select hospitalID, name, lat, lng from  hospital;";
+  const getQuery = "select hospitalID, name, lat, lng from  hospital;";
 
   connection.query(getQuery, hospitalID, (err, result) => {
     if (err) {
@@ -166,8 +164,7 @@ router.post("/getAllHospitalAmbulance", (req, res) => {
 
   const hospitalID = decodedUserId(sessionToken);
 
-  const getQuery =
-    "select * from  ambulance_driver where hospitalID = ?;";
+  const getQuery = "select * from  ambulance_driver where hospitalID = ?;";
 
   connection.query(getQuery, [hospitalID], (err, result) => {
     if (err) {
@@ -216,7 +213,6 @@ router.post("/getHospitalAmbulanceLocation", (req, res) => {
 
   const hospitalID = decodedUserId(sessionToken);
 
-  console.log(hospitalID);
   const getQuery =
     "select * from  ambulance_and_location where hospitalID = ?;";
 
@@ -239,8 +235,7 @@ router.post("/getHospitalAmbulanceLocation", (req, res) => {
 
 router.post("/getRecentRequest", (req, res) => {
   const requestID = req.body.data;
-  const getQuery =
-    "SELECT * FROM  emergency_request where  requestID = ?;";
+  const getQuery = "SELECT * FROM  emergency_request where  requestID = ?;";
 
   connection.query(getQuery, [requestID], (err, result) => {
     if (err) {

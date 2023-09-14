@@ -72,7 +72,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
     sessionStorage.removeItem("coordinates");
 
     axios
-      .post("http://localhost:8000/hospital/add", formData)
+      .post("${process.env.REACT_APP_API_URL}/hospital/add", formData)
       .then((res) => {
         // console.log(res.data);
         if (res.data.isExist) {

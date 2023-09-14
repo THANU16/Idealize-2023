@@ -16,7 +16,7 @@ const RequestCancel = (props) => {
   useEffect(() => {
     console.log(currentLocation);
     axios
-      .post("http://localhost:8000/hospital/getRecentRequest", {
+      .post("${process.env.REACT_APP_API_URL}/hospital/getRecentRequest", {
         data: requestData[0].requestID,
       })
       .then((res) => {
