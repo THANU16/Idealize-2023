@@ -8,12 +8,21 @@ class database {
     // this.password = "root";
     // this.database = "lifeserver";
 
-    this.host = "sql107.infinityfree.com";
+    // this.host = "sql107.infinityfree.com";
+    // // this.host = "192.168.219.247";
+    // this.port = 3306; // Replace with your desired port
+    // this.user = "if0_35023243";
+    // this.password = "wmQYLUnlxQ7kaf";
+    // this.database = "if0_35023243_lifeserver";
+
+    this.host = "familytree.mysql.database.azure.com";
     // this.host = "192.168.219.247";
     this.port = 3306; // Replace with your desired port
-    this.user = "if0_35023243";
-    this.password = "wmQYLUnlxQ7kaf";
-    this.database = "if0_35023243_lifeserver";
+    this.user = "kobinarth22";
+    this.password = "Itsme043";
+    this.database = "lifeserver";
+
+
 
     this.connection = mysql.createConnection({
       host: this.host,
