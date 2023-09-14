@@ -13,7 +13,7 @@ const Drivers = () => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
     axios
       .post(
-        "${process.env.REACT_APP_API_URL}/hospital/getAllHospitalDrivers",
+        `${process.env.REACT_APP_API_URL}/hospital/getAllHospitalDrivers`,
         {},
         { headers: { Authorization: "key " + sessionToken } }
       )

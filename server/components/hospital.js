@@ -24,6 +24,7 @@ router.post("/add", (req, res) => {
     "INSERT INTO hospital (Latitude, Longitude, district, email, name, contactNumber, type, password, postalCode, province, registeredDate, registrationNo, website, typeID) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?);";
 
   connection.query(checkQuery, [body.email], (err, result) => {
+    console.log()
     if (err) {
       console.log(err);
       res.send({

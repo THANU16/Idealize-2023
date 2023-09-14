@@ -12,7 +12,7 @@ const Ambulance = () => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
     axios
       .post(
-        "${process.env.REACT_APP_API_URL}/hospital/getAllHospitalAmbulance",
+        `${process.env.REACT_APP_API_URL}/hospital/getAllHospitalAmbulance`,
         {},
         { headers: { Authorization: "key " + sessionToken } }
       )

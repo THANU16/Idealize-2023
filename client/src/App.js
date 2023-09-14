@@ -43,10 +43,7 @@ const App = () => {
             <Route path="/" element={<Signup />} />
 
             {/* Hospital signup */}
-            <Route
-              path="/hospital/HospitalDetails"
-              element={<HospitalDetails />}
-            />
+            <Route path="/HospitalDetails" element={<HospitalDetails />} />
             <Route path="/OwnerDetails" element={<OwnerDetails />} />
             <Route
               path="/UploadHospitalDocuments"

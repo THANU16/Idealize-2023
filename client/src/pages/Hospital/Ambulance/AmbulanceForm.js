@@ -17,7 +17,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
 
     axios
-      .post("${process.env.REACT_APP_API_URL}/ambulance/add", data, {
+      .post(`${process.env.REACT_APP_API_URL}/ambulance/add`, data, {
         headers: { Authorization: "key " + sessionToken },
       })
       .then((res) => {

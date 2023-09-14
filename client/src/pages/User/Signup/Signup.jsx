@@ -43,7 +43,7 @@ function OwnerDetailsPage() {
     };
 
     axios
-      .post("${process.env.REACT_APP_API_URL}/user/add", data)
+      .post(`${process.env.REACT_APP_API_URL}/user/add`, data)
       .then((res) => {
         if (res.data.isExist) {
           alert("Please check your details");

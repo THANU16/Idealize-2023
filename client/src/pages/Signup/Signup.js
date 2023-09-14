@@ -11,7 +11,7 @@ const Signup = () => {
       <div className="image-container">
         <h1>Categories...</h1>
         <div className="triangle">
-          <Link to="/hospital/HospitalDetails">
+          <Link to="/HospitalDetails">
             <img src={HospitalIcon} alt="Image 1" className="category" />
           </Link>
           <Link to="/user/signup">
@@ -20,10 +20,10 @@ const Signup = () => {
           <Link to="/">
             <img src={PharmacyIcon} alt="Image 3" className="category" />
           </Link>
-          <p> Do you have account?    
-          <Link to="/login">
-            Login
-          </Link>
+          <p>
+            {" "}
+            Do you have account?
+            <Link to="/login">Login</Link>
           </p>
         </div>
       </div>

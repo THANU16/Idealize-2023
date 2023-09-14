@@ -26,7 +26,7 @@ function Login() {
     // console.log(`Username/Email: ${username}, Password: ${password}`);
     const data = { email: username, password: password };
     axios
-      .post("${process.env.REACT_APP_API_URL}/login", data)
+      .post(`${process.env.REACT_APP_API_URL}/login`, data)
       .then((res) => {
         console.log(res.data);
         if (res.data.isExist) {

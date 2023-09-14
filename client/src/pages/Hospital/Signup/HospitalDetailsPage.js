@@ -22,6 +22,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
   const [Longitude, setLongitude] = useState(null);
 
   useEffect(() => {
+    // console.log(`${process.env.REACT_APP_API_URL}`);
     var savedData = JSON.parse(sessionStorage.getItem("formData"));
     if (savedData) {
       setHospitalName(savedData.hospitalName);
@@ -72,9 +73,9 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
     sessionStorage.removeItem("coordinates");
 
     axios
-      .post("${process.env.REACT_APP_API_URL}/hospital/add", formData)
+      .post(`${process.env.REACT_APP_API_URL}/hospital/add`, formData)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data.isExist) {
           alert("email already exist. Please check your email!!!");
         } else if (res.data.sucess) {
