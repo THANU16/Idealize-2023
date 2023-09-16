@@ -20,6 +20,11 @@ const Signup = () => {
           <Link to="/">
             <img src={PharmacyIcon} alt="Image 3" className="category" />
           </Link>
+          <p>
+            {" "}
+            Do you have account?
+            <Link to="/login">Login</Link>
+          </p>
         </div>
       </div>
     </div>

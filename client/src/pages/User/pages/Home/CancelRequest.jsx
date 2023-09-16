@@ -15,6 +15,7 @@ const CancelRequest = (props) => {
   // Use useEffect to log currentLocation when it change
 
   const onYes = () => {
+    sessionStorage.removeItem("requestData")
     navigate("/home");
   };
 

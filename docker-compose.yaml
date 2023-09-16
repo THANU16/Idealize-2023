@@ -1,0 +1,21 @@
+version: "3"
+services:
+  frontend:
+    build:
+      context: . # Use the current directory as the build context
+      dockerfile: client/Dockerfile # Use the client Dockerfile
+    ports:
+      - "3000:3000" # Map host port 3000 to container port 3000
+
+  backend:
+    build:
+      context: .
+      dockerfile: server/Dockerfile # Use the server Dockerfile
+    ports:
+      - "8000:8000" # Map host port 8000 to container port 8000
+    environment:
+      MYSQL_HOST: http://sql107.infinityfree.com
+      MYSQL_PORT: 3306 # Use the default MySQL port
+      MYSQL_USER: if0_35023243
+      MYSQL_PASSWORD: wmQYLUnlxQ7kaf
+      MYSQL_DATABASE: if0_35023243_lifeserver

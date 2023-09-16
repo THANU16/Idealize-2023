@@ -26,6 +26,6 @@ app.use("/driver", driver);
 app.use("/ambulance", ambulance);
 app.use("/emergency", emergencyRequestRouter);
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log("Listen port 8000");
 });

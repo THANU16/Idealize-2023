@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const decodedUserId = require("../Authentication/decodedToken");
 const database = require("../utils/databaseUtils");
 
@@ -19,11 +19,11 @@ router.post("/add", (req, res) => {
 
   // check the employee already exist or not
   const checkQuery =
-    "select id as id, typeID as TypeID, email as email from lifeserver.all_user where email = ? union all select driverID as id, typeID as TypeID, email as email from lifeserver.driver where NIC = ?  limit 2;";
+    "select id as id, typeID as TypeID, email as email from all_user where email = ? union all select driverID as id, typeID as TypeID, email as email from driver where NIC = ?  limit 2;";
 
   // type id is the forigen key so we set the forigen key correctly
   const insertQuery =
-    "insert into lifeserver.driver (hospitalID, firstName, lastName, phoneNumber, email, password, NIC, address, typeID) values(?,?,?,?,?,?,?,?,?);";
+    "insert into driver (hospitalID, firstName, lastName, phoneNumber, email, password, NIC, address, typeID) values(?,?,?,?,?,?,?,?,?);";
 
   connection.query(checkQuery, [body.email, body.nic], (err, result) => {
     if (err) {
@@ -89,7 +89,7 @@ router.post("/showDetail", (req, res) => {
 
   const driverID = decodedUserId(sessionToken);
 
-  const getQuery = "select * from lifeserver.driver where driverID = ?;";
+  const getQuery = "select * from driver where driverID = ?;";
 
   connection.query(getQuery, driverID, (err, result) => {
     if (err) {
@@ -126,7 +126,7 @@ router.post("/setAmbulance", (req, res) => {
   const driverID = decodedUserId(sessionToken);
 
   const setQuery =
-    "insert into lifeserver.ambulanceDriverConnection (ambulance_ID, driverID);"; //=================================================
+    "insert into ambulanceDriverConnection (ambulance_ID, driverID);"; //=================================================
 
   connection.query(setQuery, [body.ambulance_ID, driverID], (err, result) => {
     if (err) {

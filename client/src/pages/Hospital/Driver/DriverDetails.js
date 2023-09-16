@@ -34,7 +34,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
 
     axios
-      .post("http://localhost:8000/driver/add", data, {
+      .post(`${process.env.REACT_APP_API_URL}/driver/add`, data, {
         headers: { Authorization: "key " + sessionToken },
       })
       .then((res) => {
@@ -50,7 +50,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
 
   return (
     <div className="HospitalDetailsPage">
-      <h2>Ambulance Details</h2>
+      <h2>Driver Details</h2>
       <div className="hospital-details-container">
         {/* Center the form content */}
         <div className="centered-form">

@@ -1,0 +1,226 @@
+CREATE TABLE `user_type` (
+  `type_id` char(2) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  PRIMARY KEY (`type_id`)
+)
+
+
+
+CREATE TABLE `user` (
+  `userID` int NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) DEFAULT NULL,
+  `phoneNumber` varchar(15) NOT NULL,
+  `NIC` varchar(20) DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
+  `DOB` date DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `preferredType` int DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `typeID` char(2) NOT NULL,
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `NIC` (`NIC`),
+  KEY `type_id` (`typeID`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`typeID`) REFERENCES `user_type` (`type_id`)
+)
+
+
+CREATE TABLE `hospital` (
+  `hospitalID` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `type` enum('Government','Private') NOT NULL,
+  `latitude` decimal(10,8) NOT NULL,
+  `longitude` decimal(11,8) NOT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `contactNumber` varchar(15) NOT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `typeID` char(2) NOT NULL,
+  `RegistrationNo` varchar(20) DEFAULT NULL,
+  `RegisteredDate` date DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `district` varchar(50) DEFAULT NULL,
+  `PostalCode` varchar(10) DEFAULT NULL,
+  `province` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`hospitalID`),
+  KEY `type_id` (`typeID`),
+  CONSTRAINT `hospital_ibfk_1` FOREIGN KEY (`typeID`) REFERENCES `user_type` (`type_id`)
+)
+
+
+CREATE TABLE `owner` (
+  `ownerID` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `occupation` varchar(255) NOT NULL,
+  `dob` date NOT NULL,
+  `nic` varchar(20) NOT NULL,
+  `phonenum` varchar(15) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `province` varchar(255) NOT NULL,
+  `district` varchar(255) NOT NULL,
+  `postalcode` varchar(10) NOT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `hospitalID` int NOT NULL,
+  PRIMARY KEY (`ownerID`),
+  UNIQUE KEY `lastname` (`lastname`),
+  UNIQUE KEY `nic` (`nic`),
+  KEY `hospitalID` (`hospitalID`),
+  CONSTRAINT `owner_ibfk_1` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`) ON DELETE CASCADE ON UPDATE CASCADE
+) 
+
+
+CREATE TABLE `ambulance` (
+  `ambulanceID` int NOT NULL AUTO_INCREMENT,
+  `ambulanceNumber` varchar(20) NOT NULL,
+  `hospitalID` int NOT NULL,
+  `isAvailable` tinyint(1) NOT NULL DEFAULT '0',
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ambulanceID`),
+  UNIQUE KEY `ambulanceNumber` (`ambulanceNumber`),
+  KEY `hospitalID` (`hospitalID`),
+  CONSTRAINT `ambulance_ibfk_1` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`) ON DELETE CASCADE ON UPDATE CASCADE
+) 
+
+
+CREATE TABLE `driver` (
+  `driverID` int NOT NULL AUTO_INCREMENT,
+  `hospitalID` int NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) DEFAULT NULL,
+  `phoneNumber` varchar(15) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `NIC` varchar(20) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `typeID` char(2) NOT NULL,
+  `currentLatitude` decimal(10,8) DEFAULT NULL,
+  `currentLongitude` decimal(11,8) DEFAULT NULL,
+  PRIMARY KEY (`driverID`),
+  UNIQUE KEY `NIC` (`NIC`),
+  KEY `hospitalID` (`hospitalID`),
+  KEY `type_id` (`typeID`),
+  CONSTRAINT `driver_ibfk_1` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `driver_ibfk_2` FOREIGN KEY (`typeID`) REFERENCES `user_type` (`type_id`)
+) 
+
+
+
+CREATE TABLE `driver_location` (
+  `locationID` int NOT NULL AUTO_INCREMENT,
+  `driverID` int NOT NULL,
+  `latitude` decimal(10,8) NOT NULL,
+  `longitude` decimal(11,8) NOT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`locationID`),
+  KEY `driverID` (`driverID`),
+  CONSTRAINT `driver_location_ibfk_1` FOREIGN KEY (`driverID`) REFERENCES `driver` (`driverID`) ON DELETE CASCADE ON UPDATE CASCADE
+) 
+
+
+
+CREATE TABLE `ambulance_driver_connection` (
+  `driverConnectionID` int NOT NULL AUTO_INCREMENT,
+  `driverID` int NOT NULL,
+  `ambulanceID` int NOT NULL,
+  `connectedTime` datetime NOT NULL,
+  `disconnectedTime` datetime NOT NULL,
+  `date` date DEFAULT NULL,
+  `workingHours` time DEFAULT '00:00:00',
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`driverConnectionID`),
+  KEY `driverID` (`driverID`),
+  KEY `ambulanceID` (`ambulanceID`),
+  CONSTRAINT `ambulance_driver_connection_ibfk_1` FOREIGN KEY (`driverID`) REFERENCES `driver` (`driverID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ambulance_driver_connection_ibfk_2` FOREIGN KEY (`ambulanceID`) REFERENCES `ambulance` (`ambulanceID`) ON DELETE CASCADE ON UPDATE CASCADE
+) 
+
+
+
+CREATE TABLE `ambulance_location_history` (
+  `locationID` int NOT NULL AUTO_INCREMENT,
+  `ambulanceID` int NOT NULL,
+  `latitude` decimal(10,8) NOT NULL,
+  `longitude` decimal(11,8) NOT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `driverID` int NOT NULL,
+  PRIMARY KEY (`locationID`),
+  KEY `ambulanceID` (`ambulanceID`),
+  KEY `driverID` (`driverID`),
+  CONSTRAINT `ambulance_location_history_ibfk_1` FOREIGN KEY (`ambulanceID`) REFERENCES `ambulance` (`ambulanceID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ambulance_location_history_ibfk_2` FOREIGN KEY (`driverID`) REFERENCES `driver` (`driverID`)
+) 
+
+
+
+CREATE TABLE `emergency_request` (
+  `requestID` int NOT NULL AUTO_INCREMENT,
+  `userID` int NOT NULL,
+  `requestedTime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('Pending','Accepted','Pickup','Dispatched','Completed') NOT NULL,
+  `ambulanceID` int DEFAULT NULL,
+  `lat` varchar(100) NOT NULL,
+  `lng` varchar(100) NOT NULL,
+  `hospitalID` int DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`requestID`),
+  KEY `userID` (`userID`),
+  KEY `ambulanceID` (`ambulanceID`),
+  KEY `hospitalID` (`hospitalID`),
+  CONSTRAINT `emergency_request_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `emergency_request_ibfk_2` FOREIGN KEY (`ambulanceID`) REFERENCES `ambulance` (`ambulanceID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `emergency_request_ibfk_3` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+
+CREATE TABLE `feedback` (
+  `feedbackID` int NOT NULL AUTO_INCREMENT,
+  `userID` int DEFAULT NULL,
+  `hospitalID` int DEFAULT NULL,
+  `ambulanceID` int DEFAULT NULL,
+  `feedbackMessage` text,
+  `feedbackType` varchar(50) DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`feedbackID`),
+  KEY `userID` (`userID`),
+  KEY `ambulanceID` (`ambulanceID`),
+  KEY `hospitalID` (`hospitalID`),
+  CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `feedback_ibfk_2` FOREIGN KEY (`ambulanceID`) REFERENCES `ambulance` (`ambulanceID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `feedback_ibfk_3` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`) ON DELETE CASCADE ON UPDATE CASCADE
+) 
+
+
+
+
+CREATE TABLE `user_ambulance_connection` (
+  `connectionID` int NOT NULL AUTO_INCREMENT,
+  `ambulanceID` int NOT NULL,
+  `disconnectedTime` datetime DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `requestID` int NOT NULL,
+  `connectedTime` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`connectionID`),
+  KEY `ambulanceID` (`ambulanceID`),
+  KEY `reques_idconnection_idx` (`requestID`),
+  CONSTRAINT `reques_idconnection` FOREIGN KEY (`requestID`) REFERENCES `emergency_request` (`requestID`),
+  CONSTRAINT `user_ambulance_connection_ibfk_2` FOREIGN KEY (`ambulanceID`) REFERENCES `ambulance` (`ambulanceID`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+

@@ -9,8 +9,26 @@ import cancel from "../../usericons/cancel.png";
 import axios from "axios";
 
 const RequestCancel = (props) => {
-  const [currentLocation, setCurrentLocation] = useState(null);
+  const requestData = JSON.parse(sessionStorage.getItem("requestData"));
   const navigate = useNavigate();
+  const currentLocation = { lat: requestData[0].lat, lng: requestData[0].lng };
+
+  useEffect(() => {
+    console.log(currentLocation);
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/hospital/getRecentRequest`, {
+        data: requestData[0].requestID,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.sucess) {
+          if (res.data.result.status == "Accepted") {
+            navigate("/show");
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  });
 
   const handleCancelRequest = () => {
     navigate("/request/cancel");

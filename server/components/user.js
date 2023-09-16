@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const decodedUserId = require("../Authentication/decodedToken");
 const database = require("../utils/databaseUtils");
 
@@ -16,10 +16,10 @@ router.post("/add", (req, res) => {
 
   // check the employee already exist or not
   const checkQuery =
-    "select id as id, typeID as TypeID, email as email from lifeserver.all_user where email = ? union all select userID as id, typeID as TypeID, email as email from lifeserver.user where NIC = ?  limit 2;";
+    "select id as id, typeID as TypeID, email as email from  all_user where email = ? union all select userID as id, typeID as TypeID, email as email from  user where NIC = ?  limit 2;";
 
   const insertQuery =
-    "insert into lifeserver.user (firstName, lastName, phoneNumber, NIC, address, DOB, email, password,preferredType,typeID) values(?,?,?,?,?,?,?,?,?,?);";
+    "insert into  user (firstName, lastName, phoneNumber, NIC, address, DOB, email, password,preferredType,typeID) values(?,?,?,?,?,?,?,?,?,?);";
 
   connection.query(checkQuery, [body.email, body.nic], (err, result) => {
     if (err) {
@@ -86,7 +86,7 @@ router.post("/showDetail", (req, res) => {
 
   const userID = decodedUserId(sessionToken);
 
-  const getQuery = "select * from lifeserver.user where userID = ?;";
+  const getQuery = "select * from  user where userID = ?;";
 
   connection.query(getQuery, (err, result) => {
     if (err) {
