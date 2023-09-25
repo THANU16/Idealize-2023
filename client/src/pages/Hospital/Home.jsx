@@ -11,6 +11,31 @@ import PlacesAutocomplete, {
 
 import axios from "axios";
 
+const useWebSockets = (sessionToken, typeID) => {
+  useEffect(() => {
+    // Construct the WebSocket URL with headers as query parameters
+    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+
+    const websocket = new WebSocket(websocketUrl);
+
+    websocket.onopen = () => {
+      console.log("connected");
+    };
+
+    // websocket.send(JSON.stringify("hiii "));
+
+    websocket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log(data);
+    };
+
+    return () => {
+      console.log("web socket close");
+      websocket.close();
+    };
+  }, [sessionToken, typeID]);
+};
+
 const Home = (props) => {
   // const { onRequest, onCancel } = props;
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -18,44 +43,12 @@ const Home = (props) => {
   const [address, setAddress] = useState("");
   const [ambulanceLocation, setAmbulanceLocation] = useState({});
   const [requestData, setRequestData] = useState({});
-  // useEffect(() => {
-  //   if (coordinates) {
-  //     sendLocationDataToBackend(coordinates.latitude, coordinates.longitude);
-  //   }
-  // }, [coordinates]);
 
-  // useEffect(() => {
-  // const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-  //   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
-  //   const socket = new WebSocket("ws://localhost:8000");
+  const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+  const typeID = JSON.parse(sessionStorage.getItem("typeID"));
 
-  //   // Send the session token to the server for authentication
-  //   socket.onopen = () => {
-  //     console.log("WebSocket connection opened.");
-  //     socket.send(
-  //       JSON.stringify({ sessionToken: sessionToken, typeID: typeID })
-  //     );
-  //   };
-
-  //   socket.onerror = (error) => {
-  //     console.error("WebSocket error:", error);
-  //   };
-
-  //   // Handle incoming messages from the server
-  //   socket.onmessage = (event) => {
-  //     const message = JSON.parse(event.data);
-  //     // Handle incoming messages (e.g., display notifications)
-  //     console.log("message ", message);
-  //   };
-
-  //   return () => {
-  //     socket.close();
-  //   };
-  // }, []);
-
+  useWebSockets(sessionToken, typeID);
   useEffect(() => {
-    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/hospital/getHospitalAmbulanceLocation`,
@@ -63,15 +56,16 @@ const Home = (props) => {
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((res) => {
+        console.log(res.data);
         if (res.data.sucess) {
           setAmbulanceLocation(res.data.results);
         }
       })
       .catch((err) => console.log(err));
-
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
       .then((res) => {
+        console.log(res.data);
         if (res.data.sucess) {
           setRequestData(res.data.results);
         }
