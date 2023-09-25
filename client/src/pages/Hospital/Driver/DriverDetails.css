@@ -12,10 +12,10 @@
     border-radius: 10px;
   }
   
-  h2 {
+  /* h2 {
     text-align: center;
     margin-bottom: 20px;
-  }
+  } */
   
   .form-row {
     display: flex;
@@ -45,7 +45,7 @@
   }
   
   /* Style for input fields */
-  input[type="text"],
+  /* input[type="text"],
   input[type="date"],
   input[type="tel"],
   input[type="email"],
@@ -60,7 +60,7 @@
     border: 3px solid #19295A;
     background: #FFF;
     font-size: 15px;
-  }
+  } */
   
   
   .button-group {
