@@ -73,14 +73,14 @@ function UploadHospitalDocumentsPage() {
         <label htmlFor="file-input" className="file-input-label">
           Select Files
         </label>
-      </div>
-      <div className="navigation-buttons">
+        <div className="navigation-buttons">
         <button className="prev-button">
-          <NavLink to="/OwnerDetails">Prev</NavLink>{" "}
+          <NavLink style={{color:'white'}} to="/OwnerDetails">Prev</NavLink>{" "}
         </button>
         <button className="finish-button" onClick={handleUpload}>
-          <NavLink to="/SignupFinished">Finish</NavLink>
+          <NavLink style={{color:'white'}} to="/SignupFinished">Finish</NavLink>
         </button>
+      </div>
       </div>
     </div>
   );

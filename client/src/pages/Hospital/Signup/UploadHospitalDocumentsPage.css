@@ -91,7 +91,6 @@ padding: 20px;
 .prev-button,
 .finish-button {
   background-color: #2e427e;
-  color: #fff;
   padding: 10px 20px;
   cursor: pointer;
   border: none;
@@ -99,11 +98,9 @@ padding: 20px;
 }
 
 .finish-button {
-  margin-right: 375px;
+  margin-left: 70%;
 }
-.prev-button {
-  margin-left: 375px;
-}
+
 .prev-button:hover,
 .finish-button:hover {
   background-color: #0056b3;
