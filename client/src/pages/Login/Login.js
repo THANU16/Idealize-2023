@@ -6,12 +6,13 @@ import { UserContext } from "../../UserContext";
 // Import your SVG icons from the public directory
 import usernameIcon from "../../images/user.svg";
 import passwordIcon from "../../images/lock.svg";
+import login_img from "../../assets/Login.png";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext)
+  const { setUser } = useContext(UserContext);
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -38,7 +39,7 @@ function Login() {
               JSON.stringify(sessionToken)
             );
             sessionStorage.setItem("typeID", JSON.stringify(typeID));
-            setUser(sessionToken)
+            setUser(sessionToken);
             navigate("/home");
           } else {
             alert("please check your email and password");
@@ -52,9 +53,9 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-left">
-        <div className="login-form">
-          <h2>Login</h2>
+      <h2>Login</h2>
+      <div className="login-form">
+        <div className="login-left">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="username">
@@ -98,14 +99,9 @@ function Login() {
             </NavLink>
           </div>
         </div>
-      </div>
-      <div className="login-right">
-        <img
-          src="https://generation-sessions.s3.amazonaws.com/7a638f4fceb35cc27f49d184e82aedce/img/19836-1.png"
-          alt="Login"
-          width="300"
-          height="300"
-        />
+        <div className="login-right">
+          <img src={login_img} width="300" height="300" />
+        </div>
       </div>
     </div>
   );
