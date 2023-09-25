@@ -29,7 +29,10 @@ const Signup = () => {
           <p>
             {" "}
             Do you have account?
-            <Link to="/login">Login</Link>
+            <span></span>
+            <Link to="/login" style={{ color: "blue" }}>
+              Login
+            </Link>
           </p>
         </div>
       </div>
