@@ -12,11 +12,12 @@ const Ambulance = () => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
     axios
       .post(
-        "http://localhost:8000/hospital/getAllHospitalAmbulance",
+        `${process.env.REACT_APP_API_URL}/hospital/getAllHospitalAmbulance`,
         {},
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((res) => {
+        console.log(res.data);
         if (res.data.sucess) {
           setAmbulanceData(res.data.result);
         }

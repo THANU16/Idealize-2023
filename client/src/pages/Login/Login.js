@@ -26,7 +26,7 @@ function Login() {
     // console.log(`Username/Email: ${username}, Password: ${password}`);
     const data = { email: username, password: password };
     axios
-      .post("http://localhost:8000/login", data)
+      .post(`${process.env.REACT_APP_API_URL}/login`, data)
       .then((res) => {
         console.log(res.data);
         if (res.data.isExist) {
@@ -93,7 +93,7 @@ function Login() {
           </form>
           <div className="register">
             <p>Don't have an account?</p>
-            <NavLink to="/signup" className="blue-link">
+            <NavLink to="/" className="blue-link">
               Register
             </NavLink>
           </div>

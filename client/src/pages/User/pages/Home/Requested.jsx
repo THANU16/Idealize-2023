@@ -9,20 +9,16 @@ import cancel from "../../usericons/cancel.png";
 import axios from "axios";
 
 const RequestCancel = (props) => {
-
-  const [currentLocation, setCurrentLocation] = useState(null);
-  const [status, setStatus] = useState(null);
   const requestData = JSON.parse(sessionStorage.getItem("requestData"));
-  
-  
   const navigate = useNavigate();
+  const currentLocation = { lat: requestData[0].lat, lng: requestData[0].lng };
 
   useEffect(() => {
+    console.log(currentLocation);
     axios
-      .post(
-        "http://localhost:8000/hospital/getRecentRequest",
-        requestData.requestID
-      )
+      .post(`${process.env.REACT_APP_API_URL}/hospital/getRecentRequest`, {
+        data: requestData[0].requestID,
+      })
       .then((res) => {
         console.log(res.data);
         if (res.data.sucess) {
@@ -38,24 +34,6 @@ const RequestCancel = (props) => {
     navigate("/request/cancel");
     // setCancelRequest(true);
   };
-
-  useEffect(() => {
-    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-    axios
-      .get("http://localhost:8000/xxxxxxxxxxxxxxx", {
-        headers: { Authorization: "key " + sessionToken },
-      })
-      .then((res) => {
-        if (res.data.sucess) {
-          setCurrentLocation(res.data[0]);
-          setStatus(res.data[1]);
-          if (status === "accepted") {
-            navigate("/show");
-          }
-        }
-      })
-      .catch((err) => console.log(err));
-  });
 
   // Use useEffect to log currentLocation when it changes
   return (

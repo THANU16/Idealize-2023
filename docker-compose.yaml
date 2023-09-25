@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   frontend:
     build:
@@ -6,8 +6,6 @@ services:
       dockerfile: client/Dockerfile # Use the client Dockerfile
     ports:
       - "3000:3000" # Map host port 3000 to container port 3000
-    depends_on:
-      - backend # Ensure that the backend container is started first
 
   backend:
     build:
@@ -16,8 +14,8 @@ services:
     ports:
       - "8000:8000" # Map host port 8000 to container port 8000
     environment:
-      MYSQL_HOST: host.docker.internal # Use this host to connect to your local MySQL
+      MYSQL_HOST: http://sql107.infinityfree.com
       MYSQL_PORT: 3306 # Use the default MySQL port
-      MYSQL_USER: your-mysql-username
-      MYSQL_PASSWORD: your-mysql-password
-      MYSQL_DATABASE: your-database-name
+      MYSQL_USER: if0_35023243
+      MYSQL_PASSWORD: wmQYLUnlxQ7kaf
+      MYSQL_DATABASE: if0_35023243_lifeserver
