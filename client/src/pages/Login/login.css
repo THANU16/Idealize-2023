@@ -1,35 +1,41 @@
 /* Styling for the login container with a shared background */
 .login-container {
-  display: flex;
-  justify-content: space-between; /* Space between login form and image */
-  align-items: center;
-  min-height: 100vh;
+  /* justify-content: space-between; Space between login form and image */
+  /* align-items: center; */
   background-color: #f4f4f4;
-  padding: 20px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
 }
+
+
+
+
 
 /* Set a common white background for login-left and login-right */
-.login-left,
-.login-right {
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.login-form{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  height: 580px;
 }
 
-/* Styling for the login-left (form) */
-.login-left {
-  flex: 1;
-  padding: 20px;
-}
 
 h2 {
   text-align: left;
-  margin-left: 30px;
+  /* margin-left: 30px; */
   font-size: 40px;
 }
 
+.login-left{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 50%;
+}
 /* Styling for form elements */
 .form-group {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 label {
@@ -49,7 +55,7 @@ input[type="password"] {
 }
 
 button[type="login"] {
-  width: 10%; /* Set the button width to 100% to fill its container */
+  width: 100%; /* Set the button width to 100% to fill its container */
   padding: 10px;
   background-color: #1c316A;
   color: #fff;
@@ -95,10 +101,12 @@ button[type="login"]:hover {
 
 /* Styling for the login-right (image) */
 .login-right {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50%;
+  height: 100%;
 }
 
 .login-right img {
