@@ -176,7 +176,7 @@ const Home = (props) => {
   };
 
   return (
-    <div>
+    <div >
       <div
         style={{
           display: "flex",

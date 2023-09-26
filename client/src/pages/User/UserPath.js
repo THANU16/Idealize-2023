@@ -19,7 +19,7 @@ const UserPath = () => {
     // <Route path="/user/signUp" element={<UserSignup />}></Route>
     //   <Route path="/user/registered" element={<U_SignupFinished />}></Route>
 
-    <Sidebar path="/dashboard">
+    <Sidebar path="/">
       <Routes>
         <Route path="/user/signup" element={<UserSignup />}></Route>
         <Route path="/registered" element={<U_SignupFinished />}></Route>
