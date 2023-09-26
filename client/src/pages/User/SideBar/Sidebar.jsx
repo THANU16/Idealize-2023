@@ -7,8 +7,7 @@ import logout from "../usericons/logout.svg";
 import logo from "../usericons/logo.svg";
 import firstaid from "../usericons/firstaid.svg";
 import { NavLink } from "react-router-dom";
-import "../../../App.css";
-
+import "./Sidebar.css";
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -26,6 +25,7 @@ const Sidebar = ({ children }) => {
     {
       path: "/hospital",
       name: "Hospital",
+      className: "hospital",
       icon: <img src={drivers} alt="" />,
     },
     {

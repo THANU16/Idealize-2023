@@ -1,0 +1,62 @@
+.container{
+    display:flex;
+  }
+  main{
+    width: 100%;
+    padding: 20px;
+  }
+  .sidebar{
+    background: #19295A;
+    color: #fff;
+    width: 283.179px;
+    height: 100vh;
+    flex-shrink: 0;
+    transition: all 0.5s;
+    border-radius: 0px 10px 10px 0px;
+    box-shadow: 0px 3.0661885738372803px 2.452950954437256px 0px rgba(0, 0, 0, 0.07), 0px 7.3684773445129395px 5.894782066345215px 0px rgba(141, 145, 160, 0.05), 0px 13.874189376831055px 11.099350929260254px 0px rgba(141, 145, 160, 0.04), 0px 24.749183654785156px 19.799345016479492px 0px rgba(141, 145, 160, 0.04), 0px 46.290626525878906px 37.032501220703125px 0px rgba(141, 145, 160, 0.03), 0px 110.80247497558594px 88.64197540283203px 0px rgba(141, 145, 160, 0.02);
+  }
+  .top_section{
+    display: flex;
+    align-items:center;
+    padding:20px 15px;
+  }
+  .logo{
+    font-size: 30px;
+  }
+  .bars{
+    display: flex;
+    font-size: 25px;
+    margin-left: 50px;
+  }
+  .link{
+    display: flex;
+    color: #EB5757;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .link:hover{
+    background:lightskyblue;
+    color: #19295A;
+    transition: all 0.5s;
+  }
+  .active{
+    background: lightskyblue;
+    color: #19295A;
+    color: #EB5757;
+  }
+  .icon, .link_text{
+    font-size: 20px;
+  }
+  
+  .bg {
+    text-align: center;
+    /* background-image: url(./assets/Background.png); */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
