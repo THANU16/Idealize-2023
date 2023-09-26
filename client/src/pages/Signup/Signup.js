@@ -14,6 +14,7 @@ const Signup = () => {
           <img src={LifeSaverIcon}></img>
           LifeSaver
         </h1>
+
         <div className="triangle">
           <Link to="/HospitalDetails">
             <img src={HospitalIcon} alt="Image 1" className="category" />
