@@ -121,7 +121,7 @@ function Login() {
             height="200"
           />
         </div>
-        <div className="attractive-text">Saving Lives, One Click </div>
+        <div class="attractive-text">Saving Lives, One Click </div>
       </div>
     </div>
 

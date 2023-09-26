@@ -4,7 +4,7 @@
   padding:0;
   text-decoration: none;
   fill: linear-gradient(180deg, rgba(12, 65, 227, 0.76) 19.27%, rgba(255, 255, 255, 0.00) 51.04%, rgba(68, 102, 206, 0.79) 81.77%);
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 
 }
 

@@ -49,10 +49,10 @@
     color: #19295A;
     color: #EB5757;
   }
-  .icon, .link_text{
+  /* .icon, .link_text{
     font-size: 20px;
   }
-  
+   */
   .bg {
     text-align: center;
     /* background-image: url(./assets/Background.png); */
