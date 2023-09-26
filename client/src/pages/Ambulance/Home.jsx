@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import deiverMarkerIcon from "../../assets/icons/placeholder.png";
-import "../styles.css";
+import "./Ambulance_Home.css";
 
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
