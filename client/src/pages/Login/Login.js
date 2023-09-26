@@ -8,6 +8,7 @@ import usernameIcon from "../../images/user.svg";
 import passwordIcon from "../../images/lock.svg";
 import login_img from "../../assets/Login.png";
 import LifeSaverIcon from "../../assets/icons/Lifesaver.svg";
+import LifeSaverLogo from "../../assets/icons/Logo_LS.svg";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -55,11 +56,8 @@ function Login() {
   return (
     <div className="loginimage">
       <div className="login-container">
-        <h1 className="login_lifesaver">
-          <img src={LifeSaverIcon}></img>
-          LifeSaver
-        </h1>
         <h1 className="login_title">Login</h1>
+
         <div className="login-form">
           <div className="login-left">
             <form onSubmit={handleSubmit}>
@@ -112,9 +110,18 @@ function Login() {
             </form>
           </div>
           <div className="login-right">
-            <img src={login_img} width="300" height="300" />
+            <img src={LifeSaverLogo} width="300" height="300" />
           </div>
         </div>
+        <div className="login_top">
+          <img
+            src={LifeSaverLogo}
+            alt="LifeSaver Logo"
+            width="200"
+            height="200"
+          />
+        </div>
+        <div class="attractive-text">Saving Lives, One Click </div>
       </div>
     </div>
 
