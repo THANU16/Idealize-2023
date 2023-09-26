@@ -12,10 +12,10 @@
   border-radius: 10px;
 }
 
-/* h2 {
+h2 {
   text-align: center;
   margin-bottom: 20px;
-} */
+}
 
 .form-row {
   display: flex;
@@ -45,13 +45,7 @@ label {
 }
 
 /* Style for input fields */
-/* input[type="text"],
-input[type="date"],
-input[type="tel"],
-input[type="email"],
-input[type="url"], Added for the webpage URL field */
-/* input[type="password"],
-select {
+.hospital-details-input{
   width: 70%;
   height: 40px;
   padding: 5px;
@@ -59,7 +53,7 @@ select {
   border: 3px solid #19295A;
   background: #FFF;
   font-size: 15px;
-} */
+}
 
 /* Adjust the position of the buttons */
 .button-group {
@@ -100,4 +94,8 @@ hr {
   border: 1px solid #ccc;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.locationBtn{
+  padding-left: 20px;
 }
