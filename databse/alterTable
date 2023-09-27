@@ -1,3 +1,14 @@
 ALTER TABLE `lifeserver`.`ambulance_driver_connection` 
 CHANGE COLUMN `connectedTime` `connectedTime` DATETIME NULL ,
 CHANGE COLUMN `disconnectedTime` `disconnectedTime` DATETIME NULL ;
+
+
+ALTER TABLE ambulance
+ADD COLUMN latitude DECIMAL(10, 8) NOT NULL,
+ADD COLUMN longitude DECIMAL(11, 8) not null;
+
+
+
+ALTER TABLE ambulance
+ADD COLUMN driverID INT DEFAULT NULL,
+ADD COLUMN driverAssigned TINYINT(1) DEFAULT 0;

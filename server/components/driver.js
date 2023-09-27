@@ -218,7 +218,8 @@ router.get("/getAllHospitalAmbulance", (req, res) => {
 
   const getHospitalIDQuery =
     "select hospitalID from  driver where driverID = ?;";
-  const getQuery = "select * from  ambulance where hospitalID = ?;";
+  const getQuery =
+    "select * from  ambulance where hospitalID = ? and driverAssigned = 0;";
 
   connection.query(getHospitalIDQuery, [driverID], (err, result) => {
     if (err) {
@@ -247,11 +248,6 @@ router.get("/getAllHospitalAmbulance", (req, res) => {
     }
   });
 });
-
-
-
-
-
 
 router.post("/checkConnection", (req, res) => {
   const body = req.body;
@@ -293,6 +289,5 @@ router.post("/checkConnection", (req, res) => {
     }
   );
 });
-
 
 module.exports = router;
