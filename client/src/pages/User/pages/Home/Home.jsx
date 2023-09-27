@@ -146,11 +146,16 @@ const Home = (props) => {
         dateTime: formattedDateTime,
       };
       axios
-        .post(`${process.env.REACT_APP_API_URL}/emergency`, data, {
-          headers: { Authorization: "key " + sessionToken },
-        })
+        .post(
+          `${process.env.REACT_APP_API_URL}/emergency/addEmergencyRequest`,
+          data,
+          {
+            headers: { Authorization: "key " + sessionToken },
+          }
+        )
         .then((res) => {
-          if (res.data.sucess) {
+          console.log(res.data.success);
+          if (res.data.success) {
             sessionStorage.setItem(
               "requestData",
               JSON.stringify(res.data.result)
