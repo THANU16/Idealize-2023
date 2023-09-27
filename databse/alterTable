@@ -1,0 +1,3 @@
+ALTER TABLE `lifeserver`.`ambulance_driver_connection` 
+CHANGE COLUMN `connectedTime` `connectedTime` DATETIME NULL ,
+CHANGE COLUMN `disconnectedTime` `disconnectedTime` DATETIME NULL ;

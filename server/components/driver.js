@@ -126,7 +126,7 @@ router.post("/setAmbulance", (req, res) => {
   const driverID = decodedUserId(sessionToken);
 
   const setQuery =
-    "insert into ambulanceDriverConnection (ambulance_ID, driverID);"; //=================================================
+    "INSERT INTO ambulance_driver_connection ( driverID, ambulanceID, connectedTime, date) VALUES (?, ?, ?, ?);"; //=================================================
 
   connection.query(setQuery, [body.ambulance_ID, driverID], (err, result) => {
     if (err) {
@@ -193,7 +193,7 @@ router.post("/setLocation", (req, res) => {
           });
         }
       }
-    }
+    } 
   );
 });
 
