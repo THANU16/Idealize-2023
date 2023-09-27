@@ -1,6 +1,11 @@
 /* Default styles for larger screens */
 
 
+.LifeSaverLogo{
+  height: 300px;
+}
+
+
 .signupimage {
   display: flex;
   flex-direction: column; 
@@ -91,8 +96,12 @@
   }
   
   .lifesaver{
+    display: none;
     margin-top: -10px;
   }
-
+  
+  .LifeSaverLogo{
+    height: 200px;
+  }
   
 }
