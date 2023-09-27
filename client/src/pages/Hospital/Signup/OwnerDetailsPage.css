@@ -12,10 +12,10 @@
   border-radius: 10px;
 }
 
-h2 {
+/* h2 {
   text-align: center;
   margin-bottom: 20px;
-}
+} */
 
 .form-row {
   display: flex;
@@ -33,7 +33,7 @@ label {
   display: block;
   font-weight: bold;
 }
-
+/* 
 input[type="text"],
 input[type="date"],
 input[type="tel"],
@@ -45,7 +45,7 @@ input[type="email"] {
   border: 3px solid #19295A;
   background: #FFF;
   font-size: 20px;
-}
+} */
 
 
 /* You can add more styling as needed */
@@ -77,8 +77,7 @@ label {
 /* ...other CSS styles... */
 
 /* Move the "Next" button to the bottom left */
-button[type="prev"],
-button[type="next"] {
+.prevBtn, .nextBtn {
   width: 10%;
   padding: 10px;
   background-color:  #2e427e;
@@ -88,15 +87,16 @@ button[type="next"] {
   cursor: pointer;
   transition: background-color 0.3s;
   bottom: 0;
-  right: 150px;
+  right: 50px;
+  height: 40px;
 }
 
-button[type="next"]{
+.nextBtn{
   margin-right: 0px;
   margin-left: 80%;
 }
 
-button[type="prev"]:hover,
-button[type="next"]:hover {
+.prevBtn:hover,
+.nextBtn:hover {
   background-color: #0056b3;
 }

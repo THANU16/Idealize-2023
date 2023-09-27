@@ -155,8 +155,11 @@ function OwnerDetailsPage({ onNext }) {
             required
           />
         </div>
-        <button type="prev"><NavLink to='/HospitalDetails'>Prev</NavLink> </button>
-        <button type="next"><NavLink to='/UploadHospitalDocuments'> Next</NavLink></button>
+        <div>
+        <button className='prevBtn' ><NavLink style={{color:"white"}} to='/HospitalDetails'>Prev</NavLink> </button>
+        <button className='nextBtn' ><NavLink style={{color:"white"}} to='/UploadHospitalDocuments'> Next</NavLink></button>
+        </div>
+
       </form>
     </div>
 
