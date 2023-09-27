@@ -1,0 +1,64 @@
+DELIMITER //
+
+-- Trigger for INSERT operation
+CREATE TRIGGER update_ambulance_coordinates_after_insert
+AFTER INSERT ON ambulance_location_history
+FOR EACH ROW
+BEGIN
+  UPDATE ambulance
+  SET
+    latitude = NEW.latitude,
+    longitude = NEW.longitude
+  WHERE
+    ambulanceId = NEW.ambulanceId;
+END;
+//
+
+-- Trigger for UPDATE operation
+CREATE TRIGGER update_ambulance_coordinates_after_update
+AFTER UPDATE ON ambulance_location_history
+FOR EACH ROW
+BEGIN
+  UPDATE ambulance
+  SET
+    latitude = NEW.latitude,
+    longitude = NEW.longitude
+  WHERE
+    ambulanceId = NEW.ambulanceId;
+END;
+//
+
+
+
+DELIMITER //
+
+-- Trigger for INSERT operation
+CREATE TRIGGER update_ambulance_after_insert
+AFTER INSERT ON ambulance_driver_connection
+FOR EACH ROW
+BEGIN
+  UPDATE ambulance
+  SET
+    driverID = NEW.driverID,
+    driverAssigned = 1
+  WHERE
+    ambulanceId = NEW.ambulanceId;
+END;
+//
+
+-- Trigger for UPDATE operation
+CREATE TRIGGER `update_ambulance_after_update`
+AFTER UPDATE ON `ambulance_driver_connection`
+FOR EACH ROW
+BEGIN
+  IF NEW.disconnectedTime IS NOT NULL THEN
+    UPDATE ambulance
+    SET
+      driverID = null,
+      driverAssigned = 0
+    WHERE
+      ambulanceId = NEW.ambulanceId;
+  END IF;
+END;
+//
+
