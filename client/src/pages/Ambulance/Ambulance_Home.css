@@ -2,6 +2,7 @@ Ambulance_Home.css .container {
   display: flex;
   flex-direction: column;
   height: 100%;
+
   /* 100% of the viewport height */
 }
 
@@ -9,7 +10,7 @@ Ambulance_Home.css .container {
   flex: 4;
   /* 3/4 of the available height */
   position: relative;
-  height: 95vh;
+  height: 80vh;
   /* margin-top: 10%; */
 }
 
@@ -183,6 +184,7 @@ h3 {
   /* padding: 20px; Increased padding for more space */
 
 }
+
 .dropbtn {
   background-color: #4CAF50;
   color: white;
@@ -202,7 +204,7 @@ h3 {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -213,7 +215,9 @@ h3 {
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+  background-color: #f1f1f1
+}
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -222,23 +226,3 @@ h3 {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
-
-/* New styles for mobile screens */
-@media (max-width: 768px) {
-  .container {
-    background-color: rgb(255, 255, 255);
-    width: 100%;
-    /* Adjust the width for smaller screens */
-    /* margin-top: -60px; */
-  }
-
-  .map {
-    flex: 4;
-    /* 3/4 of the available height */
-    position: relative;
-    height: 60vh;
-    /* Reduced height for mobile */
-  }
-
-}
-

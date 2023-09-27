@@ -166,7 +166,7 @@ const Home = (props) => {
             <Map
 
               google={props.google}
-              zoom={14}
+              zoom={10}
               initialCenter={{ lat: userLocation.latitude, lng: userLocation.longitude, }}
               mapContainerClassName="map-container"
             >
