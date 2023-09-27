@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
-import "../styles.css";
+import deiverMarkerIcon from "../../assets/icons/placeholder.png";
+import "./Ambulance_Home.css";
 
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
@@ -9,17 +10,46 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 
+import axios from "axios";
+
 const Home = (props) => {
   // const { onRequest, onCancel } = props;
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
   const [address, setAddress] = useState("");
+  const [ambulanceLocation, setAmbulanceLocation] = useState({});
+  const [requestData, setRequestData] = useState({});
 
+  const [userLocation, setUserLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
+  // Store driver's location here
   useEffect(() => {
-    if (coordinates) {
-      sendLocationDataToBackend(coordinates.latitude, coordinates.longitude);
-    }
-  }, [coordinates]);
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/hospital/getHospitalAmbulanceLocation`,
+        {},
+        { headers: { Authorization: "key " + sessionToken } }
+      )
+      .then((res) => {
+        if (res.data.sucess) {
+          setAmbulanceLocation(res.data.results);
+        }
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
+      .then((res) => {
+        if (res.data.sucess) {
+          setRequestData(res.data.results);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const onMapClick = (mapProps, map, event) => {
     const clickedLatitude = event.latLng.lat();
@@ -73,36 +103,7 @@ const Home = (props) => {
       lng: 80.0208, // Jaffna Town
       bearing: 0, // Bearing is set to 0 for reference
     },
-    {
-      lat: 9.6825,
-      lng: 80.0054, // Nallur
-      bearing: 0,
-    },
-    {
-      lat: 9.7651,
-      lng: 80.0003, // Point Pedro
-      bearing: 0,
-    },
-    {
-      lat: 9.6555,
-      lng: 80.0754, // Chavakachcheri
-      bearing: 0,
-    },
-    {
-      lat: 9.7486,
-      lng: 80.0164, // Valvettithurai
-      bearing: 0,
-    },
-    {
-      lat: 9.7178,
-      lng: 80.0081, // Kayts
-      bearing: 0,
-    },
-    {
-      lat: 9.6809,
-      lng: 80.2526, // Delft Island
-      bearing: 0,
-    },
+
   ];
 
   const [showNotifications, setShowNotifications] = useState(false);
@@ -111,6 +112,20 @@ const Home = (props) => {
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
   };
+  useEffect(() => {
+    // Check if geolocation is available in the user's browser
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Set the user's location in the state
+        setUserLocation({ latitude, longitude });
+      });
+    } else {
+      console.log("Geolocation is not available in this browser.");
+    }
+  }, []);
 
   // Show the emergency request modal if request is true
   if (request)
@@ -151,10 +166,12 @@ const Home = (props) => {
     <div className="container">
       <div className="map">
         {/* Render the Google Map */}
+        {userLocation.latitude && userLocation.longitude && (
         <Map
+         
           google={props.google}
           zoom={14}
-          initialCenter={{ lat: 9.7486, lng: 80.0164 }}
+          initialCenter={{ lat: userLocation.latitude,lng: userLocation.longitude, }}
           mapContainerClassName="map-container"
         >
           {/* Map each location to a Marker */}
@@ -168,61 +185,35 @@ const Home = (props) => {
               }}
             />
           ))}
-        </Map>
+          {/* Add a Marker for the user's location */}
+          
+            <Marker
+              position={{
+                lat: userLocation.latitude,
+                lng: userLocation.longitude,
+              }}
+              icon={{
+                url: deiverMarkerIcon,
+                scaledSize: new window.google.maps.Size(100, 100),
+              }}
+            />
+          
+            </Map>)}
+        
       </div>
+      {/* <div>
+        <h1>User's Current Location:</h1>
+        {userLocation.latitude && userLocation.longitude ? (
+          <div>
+            <p>Latitude: {userLocation.latitude}</p>
+            <p>Longitude: {userLocation.longitude}</p>
+          </div>
+        ) : (
+          <p>Fetching location...</p>
+        )}
+      </div> */}
       {/*Active ambulance details */}
-      <div className="controls">
-        <div className="tables">
-          <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3>
-          <table className="table table-bordered table-striped table-hover ">
-            <thead>
-              <tr>
-                <th>Amb.No</th>
-                <th>Distance(km)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {transactionData.map((data) => ( */}
-              <tr>
-                <td>L0142</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>L0142</td>
-                <td>4</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className="notifications">
-          <button className="white-button" onClick={toggleNotifications}>
-            <h3>Notification</h3>
-          </button>
-
-          {/* Render notifications based on the state */}
-          {showNotifications && (
-            <div className="notification-container">
-              {/* Notification content goes here */}
-              <div className="notification">
-                Notification 1
-                <span>
-                  <button style={{ backgroundColor: "green", margin: "10px" }}>
-                    Accept
-                  </button>
-                </span>
-                <span>
-                  <button style={{ backgroundColor: "red" }}>Reject</button>
-                </span>
-              </div>
-              <div className="notification">Notification 2</div>
-              <div className="notification">Notification 3</div>
-            </div>
-          )}
-
-          {/* Render other components as needed */}
-        </div>
-      </div>
+      
     </div>
   );
 };

@@ -22,7 +22,6 @@ class database {
     this.password = "Itsme043";
     this.database = "lifeserver";
 
-
     this.connection = mysql.createConnection({
       host: this.host,
       port: this.port, // Add the port here
