@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import deiverMarkerIcon from "../../assets/icons/placeholder.png";
 import "./Ambulance_Home.css";
-
+import moment from "moment";
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -118,7 +118,10 @@ const Home = (props) => {
 
   const handleAmbulanceSelect = (ambulance) => {
     setSelectedAmbulance(ambulance);
-
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    const currentDate = moment().format("YYYY-MM-DD ");
+    console.log(currentDate);
+    console.log(currentDateTime);
   };
 
   return (
