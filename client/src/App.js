@@ -22,8 +22,7 @@ import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
 import UserSignup from "./pages/User/Signup/Signup";
 import U_SignupFinished from "./pages/User/Signup/SignupFinished";
 
-//Driver 
-
+//Driver
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -107,90 +106,7 @@ const App = () => {
         )}
       </UserContext.Provider>
     </BrowserRouter>
-
-    // <BrowserRouter>
-    //   {!user ? (
-    //     <Routes>
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/signup" element={<Signup />} />
-    //       <Route
-    //         path="*"
-    //         element={<p>This page isn't available. Sorry about that.</p>}
-    //       ></Route>
-    //     </Routes>
-    //   ) : (
-    //     // : typeID === "ho" ? (
-    //     //   <HospitalPaths></HospitalPaths>
-    //     // ) : typeID === "dr" ? (
-    //     //   <DriverPath></DriverPath>
-    //     // ) : typeID === "us" ? (
-    //     //   <UserPath></UserPath>
-    //     // )
-    //     <Routes>
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/signup" element={<Signup />} />
-    //       <Route
-    //         path="*"
-    //         element={<p>This page isn't available. Sorry about that.</p>}
-    //       ></Route>
-    //     </Routes>
-    //   )}
-    // </BrowserRouter>
   );
 };
 
 export default App;
-
-// <BrowserRouter>
-//   <UserContext.Provider value={{ user, setUser }}>
-//     {!user ? (
-//       <Routes>
-//         <Route path="/login" element={<Login />} />
-//         <Route path="/signup" element={<Signup />} />
-//         <Route
-//           path="*"
-//           element={<p>This page isn't available. Sorry about that.</p>}
-//         ></Route>
-//       </Routes>
-//     ) : typeID === "ho" ? (
-//       <HospitalPaths></HospitalPaths>
-//     // ) : typeID === "dr" ? (
-//     //   <EmployeePath></EmployeePath>
-//     // ) : typeID === "us" ? (
-//     //   <EmployeePath></EmployeePath>
-//     ): (
-//       <Routes>
-//         <Route path="/login" element={<Login />} />
-//         <Route path="/signup" element={<Signup />} />
-//         <Route
-//           path="*"
-//           element={<p>This page isn't available. Sorry about that.</p>}
-//         ></Route>
-//       </Routes>
-
-//     )}
-//   </UserContext.Provider>
-// </BrowserRouter>
-
-
-
-// import React from 'react';
-// import useWebSocket from 'react-use-websocket';
-
-// import './App.css';
-
-// const WS_URL = 'ws://127.0.0.1:8000';
-
-// function App() {
-//   useWebSocket(WS_URL, {
-//     onOpen: () => {
-//       console.log('WebSocket connection established.');
-//     }
-//   });
-
-//   return (
-//     <div>Hello WebSockets!</div>
-//   );
-// }
-
-// export default App;

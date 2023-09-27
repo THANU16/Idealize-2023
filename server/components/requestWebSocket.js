@@ -59,6 +59,7 @@ const databaseObj = new database();
 
 // Map to store session tokens and associated WebSocket connections for hospitals.
 const hospitalsConnection = new Map();
+const ambulanceConnection = new Map();
 
 const router = express.Router();
 databaseObj.connectDatabase("Emergency");
@@ -74,21 +75,24 @@ function handleWebSocketConnections(server) {
     // Extract query parameters from the request URL.
     const { query } = url.parse(req.url, true);
     const sessionToken = query.sessionToken;
+    // console.log(sessionToken);
     const typeID = query.typeID;
 
     const clientID = decodedUserId(sessionToken);
 
-    // console.log(clientID && typeID && sessionToken);
+    // console.log(clientID, typeID, sessionToken);
 
     // Check if the session token is valid (you should implement your validation logic here).
     if (clientID) {
-      // if (clientID === "ho") {
-        
-      // Store the WebSocket connection with the session token.
-      hospitalsConnection.set(clientID, socket);
-      // } else if (clientID === "dr") {
-      //   // Handle connections for other client types (e.g., doctors) here if needed.
-      // }
+      // console.log(" connected");
+      if (typeID === "ho") {
+        // console.log("hospital connected");
+        hospitalsConnection.set(clientID, socket);
+      } else if (typeID === "dr") {
+        console.log("ambulance connected");
+        ambulanceConnection.set(clientID, socket);
+        // console.log(ambulanceConnection);
+      }
 
       socket.on("message", (message) => {
         console.log(`Received message: ${message}`);
@@ -160,6 +164,14 @@ function handleWebSocketConnections(server) {
                   error: null,
                   result: result,
                 });
+
+                // console.log(ambulanceConnection);
+                // Notify all ambulance about the new emergency request
+                ambulanceConnection.forEach((ambulanceSocket) => {
+                  console.log("Sending message to a ambulance");
+                  ambulanceSocket.send(JSON.stringify(requestData));
+                });
+
                 // Notify all hospitals about the new emergency request
                 hospitalsConnection.forEach((hospitalSocket) => {
                   console.log("Sending message to a hospital");
