@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { UserContext } from "./UserContext";
-
+import "./App.css";
 // Paths pages
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import UserPath from "./pages/User/UserPath";
 import HospitalPaths from "./pages/Hospital/HospitalPaths";
+import AmbulancePaths from "./pages/Ambulance/AmbulancePaths";
 
 // Hospital Signup
 import HospitalDetails from "./pages/Hospital/Signup/HospitalDetailsPage";
@@ -20,6 +21,9 @@ import HospitalSearch from "./pages/Hospital/Signup/HospitalSearch";
 // User Signup
 import UserSignup from "./pages/User/Signup/Signup";
 import U_SignupFinished from "./pages/User/Signup/SignupFinished";
+
+//Driver 
+
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -70,6 +74,8 @@ const App = () => {
           <HospitalPaths></HospitalPaths>
         ) : typeID === "us" ? (
           <UserPath></UserPath>
+        ) : typeID === "dr" ? (
+          <AmbulancePaths></AmbulancePaths>
         ) : (
           <Routes>
             <Route path="/login" element={<Login />} />

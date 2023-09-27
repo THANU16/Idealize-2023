@@ -68,7 +68,8 @@
 
   .user_container_nav_bar {
     position: fixed;
-    /* z-index: 1000; */
+    margin: 0;
+    padding: 0; 
     bottom: 0;
     left: 0;
     height: 60px; /* Adjust the height to your preference */
@@ -77,6 +78,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    z-index: 1000;
   }
   
   .user_nav_buttons {
@@ -97,6 +99,8 @@
     color: #EB5757;
     opacity: 1;
   }
+
+  
   
   .active {
     padding: 10px; /* Add padding to create a circle */
@@ -110,5 +114,12 @@
     transition: 0.2s ease-in-out;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
       0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+
+  .user_container_nav_bar a.active {
+    /* Add your styles for the active button here */
+    color: #fff; /* Change the text color for the active button */
+    background-color: #EB5757; /* Change the background color for the active button */
   }
   

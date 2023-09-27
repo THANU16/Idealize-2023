@@ -154,7 +154,7 @@ const Home = (props) => {
           }
         )
         .then((res) => {
-          console.log(res.data.success);
+          console.log(res.data);
           if (res.data.success) {
             sessionStorage.setItem(
               "requestData",
@@ -200,13 +200,13 @@ const Home = (props) => {
           </h1>
         </div>
         <div className="emergency">
-          <NavLink to="/requested">
+          {/* <NavLink to="/requested"> */}
             <img
               src={emgbtn}
               alt="emergency"
               onClick={handleEmergencyButtonClick}
             />
-          </NavLink>
+          {/* </NavLink> */}
         </div>
       </div>
     </div>

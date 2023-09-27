@@ -99,15 +99,12 @@ function Login() {
                 </a>
               </p>
               {/* <div className="form-group"></div> */}
-
-              <div className="centered-container">
-                <button type="login" className="register_btn">
-                  <NavLink to="/" style={{ color: "white" }}>
-                    Register
-                  </NavLink>
-                </button>
-              </div>
             </form>
+            <div className="centered-container">
+              <button className="register_btn" onClick={() => navigate("/")}>
+                Register
+              </button>
+            </div>
           </div>
           <div className="login-right">
             <img src={LifeSaverLogo} width="300" height="300" />
