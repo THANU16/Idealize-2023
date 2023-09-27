@@ -10,18 +10,19 @@
 
 
 
-.login-container{
-  
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center both horizontally and vertically */
-  height: 80%;
+  justify-content: center;
+  height: 80%; /* Allow the container to adjust its height based on content */
   box-shadow: 0px 0px 200px rgba(0, 0, 0, 0.2);
-  width: 50%;
+  width: 80%; /* Use a percentage width for responsiveness */
+  max-width: 700px; /* Set a max-width to limit container width on larger screens */
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-   
+  margin: 0 auto; /* Center the container horizontally */
+
 }
 
 
@@ -83,7 +84,7 @@ font-size: 50px;
   position: absolute;
   left: 0;
   top: 50%;
-  transform: translateY(40%);
+  transform: translateY(15%);
   height: 40px;
   margin-left: 15px;
 
@@ -159,19 +160,6 @@ font-size: 50px;
 
 }
 
-.attractive-text {
-  font-size: 20px;
-  font-weight: bold;
-  color: #f31a1a;
-  text-align: center;
-  background-color: #f7f7f7;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  animation: fadeInOut 5s ease-in-out infinite;
-  position: absolute;
-  bottom: 80px; /* Align the element to the bottom of its container */
-  width: 25%; /* Make the element span the full width of its container */
-}
 
 .login_top{
   display: none;
@@ -233,6 +221,8 @@ font-size: 50px;
 
     .icon-label .icon{
       margin-left: 10px;
+      transform: translateY(35%);
+
     }
 
     .login_btn ,

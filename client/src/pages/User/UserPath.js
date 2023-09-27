@@ -23,8 +23,8 @@ const UserPath = () => {
       <Routes>
         <Route path="/user/signup" element={<UserSignup />}></Route>
         <Route path="/registered" element={<U_SignupFinished />}></Route>
-        <Route path="/requested" element={<Requested />}></Route>
         <Route path="/home" element={<Home />}></Route>
+        <Route path="/requested" element={<Requested />}></Route>
         <Route path="/firstaid" element={<FirstAidInstruction />}></Route>
         <Route path="/hospital" element={<Hospital />}></Route>
         <Route path="/show" element={<ShowDirections />}></Route>

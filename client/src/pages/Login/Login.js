@@ -120,8 +120,8 @@ function Login() {
             width="200"
             height="200"
           />
+          {/* <div class="attractive-text">Saving Lives, One Click </div> */}
         </div>
-        <div class="attractive-text">Saving Lives, One Click </div>
       </div>
     </div>
 
