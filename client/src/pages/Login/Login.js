@@ -7,6 +7,8 @@ import { UserContext } from "../../UserContext";
 import usernameIcon from "../../images/user.svg";
 import passwordIcon from "../../images/lock.svg";
 import login_img from "../../assets/Login.png";
+import LifeSaverIcon from "../../assets/icons/Lifesaver.svg";
+import LifeSaverLogo from "../../assets/icons/Logo_LS.svg";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -52,58 +54,136 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <div className="login-form">
-        <div className="login-left">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="username">
-                <img src={usernameIcon} alt="Username" className="icon" />
-              </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={username}
-                onChange={handleUsernameChange}
-                required
-                placeholder="Username or Email"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">
-                <img src={passwordIcon} alt="Password" className="icon" />
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-                placeholder="Password"
-              />
-            </div>
-            <div className="form-group">
-              <button type="login">Login</button>
-              <a href="#" className="forgot-password">
-                Forgot Password?
-              </a>
-            </div>
-          </form>
-          <div className="register">
-            <p>Don't have an account?</p>
-            <NavLink to="/" className="blue-link">
-              Register
-            </NavLink>
+    <div className="loginimage">
+      <div className="login-container">
+        <h1 className="login_title">Login</h1>
+
+        <div className="login-form">
+          <div className="login-left">
+            <form onSubmit={handleSubmit}>
+              <div className="loginformgroup">
+                <label htmlFor="username" className="icon-label">
+                  <img src={usernameIcon} alt="Username" className="icon" />
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={username}
+                  onChange={handleUsernameChange}
+                  required
+                  placeholder="Username or Email"
+                />
+
+                <label htmlFor="password" className="icon-label">
+                  <img src={passwordIcon} alt="Password" className="icon" />
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required
+                  placeholder="Password"
+                />
+              </div>
+              <div className="centered-container">
+                <button type="login" className="login_btn">
+                  Login
+                </button>{" "}
+              </div>
+              <p className="forgot-password-container">
+                <a href="#" className="forgot-password">
+                  Forgotten Password
+                </a>
+              </p>
+              {/* <div className="form-group"></div> */}
+
+              <div className="centered-container">
+                <button type="login" className="register_btn">
+                  <NavLink to="/" style={{ color: "white" }}>
+                    Register
+                  </NavLink>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className="login-right">
+            <img src={LifeSaverLogo} width="300" height="300" />
           </div>
         </div>
-        <div className="login-right">
-          <img src={login_img} width="300" height="300" />
+        <div className="login_top">
+          <img
+            src={LifeSaverLogo}
+            alt="LifeSaver Logo"
+            width="200"
+            height="200"
+          />
+          {/* <div class="attractive-text">Saving Lives, One Click </div> */}
         </div>
       </div>
     </div>
+
+    // <p>
+    // <a href="#" className="forgot-password" style={{margin}}>
+    //   Forgot Password?{" "}
+    // </a>{" "}
+    // </p>
+    //     // <div>
+    //   <div className="login-container">
+    //     <h2>Login</h2>
+    //     <div className="login-form">
+    //       <div className="login-left">
+    //         <form onSubmit={handleSubmit}>
+    //           <div className="form-group">
+    //             <label htmlFor="username">
+    //               <img src={usernameIcon} alt="Username" className="icon" />
+    //             </label>
+    //             <input
+    //               type="text"
+    //               id="username"
+    //               name="username"
+    //               value={username}
+    //               onChange={handleUsernameChange}
+    //               required
+    //               placeholder="Username or Email"
+    //             />
+    //           </div>
+    //           <div className="form-group">
+    //             <label htmlFor="password">
+    //               <img src={passwordIcon} alt="Password" className="icon" />
+    //             </label>
+    //             <input
+    //               type="password"
+    //               id="password"
+    //               name="password"
+    //               value={password}
+    //               onChange={handlePasswordChange}
+    //               required
+    //               placeholder="Password"
+    //             />
+    //           </div>
+    //           <div className="form-group">
+    //             <button type="login">Login</button>
+    //             <a href="#" className="forgot-password">
+    //               Forgot Password?
+    //             </a>
+    //           </div>
+    //         </form>
+    //         <div className="register">
+    //           <p>Don't have an account?</p>
+    //           <NavLink to="/" className="blue-link">
+    //             Register
+    //           </NavLink>
+    //         </div>
+    //       </div>
+    //     </div>
+    //     {/* <div className="login-right">
+    //       <img src={login_img} width="300" height="300" />
+    //     </div> */}
+    //   </div>
+    // </div>
   );
 }
 

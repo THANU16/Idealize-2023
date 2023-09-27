@@ -1,61 +1,105 @@
 /* Styling for the login container with a shared background */
+.loginimage{
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+}
+
+
+
 .login-container {
-  /* justify-content: space-between; Space between login form and image */
-  /* align-items: center; */
-  background-color: #f4f4f4;
-  padding: 0px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%; /* Allow the container to adjust its height based on content */
+  box-shadow: 0px 0px 200px rgba(0, 0, 0, 0.2);
+  width: 80%; /* Use a percentage width for responsiveness */
+  max-width: 700px; /* Set a max-width to limit container width on larger screens */
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  margin: 0 auto; /* Center the container horizontally */
+
 }
 
 
-
-
-
-/* Set a common white background for login-left and login-right */
-.login-form{
+.login_lifesaver{
   display: flex;
-  flex-direction: row;
-  gap: 16px;
-  height: 580px;
+  justify-content: center;
+  align-items: center;
+  margin-top: -40px;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+
+
+}
+
+.login_title{
+margin-top: 30px;
+font-size: 50px;
+
+
 }
 
 
-h2 {
-  text-align: left;
-  /* margin-left: 30px; */
-  font-size: 40px;
+/* Left Side */
+.login-left {
+  flex:1; /* Take up 50% of the available width (side by side) */
+  padding-right: 20px;
+  margin-left: 10px; /* Add some spacing between the sections */
+  margin-top:40px;
 }
-
-.login-left{
+.login-form {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 50%;
-}
-/* Styling for form elements */
-.form-group {
-  /* margin-bottom: 15px; */
+  flex-wrap: wrap; /* Allow flex items to wrap to the next line on smaller screens */
+  margin-top:0px;
 }
 
-label {
-  font-weight: bold;
-  display: block;
-}
 
-input[name="username"],
-input[type="password"] {
-  width: 442.51px;
-  height: 45px;
-  padding: 10px;
+.loginformgroup input{
+  width: 80%;
+  height: 35px;
+  padding: 5px;
   border-radius: 10px;
   border: 3px solid #19295A;
   background: #FFF;
-  font-size: 20px;
+  font-size: 15px;
+  margin-bottom: 20px;
+  margin-left:70px
+  
+    
 }
 
-button[type="login"] {
-  width: 100%; /* Set the button width to 100% to fill its container */
+.icon-label {
+  position: relative;
+  display: inline-block;
+  margin-right: -5px;
+
+}
+
+.icon-label .icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(15%);
+  height: 40px;
+  margin-left: 15px;
+
+}
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.login_btn {
+  width: 70%; /* Set the button width to 100% to fill its container */
   padding: 10px;
   background-color: #1c316A;
   color: #fff;
@@ -63,86 +107,164 @@ button[type="login"] {
   border-radius: 3px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin:auto;
+  margin-left: 75px;
 }
 
+.register_btn{
+  width: 70%; /* Set the button width to 100% to fill its container */
+  padding: 10px;
+  background-color: #0a8b5b;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 75px;
+  margin-top: 20px;
 
-button[type="login"]:hover {
-  background-color: #326dac;
+}
+.register_btn:hover {
+  background-color:rgb(11, 178, 83) /* Your new background color here */ ;
 }
 
-/* Styling for the "Forgot Password?" link */
+.forgot-password-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
 .forgot-password {
-  text-align: left;
-  margin-bottom: 10px;
-}
-
-.forgot-password a {
   text-decoration: none;
-  color: #007bff;
-}
-
-/* Styling for the "Don't have an account?" section */
-.register {
-  padding-left:30px ;
-  text-align: center;
-  margin-top: 0px;
-  display: flex;
-  align-items: center; /* Vertically align the elements */
-}
-
-
-.blue-link {
-  color: #007bff;
-  text-decoration: none;
+  color: #1aa7f3;
+  font-size: 12px;
   font-weight: bold;
-  background-color: #f4f4f4;
+
+
 }
 
-/* Styling for the login-right (image) */
+/* Right Side */
+
 .login-right {
-  /* flex: 1; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 100%;
+  flex: 1; /* Take up 1/3 of the available width (adjust the ratio as needed) */
+  display: flex; /* Enable flexbox layout for .login-right */
+  justify-content: flex-end; /* Align the content to the right */
+
 }
 
 .login-right img {
   max-width: 100%;
+  width: 100%;
+  height: auto;
   max-height: 100%;
-}
+  margin-top: -30px;
 
-.form-group {
-  margin-top: 15px;
-  display: flex;
-  align-items: center; /* Vertically align the icon and input field */
-}
-
-.icon {
-  width: 45px; /* Adjust the width as needed */
-  height: 45px; /* Adjust the height as needed */
-  margin: 10px; /* Add spacing between the icon and input field */
-}
-
-.form-group button {
-  margin: 0px 40px 0px 65px; /* Push the button to the right */
-  width: 20%;
-  border-radius: 10px;
-  padding: 5px 8px;
-}
-/* Styling for the "Don't have an account?" and "Register" container */
-.register {
-  display: flex;
-  align-items: center; /* Vertically align the elements */
-  margin-top: auto; /* Adjust the top margin as needed */
 }
 
 
-/* Styling for the "Forgot Password?" link */
-.forgot-password {
-  text-decoration: none;
-  color: #007bff;
-  margin-left: 10px; /* Adjust the left margin to separate it from the login button */
+.login_top{
+  display: none;
+}
+
+/* Define the fade-in-out animation */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+  @media (max-width: 768px) {
+    .loginimage {
+      padding-top: 60px;
+       /* Adjust top padding for better spacing on smaller screens */
+    }
+  
+    .login-container {
+    background-color: rgb(255, 255, 255);
+    width: 80%; /* Adjust the width for smaller screens */
+    margin-top: -60px;
+  
+  
+    }
+    .login_lifesaver{
+      margin-top: -170px;
+  
+    
+    }
+    
+    .login_title{
+      margin-top: 20px;
+      font-size: 40px;
+    }
+  
+  
+    .login-left {
+      margin-left: 30px; /* Remove left margin on smaller screens */
+    }
+  
+    .login-form {
+      margin-top: -20px; /* Add margin-top for better spacing on smaller screens */
+    }
+  
+    .login-left {
+      margin-left: 0; /* Remove left margin on smaller screens */
+    }
+  
+    .loginformgroup input{
+      width: 70%;
+      margin-top: 10px;
+      margin-bottom: 20px;
+        
+    }
+
+    .icon-label .icon{
+      margin-left: 10px;
+      transform: translateY(35%);
+
+    }
+
+    .login_btn ,
+    .register_btn {
+      width: 60%; /* Set the button width to 100% to fill its container */
+      margin-left:60px;
+    }
+    .forgot-password-container {
+      margin-right: 35px;
+      
+      
+    }
+    
+    .login-right {
+      display: none; /* Hide the login image on smaller screens */
+    }
+    
+    .attractive-text {
+      font-size: 15px; /* Adjust the font size as needed */
+      position: absolute; /* Position the text */
+      bottom: 70px; /* Place the text at the bottom */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Center horizontally */
+      margin-bottom: 20px;
+      width: 50%
+    }
+
+    .login-right {
+      order: -1; /* Move .login-right to the top */
+      justify-content: center; /* Center the content vertically */
+    }
+  
+    .login-right img {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      margin-top: 0; /* Remove the negative margin-top */
+    }
+
+    .login_top{
+      margin-top: 20px;
+      display: inline;
+    }
 }

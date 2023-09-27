@@ -5,15 +5,14 @@ import PeopleIcon from "../../images/People.svg";
 import PharmacyIcon from "../../images/Pharmacy.svg";
 import LifeSaverIcon from "../../assets/icons/Lifesaver.svg";
 import "./Signup.css";
+import LifeSaverLogo from "../../assets/icons/Logo_LS.svg";
 
 const Signup = () => {
   return (
     <div className="signupimage">
       <div className="signupimage-container">
-        <h1 className="lifesaver">
-          <img src={LifeSaverIcon}></img>
-          LifeSaver
-        </h1>
+        <img className="LifeSaverLogo" src={LifeSaverLogo}></img>
+
         <div className="triangle">
           <Link to="/HospitalDetails">
             <img src={HospitalIcon} alt="Image 1" className="category" />

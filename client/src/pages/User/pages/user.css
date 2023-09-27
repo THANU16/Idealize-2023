@@ -14,10 +14,11 @@
     transition: transform 0.2s ease-in-out;
   }
   
-  img:hover {
-    transform: scale(1.1); /* Scale the image on hover */
-    cursor: pointer; /* Change cursor to a pointer on hover */
-  }
+  
+  /* img:hover { */
+    /* transform: scale(1.1); Scale the image on hover */
+    /* cursor: pointer; Change cursor to a pointer on hover */
+  /* } */
   
   .video-responsive {
     overflow: hidden;

@@ -1,6 +1,5 @@
 .owner-details-container {
   width: 90%;
-  width: 90%;
   margin: auto;
   padding: 20px;
   background-color: #ffffff;
@@ -27,17 +26,13 @@ h2 {
   flex: 1;
   margin-right: 10px;
   max-width: 45%;
-}
+  }
 
 label {
   display: block;
   font-weight: bold;
 }
-
-input[type="text"],
-input[type="date"],
-input[type="tel"],
-input[type="email"] {
+.user_signup_text{
   width: 70%;
   height: 10%;
   padding: 10px;
@@ -78,7 +73,7 @@ label {
 /* ...other CSS styles... */
 
 /* Move the "Next" button to the bottom left */
-button[type="prev"],
+/* button[type="prev"],
 button[type="next"],
 button[type="submit"] {
   width: 10%;
@@ -93,7 +88,7 @@ button[type="submit"] {
   right: 150px;
   -webkit-text-fill-color: #FFF;
   font-size: 20px;
-}
+} */
 
 
 button[type="next"],
@@ -109,4 +104,58 @@ button[type="next"]:hover {
   -webkit-text-fill-color: #FFF;
 
   
+}
+
+
+@media (max-width: 768px) {
+
+.owner-details-container {
+  width: 100%;
+  margin: 0;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-row {
+  flex-direction: column; /* Stack form rows vertically on small screens */
+  margin-bottom: 10px;
+}
+
+.form-group {
+  max-width: 100%; /* Allow form groups to occupy full width */
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.user_signup_text {
+  width: 100%;
+  height: auto; /* Allow input fields to adjust their height */
+  padding: 10px;
+  border-radius: 10px;
+  border: 3px solid #19295A;
+  background: #FFF;
+  font-size: 16px; /* Reduce font size for smaller screens */
+}
+
+button[type="submit"] {
+  width: 100%; /* Button occupies full width */
+  margin-left: 0;
+  margin-right: 0;
+}
 }

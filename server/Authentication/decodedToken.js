@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 function decodeUserId(token) {
   // Verify and decode the token to access the user ID
   const secretKey = "secret_key";
-  console.log(token);
 
   try {
     const decoded = jwt.verify(token, secretKey);
