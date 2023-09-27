@@ -59,7 +59,7 @@ const Home = (props) => {
         console.log(res.data);
         if (res.data.sucess) {
           setAmbulanceLocation(res.data.results);
-        }
+        } 
       })
       .catch((err) => console.log(err));
     axios
