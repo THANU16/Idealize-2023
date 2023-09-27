@@ -117,6 +117,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             <div className="form-group">
               <label htmlFor="hospitalName">Hospital Name:</label>
               <input
+                className="hospital-details-input"
                 type="text"
                 id="hospitalName"
                 name="hospitalName"
@@ -128,6 +129,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             <div className="form-group">
               <label htmlFor="ownership">Ownership:</label>
               <select
+                className="hospital-details-input"
                 id="ownership"
                 name="ownership"
                 value={ownership}
@@ -144,6 +146,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             <div className="form-group">
               <label htmlFor="registrationNo">Registration No:</label>
               <input
+                className="hospital-details-input"
                 type="text"
                 id="registrationNo"
                 name="registrationNo"
@@ -155,6 +158,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             <div className="form-group">
               <label htmlFor="registeredDate">Registered Date:</label>
               <input
+                className="hospital-details-input"
                 type="date"
                 id="registeredDate"
                 name="registeredDate"
@@ -167,13 +171,14 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
           <div className="form-row">
             <div className="form-group">
               <label>Location:</label>
-              <button type="button" onClick={handleSetLocation}>
+              <button className='locationBtn' type="location" onClick={handleSetLocation}>
                 Select Location
               </button>
             </div>
             <div className="form-group">
               <label htmlFor="province">Province:</label>
               <input
+                className="hospital-details-input"
                 type="text"
                 id="province"
                 name="province"
@@ -187,6 +192,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             <div className="form-group">
               <label htmlFor="district">District:</label>
               <input
+                className="hospital-details-input"
                 type="text"
                 id="district"
                 name="district"
@@ -198,6 +204,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             <div className="form-group">
               <label htmlFor="postalCode">Postal Code:</label>
               <input
+                className="hospital-details-input"
                 type="text"
                 id="postalCode"
                 name="postalCode"
@@ -212,6 +219,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
               <label htmlFor="hotline">Hotline:</label>{" "}
               {/* Changed from hotline1 */}
               <input
+                className="hospital-details-input"
                 type="tel"
                 id="hotline"
                 name="hotline"
@@ -224,6 +232,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
               <label htmlFor="webPage">Webpage:</label>{" "}
               {/* Added for the webpage URL */}
               <input
+                className="hospital-details-input"
                 type="url"
                 id="webPage"
                 name="webPage"
@@ -239,6 +248,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             <div className="form-group">
               <label htmlFor="email">Email Address:</label>
               <input
+                className="hospital-details-input"
                 type="email"
                 id="email"
                 name="email"
@@ -251,6 +261,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
               <label htmlFor="webPage">Password:</label>{" "}
               {/* Changed from webPageAddress */}
               <input
+                className="hospital-details-input"
                 type="password"
                 id="webPage"
                 name="webPage"
