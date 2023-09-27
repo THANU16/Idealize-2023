@@ -128,11 +128,6 @@ h3 {
   color: #fff; /* Change text color for the active suggestion */
 }
 
-.white-button{
-  background-color: #ffffff;
-  color: #333;
-  
-}
 
 .notifications{
 
@@ -158,51 +153,33 @@ h3 {
   border-bottom: 1px solid #e57373;
 }
 
-/* Add this to your CSS */
-.request-modal {
-  background-color: transparent; /* Make the modal background transparent */
-  box-shadow: none; /* Remove the modal box shadow */
-}
+/* Define a keyframe animation for the vibration effect */
+/* Vibration animation */
 
-.modal-dialog {
-  width: auto; /* Set a custom width for the modal */
-  margin: 0 auto; /* Center the modal horizontally */
-  max-width: 80%; /* Set a maximum width for the modal */
-  border: none; /* Remove the modal border */
-  border-radius: 10px; /* Add rounded corners to the modal */
-  padding: 20px; /* Add some padding to the modal content */
-  background-color: red; /* Customize the background color */
-}
-
-.modal-header {
-  border: none; /* Remove the modal header border */
-}
-
-.modal-title {
-  font-size: 24px; /* Customize the title font size */
-}
-
-.modal-body {
-  font-size: 18px; /* Customize the body text font size */
-  padding: 10px 0; /* Add some vertical padding to the body */
-}
-
-/* Customize the close button style */
-.modal-header .close {
-  color: white;
-  font-size: 28px;
-}
-
-/* Add animation for the modal */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+/* Zoom-in and zoom-out animation */
+@keyframes zoom {
+  0%, 100% {
+    transform: scale(1);
   }
-  to {
-    opacity: 1;
+  50% {
+    transform: scale(1.2); /* Adjust the scale factor as needed */
   }
 }
 
-.modal.fade .modal-dialog {
-  animation: fadeIn 0.3s;
+/* Apply both animations to the button */
+.red-button {
+  animation: zoom 1.5s ease infinite; /* Add zoom animation here */
+  background-color: red; /* Change to your preferred color */
+  color: white; /* Change text color for better contrast */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Customize the shadow */
 }
+
+.white-button {
+  width: 80%;
+  margin: auto;
+  border-radius: 5px ;
+}
+
+
+
+

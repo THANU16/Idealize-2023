@@ -160,7 +160,7 @@ const Home = (props) => {
               "requestData",
               JSON.stringify(res.data.result)
             );
-            // navigate("/requested");
+            navigate("/requested");
           }
         })
         .catch((err) => console.log(err));
