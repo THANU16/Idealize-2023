@@ -19,6 +19,18 @@ const Home = (props) => {
   const [address, setAddress] = useState("");
   const [ambulanceLocation, setAmbulanceLocation] = useState({});
   const [requestData, setRequestData] = useState({});
+  const [ambulanceNo, setAmbulanceNo] = useState({});
+  const [selectedAmbulance, setSelectedAmbulance] = useState({});
+  const ambulance = [
+    {
+      amno: 123,
+    },
+    {
+      amno: 234,
+    },
+    {
+      amno: 456,
+    }]
 
   const [userLocation, setUserLocation] = useState({
     latitude: null,
@@ -160,48 +172,81 @@ const Home = (props) => {
         </div>
       </div>
     );
+    
 
+    const handleAmbulanceSelect = (ambulance) => {
+      setSelectedAmbulance(ambulance);
+      
+    };
   // Show the map if request is false
   return (
-    <div className="container">
-      <div className="map">
-        {/* Render the Google Map */}
-        {userLocation.latitude && userLocation.longitude && (
-        <Map
-         
-          google={props.google}
-          zoom={14}
-          initialCenter={{ lat: userLocation.latitude,lng: userLocation.longitude, }}
-          mapContainerClassName="map-container"
-        >
-          {/* Map each location to a Marker */}
-          {locations.map((location, index) => (
-            <Marker
-              key={index}
-              position={{ lat: location.lat, lng: location.lng }}
-              icon={{
-                url: ambulanceMarkerIcon,
-                scaledSize: new window.google.maps.Size(100, 100),
-              }}
-            />
-          ))}
-          {/* Add a Marker for the user's location */}
+    <div>
+      
+      <div>
+      
+      {selectedAmbulance.amno ? (
+          <div>
+            
+            <p>AmbulanceNo:{selectedAmbulance.amno} </p>
           
-            <Marker
-              position={{
-                lat: userLocation.latitude,
-                lng: userLocation.longitude,
-              }}
-              icon={{
-                url: deiverMarkerIcon,
-                scaledSize: new window.google.maps.Size(100, 100),
-              }}
-            />
-          
+        </div>
+      ) : (
+        <div className="dropdown">
+          <button className="dropbtn">Select Ambulance</button>
+          <div className="dropdown-content">
+            {ambulance.map((ambulance, index) => (
+              <a
+                key={index}
+                // href="#"
+                onClick={() => handleAmbulanceSelect(ambulance)}
+              >
+                {ambulance.amno}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+
+      <div className="container">
+        <div className="map">
+          {/* Render the Google Map */}
+          {userLocation.latitude && userLocation.longitude && (
+            <Map
+
+              google={props.google}
+              zoom={14}
+              initialCenter={{ lat: userLocation.latitude, lng: userLocation.longitude, }}
+              mapContainerClassName="map-container"
+            >
+              {/* Map each location to a Marker */}
+              {locations.map((location, index) => (
+                <Marker
+                  key={index}
+                  position={{ lat: location.lat, lng: location.lng }}
+                  icon={{
+                    url: ambulanceMarkerIcon,
+                    scaledSize: new window.google.maps.Size(100, 100),
+                  }}
+                />
+              ))}
+              {/* Add a Marker for the user's location */}
+
+              <Marker
+                position={{
+                  lat: userLocation.latitude,
+                  lng: userLocation.longitude,
+                }}
+                icon={{
+                  url: deiverMarkerIcon,
+                  scaledSize: new window.google.maps.Size(100, 100),
+                }}
+              />
+
             </Map>)}
-        
-      </div>
-      {/* <div>
+
+        </div>
+        {/* <div>
         <h1>User's Current Location:</h1>
         {userLocation.latitude && userLocation.longitude ? (
           <div>
@@ -212,8 +257,9 @@ const Home = (props) => {
           <p>Fetching location...</p>
         )}
       </div> */}
-      {/*Active ambulance details */}
-      
+        {/*Active ambulance details */}
+
+      </div>
     </div>
   );
 };
