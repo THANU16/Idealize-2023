@@ -17,14 +17,14 @@ const server = http.createServer(app); // Create an HTTP server
 
 app.use(express.json());
 // Handle WebSocket connections using the imported function.
-const emergencyRequest = handleWebSocketConnections(server);
+const requestWebSocket = handleWebSocketConnections(server);
 
 app.use("/user", user);
 app.use("/login", login);
 app.use("/hospital", hospital);
 app.use("/driver", driver);
 app.use("/ambulance", ambulance);
-app.use("/emergency", emergencyRequest);
+app.use("/emergency", requestWebSocket);
 
 server.listen(process.env.PORT || 8000, () => {
   console.log("Listen port 8000");
