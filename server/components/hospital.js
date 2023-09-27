@@ -24,7 +24,7 @@ router.post("/add", (req, res) => {
     "INSERT INTO hospital (Latitude, Longitude, district, email, name, contactNumber, type, password, postalCode, province, registeredDate, registrationNo, website, typeID) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?);";
 
   connection.query(checkQuery, [body.email], (err, result) => {
-    console.log()
+    console.log();
     if (err) {
       console.log(err);
       res.send({
@@ -165,7 +165,7 @@ router.post("/getAllHospitalAmbulance", (req, res) => {
 
   const hospitalID = decodedUserId(sessionToken);
 
-  const getQuery = "select * from  ambulance_driver where hospitalID = ?;";
+  const getQuery = "select * from  ambulance where hospitalID = ?;";
 
   connection.query(getQuery, [hospitalID], (err, result) => {
     if (err) {

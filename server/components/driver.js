@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const decodedUserId = require("../Authentication/decodedToken");
 const database = require("../utils/databaseUtils");
 
@@ -195,6 +195,45 @@ router.post("/setLocation", (req, res) => {
       }
     }
   );
+});
+
+router.get("/getAllHospitalAmbulance", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ", "");
+
+  const driverID = decodedUserId(sessionToken);
+  // const driverID = 2;
+
+  const getHospitalIDQuery =
+    "select hospitalID from  driver where driverID = ?;";
+  const getQuery = "select * from  ambulance where hospitalID = ?;";
+
+  connection.query(getHospitalIDQuery, [driverID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      const hospitalID = result[0].hospitalID;
+      connection.query(getQuery, [hospitalID], (err, result) => {
+        if (err) {
+          res.send({
+            sucess: false,
+            error: err,
+            result: null,
+          });
+        } else {
+          res.send({
+            sucess: true,
+            error: null,
+            result: result,
+          });
+        }
+      });
+    }
+  });
 });
 
 module.exports = router;
