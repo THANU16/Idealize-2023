@@ -37,13 +37,12 @@ const Home = (props) => {
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((res) => {
-
         if (res.data.sucess) {
           setAmbulanceNo(res.data.result);
-
         }
       })
       .catch((err) => console.log(err));
+
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
         const latitude = position.coords.latitude;
@@ -69,8 +68,6 @@ const Home = (props) => {
     setSelectedPlace(props);
     setCoordinates(null);
   };
-
-
 
   const [request, setRequest] = useState(false);
   const onCancel = () => {
@@ -115,7 +112,6 @@ const Home = (props) => {
       </div>
     );
 
-
   const handleAmbulanceSelect = (ambulance) => {
     setSelectedAmbulance(ambulance);
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -123,23 +119,36 @@ const Home = (props) => {
     const ambulanceData = {
       currentDateTime,
       currentDate,
-      ambulance_ID: ambulance.ambulanceID, // Replace with the actual property name for ambulance ID
+      ambulanceID: ambulance.ambulanceID, // Replace with the actual property name for ambulance ID
       lat: userLocation.latitude,
-      long: userLocation.longitude,
+      lng: userLocation.longitude,
     };
     console.log(ambulanceData);
+
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/driver/setAmbulance`,
+        { data: ambulanceData },
+        { headers: { Authorization: "key " + sessionToken } }
+      )
+      .then((res) => {
+        console.log(res.data);
+        // if (res.data.sucess) {
+        //   setAmbulanceNo(res.data.result);
+
+        // }
+      })
+      .catch((err) => console.log(err));
   };
-  // console.log(ambulanceNo);
+
   return (
     <div>
-
       <div>
-
         {selectedAmbulance.ambulanceNumber ? (
           <div>
-
             <p>AmbulanceNo:{selectedAmbulance.ambulanceNumber} </p>
-
           </div>
         ) : (
           <div className="dropdown">
@@ -164,14 +173,14 @@ const Home = (props) => {
           {/* Render the Google Map */}
           {userLocation.latitude && userLocation.longitude && (
             <Map
-
               google={props.google}
               zoom={14}
-              initialCenter={{ lat: userLocation.latitude, lng: userLocation.longitude, }}
+              initialCenter={{
+                lat: userLocation.latitude,
+                lng: userLocation.longitude,
+              }}
               mapContainerClassName="map-container"
             >
-
-
               {/* Add a Marker for the user's location */}
 
               <Marker
@@ -184,12 +193,9 @@ const Home = (props) => {
                   scaledSize: new window.google.maps.Size(100, 100),
                 }}
               />
-
-            </Map>)}
-
+            </Map>
+          )}
         </div>
-
-
       </div>
     </div>
   );
