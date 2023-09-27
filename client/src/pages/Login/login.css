@@ -10,18 +10,19 @@
 
 
 
-.login-container{
-  
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center both horizontally and vertically */
-  height: 80%;
+  justify-content: center;
+  height: 80%; /* Allow the container to adjust its height based on content */
   box-shadow: 0px 0px 200px rgba(0, 0, 0, 0.2);
-  width: 50%;
+  width: 80%; /* Use a percentage width for responsiveness */
+  max-width: 700px; /* Set a max-width to limit container width on larger screens */
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-   
+  margin: 0 auto; /* Center the container horizontally */
+
 }
 
 
@@ -54,7 +55,7 @@ font-size: 50px;
 .login-form {
   display: flex;
   flex-wrap: wrap; /* Allow flex items to wrap to the next line on smaller screens */
-  margin-top: 50px;
+  margin-top:0px;
 }
 
 
@@ -67,6 +68,8 @@ font-size: 50px;
   background: #FFF;
   font-size: 15px;
   margin-bottom: 20px;
+  margin-left:70px
+  
     
 }
 
@@ -81,9 +84,9 @@ font-size: 50px;
   position: absolute;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(15%);
   height: 40px;
-  margin-left: -5px;
+  margin-left: 15px;
 
 }
 
@@ -128,7 +131,6 @@ font-size: 50px;
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
-  margin-top: 1px;
 }
 
 .forgot-password {
@@ -136,6 +138,7 @@ font-size: 50px;
   color: #1aa7f3;
   font-size: 12px;
   font-weight: bold;
+
 
 }
 
@@ -157,17 +160,6 @@ font-size: 50px;
 
 }
 
-.attractive-text {
-  font-size: 20px; /* Adjust the font size as needed */
-  font-weight: bold;
-  color: #f31a1a; /* Choose a color you like */
-  text-align: center; /* Center-align the text */
-  background-color: #f7f7f7; /* Add a background color */
-  border-radius: 5px; /* Add rounded corners */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  animation: fadeInOut 5s ease-in-out infinite; /* Apply the continuous fade-in-out animation */
-  
-}
 
 .login_top{
   display: none;
@@ -229,15 +221,19 @@ font-size: 50px;
 
     .icon-label .icon{
       margin-left: 10px;
+      transform: translateY(35%);
+
     }
 
     .login_btn ,
     .register_btn {
       width: 60%; /* Set the button width to 100% to fill its container */
-      margin-left: 35px;
+      margin-left:60px;
     }
     .forgot-password-container {
-      margin-right: 45px;
+      margin-right: 35px;
+      
+      
     }
     
     .login-right {
@@ -247,9 +243,11 @@ font-size: 50px;
     .attractive-text {
       font-size: 15px; /* Adjust the font size as needed */
       position: absolute; /* Position the text */
-      bottom: 150px; /* Place the text at the bottom */
+      bottom: 70px; /* Place the text at the bottom */
       left: 50%; /* Center horizontally */
       transform: translateX(-50%); /* Center horizontally */
+      margin-bottom: 20px;
+      width: 50%
     }
 
     .login-right {

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import emgbtn from "../../usericons/emergency.png";
-import "../user.css";
+// import "../user.css";
 import { NavLink } from "react-router-dom";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import pending from "../../usericons/pending.png";
 import cancel from "../../usericons/cancel.png";
 import axios from "axios";
+import "./Requested.css";
 
 const RequestCancel = (props) => {
   const requestData = JSON.parse(sessionStorage.getItem("requestData"));
@@ -62,51 +63,6 @@ const RequestCancel = (props) => {
         </Map>
       </div>
       {/*Active ambulance details */}
-      <div className="controls">
-        <div className="tables">
-          <h3>
-            Request Status
-            <div>
-              <span>
-                <img src={pending} />
-              </span>
-            </div>
-          </h3>
-          <table className="table table-bordered table-striped table-hover ">
-            <thead>
-              <tr>
-                <th width="20px">Req.rec.By</th>
-                <th width="20px">Count</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {transactionData.map((data) => ( */}
-              <tr>
-                <td>Ambulances</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>Hospitals</td>
-                <td>4</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className="notifications">
-          <div clasName="cancelRequest">
-            <img
-              src={cancel}
-              style={{ width: "25vh" }}
-              onClick={handleCancelRequest}
-            />
-          </div>
-
-          {/* Render notifications based on the state */}
-
-          {/* Render other components as needed */}
-        </div>
-      </div>
     </div>
   );
 };
@@ -114,3 +70,49 @@ const RequestCancel = (props) => {
 export default GoogleApiWrapper({
   apiKey: "AIzaSyAl5YvfOlFxEH09-MkWNh9OhYoQdN3uJOs", // Replace with your API key
 })(RequestCancel);
+
+// <div className="controls">
+//         <div className="tables">
+//           <h3>
+//             Request Status
+//             <div>
+//               <span>
+//                 <img src={pending} />
+//               </span>
+//             </div>
+//           </h3>
+//           <table className="table table-bordered table-striped table-hover ">
+//             <thead>
+//               <tr>
+//                 <th width="20px">Req.rec.By</th>
+//                 <th width="20px">Count</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {/* {transactionData.map((data) => ( */}
+//               <tr>
+//                 <td>Ambulances</td>
+//                 <td>5</td>
+//               </tr>
+//               <tr>
+//                 <td>Hospitals</td>
+//                 <td>4</td>
+//               </tr>
+//             </tbody>
+//           </table>
+//         </div>
+
+//         <div className="notifications">
+//           <div clasName="cancelRequest">
+//             <img
+//               src={cancel}
+//               style={{ width: "25vh" }}
+//               onClick={handleCancelRequest}
+//             />
+//           </div>
+
+//           {/* Render notifications based on the state */}
+
+//           {/* Render other components as needed */}
+//         </div>
+//       </div>

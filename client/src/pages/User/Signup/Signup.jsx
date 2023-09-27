@@ -66,6 +66,7 @@ function OwnerDetailsPage() {
                 type="text"
                 id="firstName"
                 name="firstName"
+                className="user_signup_text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
@@ -77,6 +78,7 @@ function OwnerDetailsPage() {
                 type="text"
                 id="lastName"
                 name="lastName"
+                className="user_signup_text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
@@ -90,6 +92,7 @@ function OwnerDetailsPage() {
                 type="text"
                 id="occupation"
                 name="occupation"
+                className="user_signup_text"
                 value={occupation}
                 onChange={(e) => setOccupation(e.target.value)}
                 required
@@ -101,6 +104,7 @@ function OwnerDetailsPage() {
                 type="date"
                 id="dob"
                 name="dob"
+                className="user_signup_text"
                 value={dob}
                 onChange={(e) => setDob(e.target.value)}
                 required
@@ -114,6 +118,7 @@ function OwnerDetailsPage() {
                 type="text"
                 id="nicNumber"
                 name="nicNumber"
+                className="user_signup_text"
                 value={nicNumber}
                 onChange={(e) => setNicNumber(e.target.value)}
                 required
@@ -125,6 +130,7 @@ function OwnerDetailsPage() {
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
+                className="user_signup_text"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 required
@@ -138,6 +144,7 @@ function OwnerDetailsPage() {
                 type="email"
                 id="email"
                 name="email"
+                className="user_signup_text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -146,9 +153,10 @@ function OwnerDetailsPage() {
             <div className="form-group">
               <label htmlFor="password">Password:</label>
               <input
-                type="text"
+                type="password  "
                 id="password"
                 name="password"
+                className="user_signup_text"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -160,6 +168,7 @@ function OwnerDetailsPage() {
             <div className="form-group">
               <label htmlFor="address">Address:</label>
               <input
+                className="user_signup_text"
                 type="text"
                 id="address"
                 name="address"
@@ -171,9 +180,10 @@ function OwnerDetailsPage() {
             <div className="form-group">
               <label htmlFor="confirmPassword">Confirm Password:</label>
               <input
-                type="text"
+                type="password"
                 id="confirmPassword"
                 name="confirmPassword"
+                className="user_signup_text"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
@@ -187,6 +197,7 @@ function OwnerDetailsPage() {
                 type="text"
                 id="province"
                 name="province"
+                className="user_signup_text"
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
                 required
@@ -198,6 +209,7 @@ function OwnerDetailsPage() {
                 type="text"
                 id="district"
                 name="district"
+                className="user_signup_text"
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
                 required
@@ -211,6 +223,7 @@ function OwnerDetailsPage() {
                 type="text"
                 id="postalCode"
                 name="postalCode"
+                className="user_signup_text"
                 value={postalCode}
                 onChange={(e) => setPostalCode(e.target.value)}
                 required
@@ -222,6 +235,7 @@ function OwnerDetailsPage() {
                 type="int"
                 id="preferredType"
                 name="preferredType"
+                className="user_signup_text"
                 value={preferredType}
                 onChange={(e) => setPreferredType(e.target.value)}
                 required
