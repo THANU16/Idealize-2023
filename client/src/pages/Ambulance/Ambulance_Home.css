@@ -1,58 +1,77 @@
-Ambulance_Home.css
-.container {
+Ambulance_Home.css .container {
   display: flex;
   flex-direction: column;
-  height: 100%; /* 100% of the viewport height */
+  height: 100%;
+  /* 100% of the viewport height */
 }
 
 .map {
-  flex: 4; /* 3/4 of the available height */
+  flex: 4;
+  /* 3/4 of the available height */
   position: relative;
-  height: 100vh;
-  
+  height: 95vh;
+  /* margin-top: 10%; */
 }
 
 .controls {
-  flex: 1; /* Adjust the flex value based on your layout needs */
+  flex: 1;
+  /* Adjust the flex value based on your layout needs */
   display: flex;
-  flex-direction: column; /* Stack children vertically */
+  flex-direction: column;
+  /* Stack children vertically */
   align-items: center;
   text-align: center;
   background-color: #f6caca;
   border-radius: 12px;
   width: 291px;
   height: 70%;
-  padding: 20px; /* Increased padding for more space */
+  padding: 20px;
+  /* Increased padding for more space */
   justify-content: center;
-  border: 2px solid #e57373; /* Thicker border with a different color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-  
+  border: 2px solid #e57373;
+  /* Thicker border with a different color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Add a subtle box shadow */
+
 }
 
 .tables {
-  flex: 1; /* Adjust the flex value based on your layout needs */
+  flex: 1;
+  /* Adjust the flex value based on your layout needs */
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  text-align: center; /* Align text at the top */
+  flex-direction: column;
+  /* Stack children vertically */
+  text-align: center;
+  /* Align text at the top */
   background-color: #f6caca;
   border-radius: 12px;
-  height: 50%; /* Change to 50% to make the box half of the web page size */
+  height: 50%;
+  /* Change to 50% to make the box half of the web page size */
   width: 291px;
-  padding: 20px; /* Increased padding for more space */
+  padding: 20px;
+  /* Increased padding for more space */
 }
 
 /* Add this style to target the table */
 .tables table {
-  margin-top: 0; /* Remove the default top margin on the table */
+  margin-top: 0;
+  /* Remove the default top margin on the table */
 }
-table, th, td {
-  border: 1px solid #ff0000; /* Add a 1px black border to the table, header cells, and data cells */
-  text-align: left; /* Align text to the left in cells */
-  padding: 8px; /* Add padding for spacing inside cells */
+
+table,
+th,
+td {
+  border: 1px solid #ff0000;
+  /* Add a 1px black border to the table, header cells, and data cells */
+  text-align: left;
+  /* Align text to the left in cells */
+  padding: 8px;
+  /* Add padding for spacing inside cells */
 }
 
 .controls h3 {
-  margin: 0; /* Remove margin for the heading */
+  margin: 0;
+  /* Remove margin for the heading */
 }
 
 /* Add more specific CSS rules for child elements as needed */
@@ -60,18 +79,22 @@ table, th, td {
 
 .box.col-titles-BG {
   /* Styles for the text inside the box */
-  font-size: 1.5rem; /* Adjust the font size as needed */
-  color: #333; /* Text color */
+  font-size: 1.5rem;
+  /* Adjust the font size as needed */
+  color: #333;
+  /* Text color */
 }
 
 h3 {
   /* Styles for the text */
-  font-size: 1.5rem; /* Adjust the font size as needed */
-  color: #333; /* Text color */
+  font-size: 1.5rem;
+  /* Adjust the font size as needed */
+  color: #333;
+  /* Text color */
   border-radius: 6px;
 }
 
-.textbox{
+.textbox {
   background-color: #ffffff;
   border-radius: 4px;
   width: 90%;
@@ -80,7 +103,8 @@ h3 {
 .search-box {
   position: relative;
   width: 100%;
-  max-width: 400px; /* Set a maximum width for the search box */
+  max-width: 400px;
+  /* Set a maximum width for the search box */
 }
 
 .location-search-input {
@@ -88,14 +112,17 @@ h3 {
   padding: 10px;
   font-size: 16px;
   border: none;
-  border-bottom: 2px solid #b6b6b6; /* Add a bottom border with a blue color */
+  border-bottom: 2px solid #b6b6b6;
+  /* Add a bottom border with a blue color */
   outline: none;
-  transition: border-bottom 0.3s ease; /* Smooth transition for the border */
+  transition: border-bottom 0.3s ease;
+  /* Smooth transition for the border */
   border-radius: 6px;
 }
 
 .location-search-input:focus {
-  border-bottom: 2px solid #e57373; /* Change the border color on focus */
+  border-bottom: 2px solid #e57373;
+  /* Change the border color on focus */
 }
 
 .autocomplete-dropdown-container {
@@ -107,7 +134,8 @@ h3 {
   border: 1px solid #ccc;
   z-index: 999;
   max-height: 200px;
-  overflow-y: auto; /* Add scroll if there are many suggestions */
+  overflow-y: auto;
+  /* Add scroll if there are many suggestions */
   border-radius: 6px;
 
 }
@@ -115,53 +143,102 @@ h3 {
 .suggestion-item {
   padding: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth background color transition */
+  transition: background-color 0.3s ease;
+  /* Smooth background color transition */
 }
 
 .suggestion-item:hover {
-  background-color: #f6f6f6; /* Change background color on hover */
+  background-color: #f6f6f6;
+  /* Change background color on hover */
 }
 
 .suggestion-item--active {
-  background-color: #c8c8c8; /* Change background color for the active suggestion */
-  color: #fff; /* Change text color for the active suggestion */
+  background-color: #c8c8c8;
+  /* Change background color for the active suggestion */
+  color: #fff;
+  /* Change text color for the active suggestion */
 }
 
-.white-button{
+.white-button {
   background-color: #ffffff;
   color: #333;
-  
+
 }
 
-.notifications{
+.notifications {
 
-  flex: 1; /* Adjust the flex value based on your layout needs */
+  flex: 1;
+  /* Adjust the flex value based on your layout needs */
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  text-align: center; /* Align text at the top */
+  flex-direction: column;
+  /* Stack children vertically */
+  text-align: center;
+  /* Align text at the top */
   background-color: #f6caca;
   border-radius: 12px;
-  height: 50%; /* Change to 50% to make the box half of the web page size */
+  height: 50%;
+  /* Change to 50% to make the box half of the web page size */
   width: 291px;
-  
+
   /* padding: 20px; Increased padding for more space */
 
 }
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
 
 /* New styles for mobile screens */
 @media (max-width: 768px) {
-    .container {
-        background-color: rgb(255, 255, 255);
-        width: 100%; /* Adjust the width for smaller screens */
-        /* margin-top: -60px; */
-    }
-  
-    .map {
-      flex: 4; /* 3/4 of the available height */
-      position: relative;
-      height: 60vh; /* Reduced height for mobile */
-    }
-  
+  .container {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    /* Adjust the width for smaller screens */
+    /* margin-top: -60px; */
   }
-  
+
+  .map {
+    flex: 4;
+    /* 3/4 of the available height */
+    position: relative;
+    height: 60vh;
+    /* Reduced height for mobile */
+  }
+
+}
+

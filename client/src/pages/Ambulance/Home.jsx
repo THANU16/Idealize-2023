@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import deiverMarkerIcon from "../../assets/icons/placeholder.png";
 import "./Ambulance_Home.css";
-
+import moment from "moment";
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -17,8 +17,10 @@ const Home = (props) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
   const [address, setAddress] = useState("");
-  const [ambulanceLocation, setAmbulanceLocation] = useState({});
+
   const [requestData, setRequestData] = useState({});
+  const [ambulanceNo, setAmbulanceNo] = useState([]);
+  const [selectedAmbulance, setSelectedAmbulance] = useState({});
 
   const [userLocation, setUserLocation] = useState({
     latitude: null,
@@ -29,26 +31,30 @@ const Home = (props) => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
 
     axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/hospital/getHospitalAmbulanceLocation`,
-        {},
+      .get(
+        `${process.env.REACT_APP_API_URL}/driver/getAllHospitalAmbulance`,
+
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((res) => {
-        if (res.data.sucess) {
-          setAmbulanceLocation(res.data.results);
-        }
-      })
-      .catch((err) => console.log(err));
 
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
-      .then((res) => {
         if (res.data.sucess) {
-          setRequestData(res.data.results);
+          setAmbulanceNo(res.data.result);
+
         }
       })
       .catch((err) => console.log(err));
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Set the user's location in the state
+        setUserLocation({ latitude, longitude });
+      });
+    } else {
+      console.log("Geolocation is not available in this browser.");
+    }
   }, []);
 
   const onMapClick = (mapProps, map, event) => {
@@ -64,31 +70,8 @@ const Home = (props) => {
     setCoordinates(null);
   };
 
-  const handleSelect = async (address) => {
-    try {
-      const results = await geocodeByAddress(address);
-      const latLng = await getLatLng(results[0]);
 
-      setSelectedPlace(results[0]);
-      setCoordinates({ latitude: latLng.lat, longitude: latLng.lng });
-      setAddress(address);
-    } catch (error) {
-      console.error("Error selecting location:", error);
-    }
-  };
 
-  const sendLocationDataToBackend = (lat, lng) => {
-    // Send the coordinates to the backend using an Axios POST request
-    // You can use Axios or any other method to send the data
-    // Example:
-    // axios.post('/api/saveLocation', { latitude: lat, longitude: lng })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error sending location data:', error);
-    //   });
-  };
   const [request, setRequest] = useState(false);
   const onCancel = () => {
     setRequest(false);
@@ -97,35 +80,6 @@ const Home = (props) => {
   const onRequest = () => {
     setRequest(false);
   };
-  const locations = [
-    {
-      lat: 9.6638,
-      lng: 80.0208, // Jaffna Town
-      bearing: 0, // Bearing is set to 0 for reference
-    },
-
-  ];
-
-  const [showNotifications, setShowNotifications] = useState(false);
-
-  // Function to toggle the visibility of notifications
-  const toggleNotifications = () => {
-    setShowNotifications(!showNotifications);
-  };
-  useEffect(() => {
-    // Check if geolocation is available in the user's browser
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-
-        // Set the user's location in the state
-        setUserLocation({ latitude, longitude });
-      });
-    } else {
-      console.log("Geolocation is not available in this browser.");
-    }
-  }, []);
 
   // Show the emergency request modal if request is true
   if (request)
@@ -161,59 +115,82 @@ const Home = (props) => {
       </div>
     );
 
-  // Show the map if request is false
+
+  const handleAmbulanceSelect = (ambulance) => {
+    setSelectedAmbulance(ambulance);
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    const currentDate = moment().format("YYYY-MM-DD");
+    const ambulanceData = {
+      currentDateTime,
+      currentDate,
+      ambulance_ID: ambulance.ambulanceID, // Replace with the actual property name for ambulance ID
+      lat: userLocation.latitude,
+      long: userLocation.longitude,
+    };
+    console.log(ambulanceData);
+  };
+  // console.log(ambulanceNo);
   return (
-    <div className="container">
-      <div className="map">
-        {/* Render the Google Map */}
-        {userLocation.latitude && userLocation.longitude && (
-        <Map
-         
-          google={props.google}
-          zoom={14}
-          initialCenter={{ lat: userLocation.latitude,lng: userLocation.longitude, }}
-          mapContainerClassName="map-container"
-        >
-          {/* Map each location to a Marker */}
-          {locations.map((location, index) => (
-            <Marker
-              key={index}
-              position={{ lat: location.lat, lng: location.lng }}
-              icon={{
-                url: ambulanceMarkerIcon,
-                scaledSize: new window.google.maps.Size(100, 100),
-              }}
-            />
-          ))}
-          {/* Add a Marker for the user's location */}
-          
-            <Marker
-              position={{
-                lat: userLocation.latitude,
-                lng: userLocation.longitude,
-              }}
-              icon={{
-                url: deiverMarkerIcon,
-                scaledSize: new window.google.maps.Size(100, 100),
-              }}
-            />
-          
-            </Map>)}
-        
-      </div>
-      {/* <div>
-        <h1>User's Current Location:</h1>
-        {userLocation.latitude && userLocation.longitude ? (
+    <div>
+
+      <div>
+
+        {selectedAmbulance.ambulanceNumber ? (
           <div>
-            <p>Latitude: {userLocation.latitude}</p>
-            <p>Longitude: {userLocation.longitude}</p>
+
+            <p>AmbulanceNo:{selectedAmbulance.ambulanceNumber} </p>
+
           </div>
         ) : (
-          <p>Fetching location...</p>
+          <div className="dropdown">
+            <button className="dropbtn">Select Ambulance</button>
+            <div className="dropdown-content">
+              {ambulanceNo.map((ambulance, index) => (
+                <a
+                  key={index}
+                  // href="#"
+                  onClick={() => handleAmbulanceSelect(ambulance)}
+                >
+                  {ambulance.ambulanceNumber}
+                </a>
+              ))}
+            </div>
+          </div>
         )}
-      </div> */}
-      {/*Active ambulance details */}
-      
+      </div>
+
+      <div className="container">
+        <div className="map">
+          {/* Render the Google Map */}
+          {userLocation.latitude && userLocation.longitude && (
+            <Map
+
+              google={props.google}
+              zoom={14}
+              initialCenter={{ lat: userLocation.latitude, lng: userLocation.longitude, }}
+              mapContainerClassName="map-container"
+            >
+
+
+              {/* Add a Marker for the user's location */}
+
+              <Marker
+                position={{
+                  lat: userLocation.latitude,
+                  lng: userLocation.longitude,
+                }}
+                icon={{
+                  url: deiverMarkerIcon,
+                  scaledSize: new window.google.maps.Size(100, 100),
+                }}
+              />
+
+            </Map>)}
+
+        </div>
+
+
+      </div>
     </div>
   );
 };
