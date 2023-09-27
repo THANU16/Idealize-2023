@@ -17,16 +17,7 @@ const Sidebar = ({ children }) => {
       name: "Home",
       icon: <img src={home} alt="" />,
     },
-    {
-      path: "/ambulance",
-      name: "Ambulance",
-      icon: <img src={ambulance} alt="" />,
-    },
-    // {
-    //   path: "/drivers",
-    //   name: "Drivers",
-    //   icon: <img src={drivers} alt="" />,
-    // },
+   
     {
       path: "/help",
       name: "Help",
