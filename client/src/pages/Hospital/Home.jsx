@@ -4,6 +4,7 @@ import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import "../styles.css";
 import PopupMessage from "./PopupMessage";
 import { Modal } from "react-bootstrap";
+import moment from "moment";
 
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
@@ -197,11 +198,13 @@ const Home = (props) => {
       }));
     }
 
-    const handleAssignAmbulance = (ambulanceID, userID) => {
+    const handleAssignAmbulance = (ambulanceID, notification) => {
       // Define the data to send in the request body
+      const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
       const requestData = {
         ambulanceID: ambulanceID,
-        userID: userID,
+        notification: notification,
+        connectedTime: currentDateTime,
       };
       // console.log(requestData);
       const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
@@ -297,7 +300,7 @@ const Home = (props) => {
                 Ambulance No: {ambulance.ambulanceNumber}
                 <button
                   style={{ backgroundColor: "green", marginLeft: "10px" }}
-                  onClick={() => handleAssignAmbulance(ambulance.ambulanceID,notification.userID)}
+                  onClick={() => handleAssignAmbulance(ambulance.ambulanceID,notification)}
                 >
                   Assign
                 </button>

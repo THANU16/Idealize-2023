@@ -86,7 +86,7 @@ function handleWebSocketConnections(server) {
     if (clientID) {
       // console.log(" connected");
       if (typeID === "ho") {
-        // console.log("hospital connected");
+        console.log("hospital connected");
         hospitalsConnection.set(clientID, socket);
       } else if (typeID === "dr") {
         console.log("ambulance connected");
@@ -111,6 +111,20 @@ function handleWebSocketConnections(server) {
       socket.close();
     }
   });
+
+  function sendMessageToAmbulance(ambulanceID, message) {
+    // console.log(ambulanceConnection);
+    const ambulanceSocket = ambulanceConnection.forEach((ambulanceSocket) => {
+      console.log(ambulanceSocket);
+      console.log(ambulanceSocket.ambulanceID);
+      if (ambulanceSocket.ambulanceID === ambulanceID) {
+        console.log(`Sending message to ambulance ${ambulanceID}`);
+        ambulanceSocket.send(JSON.stringify(message));
+      } else {
+        console.log(`Ambulance ${ambulanceID} not found.`);
+      }
+    });
+  }
 
   // Handle emergency requests from users
   router.post("/addEmergencyRequest", (req, res) => {
@@ -180,6 +194,46 @@ function handleWebSocketConnections(server) {
               }
             }
           );
+        }
+      }
+    );
+  });
+
+  router.post("/assignAmbulance", (req, res) => {
+    const requestData = req.body; // Assuming you receive the emergency request data from the user
+    const sessionToken = req.headers.authorization.replace("key ", "");
+    const userID = requestData.notification.userID;
+    const ambulanceID = requestData.ambulanceID;
+    const connectedTime = requestData.connectedTime;
+    const setQuery1 =
+      "insert into user_ambulance_connection (userID, ambulanceID,connectedTime) values(?,?,?);";
+
+    connection.query(
+      setQuery1,
+      [userID, ambulanceID, connectedTime],
+      (err, result) => {
+        if (err) {
+          // sendMessageToAmbulance(ambulanceID, requestData);
+          // console.log(ambulanceConnection.get(1));
+          res.send({
+            success: false,
+            isExist: false,
+            error: err,
+            result: null,
+          });
+          // console.log(ambulanceID);
+          // console.log(ambulanceConnection.get(ambulanceID));
+          ambulanceConnection
+            .get(1)
+            .send(JSON.stringify(requestData));
+          // console.log("Sending message to a ambulance");
+        } else {
+          res.send({
+            success: true,
+            isExist: true,
+            error: null,
+            result: result,
+          });
         }
       }
     );
