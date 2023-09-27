@@ -26,6 +26,7 @@ styles.css
   justify-content: center;
   border: 2px solid #e57373; /* Thicker border with a different color */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  margin-left: 20px;
   
 }
 
@@ -127,11 +128,6 @@ h3 {
   color: #fff; /* Change text color for the active suggestion */
 }
 
-.white-button{
-  background-color: #ffffff;
-  color: #333;
-  
-}
 
 .notifications{
 
@@ -147,3 +143,43 @@ h3 {
   /* padding: 20px; Increased padding for more space */
 
 }
+
+.notification{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-bottom: 1px solid #e57373;
+}
+
+/* Define a keyframe animation for the vibration effect */
+/* Vibration animation */
+
+/* Zoom-in and zoom-out animation */
+@keyframes zoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2); /* Adjust the scale factor as needed */
+  }
+}
+
+/* Apply both animations to the button */
+.red-button {
+  animation: zoom 1.5s ease infinite; /* Add zoom animation here */
+  background-color: red; /* Change to your preferred color */
+  color: white; /* Change text color for better contrast */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Customize the shadow */
+}
+
+.white-button {
+  width: 80%;
+  margin: auto;
+  border-radius: 5px ;
+}
+
+
+
+

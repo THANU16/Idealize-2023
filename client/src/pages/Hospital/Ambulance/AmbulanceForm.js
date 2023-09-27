@@ -21,6 +21,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
         headers: { Authorization: "key " + sessionToken },
       })
       .then((res) => {
+        console.log(res.data);
         if (res.data.isExist) {
           alert("Please check your ambulance number");
           navigate("/ambulanceForm");
