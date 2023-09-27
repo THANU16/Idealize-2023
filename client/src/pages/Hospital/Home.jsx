@@ -254,9 +254,7 @@ const Home = (props) => {
         </div>
 
         <div className="notifications">
-          <button className="white-button" onClick={toggleNotifications}>
-            <h3>Notification</h3>
-          </button>
+          <button className="white-button" onClick={toggleNotifications}>Notification</button>
 
           {/* Render notifications based on the state */}
           {showNotifications && (

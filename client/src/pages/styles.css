@@ -18,15 +18,16 @@ styles.css
   flex-direction: column; /* Stack children vertically */
   align-items: center;
   text-align: center;
-  background-color: #f6caca;
+  background-color: #ffffff;
+  border-color: #333;
   border-radius: 12px;
   width: 291px;
   height: 70%;
-  padding: 20px; /* Increased padding for more space */
+  padding: 10px; /* Increased padding for more space */
   justify-content: center;
-  border: 2px solid #e57373; /* Thicker border with a different color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-  
+  border: 2px solid #ffffff; /* Thicker border with a different color */
+  box-shadow: 0 2px 4px rgba(161, 43, 43, 0.1); /* Add a subtle box shadow */
+  margin-left: 25px;
 }
 
 .tables {
@@ -34,8 +35,7 @@ styles.css
   display: flex;
   flex-direction: column; /* Stack children vertically */
   text-align: center; /* Align text at the top */
-  background-color: #f6caca;
-  border-radius: 12px;
+  background-color: #ffffff;
   height: 50%; /* Change to 50% to make the box half of the web page size */
   width: 291px;
   padding: 20px; /* Increased padding for more space */
@@ -44,6 +44,7 @@ styles.css
 /* Add this style to target the table */
 .tables table {
   margin-top: 0; /* Remove the default top margin on the table */
+
 }
 table, th, td {
   border: 1px solid #ff0000; /* Add a 1px black border to the table, header cells, and data cells */
@@ -52,7 +53,11 @@ table, th, td {
 }
 
 .controls h3 {
-  margin: 0; /* Remove margin for the heading */
+  margin-bottom: 10px; /* Remove margin for the heading */
+  margin-top: 0px;
+  font-size: 20px;
+  padding: 2px;
+  background-color: #ccc;
 }
 
 /* Add more specific CSS rules for child elements as needed */
@@ -67,7 +72,7 @@ table, th, td {
 h3 {
   /* Styles for the text */
   font-size: 1.5rem; /* Adjust the font size as needed */
-  color: #333; /* Text color */
+  color: #b72626; /* Text color */
   border-radius: 6px;
 }
 
@@ -128,9 +133,10 @@ h3 {
 }
 
 .white-button{
-  background-color: #ffffff;
-  color: #333;
-  
+  background-color: #544c73;
+  color: #f8f6f6;
+  width: 70%;
+  margin: auto;
 }
 
 .notifications{
@@ -139,7 +145,7 @@ h3 {
   display: flex;
   flex-direction: column; /* Stack children vertically */
   text-align: center; /* Align text at the top */
-  background-color: #f6caca;
+  background-color: #ffffff;
   border-radius: 12px;
   height: 50%; /* Change to 50% to make the box half of the web page size */
   width: 291px;

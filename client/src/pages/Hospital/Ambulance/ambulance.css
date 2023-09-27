@@ -12,7 +12,7 @@
   
   .table th,
   .table td {
-    padding: 1.5rem;
+    padding: 1.0rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6; /* Table border color */
   }
