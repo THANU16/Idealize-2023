@@ -9,7 +9,7 @@ const login = require("./Authentication/login");
 const hospital = require("./components/hospital");
 const driver = require("./components/driver");
 const ambulance = require("./components/Ambulance");
-const emergency = require("./components/emergencyRequest");
+// const emergency = require("./components/emergencyRequest");
 const handleWebSocketConnections = require("./components/requestWebSocket");
 
 const server = http.createServer(app); // Create an HTTP server
