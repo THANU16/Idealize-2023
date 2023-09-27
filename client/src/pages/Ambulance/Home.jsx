@@ -119,11 +119,17 @@ const Home = (props) => {
   const handleAmbulanceSelect = (ambulance) => {
     setSelectedAmbulance(ambulance);
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    const currentDate = moment().format("YYYY-MM-DD ");
-    console.log(currentDate);
-    console.log(currentDateTime);
+    const currentDate = moment().format("YYYY-MM-DD");
+    const ambulanceData = {
+      currentDateTime,
+      currentDate,
+      ambulance_ID: ambulance.ambulanceID, // Replace with the actual property name for ambulance ID
+      lat: userLocation.latitude,
+      long: userLocation.longitude,
+    };
+    console.log(ambulanceData);
   };
-
+  // console.log(ambulanceNo);
   return (
     <div>
 
