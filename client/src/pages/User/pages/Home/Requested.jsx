@@ -14,26 +14,26 @@
 //   // useEffect(() => {
 //   //   console.log(isToggleBarOpen);
 //   // }, [isToggleBarOpen]);
-//   const [modalShow, setModalShow] = useState(false);
+// const [modalShow, setModalShow] = useState(false);
 
 //   return (
 //     <div>
-//       <div
-//         style={{
-//           display: "flex",
-//           justifyContent: "center",
-//           alignItems: "center",
-//         }}
-//       >
-//         <Button
-//           style={{ backgroundColor: "purple" }}
-//           onClick={() => setModalShow(true)}
-//         >
-//           Launch modal with grid
-//         </Button>
-//       </div>
+// <div
+//   style={{
+//     display: "flex",
+//     justifyContent: "center",
+//     alignItems: "center",
+//   }}
+// >
+//   <Button
+//     style={{ backgroundColor: "purple" }}
+//     onClick={() => setModalShow(true)}
+//   >
+//     Launch modal with grid
+//   </Button>
+// </div>
 
-//       <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />
+// <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />
 //     </div>
 //   );
 // }
@@ -51,12 +51,16 @@ import cancel from "../../usericons/cancel.png";
 import axios from "axios";
 import "./Requested.css";
 import Button from "react-bootstrap/Button";
+import MydModalWithGrid from "../../../../components/MydModalWithGrid";
+import SmallModal from "../../../../components/SmallModal";
+
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
-
 const RequestCancel = (props) => {
+  const [modalShow, setModalShow] = useState(false);
+
   const [currentLocation, setCurrentLocation] = useState(null);
   const navigate = useNavigate();
 
@@ -67,16 +71,19 @@ const RequestCancel = (props) => {
 
   // Use useEffect to log currentLocation when it changes
   return (
-    <div className="container">
-      <div className="map">
-        {/* Render the Google Map */}
+    <div>
+      <div className="container">
+        <div className="req_modal">
+          <SmallModal />
+        </div>
+
+        <div className="map">{/* Render the Google Map */}</div>
         <Map
           google={props.google}
           zoom={14}
           initialCenter={{ lat: 9.7486, lng: 80.0164 }}
           mapContainerClassName="map-container"
         >
-          {/* Map each location to a Marker */}
           {currentLocation && ( // Conditionally render the Marker when currentLocation is not null
             <Marker
               position={{
@@ -91,8 +98,6 @@ const RequestCancel = (props) => {
           )}
         </Map>
       </div>
-      {/*Active ambulance details */}
-      <div></div>
     </div>
   );
 };
