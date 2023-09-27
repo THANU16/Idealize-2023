@@ -1,23 +1,39 @@
-import "./User_Sidebar.css";
 import React, { useState } from "react";
-
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import home from "../usericons/home.svg";
-import drivers from "../usericons/drivers.svg";
+import firstaid from "../usericons/firstaid.svg";
 import help from "../usericons/help.svg";
 import logout from "../usericons/logout.svg";
-import logo from "../usericons/logo.svg";
-import firstaid from "../usericons/firstaid.svg";
-import { NavLink } from "react-router-dom";
-function activate_the_icon(event) {
-  // Your activate_the_icon function code goes here
-}
+import "./User_Sidebar.css";
 
 const Sidebar = ({ children }) => {
-  const [activeButton, setActiveButton] = useState(null);
+  const location = useLocation(); // Use useLocation hook to get the current URL
+
+  // Extract the pathname from the location
+  const currentPath = location.pathname;
+
+  // Determine which button should be active based on the current path
+  const getActiveButton = () => {
+    if (currentPath == "/home") {
+      return 0;
+    } else if (currentPath == "/firstaid") {
+      return 1;
+    } else if (currentPath == "/help") {
+      return 2;
+    } else if (currentPath == "/logout") {
+      return 3;
+    }
+    // Default to no active button
+    return null;
+  };
 
   const activateTheIcon = (index) => {
     setActiveButton(index);
   };
+
+  const [activeButton, setActiveButton] = useState(null);
+
   return (
     <div>
       <div>
@@ -33,7 +49,6 @@ const Sidebar = ({ children }) => {
             </a>
 
             <a href="/home">Home</a>
-            {/* <NavLink to="/home">Home</NavLink> */}
           </li>
           <li
             className={`user_search_nav_button user_nav_buttons ${

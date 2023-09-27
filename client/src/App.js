@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { UserContext } from "./UserContext";
-
+import "./App.css";
 // Paths pages
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
