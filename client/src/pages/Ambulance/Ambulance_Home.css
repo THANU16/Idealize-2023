@@ -228,10 +228,7 @@ h3 {
   background-color: #3e8e41;
 }
 
-.profile_link {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .driver-icon {
   width: 50px;

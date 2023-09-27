@@ -128,14 +128,16 @@ const Home = (props) => {
   return (
     <div>
       <div className="profile-and-ambulance-container">
-        <Link to="/driverProfile" className="profile-link">
-          <div className="profile-link-content" >
+        <Link to="/driverProfile">
+          <div className="profile_link">
             <img
               src={driverIcon}
               alt="Driver Icon"
               className="driver-icon"
             />
+
           </div>
+
         </Link>
         {selectedAmbulance.ambulanceNumber ? (
           <div>
