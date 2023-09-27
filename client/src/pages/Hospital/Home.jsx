@@ -138,7 +138,24 @@ const Home = (props) => {
   const [isNewRequest, setIsNewRequest] = useState(true);
 
   const handleAccept = () => {};
-  const handleReject = () => {};
+  const handleReject = (notificationID) => {
+    // Make a POST request to your backend with the notificationID
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
+        notificationID: notificationID,
+      })
+      .then((response) => {
+        // Handle the response from the server, if needed
+        console.log('Reject Notification Response:', response.data);
+  
+        // You can update the state or perform other actions based on the response
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the request
+        console.error('Reject Notification Error:', error);
+      });
+  };
+  
 
 
   useEffect(() => {
@@ -162,41 +179,48 @@ const Home = (props) => {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
-    // Show the emergency request modal if request is true
-  // if (xyz)
-  //   return (
-  //     <div className="emergency-request-modal">
-  //       <div className="emergency-request-content">
-  //         <div className="emergency-header">
-  //           <h1>
-  //             There is an emergency{" "}
-  //             <div className="emergency-center">
-  //               <img
-  //                 src="https://media.istockphoto.com/photos/emergency-symbol-picture-id453100595?k=6&m=453100595&s=170667a&w=0&h=Bi6sk8KHGJLcqZ5awSX7_i0esgjsWTMIdVn_EOaS2xo="
-  //                 alt="Emergency"
-  //                 width="100"
-  //                 height="100"
-  //               />
-  //             </div>
-  //           </h1>{" "}
-  //           {/* Add the ambulance emoji */}
-  //         </div>
-  //         <p>
-  //           <h2>Please accept request and send the ambulance</h2>
-  //         </p>
-  //         <div className="emergency-button-container">
-  //           <button className="reject-button" onClick={onCancel}>
-  //             Reject
-  //           </button>
-  //           <button className="accept-button" onClick={onRequest}>
-  //             Accept
-  //           </button>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
+    // Create a state variable to track the dropdown state for each notification
+    const [notificationDropdowns, setNotificationDropdowns] = useState({});
 
-  // Show the map if request is false
+    // Function to toggle the dropdown for a specific notification
+    const toggleNotificationDropdown = (notificationID) => {
+      setNotificationDropdowns((prevState) => ({
+        ...prevState,
+        [notificationID]: !prevState[notificationID],
+      }));
+    };
+
+    const handleCancel = (notificationID) => {
+      setNotificationDropdowns((prevState) => ({
+        ...prevState,
+        [notificationID]: !prevState[notificationID],
+      }));
+    }
+
+    const handleAssignAmbulance = (ambulanceID, userID) => {
+      // Define the data to send in the request body
+      const requestData = {
+        ambulanceID: ambulanceID,
+        userID: userID,
+      };
+      // console.log(requestData);
+      const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+    
+      // Make a POST request to your backend
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`, requestData,{ headers: { Authorization: "key " + sessionToken }})
+        .then((response) => {
+          // Handle the response from the server, if needed
+          console.log('Assign Ambulance Response:', response.data);
+    
+          // You can update the state or perform other actions based on the response
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the request
+          console.error('Assign Ambulance Error:', error);
+        });
+    };
+
   return (
     <div>
           <div className="container">
@@ -225,26 +249,26 @@ const Home = (props) => {
       </div>
       {/*Active ambulance details */}
       <div className="controls">
-        <div className="tables">
-          <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3>
-          <table className="table table-bordered table-striped table-hover ">
-            <thead>
-              <tr>
-                <th>AmbID</th>
-                <th>LocID</th>
-              </tr>
-            </thead>
-            <tbody>
-            {ambulanceLocation.map((ambulance, index) => (
-          <tr key={index}>
-            <td>{ambulance.ambulanceID}</td>
-            <td>{ambulance.locationID}</td>
+        {/* <div className="tables"> */}
+          {/* <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3> */}
+          {/* <table className="table table-bordered table-striped table-hover "> */}
+            {/* <thead> */}
+              {/* <tr> */}
+                {/* <th>AmbID</th> */}
+                {/* <th>LocID</th> */}
+              {/* </tr> */}
+            {/* </thead> */}
+            {/* <tbody> */}
+            {/* {ambulanceLocation.map((ambulance, index) => ( */}
+          {/* <tr key={index}> */}
+            {/* <td>{ambulance.ambulanceID}</td> */}
+            {/* <td>{ambulance.locationID}</td> */}
             {/* Add more <td> elements for other properties */}
-          </tr>
-        ))}
-            </tbody>
-          </table>
-        </div>
+          {/* </tr> */}
+        {/* ))} */}
+            {/* </tbody> */}
+          {/* </table> */}
+        {/* </div> */}
 
         <div className="notifications">
           <button className={isNewRequest ? 'white-button red-button':'white-button'} onClick={toggleNotifications}>
@@ -254,23 +278,56 @@ const Home = (props) => {
 
           {/* Render notifications based on the state */}
           {showNotifications && (
-            <div className="notification-container">
-              {requestData.map((notification, index) => (
-                <div className="notification" key={index}>
+        <div className="notification-container">
+          {requestData.slice(0, 5).map((notification, index) => (
+            <div className="notification" key={index}>
+              {notificationDropdowns[notification.requestID] ? (
+                <div className="notification-dropdown">
+                  {/* Dropdown content here */}
+                  <h4>Available Ambulances:</h4>
+                  <button
+            style={{ backgroundColor: "red", marginLeft: "10px" }}
+            onClick={() => handleCancel(notification.requestID)}
+          >
+            Cancel
+          </button>
+          <ul>
+            {ambulanceLocation.map((ambulance, index) => (
+              <li key={index}>
+                Ambulance No: {ambulance.ambulanceNumber}
+                <button
+                  style={{ backgroundColor: "green", marginLeft: "10px" }}
+                  onClick={() => handleAssignAmbulance(ambulance.ambulanceID,notification.userID)}
+                >
+                  Assign
+                </button>
+              </li>
+            ))}
+          </ul>
+                </div>
+              ) : (
+                <>
                   <p>{notification.requestID}</p>
-                  <p>{formatTime(notification.requestedTime)}</p> {/* Use a function to format the time */}
+                  <p>{formatTime(notification.requestedTime)}</p>
                   <span>
-                    <button style={{ backgroundColor: "green", margin: "10px" }} onClick={handleAccept}>
+                    <button
+                      style={{ backgroundColor: "green", margin: "10px" }}
+                      onClick={() => toggleNotificationDropdown(notification.requestID)}
+                    >
                       Accept
                     </button>
                   </span>
                   <span>
-                    <button style={{ backgroundColor: "red" }} onClick={handleReject}>Reject</button>
+                    <button style={{ backgroundColor: "red" }} onClick={handleReject}>
+                      Reject
+                    </button>
                   </span>
-                </div>
-              ))}
+                </>
+              )}
             </div>
-          )}
+          ))}
+        </div>
+      )}
 
           {/* Render other components as needed */}
         </div>

@@ -6,7 +6,7 @@ import Help from "./Pages/Help.jsx";
 import Logut from "./Pages/Logout.jsx";
 import Sidebar from "./SideBar/Sidebar";
 import Direction from "./Pages/Direction";
-
+import DriverProfile from "./Pages/DriverProfile";
 // import Ambulance from "./Ambulance/Ambulance";
 
 function AmbulancePaths() {
@@ -14,6 +14,7 @@ function AmbulancePaths() {
   return (
     <Sidebar path="/">
       <Routes>
+        <Route path="/driverProfile" element={<DriverProfile/>}/>
         <Route path="/home" element={<Home />} />
         <Route path="/help" element={<Help />} />
         <Route path="/logout" element={<Logut />} />

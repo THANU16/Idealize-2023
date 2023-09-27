@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./Firstaid.css";
 
 const YoutubeEmbed = ({ embedId }) => (
   <div className="video-responsive">
@@ -19,7 +20,28 @@ YoutubeEmbed.propTypes = {
   embedId: PropTypes.string.isRequired,
 };
 
-const videoIds = ["Ovsw7tdneqE", "ErxKDbH-iiI", "eBINwvHFTnw", "8pTaqY40-Rs"];
+const videoIds = [
+  "Ovsw7tdneqE",
+  "ErxKDbH-iiI",
+  "eBINwvHFTnw",
+  "8pTaqY40-Rs",
+  "8YREVVM2n7g",
+  "k7iPIQXvKjQ",
+  "7CgtIgSyAiU",
+  "dSfXcQqLZqs",
+  "iQwfvMu9VyE",
+  "T44piQneq4g",
+  "7Fh3v5c6FY4",
+  "_LDtqtpHnS4",
+  "lNWI6Rj65nw",
+  "XjMvBW9KDLA",
+  "DUaxt8OlT3o",
+  "DSKm5tbwG6s",
+  "0JHNvpQ9JW8",
+  "-ni7bW55KbI",
+  "jJWfHHqfSbk",
+  "2ynlaWUwMsA",
+];
 
 const VideoGallery = () => (
   <div className="video-gallery">

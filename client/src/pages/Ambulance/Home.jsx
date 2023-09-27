@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
-import deiverMarkerIcon from "../../assets/icons/placeholder.png";
+import driverMarkerIcon from "../../assets/icons/placeholder.png";
+import driverIcon from "../../assets/icons/download.png"
 import "./Ambulance_Home.css";
 import moment from "moment";
+import DriverProfile from "./Pages/DriverProfile";
+import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -55,7 +58,6 @@ const Home = (props) => {
       console.log("Geolocation is not available in this browser.");
     }
   }, []);
-
   const onMapClick = (mapProps, map, event) => {
     const clickedLatitude = event.latLng.lat();
     const clickedLongitude = event.latLng.lng();
@@ -63,7 +65,6 @@ const Home = (props) => {
     setSelectedPlace(null);
     setCoordinates({ latitude: clickedLatitude, longitude: clickedLongitude });
   };
-
   const onMarkerClick = (props, marker, e) => {
     setSelectedPlace(props);
     setCoordinates(null);
@@ -73,11 +74,9 @@ const Home = (props) => {
   const onCancel = () => {
     setRequest(false);
   };
-
   const onRequest = () => {
     setRequest(false);
   };
-
   // Show the emergency request modal if request is true
   if (request)
     return (
@@ -143,9 +142,21 @@ const Home = (props) => {
       .catch((err) => console.log(err));
   };
 
+
   return (
     <div>
-      <div>
+      <div className="profile-and-ambulance-container">
+        <Link to="/driverProfile">
+          <div className="profile_link">
+            <img
+              src={driverIcon}
+              alt="Driver Icon"
+              className="driver-icon"
+            />
+
+          </div>
+
+        </Link>
         {selectedAmbulance.ambulanceNumber ? (
           <div>
             <p>AmbulanceNo:{selectedAmbulance.ambulanceNumber} </p>
@@ -167,34 +178,30 @@ const Home = (props) => {
           </div>
         )}
       </div>
-
       <div className="container">
         <div className="map">
           {/* Render the Google Map */}
           {userLocation.latitude && userLocation.longitude && (
             <Map
               google={props.google}
-              zoom={14}
-              initialCenter={{
-                lat: userLocation.latitude,
-                lng: userLocation.longitude,
-              }}
+
+              zoom={10}
+              initialCenter={{ lat: userLocation.latitude, lng: userLocation.longitude, }}
               mapContainerClassName="map-container"
             >
               {/* Add a Marker for the user's location */}
-
               <Marker
                 position={{
                   lat: userLocation.latitude,
                   lng: userLocation.longitude,
                 }}
                 icon={{
-                  url: deiverMarkerIcon,
+                  url: driverMarkerIcon,
                   scaledSize: new window.google.maps.Size(100, 100),
                 }}
               />
-            </Map>
-          )}
+
+            </Map>)}
         </div>
       </div>
     </div>
