@@ -24,7 +24,7 @@ Ambulance_Home.css .container {
   background-color: #f6caca;
   border-radius: 12px;
   width: 291px;
-  height: 70%;
+  height: auto;
   padding: 20px;
   /* Increased padding for more space */
   justify-content: center;
@@ -176,7 +176,7 @@ h3 {
   /* Align text at the top */
   background-color: #f6caca;
   border-radius: 12px;
-  height: 50%;
+  height: auto;
   /* Change to 50% to make the box half of the web page size */
   width: 291px;
 

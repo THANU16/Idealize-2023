@@ -21,7 +21,7 @@ styles.css
   background-color: #f6caca;
   border-radius: 12px;
   width: 291px;
-  height: 70%;
+  height: auto;
   padding: 20px; /* Increased padding for more space */
   justify-content: center;
   border: 2px solid #e57373; /* Thicker border with a different color */
@@ -137,7 +137,7 @@ h3 {
   text-align: center; /* Align text at the top */
   background-color: #f6caca;
   border-radius: 12px;
-  height: 50%; /* Change to 50% to make the box half of the web page size */
+  height: auto; /* Change to 50% to make the box half of the web page size */
   width: 291px;
   
   /* padding: 20px; Increased padding for more space */
