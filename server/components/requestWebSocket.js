@@ -86,7 +86,7 @@ function handleWebSocketConnections(server) {
     if (clientID) {
       // console.log(" connected");
       if (typeID === "ho") {
-        // console.log("hospital connected");
+        console.log("hospital connected");
         hospitalsConnection.set(clientID, socket);
       } else if (typeID === "dr") {
         console.log("ambulance connected");
@@ -180,6 +180,42 @@ function handleWebSocketConnections(server) {
               }
             }
           );
+        }
+      }
+    );
+  });
+
+  router.post("/assignAmbulance", (req, res) => {
+    const requestData = req.body; // Assuming you receive the emergency request data from the user
+    const sessionToken = req.headers.authorization.replace("key ", "");
+    const userID = requestData.notification.userID;
+    const ambulanceID = requestData.ambulanceID;
+    const connectedTime = requestData.connectedTime;
+    const setQuery1 =
+      "insert into user_ambulance_connection (userID, ambulanceID,connectedTime) values(?,?,?);";
+
+    connection.query(
+      setQuery1,
+      [userID, ambulanceID, connectedTime],
+      (err, result) => {
+        if (err) {
+          res.send({
+            success: false,
+            isExist: false,
+            error: err,
+            result: null,
+          });
+        } else {
+          res.send({
+            success: true,
+            isExist: true,
+            error: null,
+            result: result,
+          });
+
+          ambulanceConnection
+            .get(ambulanceID)
+            .send(JSON.stringify(requestData));
         }
       }
     );
