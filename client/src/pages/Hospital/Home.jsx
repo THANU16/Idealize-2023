@@ -185,16 +185,16 @@ const Home = (props) => {
   };
 
   const handleAssignAmbulance = (ambulanceID, notification, driverID) => {
-    console.log("notification");
-    console.log(notification);
     // Define the data to send in the request body
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     const requestData = {
       ambulanceID: ambulanceID,
-      notification: notification,
+      userID: notification.userID,
+      requestID: notification.requestID,
+      latitude: notification.lat,
+      longtitude: notification.lng,
       driverID: driverID,
       connectedTime: currentDateTime,
-
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
@@ -238,32 +238,30 @@ const Home = (props) => {
 
   return (
     <div>
-          <div className="hospital-container">
+      <div className="hospital-container">
+        <div className="map">
+          {/* Render the Google Map */}
+          <Map
+            google={props.google}
+            zoom={14}
+            // initialCenter={{ lat: 9.7486, lng: 80.0164 }}
+            initialCenter={{ lat: 6.9271, lng: 79.8612 }}
+            mapContainerClassName="map-container"
+          >
+            {/* Map each location to a Marker */}
+            {ambulanceLocation.map((location, index) => (
+              <Marker
+                key={index}
+                position={{ lat: location.latitude, lng: location.longitude }}
+                icon={{
+                  url: ambulanceMarkerIcon,
+                  scaledSize: new window.google.maps.Size(100, 100),
+                }}
+              />
+            ))}
+          </Map>
+        </div>
 
-            <div className="map">
-        {/* Render the Google Map */}
-        <Map
-          google={props.google}
-          zoom={14}
-          // initialCenter={{ lat: 9.7486, lng: 80.0164 }}
-          initialCenter={{ lat: 6.9271, lng: 79.8612 }}
-          mapContainerClassName="map-container"
-        >
-          {/* Map each location to a Marker */}
-          {ambulanceLocation.map((location, index) => (
-            <Marker
-              key={index}
-              position={{ lat: location.latitude, lng: location.longitude }}
-              icon={{
-                url: ambulanceMarkerIcon,
-                scaledSize: new window.google.maps.Size(100, 100),
-              }}
-            />
-          ))}
-        </Map>
-      </div>
-
-        
         {/*Active ambulance details */}
         <div className="controls">
           <div className="notifications">
