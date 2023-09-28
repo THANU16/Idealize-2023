@@ -14,8 +14,6 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 
-import { useNavigate } from "react-router";
-
 import axios from "axios";
 
 const useWebSockets = (
@@ -168,7 +166,6 @@ const Home = (props) => {
   const onRequest = () => {
     setRequest(false);
   };
-  const navigate = useNavigate();
   const handleNotificationClick = () => {
     navigate("/notification");
   };
