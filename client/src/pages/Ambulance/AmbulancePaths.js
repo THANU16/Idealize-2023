@@ -7,6 +7,7 @@ import Logut from "./Pages/Logout.jsx";
 import Sidebar from "./SideBar/Sidebar";
 import Direction from "./Pages/Direction";
 import DriverProfile from "./Pages/DriverProfile";
+import HomeAfter from "./HomeAfter";
 // import Ambulance from "./Ambulance/Ambulance";
 
 function AmbulancePaths() {
@@ -19,6 +20,7 @@ function AmbulancePaths() {
         <Route path="/help" element={<Help />} />
         <Route path="/logout" element={<Logut />} />
         <Route path="/show" element={<Direction />} />
+        <Route path="/homeAfter" element={<HomeAfter/>}/>
       </Routes>
     </Sidebar>
   );

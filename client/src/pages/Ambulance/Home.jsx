@@ -8,6 +8,8 @@ import moment from "moment";
 import DriverProfile from "./Pages/DriverProfile";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import { useNavigate } from "react-router-dom";
+import HomeAfter from "./HomeAfter";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -45,6 +47,7 @@ const useWebSockets = (sessionToken, typeID, updateRequestData) => {
 
 const Home = (props) => {
   // const { onRequest, onCancel } = props;
+  const navigate = useNavigate();
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
   const [address, setAddress] = useState("");
@@ -81,7 +84,20 @@ const Home = (props) => {
           console.log(
             "navigate to after select and store the object session storage "
           );
-          console.log(res.data.result);
+          if (sessionStorage.getItem("ambulance")) {
+            navigate("/homeAfter");
+          } else {
+            sessionStorage.setItem(
+              "ambulance",
+              JSON.stringify(res.data.result[0])
+            );
+            navigate("/homeAfter");
+          
+            
+          }
+          
+          
+          // console.log(res.data.result[0]);
         }
       });
   });
@@ -157,6 +173,13 @@ const Home = (props) => {
           console.log(
             "navigate to after select and store the object session storage "
           );
+          sessionStorage.setItem(
+            "ambulance",
+            JSON.stringify(res.data.result[0])
+          );
+          
+          navigate("/homeAfter");
+          
         }
       })
       .catch((err) => console.log(err));
