@@ -209,7 +209,7 @@ const Home = (props) => {
       }));
     }
 
-    const handleAssignAmbulance = (ambulanceID, notification) => {
+    const handleAssignAmbulance = (ambulanceID, notification,driverID) => {
       // Define the data to send in the request body
       const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
       const requestData = {
