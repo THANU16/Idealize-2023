@@ -7,6 +7,8 @@ import logout from "../../../assets/icons/logout.svg";
 import logo from "../../../assets/icons/logo.svg";
 import { NavLink } from "react-router-dom";
 import "./Ambulance_Sidebar.css";
+import Logout from "../Pages/Logout";
+
 
 const Sidebar = ({ children }) => {
   const [activeButton, setActiveButton] = useState(null);
