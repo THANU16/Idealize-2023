@@ -10,9 +10,16 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 
+import { useNavigate } from "react-router";
+
 import axios from "axios";
 
-const useWebSockets = (sessionToken, typeID, updateRequestData) => {
+const useWebSockets = (
+  sessionToken,
+  typeID,
+  updateRequestData,
+  updateHospitalReqData
+) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
     const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
@@ -23,24 +30,25 @@ const useWebSockets = (sessionToken, typeID, updateRequestData) => {
       console.log("connected");
     };
 
-    // websocket.send(JSON.stringify("hiii "));
-
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log(data);
-
-      // Call the function to update requestData when new data is received
-      updateRequestData(data);
+      if (data.identify === "hospitalReq") {
+        updateHospitalReqData(data.requestData);
+      } else {
+        updateRequestData(data.requestData);
+      }
     };
 
     return () => {
       console.log("web socket close");
       websocket.close();
     };
-  }, [sessionToken, typeID, updateRequestData]); // Include updateRequestData in the dependencies
+  }, [sessionToken, typeID, updateRequestData, updateHospitalReqData]); // Include updateRequestData in the dependencies
 };
 
 const Home = (props) => {
+  const navigate = useNavigate();
   const ambulance = JSON.parse(sessionStorage.getItem("ambulance"));
   // const { onRequest, onCancel } = props;
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -49,7 +57,7 @@ const Home = (props) => {
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
 
   const [requestData, setRequestData] = useState([]);
-  const [isHospitalReq, setIsHospitalReq] = useState(false);
+  const [hospitalReqData, setHospitalReqData] = useState(false);
   const [isClientReq, setIsClientReq] = useState(false);
 
   const [userLocation, setUserLocation] = useState({
@@ -61,23 +69,19 @@ const Home = (props) => {
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
 
   // Create a function to update requestData
-  const updateHospitalReq = () => {
-    setIsHospitalReq(true); 
-    setIsClientReq(false);
-  };
-
-  // Create a function to update requestData
-  const updateClientReq = (newData) => {
-    setIsClientReq(true);
-  };
-
-  // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
   };
 
+  // Create a function to update requestData
+  const updateHospitalReqData = (newData) => {
+    setHospitalReqData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
+    sessionStorage.setItem("hospitalReqData", JSON.stringify(hospitalReqData));
+    navigate("/show");
+  };
+
   // Pass updateRequestData to useWebSockets
-  useWebSockets(sessionToken, typeID, updateRequestData);
+  useWebSockets(sessionToken, typeID, updateRequestData, updateHospitalReqData);
 
   // Store driver's location here
   useEffect(() => {
@@ -85,10 +89,9 @@ const Home = (props) => {
     setSelectedAmbulance(JSON.parse(sessionStorage.getItem("ambulance")));
 
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/driver/checkConnection`,
-        { headers: { Authorization: "key " + sessionToken } }
-      )
+      .get(`${process.env.REACT_APP_API_URL}/driver/checkConnection`, {
+        headers: { Authorization: "key " + sessionToken },
+      })
       .then((res) => {
         if (res.data.sucess) {
           //   setAmbulanceNo(res.data.result);
