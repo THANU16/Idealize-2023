@@ -18,7 +18,7 @@
  
     height: 100vh; /* Adjust this to control the height of the centered content */
 }
-h2{
+/* h2{
     font-size: 150px;
     margin: 0;
     text-shadow: 15px 5px 2px black;
@@ -30,14 +30,14 @@ h3{
 p{
     font-size: 18px;
     margin: 5px;
-}
-p:last-of-type{
+} */
+/* p:last-of-type{
     margin-bottom: 35px;
-}
-a{
+} */
+/* a{
     text-decoration: none;
     
-} 
+}  */
 
   
 .error_content {
