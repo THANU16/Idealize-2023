@@ -48,7 +48,9 @@ const Home = (props) => {
 
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
 
-  const [requestData, setRequestData] = useState({});
+  const [requestData, setRequestData] = useState([]);
+  const [isHospitalReq, setIsHospitalReq] = useState(false);
+  const [isClientReq, setIsClientReq] = useState(false);
 
   const [userLocation, setUserLocation] = useState({
     latitude: null,
@@ -57,6 +59,17 @@ const Home = (props) => {
 
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
+
+  // Create a function to update requestData
+  const updateHospitalReq = () => {
+    setIsHospitalReq(true); 
+    setIsClientReq(false);
+  };
+
+  // Create a function to update requestData
+  const updateClientReq = (newData) => {
+    setIsClientReq(true);
+  };
 
   // Create a function to update requestData
   const updateRequestData = (newData) => {
@@ -74,7 +87,6 @@ const Home = (props) => {
     axios
       .get(
         `${process.env.REACT_APP_API_URL}/driver/checkConnection`,
-
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((res) => {
