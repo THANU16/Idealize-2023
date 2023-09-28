@@ -75,7 +75,7 @@ const Sidebar = ({ children }) => {
             onClick={() => activateTheIcon(3)}
           >
             <img src={logout} alt="Logout" />
-            <a href="#">Logout</a>
+            <a href="/logout">Logout</a>
           </li>
         </ul>
       </div>
