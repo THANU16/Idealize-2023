@@ -33,9 +33,9 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
   };
 
   return (
-    <div className="HospitalDetailsPage">
+    <div className="ambulance-details">
       <h2>Ambulance Details</h2>
-      <div className="hospital-details-container">
+      <div className="ambulance-details-container">
         {/* Center the form content */}
         <div className="centered-form">
           <form onSubmit={handleSubmit}>
@@ -46,6 +46,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   type="text"
                   id="ambulanceNo"
                   name="ambulanceNo"
+                  className="ambulance-details-input"
                   value={ambulanceNo}
                   onChange={(e) => setAmbulanceNo(e.target.value)}
                   required
@@ -57,6 +58,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   id="ownership"
                   name="ownership"
                   value={ownership}
+                  className="ambulance-details-input"
                   onChange={(e) => setOwnership(e.target.value)}
                   required
                 >
@@ -74,6 +76,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   id="registrationNo"
                   name="registrationNo"
                   value={registrationNo}
+                  className="ambulance-details-input"
                   onChange={(e) => setAmbulanceCompany(e.target.value)}
                   required
                 />
@@ -85,6 +88,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   id="registeredDate"
                   name="registeredDate"
                   value={registeredDate}
+                  className="ambulance-details-input"
                   onChange={(e) => setRegisteredDate(e.target.value)}
                   required
                 />
@@ -114,7 +118,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
               </div>
             </div>
 
-            <div className="button-group" style={{ color: "white" }}>
+            <div className="ambulance-details-next" style={{ color: "white" }}>
               <button type="submit">Next</button>
             </div>
           </form>

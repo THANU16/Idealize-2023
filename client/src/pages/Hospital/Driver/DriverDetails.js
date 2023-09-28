@@ -49,9 +49,9 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
   };
 
   return (
-    <div className="HospitalDetailsPage">
+    <div className="driver-details">
       <h2>Driver Details</h2>
-      <div className="hospital-details-container">
+      <div className="driver-details-container">
         {/* Center the form content */}
         <div className="centered-form">
           <form onSubmit={handleSubmit}>
@@ -62,6 +62,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   type="text"
                   id="firstName"
                   name="firstName"
+                  className="driver-details-input"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   required
@@ -73,6 +74,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   type="text"
                   id="lastName"
                   name="lastName"
+                  className="driver-details-input"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   required
@@ -86,6 +88,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   type="text"
                   id="phoneNo"
                   name="phoneNo"
+                  className="driver-details-input"
                   value={phoneNo}
                   onChange={(e) => setPhoneNo(e.target.value)}
                   required
@@ -97,6 +100,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   type="email"
                   id="email"
                   name="email"
+                  className="driver-details-input"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -111,6 +115,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   type="text"
                   id="nic"
                   name="nic"
+                  className="driver-details-input NIC"
                   value={nic}
                   onChange={(e) => setNIC(e.target.value)}
                   required
@@ -122,6 +127,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   type="text"
                   id="address"
                   name="address"
+                  className="driver-details-input"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   required
@@ -137,6 +143,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                   type="password"
                   id="password"
                   name="password"
+                  className="driver-details-input"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -145,9 +152,10 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
               <div className="form-group">
                 <label htmlFor="conformPassword">Confirm Password</label>
                 <input
-                  type="text"
+                  type="password"
                   id="conformPassword"
                   name="conformPassword"
+                  className="driver-details-input"
                   value={conformPassword}
                   onChange={(e) => setConformPassword(e.target.value)}
                   required
@@ -156,7 +164,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             </div>
 
             <div className="button-group">
-              <button style={{ color: "white" }}>Next</button>
+              <button className="driver-details-next" style={{ color: "white" }}>Next</button>
             </div>
           </form>
         </div>
