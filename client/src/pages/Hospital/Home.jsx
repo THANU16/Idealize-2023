@@ -12,7 +12,15 @@ import PlacesAutocomplete, {
 
 import axios from "axios";
 
-const useWebSockets = (sessionToken, typeID, updateRequestData) => {
+// Import your notification sound
+import notificationSound from "../soundmp3/iphoneRingtone.mp3";
+
+const useWebSockets = (
+  sessionToken,
+  typeID,
+  updateRequestData,
+  playNotificationSound
+) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
     const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
@@ -31,13 +39,16 @@ const useWebSockets = (sessionToken, typeID, updateRequestData) => {
 
       // Call the function to update requestData when new data is received
       updateRequestData(data);
+
+      // Play the notification sound when a new notification arrives
+      playNotificationSound();
     };
 
     return () => {
       console.log("web socket close");
       websocket.close();
     };
-  }, [sessionToken, typeID, updateRequestData]); // Include updateRequestData in the dependencies
+  }, [sessionToken, typeID, updateRequestData, playNotificationSound]); // Include updateRequestData and playNotificationSound in the dependencies
 };
 
 const Home = (props) => {
@@ -50,13 +61,21 @@ const Home = (props) => {
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
   const [AvailableAmbulance, setAvailableAmbulance] = useState([]);
 
+  // Create an Audio element for the notification sound
+  const notificationAudio = new Audio(notificationSound);
+
+  // Define a function to play the notification sound
+  const playNotificationSound = () => {
+    notificationAudio.play();
+  };
+
   // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
   };
 
-  // Pass updateRequestData to useWebSockets
-  useWebSockets(sessionToken, typeID, updateRequestData);
+  // Pass playNotificationSound to useWebSockets
+  useWebSockets(sessionToken, typeID, updateRequestData, playNotificationSound);
 
   useEffect(() => {
     axios
@@ -217,8 +236,6 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    // ... (your existing code for fetching data)
-  
     // Check if there are any new requests
     if (requestData.length > 0) {
       setIsNewRequest(true);
