@@ -8,7 +8,7 @@ import Sidebar from "./SideBar/Sidebar";
 import Direction from "./Pages/Direction";
 import DriverProfile from "./Pages/DriverProfile";
 // import Ambulance from "./Ambulance/Ambulance";
-import Home1 from "./HomeAfterSelectedAmbulance";
+import Home1 from "./HomeAfter";
 
 function AmbulancePaths() {
   console.log();
