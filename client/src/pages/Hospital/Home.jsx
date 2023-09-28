@@ -50,6 +50,7 @@ const Home = (props) => {
   const [requestData, setRequestData] = useState([]);
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
+  const [AvailableAmbulance, setAvailableAmbulance] = useState([]);
   
   // Create a function to update requestData
   const updateRequestData = (newData) => {
@@ -93,6 +94,16 @@ const Home = (props) => {
         }
       })
       .catch((err) => console.log(err));
+
+    axios.get(`${process.env.REACT_APP_API_URL}/hospital/getAvailableAmbulance`,
+    {},
+    { headers: { Authorization: "key " + sessionToken } })
+    .then((res) => {
+      if (res.data.sucess) {
+        setAvailableAmbulance(res.data.result);
+      } 
+    })
+    .catch((err) => console.log(err));
   },[]);
 
 
@@ -204,6 +215,7 @@ const Home = (props) => {
       const requestData = {
         ambulanceID: ambulanceID,
         notification: notification,
+        driverID: driverID,
         connectedTime: currentDateTime,
       };
       // console.log(requestData);
@@ -295,12 +307,12 @@ const Home = (props) => {
             Cancel
           </button>
           <ul>
-            {ambulanceLocation.map((ambulance, index) => (
+            {AvailableAmbulance.map((ambulance, index) => (
               <li key={index}>
                 Ambulance No: {ambulance.ambulanceNumber}
                 <button
                   style={{ backgroundColor: "green", marginLeft: "10px" }}
-                  onClick={() => handleAssignAmbulance(ambulance.ambulanceID,notification)}
+                  onClick={() => handleAssignAmbulance(ambulance.ambulanceID,notification,ambulance.driverID)}
                 >
                   Assign
                 </button>

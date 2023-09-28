@@ -205,6 +205,7 @@ function handleWebSocketConnections(server) {
     const userID = requestData.notification.userID;
     const ambulanceID = requestData.ambulanceID;
     const connectedTime = requestData.connectedTime;
+    const driverID = requestData.driverID;
     const setQuery1 =
       "insert into user_ambulance_connection (userID, ambulanceID,connectedTime) values(?,?,?);";
 
@@ -238,6 +239,7 @@ function handleWebSocketConnections(server) {
       }
     );
   });
+
 
   return router;
 }
