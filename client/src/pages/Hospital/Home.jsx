@@ -218,7 +218,7 @@ const Home = (props) => {
         driverID: driverID,
         connectedTime: currentDateTime,
       };
-      // console.log(requestData);
+      console.log(requestData);
       const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
     
       // Make a POST request to your backend
@@ -238,7 +238,7 @@ const Home = (props) => {
 
   return (
     <div>
-          <div className="container">
+          <div className="hospital-container">
 
             <div className="map">
         {/* Render the Google Map */}
@@ -263,7 +263,7 @@ const Home = (props) => {
         </Map>
       </div>
       {/*Active ambulance details */}
-      <div className="controls">
+      <div className="hospital-controls">
         {/* <div className="tables"> */}
           {/* <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3> */}
           {/* <table className="table table-bordered table-striped table-hover "> */}

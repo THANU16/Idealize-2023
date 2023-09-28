@@ -5,6 +5,20 @@ styles.css
   height: 100%; /* 100% of the viewport height */
 }
 
+.hospital-container {
+  display: flex;
+  height: 100%; /* 100% of the viewport height */
+  margin-left: -50px;
+  position: relative;
+  width : 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+ 
+}
+
 .map {
   flex: 4; /* 3/4 of the available height */
   position: relative;
@@ -12,7 +26,7 @@ styles.css
   
 }
 
-.controls {
+.hospital-container .hospital-controls {
   flex: 1; /* Adjust the flex value based on your layout needs */
   display: flex;
   flex-direction: column; /* Stack children vertically */
@@ -20,9 +34,9 @@ styles.css
   text-align: center;
   background-color: #f6caca;
   border-radius: 12px;
-  width: 291px;
+  width: 40%;
   height: auto;
-  padding: 20px; /* Increased padding for more space */
+  padding: 10px; /* Increased padding for more space */
   justify-content: center;
   border: 2px solid #e57373; /* Thicker border with a different color */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
