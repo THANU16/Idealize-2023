@@ -134,18 +134,6 @@ const Home = (props) => {
     }
   };
 
-  const sendLocationDataToBackend = (lat, lng) => {
-    // Send the coordinates to the backend using an Axios POST request
-    // You can use Axios or any other method to send the data
-    // Example:
-    // axios.post('/api/saveLocation', { latitude: lat, longitude: lng })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error sending location data:', error);
-    //   });
-  };
 
   const [isNewRequest, setIsNewRequest] = useState(true);
 
