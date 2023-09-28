@@ -87,19 +87,24 @@ const Home = (props) => {
           if (sessionStorage.getItem("ambulance")) {
             navigate("/homeAfter");
           } else {
+            // console.log(res.data.result[0])
             sessionStorage.setItem(
               "ambulance",
               JSON.stringify(res.data.result[0])
             );
             navigate("/homeAfter");
-          
-            
           }
-          
-          
-          // console.log(res.data.result[0]);
         }
       });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/driver/getRequest`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.sucess) {
+          setRequestData(res.data.result);
+        }
+      })
+      .catch((err) => console.log(err));
   });
 
   // Store driver's location here
@@ -173,13 +178,13 @@ const Home = (props) => {
           console.log(
             "navigate to after select and store the object session storage "
           );
-          sessionStorage.setItem(
-            "ambulance",
-            JSON.stringify(res.data.result[0])
-          );
-          
-          navigate("/homeAfter");
-          
+          // sessionStorage.setItem(
+          //   "ambulance",
+          //   JSON.stringify(res.data.result[0])
+          // );
+
+          navigate("/home");
+
         }
       })
       .catch((err) => console.log(err));
@@ -205,8 +210,8 @@ const Home = (props) => {
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="map">
+      <div className="driverContainer">
+        <div className="driverMap">
           {/* Render the Google Map */}
           {userLocation.latitude && userLocation.longitude && (
             <Map

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import deiverMarkerIcon from "../../assets/icons/placeholder.png";
+import driverIcon from "../../assets/icons/download.png";
 import "./Ambulance_Home.css";
 import moment from "moment";
+import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -83,13 +85,20 @@ const Home = (props) => {
   return (
     <div>
       <div>
-        <div>
-          <p>AmbulanceNo:{ambulance.ambulanceNumber} </p>
+        <div className="profile-and-ambulance-container">
+          <Link to="/driverProfile">
+            <div className="profile_link">
+              <img src={driverIcon} alt="Driver Icon" className="driver-icon" />
+            </div>
+          </Link>
+          <div>
+            <p>AmbulanceNo:{ambulance.ambulanceNumber} </p>
+          </div>
         </div>
       </div>
 
-      <div className="container">
-        <div className="map">
+      <div className="driverContainer">
+        <div className="driverMap">
           {/* Render the Google Map */}
           {userLocation.latitude && userLocation.longitude && (
             <Map
