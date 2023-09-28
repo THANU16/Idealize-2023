@@ -9,7 +9,7 @@ import logo from "../../../assets/icons/logo.svg";
 import { NavLink } from "react-router-dom";
 import "./Ambulance_Sidebar.css";
 import Logout from "../Pages/Logout";
-import notification from "../../../assets/icons/images.png";
+import notification from "../../../assets/icons/notification.svg";
 
 const Sidebar = ({ children }) => {
   const [activeButton, setActiveButton] = useState(null);
@@ -44,7 +44,7 @@ const Sidebar = ({ children }) => {
             }`}
             onClick={() => activateTheIcon(2)}
           >
-            <img src={help} alt="Notification" />
+            <img src={notification} alt="Notification" />
             <a href="/notification">Notification</a>
           </li>
 
