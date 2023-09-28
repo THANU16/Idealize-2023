@@ -4,6 +4,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { UserContext } from "./UserContext";
 import "./App.css";
+
+import Error404 from "./Error404";
+
 // Paths pages
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
@@ -42,6 +45,7 @@ const App = () => {
       <UserContext.Provider value={{ user, setUser }}>
         {!user ? (
           <Routes>
+            
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Signup />} />
 
@@ -62,48 +66,48 @@ const App = () => {
 
             <Route
               path="*"
-              element={<p>This page isn't available. Sorry about that.</p>}
+              element={<Error404/>}
             ></Route>
           </Routes>
         ) : // {/* <HospitalPaths></HospitalPaths> */}
-        // {/* <UserPath></UserPath> */}
+          // {/* <UserPath></UserPath> */}
 
-        // {/* // <DriverPaths></DriverPaths> */}
-        typeID === "ho" ? (
-          <HospitalPaths></HospitalPaths>
-        ) : typeID === "us" ? (
-          <UserPath></UserPath>
-        ) : typeID === "dr" ? (
-          <AmbulancePaths></AmbulancePaths>
-        ) : (
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Signup />} />
+          // {/* // <DriverPaths></DriverPaths> */}
+          typeID === "ho" ? (
+            <HospitalPaths></HospitalPaths>
+          ) : typeID === "us" ? (
+            <UserPath></UserPath>
+          ) : typeID === "dr" ? (
+            <AmbulancePaths></AmbulancePaths>
+          ) : (
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Signup />} />
+              
+              {/* Hospital signup */}
+              <Route
+                path="/hospital/HospitalDetails"
+                element={<HospitalDetails />}
+              />
+              <Route path="/HospitalSearch" element={<HospitalSearch />} />
+              <Route path="/OwnerDetails" element={<OwnerDetails />} />
+              <Route
+                path="/UploadHospitalDocuments"
+                element={<UploadHospitalDocuments />}
+              />
+              <Route path="/SignupFinished" element={<SignupFinished />} />
 
-            {/* Hospital signup */}
-            <Route
-              path="/hospital/HospitalDetails"
-              element={<HospitalDetails />}
-            />
-            <Route path="/HospitalSearch" element={<HospitalSearch />} />
-            <Route path="/OwnerDetails" element={<OwnerDetails />} />
-            <Route
-              path="/UploadHospitalDocuments"
-              element={<UploadHospitalDocuments />}
-            />
-            <Route path="/SignupFinished" element={<SignupFinished />} />
+              {/* user signup */}
 
-            {/* user signup */}
+              <Route path="/user/signup" element={<UserSignup />}></Route>
+              <Route path="/registered" element={<U_SignupFinished />}></Route>
 
-            <Route path="/user/signup" element={<UserSignup />}></Route>
-            <Route path="/registered" element={<U_SignupFinished />}></Route>
-
-            <Route
+              <Route
               path="*"
-              element={<p>This page isn't available. Sorry about that.</p>}
+              element={<Error404/>}
             ></Route>
-          </Routes>
-        )}
+            </Routes>
+          )}
       </UserContext.Provider>
     </BrowserRouter>
   );

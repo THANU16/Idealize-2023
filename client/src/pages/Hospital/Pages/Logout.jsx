@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link, Outlet, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../UserContext";
+import './Logout.css'
+import LifeSaverLogo from "../../../assets/icons/Logo_LS.svg";
 
 function Logout() {
   const navigate = useNavigate();
@@ -19,18 +21,19 @@ function Logout() {
   };
 
   return (
-    <div className="d-flex justify-content-between px-5 py-5">
-      <div>
-        <p>are you sure you want to log out?</p>
-      </div>
-      <div>
-        <button onClickCapture={cancel} className="btn btn-light mx-2">
+    <div className="hospital-logout">
+      <div className="hospital-logout-container">
+        <h2>are you sure you want to log out?</h2>
+        <div className="hospital-logout-btn">
+        <button onClickCapture={cancel} className="hospital-logout-cancel">
           Cancel
         </button>
-        <button onClickCapture={logout} className="btn btn-light mx-2">
+        <button onClickCapture={logout} className="hospital-logout-logout">
           Logout
         </button>
       </div>
+      </div>
+      
     </div>
   );
 }
