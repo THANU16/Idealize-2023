@@ -204,6 +204,7 @@ const Home = (props) => {
       notification: notification,
       driverID: driverID,
       connectedTime: currentDateTime,
+
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
@@ -247,15 +248,50 @@ const Home = (props) => {
 
   return (
     <div>
-      <div className="container">
-        <div className="map">
-          {/* Render the Google Map */}
-          <Map
-            google={props.google}
-            zoom={14}
-            // initialCenter={{ lat: 9.7486, lng: 80.0164 }}
-            initialCenter={{ lat: 6.9271, lng: 79.8612 }}
-            mapContainerClassName="map-container"
+          <div className="hospital-container">
+
+            <div className="map">
+        {/* Render the Google Map */}
+        <Map
+          google={props.google}
+          zoom={14}
+          // initialCenter={{ lat: 9.7486, lng: 80.0164 }}
+          initialCenter={{ lat: 6.9271, lng: 79.8612 }}
+          mapContainerClassName="map-container"
+        >
+          {/* Map each location to a Marker */}
+          {ambulanceLocation.map((location, index) => (
+            <Marker
+              key={index}
+              position={{ lat: location.latitude, lng: location.longitude }}
+              icon={{
+                url: ambulanceMarkerIcon,
+                scaledSize: new window.google.maps.Size(100, 100),
+              }}
+            />
+          ))}
+        </Map>
+      </div>
+
+        <div className="notifications">
+          <button className={isNewRequest ? 'white-button red-button':'white-button'} onClick={toggleNotifications}>
+            <h3>Notification - {requestData.length}</h3>
+          </button>
+
+
+          {/* Render notifications based on the state */}
+          {showNotifications && (
+        <div className="notification-container">
+          {requestData.slice(0, 5).map((notification, index) => (
+            <div className="notification" key={index}>
+              {notificationDropdowns[notification.requestID] ? (
+                <div className="notification-dropdown">
+                  {/* Dropdown content here */}
+                  <h4>Available Ambulances:</h4>
+                  <button
+            style={{ backgroundColor: "red", marginLeft: "10px" }}
+            onClick={() => handleCancel(notification.requestID)}
+
           >
             {/* Map each location to a Marker */}
             {ambulanceLocation.map((location, index) => (

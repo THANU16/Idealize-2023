@@ -1,27 +1,30 @@
 .container{
     display:flex;
-    margin-left: -15px;
+    margin-left: 0px;
   }
   main{
     width: 100%;
     padding: 20px;
   }
-  .h_sidebar{
-    background: #19295A;
+  .h_sidebar {
+    /* padding-left: 30px; */ /* Remove this line */
+    background: #19295a;
     color: #fff;
-    width: 283.179px;
-    height: 107vh;
+    /* width: 283.179px; */ /* Remove fixed width */
+    min-width: 87.418px; /* Set a minimum width */
+    height: 100vh; /* Change to 100vh */
     flex-shrink: 0;
     transition: all 0.5s;
     border-radius: 0px 10px 10px 0px;
-    box-shadow: 0px 3.0661885738372803px 2.452950954437256px 0px rgba(0, 0, 0, 0.07), 0px 7.3684773445129395px 5.894782066345215px 0px rgba(141, 145, 160, 0.05), 0px 13.874189376831055px 11.099350929260254px 0px rgba(141, 145, 160, 0.04), 0px 24.749183654785156px 19.799345016479492px 0px rgba(141, 145, 160, 0.04), 0px 46.290626525878906px 37.032501220703125px 0px rgba(141, 145, 160, 0.03), 0px 110.80247497558594px 88.64197540283203px 0px rgba(141, 145, 160, 0.02);
+    /* Remove box-shadow for a cleaner look */
   }
-  .top_section{
+  .top_section {
     display: flex;
-    align-items:center;
-    padding:20px 15px;
-    margin-bottom:30px;
+    align-items: center;
+    padding: 20px 15px;
+    margin-bottom: 30px;
   }
+  
   .logo{
     font-size: 30px;
   }
@@ -38,22 +41,40 @@
     transition: all 0.5s;
     font-weight: bold;
     margin-bottom: 40px;
+    text-decoration: none;
   }
   .link:hover{
+    display: flex;
     background:lightskyblue;
     color: #19295A;
     transition: all 0.5s;
+    margin: 0px;
+    padding: 10px 15px;
+    gap: 15px;
+    margin-bottom: 40px;
     
   }
-  .active{
+
+  .link.active {
     background: lightskyblue;
-    color: #19295A;
-    color: #EB5757;
+    color: #19295a;
+    width: auto; /* Remove fixed width */
+    padding-right: 15px; /* Add padding to the right for better spacing */
   }
   /* .icon, .link_text{
     font-size: 20px;
   }
    */
+
+   .link .icon {
+    font-size: 20px;
+  }
+
+  .link .link_text {
+    font-size: 20px;
+    text-decoration: none;
+  }
+
   .bg {
     text-align: center;
     /* background-image: url(./assets/Background.png); */
