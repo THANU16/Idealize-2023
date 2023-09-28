@@ -263,39 +263,7 @@ const Home = (props) => {
         </Map>
       </div>
 
-        <div className="notifications">
-          <button className={isNewRequest ? 'white-button red-button':'white-button'} onClick={toggleNotifications}>
-            <h3>Notification - {requestData.length}</h3>
-          </button>
-
-
-          {/* Render notifications based on the state */}
-          {showNotifications && (
-        <div className="notification-container">
-          {requestData.slice(0, 5).map((notification, index) => (
-            <div className="notification" key={index}>
-              {notificationDropdowns[notification.requestID] ? (
-                <div className="notification-dropdown">
-                  {/* Dropdown content here */}
-                  <h4>Available Ambulances:</h4>
-                  <button
-            style={{ backgroundColor: "red", marginLeft: "10px" }}
-            onClick={() => handleCancel(notification.requestID)}
-
-          >
-            {/* Map each location to a Marker */}
-            {ambulanceLocation.map((location, index) => (
-              <Marker
-                key={index}
-                position={{ lat: location.latitude, lng: location.longitude }}
-                icon={{
-                  url: ambulanceMarkerIcon,
-                  scaledSize: new window.google.maps.Size(100, 100),
-                }}
-              />
-            ))}
-          </Map>
-        </div>
+  
         {/*Active ambulance details */}
         <div className="controls">
           <div className="notifications">

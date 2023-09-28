@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import deiverMarkerIcon from "../../assets/icons/placeholder.png";
 import driverIcon from "../../assets/icons/download.png";
+import notification from "../../assets/icons/images.png"
 import "./Ambulance_Home.css";
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -47,10 +48,37 @@ const Home = (props) => {
   // const { onRequest, onCancel } = props;
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
-
+  const [showNotifications, setShowNotifications] = useState(false);
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+    setIsNewRequest(false);
+  };
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
+  const [isNewRequest, setIsNewRequest] = useState(true);
+  const [requestData, setRequestData] = useState([]);
+  // Create a state variable to track the dropdown state for each notification
+  const [notificationDropdowns, setNotificationDropdowns] = useState({});
 
-  const [requestData, setRequestData] = useState({});
+  // Function to toggle the dropdown for a specific notification
+  const toggleNotificationDropdown = (notificationID) => {
+    setNotificationDropdowns((prevState) => ({
+      ...prevState,
+      [notificationID]: !prevState[notificationID],
+    }));
+  };
+
+  const handleReject = () => { }
+  function formatTime(dateTimeString) {
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours();
+    const minutes = dateTime.getMinutes();
+    const seconds = dateTime.getSeconds();
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  }
+
+
 
   const [userLocation, setUserLocation] = useState({
     latitude: null,
@@ -133,8 +161,44 @@ const Home = (props) => {
               <img src={driverIcon} alt="Driver Icon" className="driver-icon" />
             </div>
           </Link>
-          <div>
-            <p>AmbulanceNo:{ambulance.ambulanceNumber} </p>
+          <div classname= "amno">
+            <p><h4><b>AmbulanceNo:{ambulance.ambulanceNumber} </b></h4></p>
+          </div>
+          <div className="notifications">
+            <img src={notification} alt="notification" className="notification-icon" />
+            {/* Render notifications based on the state */}
+            {showNotifications && (
+              <div className="notification-container">
+                {requestData.map((notification, index) => (
+                  <div className="notification" key={index}>
+                    <>
+                      <p>{notification.requestID}</p>
+                      <p>{formatTime(notification.requestedTime)}</p>
+                      <span>
+                        <button
+                          style={{ backgroundColor: "green", margin: "10px" }}
+                          onClick={() =>
+                            toggleNotificationDropdown(notification.requestID)
+                          }
+                        >
+                          Accept
+                        </button>
+                      </span>
+                      <span>
+                        <button
+                          style={{ backgroundColor: "red" }}
+                          onClick={handleReject}
+                        >
+                          Reject
+                        </button>
+                      </span>
+                    </>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Render other components as needed */}
           </div>
         </div>
       </div>
@@ -168,6 +232,7 @@ const Home = (props) => {
           )}
         </div>
       </div>
+
     </div>
   );
 };

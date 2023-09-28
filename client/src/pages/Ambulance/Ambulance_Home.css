@@ -229,7 +229,11 @@ h3 {
   background-color: #3e8e41;
 }
 
-
+.notification-icon{
+  width: 50px;
+  height: 50px;
+  z-index: 1000;
+}
 
 .driver-icon {
   width: 50px;
@@ -252,4 +256,10 @@ h3 {
   text-decoration: none;
   color: black;
   margin-right: 16px; /* Adjust the spacing between the items */
+}
+
+
+.amno{
+  font-weight: bold;
+  font-size:40px ;
 }
