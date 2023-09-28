@@ -202,6 +202,7 @@ function handleWebSocketConnections(server) {
   router.post("/assignAmbulance", (req, res) => {
     const requestData = req.body; // Assuming you receive the emergency request data from the user
     const sessionToken = req.headers.authorization.replace("key ", "");
+    console.log(requestData);
     const userID = requestData.notification.userID;
     const ambulanceID = requestData.ambulanceID;
     const connectedTime = requestData.connectedTime;
@@ -224,9 +225,7 @@ function handleWebSocketConnections(server) {
           });
           // console.log(ambulanceID);
           // console.log(ambulanceConnection.get(ambulanceID));
-          ambulanceConnection
-            .get(1)
-            .send(JSON.stringify(requestData));
+          ambulanceConnection.get(1).send(JSON.stringify(requestData));
           // console.log("Sending message to a ambulance");
         } else {
           res.send({
@@ -239,7 +238,6 @@ function handleWebSocketConnections(server) {
       }
     );
   });
-
 
   return router;
 }
