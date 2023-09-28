@@ -196,14 +196,31 @@ const Home = (props) => {
     }));
   };
 
-  const handleAssignAmbulance = (ambulanceID, notification, driverID) => {
-    // Define the data to send in the request body
-    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    const requestData = {
-      ambulanceID: ambulanceID,
-      notification: notification,
-      driverID: driverID,
-      connectedTime: currentDateTime,
+    const handleAssignAmbulance = (ambulanceID, notification,driverID) => {
+      // Define the data to send in the request body
+      const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+      const requestData = {
+        ambulanceID: ambulanceID,
+        notification: notification,
+        driverID: driverID,
+        connectedTime: currentDateTime,
+      };
+      // console.log(requestData);
+      const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+    
+      // Make a POST request to your backend
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`, requestData,{ headers: { Authorization: "key " + sessionToken }})
+        .then((response) => {
+          // Handle the response from the server, if needed
+          console.log('Assign Ambulance Response:', response.data);
+    
+          // You can update the state or perform other actions based on the response
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the request
+          console.error('Assign Ambulance Error:', error);
+        });
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
