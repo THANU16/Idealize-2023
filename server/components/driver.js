@@ -229,6 +229,7 @@ router.get("/getAllHospitalAmbulance", (req, res) => {
         result: null,
       });
     } else {
+      console.log(result);
       const hospitalID = result[0].hospitalID;
 
       connection.query(getQuery, [hospitalID], (err, result) => {
