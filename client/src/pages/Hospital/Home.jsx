@@ -196,31 +196,14 @@ const Home = (props) => {
     }));
   };
 
-    const handleAssignAmbulance = (ambulanceID, notification,driverID) => {
-      // Define the data to send in the request body
-      const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-      const requestData = {
-        ambulanceID: ambulanceID,
-        notification: notification,
-        driverID: driverID,
-        connectedTime: currentDateTime,
-      };
-      // console.log(requestData);
-      const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-    
-      // Make a POST request to your backend
-      axios
-        .post(`${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`, requestData,{ headers: { Authorization: "key " + sessionToken }})
-        .then((response) => {
-          // Handle the response from the server, if needed
-          console.log('Assign Ambulance Response:', response.data);
-    
-          // You can update the state or perform other actions based on the response
-        })
-        .catch((error) => {
-          // Handle any errors that occurred during the request
-          console.error('Assign Ambulance Error:', error);
-        });
+  const handleAssignAmbulance = (ambulanceID, notification, driverID) => {
+    // Define the data to send in the request body
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    const requestData = {
+      ambulanceID: ambulanceID,
+      notification: notification,
+      driverID: driverID,
+      connectedTime: currentDateTime,
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
@@ -243,6 +226,24 @@ const Home = (props) => {
         console.error("Assign Ambulance Error:", error);
       });
   };
+
+  // Make a POST request to your backend
+  axios
+    .post(
+      `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
+      requestData,
+      { headers: { Authorization: "key " + sessionToken } }
+    )
+    .then((response) => {
+      // Handle the response from the server, if needed
+      console.log("Assign Ambulance Response:", response.data);
+
+      // You can update the state or perform other actions based on the response
+    })
+    .catch((error) => {
+      // Handle any errors that occurred during the request
+      console.error("Assign Ambulance Error:", error);
+    });
 
   return (
     <div>
@@ -271,27 +272,6 @@ const Home = (props) => {
         </div>
         {/*Active ambulance details */}
         <div className="controls">
-          {/* <div className="tables"> */}
-          {/* <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3> */}
-          {/* <table className="table table-bordered table-striped table-hover "> */}
-          {/* <thead> */}
-          {/* <tr> */}
-          {/* <th>AmbID</th> */}
-          {/* <th>LocID</th> */}
-          {/* </tr> */}
-          {/* </thead> */}
-          {/* <tbody> */}
-          {/* {ambulanceLocation.map((ambulance, index) => ( */}
-          {/* <tr key={index}> */}
-          {/* <td>{ambulance.ambulanceID}</td> */}
-          {/* <td>{ambulance.locationID}</td> */}
-          {/* Add more <td> elements for other properties */}
-          {/* </tr> */}
-          {/* ))} */}
-          {/* </tbody> */}
-          {/* </table> */}
-          {/* </div> */}
-
           <div className="notifications">
             <button
               className={
