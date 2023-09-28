@@ -1,0 +1,105 @@
+/* Container for the Logout component */
+.user-logout {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh; /* Adjust the height as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff; /* Text color for contrast */
+  font-family: Arial, sans-serif; /* Choose your preferred font-family */
+}
+
+/* Pseudo-element for background image and blur */
+.user-logout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../assets/icons/Logo_LS.svg"); /* Path to your LifeSaverLogo */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0.1; /* Adjust the opacity for the background image */
+  z-index: -1; /* Place it behind the content */
+}
+
+/* Container for the text content */
+.user-logout-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-color: #333;
+  background-color: rgba(
+    236,
+    233,
+    233,
+    0.8
+  ); /* Add a semi-transparent background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Text style */
+.user-logout h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  background-color: rgba(236, 233, 233, 0.8);
+}
+
+/* Container for the buttons */
+.user-logout-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Button styling */
+.user-logout-logout,
+.user-logout-cancel {
+  margin: 10px;
+  padding: 10px 20px; /* Adjust padding for buttons */
+  border-radius: 10px;
+  background-color: #1c316a;
+  border: 1px solid #ffff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none; /* Remove underline from buttons */
+}
+
+/* Button hover effect */
+.user-logout-logout:hover,
+.user-logout-cancel:hover {
+  background-color: #476edc;
+  border: 1px solid #c0bdd7;
+  color: #e3e3e3;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  /* zoom in */
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+  .user-logout::before {
+    width: 100%;
+    height: 50%;
+    background-size: contain;
+    justify-content: center;
+  }
+}
