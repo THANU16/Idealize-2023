@@ -56,7 +56,9 @@ const Sidebar = ({ children }) => {
             }`}
             onClick={() => activateTheIcon(1)}
           >
-            <img src={firstaid} alt="First Aid" />
+            <a href="/firstaid">
+              <img src={firstaid} alt="First Aid" />
+            </a>
             <a href="/firstaid">First Aid</a>
           </li>
           <li
@@ -65,7 +67,9 @@ const Sidebar = ({ children }) => {
             }`}
             onClick={() => activateTheIcon(2)}
           >
-            <img src={help} alt="Help" />
+            <a href="/help">
+              <img src={help} alt="Help" />
+            </a>
             <a href="/help">Help</a>
           </li>
           <li
@@ -74,8 +78,10 @@ const Sidebar = ({ children }) => {
             }`}
             onClick={() => activateTheIcon(3)}
           >
-            <img src={logout} alt="Logout" />
-            <a href="#">Logout</a>
+            <a href="/logout">
+              <img src={logout} alt="Logout" />
+            </a>
+            <a href="/logout">Logout</a>
           </li>
         </ul>
       </div>
