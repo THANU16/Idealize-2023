@@ -219,7 +219,7 @@ router.get("/getAllHospitalAmbulance", (req, res) => {
   const getHospitalIDQuery =
     "select hospitalID from  driver where driverID = ?;";
   const getQuery =
-    "select * from  ambulance where hospitalID = ? and driverAssigned = 0;";
+    "select * from  ambulance where hospitalID = ?";
 
   connection.query(getHospitalIDQuery, [driverID], (err, result) => {
     if (err) {

@@ -8,6 +8,7 @@ import Sidebar from "./SideBar/Sidebar";
 import Direction from "./Pages/Direction";
 import DriverProfile from "./Pages/DriverProfile";
 // import Ambulance from "./Ambulance/Ambulance";
+import Home1 from "./HomeAfterSelectedAmbulance";
 
 function AmbulancePaths() {
   console.log();
@@ -19,6 +20,7 @@ function AmbulancePaths() {
         <Route path="/help" element={<Help />} />
         <Route path="/logout" element={<Logut />} />
         <Route path="/show" element={<Direction />} />
+        <Route path="/home1" element={<Home1/>}/>
       </Routes>
     </Sidebar>
   );

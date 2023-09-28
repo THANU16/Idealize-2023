@@ -1,13 +1,17 @@
-Ambulance_Home.css .container {
+Ambulance_Home.css .Homestartcontainer {
   display: flex;
   flex-direction: column;
   height: 100%;
-
+  margin: 0;
+  padding: 0;
   /* 100% of the viewport height */
 }
 
 .map {
-  flex: 4;
+  flex: 1;
+  padding: 0;
+  margin-right: 0;
+  margin-left: 1px;
   /* 3/4 of the available height */
   position: relative;
   height: 80vh;
@@ -195,13 +199,13 @@ h3 {
 }
 
 .dropdown {
-
   position: relative;
   display: inline-block;
 }
 
 .dropdown-content {
   display: none;
+  z-index: 1000;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
@@ -238,10 +242,13 @@ h3 {
 }
 
 .profile-and-ambulance-container {
-  display: flex; /* Use flexbox to display the items in a row */
-  align-items: center; /* Vertically center the items */
+  display: flex;
+  /* Use flexbox to display the items in a row */
+  align-items: center;
+  /* Vertically center the items */
   justify-content: space-between;
 }
+
 .profile-and-ambulance-container {
   display: flex;
   align-items: center;
@@ -250,5 +257,6 @@ h3 {
 .profile-link {
   text-decoration: none;
   color: black;
-  margin-right: 16px; /* Adjust the spacing between the items */
+  margin-right: 16px;
+  /* Adjust the spacing between the items */
 }
