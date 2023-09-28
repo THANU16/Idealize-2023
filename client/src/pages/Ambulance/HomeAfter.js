@@ -5,6 +5,7 @@ import deiverMarkerIcon from "../../assets/icons/placeholder.png";
 import driverIcon from "../../assets/icons/download.png";
 import notification from "../../assets/icons/images.png"
 import "./Ambulance_Home.css";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
@@ -164,6 +165,11 @@ const Home = (props) => {
   const onRequest = () => {
     setRequest(false);
   };
+  const navigate = useNavigate();
+  const handleNotificationClick = () => {
+    navigate("/notification");
+  };
+
 
   return (
     <div>
@@ -178,9 +184,9 @@ const Home = (props) => {
             <p><h4><b>AmbulanceNo:{ambulance.ambulanceNumber} </b></h4></p>
           </div>
           <div className="notifications">
-            <img src={notification} alt="notification" className="notification-icon" />
+            {/* <img src={notification} alt="notification" className="notification-icon" /> */}
             {/* Render notifications based on the state */}
-            {showNotifications && (
+            {/* {showNotifications && (
               <div className="notification-container">
                 {requestData.map((notification, index) => (
                   <div className="notification" key={index}>
@@ -209,8 +215,13 @@ const Home = (props) => {
                   </div>
                 ))}
               </div>
-            )}
-
+            )} */}
+          <img
+            src={notification}
+            alt="notification"
+            className="notification-icon"
+            onClick={handleNotificationClick} // Add the onClick event handler
+          />
             {/* Render other components as needed */}
           </div>
         </div>

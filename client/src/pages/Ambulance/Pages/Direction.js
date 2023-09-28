@@ -6,6 +6,7 @@ import driverIcon from "../../../assets/icons/download.png";
 import notification from "../../../assets/icons/images.png";
 import { Link } from "react-router-dom";
 import "../Ambulance_Home.css";
+import { useNavigate } from "react-router-dom";
 
 function ShowPath() {
   const [origin, setOrigin] = useState({
@@ -88,7 +89,10 @@ function ShowPath() {
         window.alert("Directions request failed due to " + error.status);
       });
   };
-
+  const navigate = useNavigate();
+  const handleNotificationClick = () => {
+    navigate("/notification");
+  };
   return (
     <div className="driverContainer">
       <div>
@@ -106,7 +110,13 @@ function ShowPath() {
             </p>
           </div>
           <div>
-            <img src={notification} alt="notification" className="notification-icon" />
+          
+            <img
+            src={notification}
+            alt="notification"
+            className="notification-icon"
+            onClick={handleNotificationClick} // Add the onClick event handler
+          />
             {/* Render notifications based on the state */}
             {/* {showNotifications && (
               <div className="notification-container">
@@ -143,7 +153,7 @@ function ShowPath() {
         </div>
       </div>
       <div className="driverMap">
-        <div id="map" style={{ height: "700px" }}></div>
+        <div id="map" style={{ height: "670px" }}></div>
       </div>
     </div>
   );
