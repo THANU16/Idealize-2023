@@ -51,18 +51,18 @@ const Home = (props) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
   const [address, setAddress] = useState("");
+  const [requestData, setRequestData] = useState([]);
+  const typeID = JSON.parse(sessionStorage.getItem("typeID"));
 
-  const [requestData, setRequestData] = useState({});
-  const [ambulanceNo, setAmbulanceNo] = useState([]);
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
-
+  const [ambulanceNo, setAmbulanceNo] = useState([]);
+ 
+  const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+  
   const [userLocation, setUserLocation] = useState({
     latitude: null,
     longitude: null,
   });
-
-  const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-  const typeID = JSON.parse(sessionStorage.getItem("typeID"));
 
   // Create a function to update requestData
   const updateRequestData = (newData) => {
@@ -71,9 +71,12 @@ const Home = (props) => {
 
   // Pass updateRequestData to useWebSockets
   useWebSockets(sessionToken, typeID, updateRequestData);
+  
+
+ 
 
   useEffect(() => {
-    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+
 
     axios
       .get(`${process.env.REACT_APP_API_URL}/driver/checkConnection`, {
@@ -87,19 +90,16 @@ const Home = (props) => {
           if (sessionStorage.getItem("ambulance")) {
             navigate("/homeAfter");
           } else {
+            // console.log(res.data.result[0])
             sessionStorage.setItem(
               "ambulance",
               JSON.stringify(res.data.result[0])
             );
             navigate("/homeAfter");
-          
-            
           }
-          
-          
-          // console.log(res.data.result[0]);
         }
       });
+
   });
 
   // Store driver's location here
@@ -147,6 +147,9 @@ const Home = (props) => {
     setRequest(false);
   };
 
+  
+  
+
   const handleAmbulanceSelect = (ambulance) => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
     setSelectedAmbulance(ambulance);
@@ -173,13 +176,13 @@ const Home = (props) => {
           console.log(
             "navigate to after select and store the object session storage "
           );
-          sessionStorage.setItem(
-            "ambulance",
-            JSON.stringify(res.data.result[0])
-          );
-          
-          navigate("/homeAfter");
-          
+          // sessionStorage.setItem(
+          //   "ambulance",
+          //   JSON.stringify(res.data.result[0])
+          // );
+
+          navigate("/home");
+
         }
       })
       .catch((err) => console.log(err));
@@ -205,8 +208,8 @@ const Home = (props) => {
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="map">
+      <div className="driverContainer">
+        <div className="driverMap">
           {/* Render the Google Map */}
           {userLocation.latitude && userLocation.longitude && (
             <Map
@@ -233,6 +236,7 @@ const Home = (props) => {
           )}
         </div>
       </div>
+      
     </div>
   );
 };

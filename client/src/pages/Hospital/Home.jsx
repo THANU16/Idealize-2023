@@ -31,9 +31,7 @@ const useWebSockets = (sessionToken, typeID, updateRequestData) => {
       const data = JSON.parse(event.data);
       console.log(data);
 
-
       // Call the function to update requestData when new data is received
-      updateRequestData(data);
       updateRequestData(data);
     };
 
@@ -88,7 +86,7 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
 
-      axios
+    axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getAvailableAmbulance`, {
         headers: { Authorization: "key " + sessionToken },
       })
@@ -98,10 +96,7 @@ const Home = (props) => {
         }
       })
       .catch((err) => console.log(err));
-
-  },[]);
-
-
+  }, []);
 
   const onMapClick = (mapProps, map, event) => {
     const clickedLatitude = event.latLng.lat();
@@ -134,23 +129,20 @@ const Home = (props) => {
   const handleAccept = () => {};
   const handleReject = (notificationID) => {
     // Make a POST request to your backend with the notificationID
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
-        notificationID: notificationID,
-      })
-      .then((response) => {
-        // Handle the response from the server, if needed
-        console.log('Reject Notification Response:', response.data);
-  
-        // You can update the state or perform other actions based on the response
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the request
-        console.error('Reject Notification Error:', error);
-      });
+    // axios
+    //   .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
+    //     notificationID: notificationID,
+    //   })
+    //   .then((response) => {
+    //     // Handle the response from the server, if needed
+    //     console.log("Reject Notification Response:", response.data);
+    //     // You can update the state or perform other actions based on the response
+    //   })
+    //   .catch((error) => {
+    //     // Handle any errors that occurred during the request
+    //     console.error("Reject Notification Error:", error);
+    //   });
   };
-  
-
 
   useEffect(() => {
     setIsNewRequest(true);
@@ -192,140 +184,162 @@ const Home = (props) => {
     }));
   };
 
-    const handleAssignAmbulance = (ambulanceID, notification,driverID) => {
-      // Define the data to send in the request body
-      const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-      const requestData = {
-        ambulanceID: ambulanceID,
-        notification: notification,
-        driverID: driverID,
-        connectedTime: currentDateTime,
-      };
-      console.log(requestData);
-      const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-    
-      // Make a POST request to your backend
-      axios
-        .post(`${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`, requestData,{ headers: { Authorization: "key " + sessionToken }})
-        .then((response) => {
-          // Handle the response from the server, if needed
-          console.log('Assign Ambulance Response:', response.data);
-    
-          // You can update the state or perform other actions based on the response
-        })
-        .catch((error) => {
-          // Handle any errors that occurred during the request
-          console.error('Assign Ambulance Error:', error);
-        });
+  const handleAssignAmbulance = (ambulanceID, notification, driverID) => {
+    // Define the data to send in the request body
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    const requestData = {
+      ambulanceID: ambulanceID,
+      userID: notification.userID,
+      requestID: notification.requestID,
+      latitude: notification.lat,
+      longtitude: notification.lng,
+      driverID: driverID,
+      connectedTime: currentDateTime,
     };
+    // console.log(requestData);
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+
+    // Make a POST request to your backend
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
+        requestData,
+        { headers: { Authorization: "key " + sessionToken } }
+      )
+      .then((response) => {
+        // Handle the response from the server, if needed
+        console.log("Assign Ambulance Response:", response.data);
+
+        // You can update the state or perform other actions based on the response
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the request
+        console.error("Assign Ambulance Error:", error);
+      });
+  };
+
+  // // Make a POST request to your backend
+  // axios
+  //   .post(
+  //     `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
+  //     requestData,
+  //     { headers: { Authorization: "key " + sessionToken } }
+  //   )
+  //   .then((response) => {
+  //     // Handle the response from the server, if needed
+  //     console.log("Assign Ambulance Response:", response.data);
+
+  //     // You can update the state or perform other actions based on the response
+  //   })
+  //   .catch((error) => {
+  //     // Handle any errors that occurred during the request
+  //     console.error("Assign Ambulance Error:", error);
+  //   });
 
   return (
     <div>
-          <div className="hospital-container">
-
-            <div className="map">
-        {/* Render the Google Map */}
-        <Map
-          google={props.google}
-          zoom={14}
-          // initialCenter={{ lat: 9.7486, lng: 80.0164 }}
-          initialCenter={{ lat: 6.9271, lng: 79.8612 }}
-          mapContainerClassName="map-container"
-        >
-          {/* Map each location to a Marker */}
-          {ambulanceLocation.map((location, index) => (
-            <Marker
-              key={index}
-              position={{ lat: location.latitude, lng: location.longitude }}
-              icon={{
-                url: ambulanceMarkerIcon,
-                scaledSize: new window.google.maps.Size(100, 100),
-              }}
-            />
-          ))}
-        </Map>
-      </div>
-      {/*Active ambulance details */}
-      <div className="hospital-controls">
-        {/* <div className="tables"> */}
-          {/* <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3> */}
-          {/* <table className="table table-bordered table-striped table-hover "> */}
-            {/* <thead> */}
-              {/* <tr> */}
-                {/* <th>AmbID</th> */}
-                {/* <th>LocID</th> */}
-              {/* </tr> */}
-            {/* </thead> */}
-            {/* <tbody> */}
-            {/* {ambulanceLocation.map((ambulance, index) => ( */}
-          {/* <tr key={index}> */}
-            {/* <td>{ambulance.ambulanceID}</td> */}
-            {/* <td>{ambulance.locationID}</td> */}
-            {/* Add more <td> elements for other properties */}
-          {/* </tr> */}
-        {/* ))} */}
-            {/* </tbody> */}
-          {/* </table> */}
-        {/* </div> */}
-
-        <div className="notifications">
-          <button className={isNewRequest ? 'white-button red-button':'white-button'} onClick={toggleNotifications}>
-            <h3>Notification - {requestData.length}</h3>
-          </button>
-
-
-          {/* Render notifications based on the state */}
-          {showNotifications && (
-        <div className="notification-container">
-          {requestData.slice(0, 5).map((notification, index) => (
-            <div className="notification" key={index}>
-              {notificationDropdowns[notification.requestID] ? (
-                <div className="notification-dropdown">
-                  {/* Dropdown content here */}
-                  <h4>Available Ambulances:</h4>
-                  <button
-            style={{ backgroundColor: "red", marginLeft: "10px" }}
-            onClick={() => handleCancel(notification.requestID)}
+      <div className="hospital-container">
+        <div className="map">
+          {/* Render the Google Map */}
+          <Map
+            google={props.google}
+            zoom={14}
+            // initialCenter={{ lat: 9.7486, lng: 80.0164 }}
+            initialCenter={{ lat: 6.9271, lng: 79.8612 }}
+            mapContainerClassName="map-container"
           >
-            Cancel
-          </button>
-          <ul>
-            {AvailableAmbulance.map((ambulance, index) => (
-              <li key={index}>
-                Ambulance No: {ambulance.ambulanceNumber}
-                <button
-                  style={{ backgroundColor: "green", marginLeft: "10px" }}
-                  onClick={() => handleAssignAmbulance(ambulance.ambulanceID,notification,ambulance.driverID)}
-                >
-                  Assign
-                </button>
-              </li>
+            {/* Map each location to a Marker */}
+            {ambulanceLocation.map((location, index) => (
+              <Marker
+                key={index}
+                position={{ lat: location.latitude, lng: location.longitude }}
+                icon={{
+                  url: ambulanceMarkerIcon,
+                  scaledSize: new window.google.maps.Size(100, 100),
+                }}
+              />
             ))}
-          </ul>
-                </div>
-              ) : (
-                <>
-                  <p>{notification.requestID}</p>
-                  <p>{formatTime(notification.requestedTime)}</p>
-                  <span>
-                    <button
-                      style={{ backgroundColor: "green", margin: "10px" }}
-                      onClick={() => toggleNotificationDropdown(notification.requestID)}
-                    >
-                      Accept
-                    </button>
-                  </span>
-                  <span>
-                    <button style={{ backgroundColor: "red" }} onClick={handleReject}>
-                      Reject
-                    </button>
-                  </span>
-                </>
-              )}
-            </div>
-          ))}
+          </Map>
         </div>
-      )}
+
+        {/*Active ambulance details */}
+        <div className="controls">
+          <div className="notifications">
+            <button
+              className={
+                isNewRequest ? "white-button red-button" : "white-button"
+              }
+              onClick={toggleNotifications}
+            >
+              <h3>Notification - {requestData.length}</h3>
+            </button>
+
+            {/* Render notifications based on the state */}
+            {showNotifications && (
+              <div className="notification-container">
+                {requestData.slice(0, 5).map((notification, index) => (
+                  <div className="notification" key={index}>
+                    {notificationDropdowns[notification.requestID] ? (
+                      <div className="notification-dropdown">
+                        {/* Dropdown content here */}
+                        <h4>Available Ambulances:</h4>
+                        <button
+                          style={{ backgroundColor: "red", marginLeft: "10px" }}
+                          onClick={() => handleCancel(notification.requestID)}
+                        >
+                          Cancel
+                        </button>
+                        <ul>
+                          {AvailableAmbulance.map((ambulance, index) => (
+                            <li key={index}>
+                              Ambulance No: {ambulance.ambulanceNumber}
+                              <button
+                                style={{
+                                  backgroundColor: "green",
+                                  marginLeft: "10px",
+                                }}
+                                onClick={() =>
+                                  handleAssignAmbulance(
+                                    ambulance.ambulanceID,
+                                    notification,
+                                    ambulance.driverID
+                                  )
+                                }
+                              >
+                                Assign
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : (
+                      <>
+                        <p>{notification.requestID}</p>
+                        <p>{formatTime(notification.requestedTime)}</p>
+                        <span>
+                          <button
+                            style={{ backgroundColor: "green", margin: "10px" }}
+                            onClick={() =>
+                              toggleNotificationDropdown(notification.requestID)
+                            }
+                          >
+                            Accept
+                          </button>
+                        </span>
+                        <span>
+                          <button
+                            style={{ backgroundColor: "red" }}
+                            onClick={handleReject}
+                          >
+                            Reject
+                          </button>
+                        </span>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Render other components as needed */}
           </div>
