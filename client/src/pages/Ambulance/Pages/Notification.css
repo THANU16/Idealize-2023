@@ -1,0 +1,46 @@
+/* Notification.css */
+
+.notification-list {
+    list-style: none;
+    padding: 0;
+    /* font-size: 20px; */
+  }
+  
+  .notification-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .notification-text {
+    flex-grow: 1;
+    font-weight: bold;
+    font-size: 22px;
+  }
+  .heading1 {
+    font-weight: bold;
+    font-size: 25px;
+    background: linear-gradient(to right, rgb(249, 18, 18), rgb(255, 115, 115));
+    text-align: center;
+   
+    padding: 5px 0;
+  }
+  .accept-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .reject-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
