@@ -68,27 +68,18 @@ const Home = (props) => {
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((res) => {
+        // console.log("check");
+        // console.log(res.data);
         if (res.data.sucess) {
           setAmbulanceLocation(res.data.result);
         }
       })
       .catch((err) => console.log(err));
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.sucess) {
-          setRequestData(res.data.result);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
-  useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.sucess) {
           setRequestData(res.data.result);
         }
@@ -96,11 +87,9 @@ const Home = (props) => {
       .catch((err) => console.log(err));
 
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/hospital/getAvailableAmbulance`,
-        {},
-        { headers: { Authorization: "key " + sessionToken } }
-      )
+      .get(`${process.env.REACT_APP_API_URL}/hospital/getAvailableAmbulance`, {
+        headers: { Authorization: "key " + sessionToken },
+      })
       .then((res) => {
         if (res.data.sucess) {
           setAvailableAmbulance(res.data.result);
@@ -140,20 +129,19 @@ const Home = (props) => {
   const handleAccept = () => {};
   const handleReject = (notificationID) => {
     // Make a POST request to your backend with the notificationID
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
-        notificationID: notificationID,
-      })
-      .then((response) => {
-        // Handle the response from the server, if needed
-        console.log("Reject Notification Response:", response.data);
-
-        // You can update the state or perform other actions based on the response
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the request
-        console.error("Reject Notification Error:", error);
-      });
+    // axios
+    //   .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
+    //     notificationID: notificationID,
+    //   })
+    //   .then((response) => {
+    //     // Handle the response from the server, if needed
+    //     console.log("Reject Notification Response:", response.data);
+    //     // You can update the state or perform other actions based on the response
+    //   })
+    //   .catch((error) => {
+    //     // Handle any errors that occurred during the request
+    //     console.error("Reject Notification Error:", error);
+    //   });
   };
 
   useEffect(() => {
@@ -197,6 +185,8 @@ const Home = (props) => {
   };
 
   const handleAssignAmbulance = (ambulanceID, notification, driverID) => {
+    console.log("notification");
+    console.log(notification);
     // Define the data to send in the request body
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     const requestData = {
@@ -228,23 +218,23 @@ const Home = (props) => {
       });
   };
 
-  // Make a POST request to your backend
-  axios
-    .post(
-      `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
-      requestData,
-      { headers: { Authorization: "key " + sessionToken } }
-    )
-    .then((response) => {
-      // Handle the response from the server, if needed
-      console.log("Assign Ambulance Response:", response.data);
+  // // Make a POST request to your backend
+  // axios
+  //   .post(
+  //     `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
+  //     requestData,
+  //     { headers: { Authorization: "key " + sessionToken } }
+  //   )
+  //   .then((response) => {
+  //     // Handle the response from the server, if needed
+  //     console.log("Assign Ambulance Response:", response.data);
 
-      // You can update the state or perform other actions based on the response
-    })
-    .catch((error) => {
-      // Handle any errors that occurred during the request
-      console.error("Assign Ambulance Error:", error);
-    });
+  //     // You can update the state or perform other actions based on the response
+  //   })
+  //   .catch((error) => {
+  //     // Handle any errors that occurred during the request
+  //     console.error("Assign Ambulance Error:", error);
+  //   });
 
   return (
     <div>

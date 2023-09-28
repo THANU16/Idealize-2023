@@ -17,33 +17,7 @@ import PlacesAutocomplete, {
 
 import axios from "axios";
 
-const useWebSockets = (sessionToken, typeID, updateRequestData) => {
-  useEffect(() => {
-    // Construct the WebSocket URL with headers as query parameters
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
-    const websocket = new WebSocket(websocketUrl);
-
-    websocket.onopen = () => {
-      console.log("connected");
-    };
-
-    // websocket.send(JSON.stringify("hiii "));
-
-    websocket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log(data);
-
-      // Call the function to update requestData when new data is received
-      updateRequestData(data);
-    };
-
-    return () => {
-      console.log("web socket close");
-      websocket.close();
-    };
-  }, [sessionToken, typeID, updateRequestData]); // Include updateRequestData in the dependencies
-};
 
 const Home = (props) => {
   // const { onRequest, onCancel } = props;
@@ -52,7 +26,6 @@ const Home = (props) => {
   const [coordinates, setCoordinates] = useState(null);
   const [address, setAddress] = useState("");
 
-  const [requestData, setRequestData] = useState({});
   const [ambulanceNo, setAmbulanceNo] = useState([]);
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
 
@@ -61,16 +34,7 @@ const Home = (props) => {
     longitude: null,
   });
 
-  const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-  const typeID = JSON.parse(sessionStorage.getItem("typeID"));
 
-  // Create a function to update requestData
-  const updateRequestData = (newData) => {
-    setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
-  };
-
-  // Pass updateRequestData to useWebSockets
-  useWebSockets(sessionToken, typeID, updateRequestData);
 
   useEffect(() => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
