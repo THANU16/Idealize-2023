@@ -87,9 +87,8 @@ const Home = (props) => {
         }
       })
       .catch((err) => console.log(err));
-  },[]);
 
-    axios
+      axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getAvailableAmbulance`, {
         headers: { Authorization: "key " + sessionToken },
       })
@@ -100,15 +99,6 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
 
-    axios.get(`${process.env.REACT_APP_API_URL}/hospital/getAvailableAmbulance`,
-    {},
-    { headers: { Authorization: "key " + sessionToken } })
-    .then((res) => {
-      if (res.data.sucess) {
-        setAvailableAmbulance(res.data.result);
-      } 
-    })
-    .catch((err) => console.log(err));
   },[]);
 
 
