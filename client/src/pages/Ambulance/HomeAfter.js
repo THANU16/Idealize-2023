@@ -13,6 +13,7 @@ import PlacesAutocomplete, {
 import axios from "axios";
 
 const Home = (props) => {
+  const ambulance = JSON.parse(sessionStorage.getItem("ambulance"));
   // const { onRequest, onCancel } = props;
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
@@ -83,7 +84,7 @@ const Home = (props) => {
     <div>
       <div>
         <div>
-          <p>AmbulanceNo:{selectedAmbulance.ambulanceNumber} </p>
+          <p>AmbulanceNo:{ambulance.ambulanceNumber} </p>
         </div>
       </div>
 
