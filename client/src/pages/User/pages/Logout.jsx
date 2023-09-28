@@ -4,35 +4,35 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../UserContext";
 
 function Logout() {
-    const navigate = useNavigate();
-    const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
-    const logout = () => {
-        setUser(null);
-        sessionStorage.removeItem("sessionToken");
-        sessionStorage.removeItem("typeID");
-        navigate("/login");
-    };
+  const logout = () => {
+    setUser(null);
+    sessionStorage.removeItem("sessionToken");
+    sessionStorage.removeItem("typeID");
+    navigate("/login");
+  };
 
-    const cancel = () => {
-        navigate("/Home");
-    };
+  const cancel = () => {
+    navigate("/Home");
+  };
 
-    return (
-        <div className="d-flex justify-content-between px-5 py-5">
-            <div>
-                <p>are you sure you want to log out?</p>
-            </div>
-            <div>
-                <button onClickCapture={cancel} className="btn btn-light mx-2">
-                    Cancel
-                </button>
-                <button onClickCapture={logout} className="btn btn-light mx-2">
-                    Logout
-                </button>
-            </div>
-        </div>
-    );
+  return (
+    <div className="d-flex justify-content-between px-5 py-5">
+      <div>
+        <p className="text-center">Are you sure you want to log out?</p>
+      </div>
+      <div>
+        <button onClickCapture={cancel} className="btn btn-danger mx-2">
+          Cancel
+        </button>
+        <button onClickCapture={logout} className="btn btn-success mx-2">
+          Logout
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Logout;
