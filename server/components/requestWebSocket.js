@@ -183,7 +183,12 @@ function handleWebSocketConnections(server) {
                 // Notify all ambulance about the new emergency request
                 ambulanceConnection.forEach((ambulanceSocket) => {
                   console.log("Sending message to a ambulance");
-                  ambulanceSocket.send(JSON.stringify(requestData));
+                  ambulanceSocket.send(
+                    JSON.stringify({
+                      requestData: requestData,
+                      identify: "clientReq",
+                    })
+                  );
                 });
 
                 // Notify all hospitals about the new emergency request
