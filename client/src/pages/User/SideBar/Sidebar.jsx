@@ -66,7 +66,7 @@ const Sidebar = ({ children }) => {
             onClick={() => activateTheIcon(2)}
           >
             <img src={help} alt="Help" />
-            <a href="#">Help</a>
+            <a href="/help">Help</a>
           </li>
           <li
             className={`user_chat_nav_button user_nav_buttons ${

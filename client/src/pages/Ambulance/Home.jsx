@@ -277,6 +277,7 @@ const Home = (props) => {
           if (!res.data.isExist) {
             // navigate to before select ambulance page
           }
+
         }
       })
       .catch((err) => console.log(err));
@@ -316,6 +317,73 @@ const Home = (props) => {
     setRequest(false);
   };
 
+  // Show the emergency request modal if request is true
+  if (request)
+    return (
+      <div className="emergency-request-modal">
+        <div className="emergency-request-content">
+          <div className="emergency-header">
+            <h1>
+              There is an emergency{" "}
+              <div className="emergency-center">
+                <img
+                  src="https://media.istockphoto.com/photos/emergency-symbol-picture-id453100595?k=6&m=453100595&s=170667a&w=0&h=Bi6sk8KHGJLcqZ5awSX7_i0esgjsWTMIdVn_EOaS2xo="
+                  alt="Emergency"
+                  width="100"
+                  height="100"
+                />
+              </div>
+            </h1>{" "}
+            {/* Add the ambulance emoji */}
+          </div>
+          <p>
+            <h2>Please accept request and send the ambulance</h2>
+          </p>
+          <div className="emergency-button-container">
+            <button className="reject-button" onClick={onCancel}>
+              Reject
+            </button>
+            <button className="accept-button" onClick={onRequest}>
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+
+  const handleAmbulanceSelect = (ambulance) => {
+    setSelectedAmbulance(ambulance);
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    const currentDate = moment().format("YYYY-MM-DD");
+    const ambulanceData = {
+      currentDateTime,
+      currentDate,
+      ambulanceID: ambulance.ambulanceID, // Replace with the actual property name for ambulance ID
+      lat: userLocation.latitude,
+      lng: userLocation.longitude,
+    };
+    console.log(ambulanceData);
+
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/driver/setAmbulance`,
+        { data: ambulanceData },
+        { headers: { Authorization: "key " + sessionToken } }
+      )
+      .then((res) => {
+        console.log(res.data);
+        // if (res.data.sucess) {
+        //   setAmbulanceNo(res.data.result);
+
+        // }
+      })
+      .catch((err) => console.log(err));
+  };
+
+
+
   return (
     <div>
       <div>
@@ -330,11 +398,10 @@ const Home = (props) => {
           {userLocation.latitude && userLocation.longitude && (
             <Map
               google={props.google}
-              zoom={14}
-              initialCenter={{
-                lat: userLocation.latitude,
-                lng: userLocation.longitude,
-              }}
+
+              zoom={10}
+              initialCenter={{ lat: userLocation.latitude, lng: userLocation.longitude, }}
+
               mapContainerClassName="map-container"
             >
               {/* Add a Marker for the user's location */}
@@ -351,6 +418,7 @@ const Home = (props) => {
               />
             </Map>
           )}
+
         </div>
       </div>
     </div>
