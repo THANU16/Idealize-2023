@@ -1,54 +1,38 @@
-// import React, { useState, useContext } from "react";
-// import Button from "react-bootstrap/Button";
-// import Modal from "react-bootstrap/Modal";
-// import { useNavigate } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import { UserContext } from "../../../UserContext";
+import React, { useState, useContext } from "react";
+import { Link, Outlet, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../UserContext";
 
+function Logout() {
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
-// function Logout({ show, onHide }) {
-//   const navigate = useNavigate();
-//   const { setUser } = useContext(UserContext);
+  const logout = () => {
+    setUser(null);
+    sessionStorage.removeItem("sessionToken");
+    sessionStorage.removeItem("typeID");
+    navigate("/login");
+  };
 
+  const cancel = () => {
+    navigate("/Home");
+  };
 
-//   const handleCancel = (event) => {
-//     navigate("/Home");
-//   };
+  return (
+    <div className="d-flex justify-content-between px-5 py-5">
+      <div>
+        <p className="text-center">Are you sure you want to log out?</p>
+      </div>
+      <div>
+        <button onClickCapture={cancel} className="btn btn-danger mx-2">
+          Cancel
+        </button>
+        <button onClickCapture={logout} className="btn btn-success mx-2">
+          Logout
+        </button>
+      </div>
+    </div>
+  );
+}
 
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     setUser(null);
-//     sessionStorage.removeItem("sessionToken");
-//     sessionStorage.removeItem("type_id");
-//     navigate("/login");
-//   };
-
-//   return (
-//     <>
-//       <Modal
-//         show={show}
-//         onHide={onHide}
-//         backdrop="static"
-//         keyboard={false}
-//         centered
-//       >
-//         <Modal.Header>
-//           <Modal.Title>Do you want to Logout</Modal.Title>
-//         </Modal.Header>
-
-//         <Modal.Footer>
-//           <Button variant="secondary" onClick={handleCancel} className="mx-2">
-//             Cancel
-//           </Button>
-//           <Button variant="primary" onClick={handleSubmit} type="submit">
-//             Logout
-//           </Button>
-
-         
-//         </Modal.Footer>
-//       </Modal>
-//     </>
-//   );
-// }
-
-// export default Logout;
+export default Logout;

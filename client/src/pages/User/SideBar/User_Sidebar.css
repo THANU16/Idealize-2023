@@ -1,0 +1,125 @@
+/* .container{
+    display:flex;
+  }
+  main{
+    width: 100%;
+    padding: 20px;
+  }
+  .sidebar{
+    background: #19295A;
+    color: #fff;
+    width: 283.179px;
+    height: 100vh;
+    flex-shrink: 0;
+    transition: all 0.5s;
+    border-radius: 0px 10px 10px 0px;
+    box-shadow: 0px 3.0661885738372803px 2.452950954437256px 0px rgba(0, 0, 0, 0.07), 0px 7.3684773445129395px 5.894782066345215px 0px rgba(141, 145, 160, 0.05), 0px 13.874189376831055px 11.099350929260254px 0px rgba(141, 145, 160, 0.04), 0px 24.749183654785156px 19.799345016479492px 0px rgba(141, 145, 160, 0.04), 0px 46.290626525878906px 37.032501220703125px 0px rgba(141, 145, 160, 0.03), 0px 110.80247497558594px 88.64197540283203px 0px rgba(141, 145, 160, 0.02);
+  }
+  .top_section{
+    display: flex;
+    align-items:center;
+    padding:20px 15px;
+  }
+  .logo{
+    font-size: 30px;
+  }
+  .bars{
+    display: flex;
+    font-size: 25px;
+    margin-left: 50px;
+  }
+  .link{
+    display: flex;
+    color: #EB5757;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .link:hover{
+    background:lightskyblue;
+    color: #19295A;
+    transition: all 0.5s;
+  }
+  .active{
+    background: lightskyblue;
+    color: #19295A;
+    color: #EB5757;
+  }
+  .icon, .link_text{
+    font-size: 20px;
+  }
+  
+  .bg {
+    text-align: center;
+    background-image: url(./assets/Background.png);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  } */
+
+  /* main{
+    width: 100%;
+    padding: 20px;
+  } */
+
+  .user_container_nav_bar {
+    position: fixed;
+    margin: 0;
+    padding: 0; 
+    bottom: 0;
+    left: 0;
+    height: 60px; /* Adjust the height to your preference */
+    width: 100%;
+    background-color: #19295A;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .user_nav_buttons {
+    padding: 0;
+    background-color: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+    flex: 1;
+  }
+  
+  .user_container_nav_bar a {
+    text-decoration: none;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #EB5757;
+    opacity: 1;
+  }
+
+  
+  
+  .active {
+    padding: 10px; /* Add padding to create a circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    width: 60px;
+    height: 60px;
+    transform: translateY(-15px);
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+
+  .user_container_nav_bar a.active {
+    /* Add your styles for the active button here */
+    color: #fff; /* Change the text color for the active button */
+    background-color: #EB5757; /* Change the background color for the active button */
+  }
+  

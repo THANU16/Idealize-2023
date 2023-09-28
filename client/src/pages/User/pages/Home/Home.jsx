@@ -146,11 +146,16 @@ const Home = (props) => {
         dateTime: formattedDateTime,
       };
       axios
-        .post(`${process.env.REACT_APP_API_URL}/emergency`, data, {
-          headers: { Authorization: "key " + sessionToken },
-        })
+        .post(
+          `${process.env.REACT_APP_API_URL}/emergency/addEmergencyRequest`,
+          data,
+          {
+            headers: { Authorization: "key " + sessionToken },
+          }
+        )
         .then((res) => {
-          if (res.data.sucess) {
+          console.log(res.data);
+          if (res.data.success) {
             sessionStorage.setItem(
               "requestData",
               JSON.stringify(res.data.result)
@@ -187,18 +192,20 @@ const Home = (props) => {
         }}
       >
         <div>
-          <h2 style={{ color: "red" }}>Are you in an emergency?</h2>
-          <h1 style={{ color: "red" }}>
+          <h2 style={{ color: "red", marginTop: "100px" }}>
+            Are you in an emergency?
+          </h2>
+          <h1 style={{ color: "red", textAlign: "center" }}>
             Tap the button below to request for help.
           </h1>
         </div>
         <div className="emergency">
-          {/* <NavLink to="/user/firstaid"> */}
-          <img
-            src={emgbtn}
-            alt="emergency"
-            onClick={handleEmergencyButtonClick}
-          />
+          {/* <NavLink to="/requested"> */}
+            <img
+              src={emgbtn}
+              alt="emergency"
+              onClick={handleEmergencyButtonClick}
+            />
           {/* </NavLink> */}
         </div>
       </div>

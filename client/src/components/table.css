@@ -1,0 +1,25 @@
+/* YourTable.css */
+.custom-table {
+    font-size: 16px;
+    background-color: #f7f7f7;
+  }
+  
+  .custom-table thead th {
+    background-color: #19295A; /* Header background color */
+    color: white; /* Header text color */
+  }
+  
+  .custom-table tbody tr:nth-child(odd) {
+    background-color: #e9ecef; /* Alternate row background color */
+  }
+  
+  .custom-table tbody tr:hover {
+    background-color: #d4edda; /* Hovered row background color */
+  }
+  
+  .custom-table tbody th {
+    background-color: #19295A; /* Header background color */
+    color: white; /* Header text color */
+  }
+  /* You can add more custom styles here as needed */
+  

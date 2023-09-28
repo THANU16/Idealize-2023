@@ -5,6 +5,7 @@ class database {
   constructor() {
     // this.host = "localhost";
     // this.user = "root";
+    // this.port = 3306;
     // this.password = "root";
     // this.database = "lifeserver";
 
@@ -21,8 +22,6 @@ class database {
     this.user = "kobinarth22";
     this.password = "Itsme043";
     this.database = "lifeserver";
-
-
 
     this.connection = mysql.createConnection({
       host: this.host,

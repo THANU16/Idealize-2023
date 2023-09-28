@@ -24,7 +24,7 @@ router.post("/add", (req, res) => {
     "INSERT INTO hospital (Latitude, Longitude, district, email, name, contactNumber, type, password, postalCode, province, registeredDate, registrationNo, website, typeID) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?);";
 
   connection.query(checkQuery, [body.email], (err, result) => {
-    console.log()
+    console.log();
     if (err) {
       console.log(err);
       res.send({
@@ -165,7 +165,7 @@ router.post("/getAllHospitalAmbulance", (req, res) => {
 
   const hospitalID = decodedUserId(sessionToken);
 
-  const getQuery = "select * from  ambulance_driver where hospitalID = ?;";
+  const getQuery = "select * from  ambulance where hospitalID = ?;";
 
   connection.query(getQuery, [hospitalID], (err, result) => {
     if (err) {
@@ -211,6 +211,7 @@ router.post("/getAllHospitalDrivers", (req, res) => {
 router.post("/getHospitalAmbulanceLocation", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ", "");
+  // console.log(sessionToken);
 
   const hospitalID = decodedUserId(sessionToken);
 
@@ -348,5 +349,59 @@ router.post("/AvailabileAmbulance", (req, res) => {
     }
   });
 });
+
+router.get("/getAvailableAmbulance", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ", "");
+
+  const hospitalID = decodedUserId(sessionToken);
+  const getQuery =
+    "SELECT * FROM ambulance where hospitalID = ? and isAvailable = 1;";
+
+  connection.query(getQuery, [hospitalID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      res.send({
+        sucess: true,
+        error: null,
+        result: result,
+      });
+    }
+  });
+});
+
+// router.get("/getAvailableAmbulance", (req, res) => {
+//   console.log(req);
+//   const body = req.body;
+
+//   // const hospitalID = decodedUserId(req.headers.authorization);
+//   const sessionToken = req.headers.Authorization.replace("key ", "");
+//   const hospitalID = decodedUserId(sessionToken);
+
+//   console.log(hospitalID);
+//   const getQuery =
+//     "SELECT * FROM ambulance where hospitalID = ? and isAvailable = 1;";
+
+//   connection.query(getQuery, [hospitalID], (err, result) => {
+//     if (err) {
+//       res.send({
+//         sucess: false,
+//         error: err,
+//         result: null,
+//       });
+//     } else {
+//       res.send({
+//         sucess: true,
+//         error: null,
+//         result: result,
+//       });
+//     }
+//   });
+// });
 
 module.exports = router;

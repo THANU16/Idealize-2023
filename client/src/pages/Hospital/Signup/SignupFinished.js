@@ -10,7 +10,7 @@ function SignupFinished() {
         <h3>Documents have been submitted successfully!</h3>
         <p>We will send the username and password to your email after verification.</p>
         <p>Thank you.</p>
-        <button type='button'><NavLink to='/login'> Go to Login Page</NavLink></button>
+        <button type='button'><NavLink style={{color:'white'}} to='/login'> Go to Login Page</NavLink></button>
       </div>
     </div>
   );

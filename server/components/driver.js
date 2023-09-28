@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const decodedUserId = require("../Authentication/decodedToken");
 const database = require("../utils/databaseUtils");
 
@@ -120,40 +120,53 @@ router.post("/showDetail", (req, res) => {
 });
 
 router.post("/setAmbulance", (req, res) => {
-  const body = req.body;
-  const sessionToken = req.headers.authorization.replace("key ");
+  const body = req.body.data;
+  const sessionToken = req.headers.authorization.replace("key ", "");
 
   const driverID = decodedUserId(sessionToken);
+  console.log(body);
 
-  const setQuery =
-    "insert into ambulanceDriverConnection (ambulance_ID, driverID);"; //=================================================
+  const setAmbulanceQuery =
+    "INSERT INTO ambulance_driver_connection ( driverID, ambulanceID, connectedTime, date) VALUES (?, ?, ?, ?);";
+  const setLocationQuery =
+    "insert into ambulance_location_history (ambulanceID, latitude, longitude, driverID) values (?, ?, ?, ?);";
 
-  connection.query(setQuery, [body.ambulance_ID, driverID], (err, result) => {
-    if (err) {
-      res.send({
-        sucess: false,
-        isExist: false,
-        error: err,
-        result: null,
-      });
-    } else {
-      if (result.length > 0) {
-        res.send({
-          sucess: true,
-          isExist: true,
-          error: null,
-          result: result,
-        });
-      } else {
+  connection.query(
+    setAmbulanceQuery,
+    [driverID, body.ambulanceID, body.currentDateTime, body.currentDate],
+    (err, result) => {
+      if (err) {
         res.send({
           sucess: false,
           isExist: false,
-          error: null,
-          result: result,
+          error: err,
+          result: null,
         });
+      } else {
+        connection.query(
+          setLocationQuery,
+          [body.ambulanceID, body.lat, body.lng, driverID],
+          (err, result) => {
+            if (err) {
+              res.send({
+                sucess: false,
+                isExist: false,
+                error: err,
+                result: null,
+              });
+            } else {
+              res.send({
+                sucess: true,
+                isExist: true,
+                error: null,
+                result: result,
+              });
+            }
+          }
+        );
       }
     }
-  });
+  );
 });
 
 router.post("/setLocation", (req, res) => {
@@ -195,6 +208,84 @@ router.post("/setLocation", (req, res) => {
       }
     }
   );
+});
+
+router.get("/getAllHospitalAmbulance", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ", "");
+
+  const driverID = decodedUserId(sessionToken);
+
+  const getHospitalIDQuery =
+    "select hospitalID from  driver where driverID = ?;";
+  const getQuery =
+    "select * from  ambulance where hospitalID = ? and driverAssigned = 0;";
+
+  connection.query(getHospitalIDQuery, [driverID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      console.log(result);
+      const hospitalID = result[0].hospitalID;
+
+      connection.query(getQuery, [hospitalID], (err, result) => {
+        if (err) {
+          res.send({
+            sucess: false,
+            error: err,
+            result: null,
+          });
+        } else {
+          res.send({
+            sucess: true,
+            error: null,
+            result: result,
+          });
+        }
+      });
+    }
+  });
+});
+
+router.get("/checkConnection", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ", "");
+
+  const driverID = decodedUserId(sessionToken);
+
+  const getQuery =
+    "SELECT * FROM ambulance where driverID = ? and driverAssigned = 1;";
+
+  connection.query(getQuery, [driverID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        isExist: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      if (result.length > 0) {
+        res.send({
+          sucess: true,
+          isExist: true,
+          error: null,
+          result: result,
+        });
+      } else {
+        res.send({
+          sucess: false,
+          isExist: false,
+          error: null,
+          result: result,
+        });
+      }
+    }
+  });
 });
 
 module.exports = router;
