@@ -1,11 +1,12 @@
 import React from "react";
+import { UserSafety } from "./Sections"; // Adjust the import path as needed
 
-const Product = () => {
+function HelpPage() {
   return (
     <div>
-      <h1>product page</h1>
+      <UserSafety />
     </div>
   );
-};
+}
 
-export default Product;
+export default HelpPage;

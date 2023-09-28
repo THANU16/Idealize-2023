@@ -8,6 +8,7 @@ Ambulance_Home.css .container {
 
 .map {
   flex: 4;
+  margin: 0;
   /* 3/4 of the available height */
   position: relative;
   height: 80vh;

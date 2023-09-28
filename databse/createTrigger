@@ -40,25 +40,59 @@ BEGIN
   UPDATE ambulance
   SET
     driverID = NEW.driverID,
-    driverAssigned = 1
+    driverAssigned = 1,
+    isAvailable = 1
   WHERE
     ambulanceId = NEW.ambulanceId;
 END;
 //
 
 -- Trigger for UPDATE operation
-CREATE TRIGGER `update_ambulance_after_update`
-AFTER UPDATE ON `ambulance_driver_connection`
+CREATE TRIGGER update_ambulance_after_update
+AFTER UPDATE ON ambulance_driver_connection
+FOR EACH ROW
+BEGIN
+  UPDATE ambulance
+  SET
+    driverID = null,
+    driverAssigned = 0,
+    isAvailable = 0
+  WHERE
+    ambulanceId = NEW.ambulanceId;
+END;
+//
+
+
+
+DELIMITER //
+
+-- Trigger for INSERT operation
+CREATE TRIGGER update_ambulanceavailable_after_insert
+AFTER INSERT ON user_ambulance_connection
+FOR EACH ROW
+BEGIN
+  UPDATE ambulance
+  SET
+    isAvailable = 0
+  WHERE
+    ambulanceId = NEW.ambulanceId;
+END;
+//
+
+-- Trigger for UPDATE operation
+CREATE TRIGGER `update_ambulanceavailable_after_update`
+AFTER UPDATE ON `user_ambulance_connection`
 FOR EACH ROW
 BEGIN
   IF NEW.disconnectedTime IS NOT NULL THEN
     UPDATE ambulance
     SET
-      driverID = null,
-      driverAssigned = 0
+      isAvailable = 1
     WHERE
       ambulanceId = NEW.ambulanceId;
   END IF;
 END;
 //
 
+
+ 
