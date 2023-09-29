@@ -99,12 +99,12 @@ function handleWebSocketConnections(server) {
         // Handle WebSocket messages here.
       });
 
-      // socket.on("close", () => {
-      //   console.log("WebSocket client disconnected");
+      socket.on("close", () => {
+        console.log("WebSocket client disconnected");
 
-      //   // Remove the WebSocket connection from the map when the client disconnects.
-      //   hospitalsConnection.delete(clientID);
-      // });
+        // Remove the WebSocket connection from the map when the client disconnects.
+        hospitalsConnection.delete(clientID);
+      });
     } else {
       // If the session token is invalid, close the WebSocket connection.
       console.log("Invalid session token. Closing WebSocket connection.");

@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import deiverMarkerIcon from "../../assets/icons/placeholder.png";
 import driverIcon from "../../assets/icons/download.png";
-import notification from "../../assets/icons/images.png"
+import notification from "../../assets/icons/images.png";
 import "./Ambulance_Home.css";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -62,7 +62,7 @@ const Home = (props) => {
   };
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
   const [isNewRequest, setIsNewRequest] = useState(true);
-  
+
   // Create a state variable to track the dropdown state for each notification
   const [notificationDropdowns, setNotificationDropdowns] = useState({});
 
@@ -74,7 +74,7 @@ const Home = (props) => {
     }));
   };
 
-  const handleReject = () => { }
+  const handleReject = () => {};
   function formatTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
     const hours = dateTime.getHours();
@@ -84,7 +84,6 @@ const Home = (props) => {
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   }
-
 
   const [requestData, setRequestData] = useState([]);
   const [hospitalReqData, setHospitalReqData] = useState(false);
@@ -170,7 +169,6 @@ const Home = (props) => {
     navigate("/notification");
   };
 
-
   return (
     <div>
       <div>
@@ -180,8 +178,12 @@ const Home = (props) => {
               <img src={driverIcon} alt="Driver Icon" className="driver-icon" />
             </div>
           </Link>
-          <div classname= "amno">
-            <p><h4><b>AmbulanceNo:{ambulance.ambulanceNumber} </b></h4></p>
+          <div classname="amno">
+            <p>
+              <h4>
+                <b>AmbulanceNo:{ambulance.ambulanceNumber} </b>
+              </h4>
+            </p>
           </div>
           <div className="notifications">
             {/* <img src={notification} alt="notification" className="notification-icon" /> */}
@@ -216,12 +218,12 @@ const Home = (props) => {
                 ))}
               </div>
             )} */}
-          <img
-            src={notification}
-            alt="notification"
-            className="notification-icon"
-            onClick={handleNotificationClick} // Add the onClick event handler
-          />
+            <img
+              src={notification}
+              alt="notification"
+              className="notification-icon"
+              onClick={handleNotificationClick} // Add the onClick event handler
+            />
             {/* Render other components as needed */}
           </div>
         </div>
@@ -256,7 +258,6 @@ const Home = (props) => {
           )}
         </div>
       </div>
-
     </div>
   );
 };
