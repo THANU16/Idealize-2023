@@ -8,21 +8,20 @@ styles.css
 .hospital-container {
   display: flex;
   height: 100%; /* 100% of the viewport height */
-  margin-left: -50px;
   position: relative;
-  width : 100%;
   padding-right: calc(var(--bs-gutter-x) * .5);
   padding-left: calc(var(--bs-gutter-x) * .5);
   margin-right: auto;
-  --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
  
 }
 
-.map {
+.hospital-map {
   flex: 4; /* 3/4 of the available height */
   position: relative;
   height: 100vh;
+  margin-left: 0;
+  
   
 }
 
@@ -44,27 +43,10 @@ styles.css
   
 }
 
-.tables {
-  flex: 1; /* Adjust the flex value based on your layout needs */
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
-  text-align: center; /* Align text at the top */
-  background-color: #f6caca;
-  border-radius: 12px;
-  height: 50%; /* Change to 50% to make the box half of the web page size */
-  width: 291px;
-  padding: 20px; /* Increased padding for more space */
-}
+
 
 /* Add this style to target the table */
-.tables table {
-  margin-top: 0; /* Remove the default top margin on the table */
-}
-table, th, td {
-  border: 1px solid #ff0000; /* Add a 1px black border to the table, header cells, and data cells */
-  text-align: left; /* Align text to the left in cells */
-  padding: 8px; /* Add padding for spacing inside cells */
-}
+
 
 .controls h3 {
   margin: 0; /* Remove margin for the heading */
@@ -188,11 +170,21 @@ h3 {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Customize the shadow */
 }
 
-.white-button {
-  width: 300px;
+.green-button {
+  width: 350px;
   margin: auto;
   border-radius: 5px ;
+  background: #B3FBB5;
+
+
+  
 }
+.green-button:hover{
+  background-color: #44953b;
+
+}
+
+
 
 
 /* Add these styles to your existing CSS file or import a new CSS file */
@@ -219,13 +211,13 @@ h3 {
   position: absolute;
   top: 100%;
   right: 0;
-  width: 300px;
-  background-color: white;
+  width: 350px;
+  background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid #ccc;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
   z-index: 3;
   padding: 10px;
-  max-height: 300px;
+  max-height: 90vh;
   overflow-y: auto;
 }
 
@@ -238,5 +230,34 @@ h3 {
 }
 
 /* Add any other styles you need */
+.req_hos_assign_button,
+.req_hos_accept_button{
+  color: #0b6926;
+  border-radius: 32px;
+  background: #B3FBB5;
+  width: 65px;
+  margin: 10px;
 
+}
 
+.req_hos_cancel_button,
+.req_hos_reject_button
+  {
+  color: #FF0000;
+  border-radius: 32px;
+  background: #FA9898;
+  width: 65px;
+
+}
+                          
+.req_hos_assign_button:hover,
+.req_hos_accept_button:hover {
+  background-color: #44953b;
+
+}
+
+.req_hos_cancel_button:hover,
+.req_hos_reject_button:hover  {
+  background-color: #b66b67;
+
+}
