@@ -14,13 +14,14 @@ router.post("/add", (req, res) => {
   const ambulanceNumber = req.body.ambulanceNo;
   const sessionToken = req.headers.authorization.replace("key ", "");
   const hospitalID = decodedUserId(sessionToken);
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
   // check the employee already exist or not
-  const checkQuery =
-    "SELECT * FROM ambulance where ambulanceNumber = ?;";
+  const checkQuery = "SELECT * FROM ambulance where ambulanceNumber = ?;";
 
   // type id is the forigen key so we set the forigen key correctly
   const insertQuery =
-    "insert into ambulance (ambulanceNumber, hospitalID) values(?,?);";
+    "insert into ambulance (ambulanceNumber, hospitalID, latitude, longitude) values(?,?,?,?);";
 
   connection.query(checkQuery, [ambulanceNumber], (err, result) => {
     if (err) {
@@ -42,7 +43,7 @@ router.post("/add", (req, res) => {
       } else {
         connection.query(
           insertQuery,
-          [ambulanceNumber, hospitalID],
+          [ambulanceNumber, hospitalID, latitude, longitude],
           (err, result) => {
             if (err) {
               res.send({
