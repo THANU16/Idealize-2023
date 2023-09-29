@@ -19,7 +19,7 @@ import Row from "react-bootstrap/Row";
 
 const useWebSockets = (sessionToken, typeID, updateAcceptData) => {
   useEffect(() => {
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+    const websocketUrl = `${process.env.REACT_APP_WEBSOCKET_URL}/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
 
@@ -68,7 +68,7 @@ const RequestCancel = (props) => {
   // Use useEffect to log currentLocation when it changes
   return (
     <div>
-      <div className="container">
+      <div className="req-container">
         <div className="req_modal">
           <SmallModal />
         </div>

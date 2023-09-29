@@ -24,7 +24,7 @@ const useWebSockets = (
 ) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+    const websocketUrl = `${process.env.REACT_APP_WEBSOCKET_URL}/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
 
@@ -36,7 +36,7 @@ const useWebSockets = (
 
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log('hospital request')
+      console.log("hospital request");
       console.log(data.requestData);
 
       // Call the function to update requestData when new data is received
@@ -75,9 +75,8 @@ const Home = (props) => {
   // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
-    console.log('new data',newData)
+    console.log("new data", newData);
   };
-
 
   // Pass playNotificationSound to useWebSockets
   useWebSockets(sessionToken, typeID, updateRequestData, playNotificationSound);
@@ -114,10 +113,13 @@ const Home = (props) => {
           }
         })
         .catch((err) => console.log(err));
+
     } 
     else {
       setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
+
     }
+
 
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
@@ -237,11 +239,14 @@ const Home = (props) => {
     }));
   };
 
+
   const handleAssignAmbulance = (ambulance, notification) => {
     // Define the data to send in the request body
 
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    const requestData = {      
+
+    const requestData = {
+
       userID: notification.userID,
       ambulanceID: ambulance.ambulanceID,
       driverID: ambulance.driverID,

@@ -159,13 +159,13 @@ router.post("/getAllHospitalsLocations", (req, res) => {
   });
 });
 
-router.post("/getAllHospitalAmbulance", (req, res) => {
+router.get("/getAllHospitalAmbulance", (req, res) => {
   const body = req.body;
   const sessionToken = req.headers.authorization.replace("key ", "");
 
   const hospitalID = decodedUserId(sessionToken);
 
-  const getQuery = "select * from  ambulance where hospitalID = ?;";
+  const getQuery = "select * from  ambulance_details where hospitalID = ?;";
 
   connection.query(getQuery, [hospitalID], (err, result) => {
     if (err) {

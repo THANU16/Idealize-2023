@@ -11,9 +11,8 @@ const Ambulance = () => {
   useEffect(() => {
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
     axios
-      .post(
+      .get(
         `${process.env.REACT_APP_API_URL}/hospital/getAllHospitalAmbulance`,
-        {},
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((res) => {
@@ -21,11 +20,11 @@ const Ambulance = () => {
         if (res.data.sucess) {
           const originalArray = res.data.result;
           const filteredArray = originalArray.map((item) => ({
-            'Ambulance Number': item.ambulanceNumber,
-            'Driver Assigned':item.driverAssigned?'Yes':'No',
-            'Driver Name':'set',
-            'Driver Phone No.':'set',
-            'Available':item.available?'Yes':'No',
+            "Ambulance Number": item.ambulanceNumber,
+            "Driver Assigned": item.driverAssigned ? "Yes" : "No",
+            "Driver Name": "set",
+            "Driver Phone No.": "set",
+            Available: item.available ? "Yes" : "No",
           }));
           setAmbulanceData(filteredArray);
         }
@@ -34,11 +33,11 @@ const Ambulance = () => {
   }, []);
 
   const ambulanceColumns = [
-    'Ambulance Number',
-    'Driver Assigned',
-    'Driver Name',
-    'Driver Phone No.',
-    'Available'
+    "Ambulance Number",
+    "Driver Assigned",
+    "Driver Name",
+    "Driver Phone No.",
+    "Available",
   ];
 
   return (
