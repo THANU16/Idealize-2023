@@ -250,7 +250,7 @@ const Home = (props) => {
       userlng: notification.lng,
       ambulancelat: ambulance.latitude,
       ambulancelng: ambulance.longitude,
-      driverID: driverID,
+      driverID: ambulance.driverID,
       connectedTime: currentDateTime,
     };
     // console.log(requestData);
