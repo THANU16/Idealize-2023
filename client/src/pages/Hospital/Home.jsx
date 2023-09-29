@@ -97,8 +97,8 @@ const Home = (props) => {
         }
       })
       .catch((err) => console.log(err));
-    const hospitalLocation = sessionStorage.getItem("hospitalLocation");
-    if (!JSON.parse(hospitalLocation!=null)) {
+
+    if (JSON.parse(sessionStorage.getItem("hospitalLocation"))==null) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/hospital/getHospitalLocation`, {
           headers: { Authorization: "key " + sessionToken },
@@ -115,9 +115,9 @@ const Home = (props) => {
         })
         .catch((err) => console.log(err));
     } 
-    // else {
-    //   setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
-    // }
+    else {
+      setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
+    }
 
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
@@ -218,7 +218,6 @@ const Home = (props) => {
   // Usage
   const providedTimestamp = "2023-09-28T05:20:14.000Z";
   const formattedDifference = formatAndSubtractTime(providedTimestamp);
-  console.log(formattedDifference);
 
   // Create a state variable to track the dropdown state for each notification
   const [notificationDropdowns, setNotificationDropdowns] = useState({});
