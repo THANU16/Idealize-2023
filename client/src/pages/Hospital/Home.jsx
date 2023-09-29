@@ -97,7 +97,7 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
 
-    if (JSON.parse(sessionStorage.getItem("hospitalLocation"))==null) {
+    if (JSON.parse(sessionStorage.getItem("hospitalLocation")) == null) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/hospital/getHospitalLocation`, {
           headers: { Authorization: "key " + sessionToken },
@@ -113,13 +113,12 @@ const Home = (props) => {
           }
         })
         .catch((err) => console.log(err));
-
-    } 
-    else {
-      setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
+    } else {
+      setHospitalLocation(
+        JSON.parse(sessionStorage.getItem("hospitalLocation"))
+      );
 
     }
-
 
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
@@ -239,14 +238,12 @@ const Home = (props) => {
     }));
   };
 
-
   const handleAssignAmbulance = (ambulance, notification) => {
     // Define the data to send in the request body
 
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
 
     const requestData = {
-
       userID: notification.userID,
       ambulanceID: ambulance.ambulanceID,
       driverID: ambulance.driverID,
@@ -260,7 +257,7 @@ const Home = (props) => {
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-
+    console.log(ambulance.latitude,ambulance.longitude)
     // Make a POST request to your backend
     axios
       .post(
@@ -328,10 +325,7 @@ const Home = (props) => {
                             <button
                               className="req_hos_assign_button"
                               onClick={() =>
-                                handleAssignAmbulance(
-                                  ambulance,
-                                  notification,
-                                )
+                                handleAssignAmbulance(ambulance, notification)
                               }
                             >
                               Assign

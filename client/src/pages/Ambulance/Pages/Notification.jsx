@@ -61,8 +61,23 @@ const Notification = () => {
 
   // Pass updateRequestData to useWebSockets
   useWebSockets(sessionToken, typeID, updateRequestData, updateHospitalReqData);
-
+  const [current, setCurrent] = useState({
+    currentLat: null,
+    currentLng: null,
+  });
   useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        // Set the user's location in the state
+        setCurrent({ currentLat: lat, currentLng: lng });
+
+      });
+    } else {
+      console.log("Geolocation is not available in this browser.");
+    }
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
       .then((res) => {
@@ -81,17 +96,12 @@ const Notification = () => {
       ambulanceID: ambulancedata.ambulanceID,
       userID: notification.userID,
       requestID: notification.requestID,
-      //  we want to set the current location of the ambulance driver location =========================================================
-      // ======================================================
-      // Please consider
-      // =======================================================================
-      // =====================================================
-      // =======================================
-      latitude: notification.lat,
-      longtitude: notification.lng,
+      ambulanceLat: current.currentLat,
+      ambulanceLng: current.currentLng,
+      userLat: notification.lat,
+      useLng: notification.lng,
       connectedTime: currentDateTime,
     };
-
 
     axios
       .post(
@@ -100,7 +110,9 @@ const Notification = () => {
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((response) => {
+
         if (response.data.success) {
+          sessionStorage.setItem("acceptReqData", JSON.stringify(data));
           navigate("/show");
         }
 
@@ -126,7 +138,6 @@ const Notification = () => {
     // You can add your logic here, such as marking the notification as rejected.
     // For this example, we will remove the notification from the list.
   };
-
 
   return (
     <div>
