@@ -20,6 +20,8 @@ function Logout() {
     sessionStorage.removeItem("sessionToken");
     sessionStorage.removeItem("ambulance");
     sessionStorage.removeItem("typeID");
+    sessionStorage.removeItem('hospitalReqData');
+    sessionStorage.removeItem("acceptReqData");
     navigate("/login");
   };
 
@@ -29,6 +31,8 @@ function Logout() {
     sessionStorage.removeItem("sessionToken");
     sessionStorage.removeItem("ambulance");
     sessionStorage.removeItem("typeID");
+    sessionStorage.removeItem('hospitalReqData');
+    sessionStorage.removeItem("acceptReqData");
     navigate("/login");
     
   };

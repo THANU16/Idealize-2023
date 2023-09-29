@@ -13,6 +13,7 @@ function Logout() {
     setUser(null);
     sessionStorage.removeItem("sessionToken");
     sessionStorage.removeItem("typeID");
+    sessionStorage.removeItem("hospitalLocation");
     navigate("/login");
   };
 
