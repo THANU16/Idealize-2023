@@ -16,7 +16,11 @@ function Logout() {
   const handleConfirmQuit = () => {
     // User wants to quit, perform full logout
     
-    console.log("job quit logic");
+    setUser(null);
+    sessionStorage.removeItem("sessionToken");
+    sessionStorage.removeItem("ambulance");
+    sessionStorage.removeItem("typeID");
+    navigate("/login");
   };
 
   const handleCancelQuit = () => {
