@@ -57,10 +57,10 @@ function OwnerDetailsPage() {
   return (
     <div className="OwnerDetailsPage">
       <h2>User Details</h2>
-      <div className="owner-details-container">
+      <div className="user-details-container">
         <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="user-form-row">
+            <div className="user-form-group">
               <label htmlFor="firstName">First Name:</label>
               <input
                 type="text"
@@ -72,7 +72,7 @@ function OwnerDetailsPage() {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="user-form-group">
               <label htmlFor="lastName">Last Name:</label>
               <input
                 type="text"
@@ -85,8 +85,8 @@ function OwnerDetailsPage() {
               />
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="user-form-row">
+            <div className="user-form-group">
               <label htmlFor="occupation">Occupation:</label>
               <input
                 type="text"
@@ -98,7 +98,7 @@ function OwnerDetailsPage() {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="user-form-group">
               <label htmlFor="dob">Date of Birth (DOB):</label>
               <input
                 type="date"
@@ -111,8 +111,8 @@ function OwnerDetailsPage() {
               />
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="user-form-row">
+            <div className="user-form-group">
               <label htmlFor="nicNumber">NIC Number:</label>
               <input
                 type="text"
@@ -124,7 +124,7 @@ function OwnerDetailsPage() {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="user-form-group">
               <label htmlFor="phoneNumber">Phone Number:</label>
               <input
                 type="tel"
@@ -137,8 +137,8 @@ function OwnerDetailsPage() {
               />
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="user-form-row">
+            <div className="user-form-group">
               <label htmlFor="email">Email Address:</label>
               <input
                 type="email"
@@ -150,10 +150,10 @@ function OwnerDetailsPage() {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="user-form-group">
               <label htmlFor="password">Password:</label>
               <input
-                type="password  "
+                type="password"
                 id="password"
                 name="password"
                 className="user_signup_text"
@@ -164,20 +164,8 @@ function OwnerDetailsPage() {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="address">Address:</label>
-              <input
-                className="user_signup_text"
-                type="text"
-                id="address"
-                name="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
+          <div className="user-form-row">
+            <div className="user-form-group">
               <label htmlFor="confirmPassword">Confirm Password:</label>
               <input
                 type="password"
@@ -190,8 +178,8 @@ function OwnerDetailsPage() {
               />
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="user-form-row">
+            <div className="user-form-group">
               <label htmlFor="province">Province:</label>
               <input
                 type="text"
@@ -203,7 +191,7 @@ function OwnerDetailsPage() {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="user-form-group">
               <label htmlFor="district">District:</label>
               <input
                 type="text"
@@ -216,8 +204,8 @@ function OwnerDetailsPage() {
               />
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="user-form-row">
+            <div className="user-form-group">
               <label htmlFor="postalCode">Postal Code:</label>
               <input
                 type="text"
@@ -229,7 +217,7 @@ function OwnerDetailsPage() {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="user-form-group">
               <label htmlFor="preferredType">Preferred Type:</label>
               <input
                 type="int"
@@ -243,7 +231,7 @@ function OwnerDetailsPage() {
             </div>
           </div>
 
-          <button type="submit" onClick={handleSubmit}>
+          <button className="user_lg_submit" onClick={handleSubmit}>
             Submit
           </button>
         </form>
