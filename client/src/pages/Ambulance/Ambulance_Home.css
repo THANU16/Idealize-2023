@@ -265,3 +265,15 @@ h3 {
   font-weight: bold;
   font-size:40px ;
 }
+
+@keyframes zoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2); /* Adjust the scale factor as needed */
+  }
+}
+.ring{
+  animation: zoom 1.5s ease infinite;
+}

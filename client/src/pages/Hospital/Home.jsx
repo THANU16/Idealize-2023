@@ -171,10 +171,6 @@ const Home = (props) => {
   const handleAccept = () => {};
   const handleReject = (notificationID) => {};
 
-  useEffect(() => {
-    setIsNewRequest(true);
-  }, [requestData]);
-
   const [showNotifications, setShowNotifications] = useState(false);
 
   // Function to toggle the visibility of notifications
@@ -246,7 +242,7 @@ const Home = (props) => {
     // Define the data to send in the request
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     const requestData = {
-      ambulanceID: ambulanceID,
+      
       userID: notification.userID,
       requestID: notification.requestID,
       latitude: notification.lat,

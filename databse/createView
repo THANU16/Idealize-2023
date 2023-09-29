@@ -1,0 +1,31 @@
+create view ambulance_details as SELECT 
+    ambulance.ambulanceID, 
+    ambulance.ambulanceNumber, 
+    ambulance.isAvailable, 
+    ambulance.driverAssigned, 
+    ambulance.driverID, 
+    driver.firstName, 
+    ambulance.hospitalID, 
+    driver.lastName, 
+    driver.phoneNumber ,hospital.latitude as hospitalLatitude ,hospital.longitude as hospitalLongitude
+
+FROM ambulance 
+JOIN driver ON ambulance.driverID = driver.driverID 
+join hospital on hospital.hospitalID =  ambulance.hospitalID
+WHERE ambulance.driverAssigned = 1
+
+UNION
+
+SELECT 
+    ambulance.ambulanceID, 
+    ambulance.ambulanceNumber, 
+    ambulance.isAvailable, 
+    ambulance.driverAssigned, 
+    NULL as driverID, 
+    NULL as firstName, 
+    ambulance.hospitalID, 
+    NULL as lastName, 
+    NULL as phoneNumber ,hospital.latitude as hospitalLatitude ,hospital.longitude as hospitalLongitude
+FROM ambulance 
+join hospital on hospital.hospitalID =  ambulance.hospitalID
+WHERE ambulance.driverAssigned = 0;

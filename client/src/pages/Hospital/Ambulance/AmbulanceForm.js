@@ -10,10 +10,10 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
   const [registrationNo, setAmbulanceCompany] = useState("");
   const [registeredDate, setRegisteredDate] = useState("");
   const navigate = useNavigate();
-
+  const hospitalLocation = JSON.parse(sessionStorage.getItem("hospitalLocation"));
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = { ambulanceNo: ambulanceNo };
+    const data = { ambulanceNo: ambulanceNo ,latitude:hospitalLocation.latitude,longitude:hospitalLocation.longitude};
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
 
     axios
