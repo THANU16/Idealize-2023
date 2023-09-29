@@ -187,6 +187,7 @@ const Home = (props) => {
             </p>
           </div>
           <div className="notifications">
+
             {/* <img src={notification} alt="notification" className="notification-icon" /> */}
             {/* Render notifications based on the state */}
             {/* {showNotifications && (

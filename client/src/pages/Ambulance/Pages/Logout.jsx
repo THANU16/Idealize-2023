@@ -35,7 +35,7 @@ function Logout() {
 
   return (
     <div className="driver-logout">
-      <div className="driver-logout-container">
+    <div className="driver-logout-container">
       <div>
         {showConfirmationDialog ? (
           <p>Have you completed your work hours for the day?</p>
@@ -45,17 +45,17 @@ function Logout() {
       </div>
       <div className="driver-logout-btn">
         {showConfirmationDialog ? (
-          <div >
-            <button onClick={handleConfirmQuit} className="driver-logout-logout ">
+          <div>
+            <button onClick={handleConfirmQuit} className="driver-logout-logout">
               Yes
             </button>
-            <button onClick={handleCancelQuit} className="driver-logout-logout ">
+            <button onClick={handleCancelQuit} className="driver-logout-logout">
               No Just Break
             </button>
           </div>
         ) : (
           <>
-            <button onClick={handlecancel} className="driver-logout-cancel ">
+            <button onClick={handlecancel} className="driver-logout-cancel">
               Cancel
             </button>
             <button onClick={handleLogout} className="driver-logout-logout">
@@ -63,9 +63,9 @@ function Logout() {
             </button>
           </>
         )}
-        </div>
-        </div>
+      </div>
     </div>
+  </div>
   );
 }
 
