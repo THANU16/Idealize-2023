@@ -211,6 +211,7 @@ const Home = (props) => {
               }
               onClick={handleNotificationClick} // Add the onClick event handler
             />
+            {isNewRequest? requestData.length:'' }
             {/* Render other components as needed */}
           </div>
         </div>

@@ -96,8 +96,8 @@ const Home = (props) => {
         }
       })
       .catch((err) => console.log(err));
-
-    if (!JSON.parse(sessionStorage.getItem("hospitalLocation"))) {
+    const hospitalLocation = sessionStorage.getItem("hospitalLocation");
+    if (!JSON.parse(hospitalLocation!=null)) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/hospital/getHospitalLocation`, {
           headers: { Authorization: "key " + sessionToken },
@@ -113,11 +113,12 @@ const Home = (props) => {
           }
         })
         .catch((err) => console.log(err));
-    } else {
-      setHospitalLocation(
-        JSON.parse(sessionStorage.getItem("hospitalLocation"))
-      );
-    }
+
+    } 
+    // else {
+    //   setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
+    // }
+
 
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
@@ -238,16 +239,20 @@ const Home = (props) => {
     }));
   };
 
-  const handleAssignAmbulance = (ambulanceID, notification, driverID) => {
-    // Define the data to send in the request
+
+  const handleAssignAmbulance = (ambulance, notification) => {
+    // Define the data to send in the request body
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    const requestData = {
-      
+    const requestData = {      
       userID: notification.userID,
+      ambulanceID: ambulance.ambulanceID,
+      driverID: ambulance.driverID,
       requestID: notification.requestID,
-      latitude: notification.lat,
-      longtitude: notification.lng,
-      driverID: driverID,
+      userlat: notification.lat,
+      userlng: notification.lng,
+      ambulancelat: ambulance.latitude,
+      ambulancelng: ambulance.longitude,
+      driverID: ambulance.driverID,
       connectedTime: currentDateTime,
     };
     // console.log(requestData);
@@ -314,9 +319,8 @@ const Home = (props) => {
                               className="req_hos_assign_button"
                               onClick={() =>
                                 handleAssignAmbulance(
-                                  ambulance.ambulanceID,
+                                  ambulance,
                                   notification,
-                                  ambulance.driverID
                                 )
                               }
                             >
