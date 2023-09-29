@@ -105,8 +105,8 @@ const Home = (props) => {
 
   // Create a function to update requestData
   const updateHospitalReqData = (newData) => {
-    setHospitalReqData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
-    sessionStorage.setItem("hospitalReqData", JSON.stringify(hospitalReqData));
+    setHospitalReqData( newData); // Assuming newData is an object you want to add to requestData
+    sessionStorage.setItem("hospitalReqData", JSON.stringify(newData));
     navigate("/show");
   };
 

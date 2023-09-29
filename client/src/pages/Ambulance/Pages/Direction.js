@@ -9,6 +9,8 @@ import "../Ambulance_Home.css";
 import { useNavigate } from "react-router-dom";
 
 const useWebSockets = (sessionToken, typeID, updateRequestData) => {
+
+
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
     const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
@@ -34,18 +36,19 @@ const useWebSockets = (sessionToken, typeID, updateRequestData) => {
 };
 
 function ShowPath() {
+
   const [requestData, setRequestData] = useState([]);
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
 
   const [origin, setOrigin] = useState({
-    lat: 12.9802347063322,
-    lng: 77.5907760360903,
+    lat: null,
+    lng: null,
   }); // Replace with your origin latitude and longitude
 
   const [destination, setDestination] = useState({
-    lat: 13.9793774204024,
-    lng: 78.5910979011596,
+    lat: null,
+    lng: null,
   }); // Replace with your destination latitude and longitude
 
   // Create a function to update requestData
@@ -60,7 +63,24 @@ function ShowPath() {
 
   useEffect(() => {
     // Call the API to fetch origin and destination data
-    // const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        // Set the user's location in the state
+        setOrigin({ lat, lng });
+      });
+    } else {
+      console.log("Geolocation is not available in this browser.");
+    }
+
+    const ambulance = JSON.parse(sessionStorage.getItem("ambulance"));
+
+    setDestination({ lat: ambulance.latitude, lng: ambulance.longitude });
+
+    const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+
     // axios
     //   .get(`${process.env.REACT_APP_API_URL}/xxxxxxxxxxxxxxx`, {
     //     headers: { Authorization: "key " + sessionToken },
@@ -82,6 +102,9 @@ function ShowPath() {
     //   .catch((err) => console.log(err));
     initMap();
   }, []);
+ 
+
+
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -153,38 +176,7 @@ function ShowPath() {
               className="notification-icon"
               onClick={handleNotificationClick} // Add the onClick event handler
             />
-            {/* Render notifications based on the state */}
-            {/* {showNotifications && (
-              <div className="notification-container">
-                {requestData.map((notification, index) => (
-                  <div className="notification" key={index}>
-                    <>
-                      <p>{notification.requestID}</p>
-                      <p>{formatTime(notification.requestedTime)}</p>
-                      <span>
-                        <button
-                          style={{ backgroundColor: "green", margin: "10px" }}
-                          onClick={() =>
-                            toggleNotificationDropdown(notification.requestID)
-                          }
-                        >
-                          Accept
-                        </button>
-                      </span>
-                      <span>
-                        <button
-                          style={{ backgroundColor: "red" }}
-                          onClick={handleReject}
-                        >
-                          Reject
-                        </button>
-                      </span>
-                    </>
-                  </div>
-                ))}
-              </div>
-            )} */}
-            {/* Render other components as needed */}
+
           </div>
         </div>
       </div>
