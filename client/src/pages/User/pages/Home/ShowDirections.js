@@ -1,59 +1,58 @@
 import React, { Component } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
+import { useEffect,useState } from "react";
 
-class ShowPath extends Component {
-  constructor(props) {
-    super(props);
-    const acceptData = JSON.parse(sessionStorage.getItem("sessionToken"));
-    this.state = {
-      // origin: { lat: 6.7880706, lng: 79.8912813 },
-      origin: { lat: acceptData.lat, lng: acceptData.longitude },
-      // destination: { lat: 13.9793774204024, lng: 78.5910979011596 },
-      destination: null,
-    };
-  }
 
-  componentDidMount() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          this.setState(
-            {
-              destination: { lat: latitude, lng: longitude },
-            },
-            () => {
-              // Initialize the map once destination is obtained
-              this.initMap();
-            }
-          );
-        },
-        (error) => {
-          console.error("Geolocation error:", error);
-          // Handle the error, e.g., by providing a user-friendly message
-        }
-      );
-    } else {
-      console.error("Geolocation is not available in this browser.");
+function ShowPath(props) {
+  const [origin, setOrigin] = useState(null);
+  const [destination, setDestination] = useState(null);
+  const [acceptData,setAcceptData] = useState(null)
+
+  useEffect(() => {
+    const acceptDataFromSession = JSON.parse(sessionStorage.getItem("acceptData"));
+    setAcceptData(acceptDataFromSession);
+
+    // Check if acceptDataFromSession exists and then set origin
+    if (acceptDataFromSession) {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            setDestination({ lat: latitude, lng: longitude });
+            setOrigin({ lat: acceptDataFromSession.latitude, lng: acceptDataFromSession.longtitude });
+          },
+          (error) => {
+            console.error("Geolocation error:", error);
+            // Handle the error, e.g., by providing a user-friendly message
+          }
+        );
+      } else {
+        console.error("Geolocation is not available in this browser.");
+      }
     }
-  }
+  }, []);
 
-  initMap() {
+  useEffect(() => {
+    if (origin && destination) {
+      initMap();
+    }
+  }, [origin, destination]);
+
+  function initMap() {
     const directionsService = new window.google.maps.DirectionsService();
     const directionsRenderer = new window.google.maps.DirectionsRenderer();
     const map = new window.google.maps.Map(document.getElementById("map"), {
       zoom: 7,
-      center: this.state.origin,
+      center: origin,
     });
 
     directionsRenderer.setMap(map);
 
-    this.calculateAndDisplayRoute(directionsService, directionsRenderer);
+    calculateAndDisplayRoute(directionsService, directionsRenderer);
   }
 
-  calculateAndDisplayRoute(directionsService, directionsRenderer) {
-    const { origin, destination } = this.state;
+  function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     directionsService
       .route({
         origin,
@@ -68,13 +67,11 @@ class ShowPath extends Component {
       });
   }
 
-  render() {
-    return (
-      <div>
-        <div id="map" style={{ height: "1000px" }}></div>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <div id="map" style={{ height: "1000px" }}></div>
+    </div>
+  );
 }
 
 export default GoogleApiWrapper({
