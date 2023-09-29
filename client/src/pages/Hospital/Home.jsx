@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import "../styles.css";
 import { Modal } from "react-bootstrap";
+import moment from "moment";
 
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
@@ -48,6 +49,7 @@ const Home = (props) => {
   const [requestData, setRequestData] = useState([]);
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
+  const [AvailableAmbulance, setAvailableAmbulance] = useState([]);
 
   // Create a function to update requestData
   const updateRequestData = (newData) => {
@@ -65,29 +67,31 @@ const Home = (props) => {
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((res) => {
+        // console.log("check");
+        // console.log(res.data);
         if (res.data.sucess) {
           setAmbulanceLocation(res.data.result);
         }
       })
       .catch((err) => console.log(err));
+
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.sucess) {
           setRequestData(res.data.result);
         }
       })
       .catch((err) => console.log(err));
-  }, []);
 
-  useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
+      .get(`${process.env.REACT_APP_API_URL}/hospital/getAvailableAmbulance`, {
+        headers: { Authorization: "key " + sessionToken },
+      })
       .then((res) => {
-        console.log(res.data);
         if (res.data.sucess) {
-          setRequestData(res.data.result);
+          setAvailableAmbulance(res.data.result);
         }
       })
       .catch((err) => console.log(err));
@@ -119,38 +123,24 @@ const Home = (props) => {
     }
   };
 
-  const sendLocationDataToBackend = (lat, lng) => {
-    // Send the coordinates to the backend using an Axios POST request
-    // You can use Axios or any other method to send the data
-    // Example:
-    // axios.post('/api/saveLocation', { latitude: lat, longitude: lng })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error sending location data:', error);
-    //   });
-  };
-
   const [isNewRequest, setIsNewRequest] = useState(true);
 
   const handleAccept = () => {};
   const handleReject = (notificationID) => {
     // Make a POST request to your backend with the notificationID
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
-        notificationID: notificationID,
-      })
-      .then((response) => {
-        // Handle the response from the server, if needed
-        console.log("Reject Notification Response:", response.data);
-
-        // You can update the state or perform other actions based on the response
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the request
-        console.error("Reject Notification Error:", error);
-      });
+    // axios
+    //   .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
+    //     notificationID: notificationID,
+    //   })
+    //   .then((response) => {
+    //     // Handle the response from the server, if needed
+    //     console.log("Reject Notification Response:", response.data);
+    //     // You can update the state or perform other actions based on the response
+    //   })
+    //   .catch((error) => {
+    //     // Handle any errors that occurred during the request
+    //     console.error("Reject Notification Error:", error);
+    //   });
   };
 
   useEffect(() => {
@@ -193,11 +183,17 @@ const Home = (props) => {
     }));
   };
 
-  const handleAssignAmbulance = (ambulanceID, userID) => {
+  const handleAssignAmbulance = (ambulanceID, notification, driverID) => {
     // Define the data to send in the request body
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     const requestData = {
       ambulanceID: ambulanceID,
-      userID: userID,
+      userID: notification.userID,
+      requestID: notification.requestID,
+      latitude: notification.lat,
+      longtitude: notification.lng,
+      driverID: driverID,
+      connectedTime: currentDateTime,
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
@@ -221,9 +217,27 @@ const Home = (props) => {
       });
   };
 
+  // // Make a POST request to your backend
+  // axios
+  //   .post(
+  //     `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
+  //     requestData,
+  //     { headers: { Authorization: "key " + sessionToken } }
+  //   )
+  //   .then((response) => {
+  //     // Handle the response from the server, if needed
+  //     console.log("Assign Ambulance Response:", response.data);
+
+  //     // You can update the state or perform other actions based on the response
+  //   })
+  //   .catch((error) => {
+  //     // Handle any errors that occurred during the request
+  //     console.error("Assign Ambulance Error:", error);
+  //   });
+
   return (
     <div>
-      <div className="container">
+      <div className="hospital-container">
         <div className="map">
           {/* Render the Google Map */}
           <Map
@@ -246,29 +260,9 @@ const Home = (props) => {
             ))}
           </Map>
         </div>
+
         {/*Active ambulance details */}
         <div className="controls">
-          {/* <div className="tables"> */}
-          {/* <h3 style={{ backgroundColor: "white" }}>Away from hospital</h3> */}
-          {/* <table className="table table-bordered table-striped table-hover "> */}
-          {/* <thead> */}
-          {/* <tr> */}
-          {/* <th>AmbID</th> */}
-          {/* <th>LocID</th> */}
-          {/* </tr> */}
-          {/* </thead> */}
-          {/* <tbody> */}
-          {/* {ambulanceLocation.map((ambulance, index) => ( */}
-          {/* <tr key={index}> */}
-          {/* <td>{ambulance.ambulanceID}</td> */}
-          {/* <td>{ambulance.locationID}</td> */}
-          {/* Add more <td> elements for other properties */}
-          {/* </tr> */}
-          {/* ))} */}
-          {/* </tbody> */}
-          {/* </table> */}
-          {/* </div> */}
-
           <div className="notifications">
             <button
               className={
@@ -295,7 +289,7 @@ const Home = (props) => {
                           Cancel
                         </button>
                         <ul>
-                          {ambulanceLocation.map((ambulance, index) => (
+                          {AvailableAmbulance.map((ambulance, index) => (
                             <li key={index}>
                               Ambulance No: {ambulance.ambulanceNumber}
                               <button
@@ -306,7 +300,8 @@ const Home = (props) => {
                                 onClick={() =>
                                   handleAssignAmbulance(
                                     ambulance.ambulanceID,
-                                    notification.userID
+                                    notification,
+                                    ambulance.driverID
                                   )
                                 }
                               >

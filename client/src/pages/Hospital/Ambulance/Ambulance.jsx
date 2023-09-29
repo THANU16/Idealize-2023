@@ -19,22 +19,24 @@ const Ambulance = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.sucess) {
-          setAmbulanceData(res.data.result);
+          const originalArray = res.data.result;
+          const filteredArray = originalArray.map((item) => ({
+            'Ambulance Number': item.ambulanceNumber,
+            'Driver Assigned':item.driverAssigned?'Yes':'No',
+            'Driver ID':item.driverID,
+            'Available':item.available?'Yes':'No',
+          }));
+          setAmbulanceData(filteredArray);
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
   const ambulanceColumns = [
-    "ambulanceNumber",
-    "hospitalID",
-    "isAvailable",
-    "driverConnectionID",
-    "driverID",
-    "connectedTime",
-    "disconnectedTime",
-    "date",
-    "workingHours",
+    'Ambulance Number',
+    'Driver Assigned',
+    'Driver ID',
+    'Available'
   ];
 
   return (

@@ -20,22 +20,29 @@ const Drivers = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.sucess) {
-          setDriverData(res.data.result);
+          const originalArray = res.data.result;
+          const filteredArray = originalArray.map((item) => ({
+            'First Name': item.firstName,
+            'Last Name': item.lastName,
+            'Phone No.': item.phoneNumber,
+            'Email': item.email,
+            'NIC': item.NIC,
+            'Address': item.address,
+          }));
+          setDriverData(filteredArray);
+          console.log(res.data.result);
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
   const driverColumns = [
-    "firstName",
-    "lastName",
-    "phoneNumber",
-    "email",
-    "password",
-    "NIC",
-    "address",
-    "createdAt",
-    "updatedAt",
+    'First Name',
+    'Last Name',
+    'Phone No.',
+    'Email',
+    'NIC',
+    'Address'
   ];
 
   return (
