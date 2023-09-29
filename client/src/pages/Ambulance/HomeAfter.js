@@ -184,38 +184,8 @@ const Home = (props) => {
             <p><h4><b>AmbulanceNo:{ambulance.ambulanceNumber} </b></h4></p>
           </div>
           <div className="notifications">
-            {/* <img src={notification} alt="notification" className="notification-icon" /> */}
-            {/* Render notifications based on the state */}
-            {/* {showNotifications && (
-              <div className="notification-container">
-                {requestData.map((notification, index) => (
-                  <div className="notification" key={index}>
-                    <>
-                      <p>{notification.requestID}</p>
-                      <p>{formatTime(notification.requestedTime)}</p>
-                      <span>
-                        <button
-                          style={{ backgroundColor: "green", margin: "10px" }}
-                          onClick={() =>
-                            toggleNotificationDropdown(notification.requestID)
-                          }
-                        >
-                          Accept
-                        </button>
-                      </span>
-                      <span>
-                        <button
-                          style={{ backgroundColor: "red" }}
-                          onClick={handleReject}
-                        >
-                          Reject
-                        </button>
-                      </span>
-                    </>
-                  </div>
-                ))}
-              </div>
-            )} */}
+
+           
           <img
             src={notification}
             alt="notification"
