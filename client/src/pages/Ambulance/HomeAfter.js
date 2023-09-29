@@ -75,7 +75,7 @@ const Home = (props) => {
     }));
   };
 
-  const handleReject = () => { };
+  const handleReject = () => {};
   function formatTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
     const hours = dateTime.getHours();
@@ -101,7 +101,6 @@ const Home = (props) => {
   // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
-
   };
 
   // Create a function to update requestData
@@ -190,17 +189,26 @@ const Home = (props) => {
           </Link>
           <div classname="amno">
             <p>
-              <h4>
+              <h4
+                style={{
+                  backgroundColor: "#19295a",
+                  borderRadius: "10px",
+                  color: "white",
+                  fontSize: "20px",
+                  padding: "10px",
+                }}
+              >
                 <b>AmbulanceNo:{ambulance.ambulanceNumber} </b>
               </h4>
             </p>
           </div>
           <div className="notifications">
-
             <img
               src={notification}
               alt="notification"
-              className={isNewRequest?"notification-icon ring":'notification-icon'}
+              className={
+                isNewRequest ? "notification-icon ring" : "notification-icon"
+              }
               onClick={handleNotificationClick} // Add the onClick event handler
             />
             {isNewRequest? requestData.length:'' }

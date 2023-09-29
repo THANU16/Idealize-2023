@@ -47,7 +47,7 @@ const Drivers = () => {
 
   return (
     <div className="hospital-driver">
-      <div>
+      <div> 
         <div>
           <div style={{ textAlign: "center" }}>
             <h1>Driver Details</h1>
