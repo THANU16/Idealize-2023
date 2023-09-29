@@ -24,7 +24,7 @@ const useWebSockets = (
 ) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+    const websocketUrl = `${process.env.REACT_APP_WEBSOCKET_URL}/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
 
@@ -36,7 +36,7 @@ const useWebSockets = (
 
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log('hospital request')
+      console.log("hospital request");
       console.log(data.requestData);
 
       // Call the function to update requestData when new data is received
@@ -75,9 +75,8 @@ const Home = (props) => {
   // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
-    console.log('new data',newData)
+    console.log("new data", newData);
   };
-
 
   // Pass playNotificationSound to useWebSockets
   useWebSockets(sessionToken, typeID, updateRequestData, playNotificationSound);
@@ -98,7 +97,7 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
 
-    if (!JSON.parse(sessionStorage.getItem("hospitalLocation"))) {
+    if (JSON.parse(sessionStorage.getItem("hospitalLocation"))==null) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/hospital/getHospitalLocation`, {
           headers: { Authorization: "key " + sessionToken },
@@ -114,9 +113,13 @@ const Home = (props) => {
           }
         })
         .catch((err) => console.log(err));
-    } else {
+
+    } 
+    else {
       setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
+
     }
+
 
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
@@ -217,7 +220,6 @@ const Home = (props) => {
   // Usage
   const providedTimestamp = "2023-09-28T05:20:14.000Z";
   const formattedDifference = formatAndSubtractTime(providedTimestamp);
-  console.log(formattedDifference);
 
   // Create a state variable to track the dropdown state for each notification
   const [notificationDropdowns, setNotificationDropdowns] = useState({});
@@ -237,16 +239,22 @@ const Home = (props) => {
     }));
   };
 
-  const handleAssignAmbulance = (ambulanceID, notification, driverID) => {
+
+  const handleAssignAmbulance = (ambulance, notification) => {
     // Define the data to send in the request body
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+
     const requestData = {
-      
+
       userID: notification.userID,
+      ambulanceID: ambulance.ambulanceID,
+      driverID: ambulance.driverID,
       requestID: notification.requestID,
-      latitude: notification.lat,
-      longtitude: notification.lng,
-      driverID: driverID,
+      userlat: notification.lat,
+      userlng: notification.lng,
+      ambulancelat: ambulance.latitude,
+      ambulancelng: ambulance.longitude,
+      driverID: ambulance.driverID,
       connectedTime: currentDateTime,
     };
     // console.log(requestData);
@@ -313,9 +321,8 @@ const Home = (props) => {
                               className="req_hos_assign_button"
                               onClick={() =>
                                 handleAssignAmbulance(
-                                  ambulance.ambulanceID,
+                                  ambulance,
                                   notification,
-                                  ambulance.driverID
                                 )
                               }
                             >

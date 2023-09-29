@@ -2,7 +2,7 @@ import React from "react";
 
 // Define a CSS style object to control font size and add decorative elements
 const textStyle = {
-  fontSize: "25px", // Default font size for larger screens
+  fontSize: "20px", // Default font size for larger screens
   color: "#333", // Text color
 };
 
@@ -25,7 +25,7 @@ const bulletIconStyle = {
 const bulletIcon = {
   width: "16px",
   height: "16px",
-  backgroundColor: "#F00", // Red color for ambulance and hospital context
+  backgroundColor: "#19295a", // Red color for ambulance and hospital context
   borderRadius: "50%",
   display: "inline-block",
   marginRight: "8px", // Adjust the spacing between bullet and text
@@ -53,14 +53,24 @@ function UserSafety() {
         ...fadeInAnimation,
       }}
     >
-      <h2 style={{ ...textStyle, color: headingColor }}>User Safety</h2>
+      <h2
+        style={{
+          ...textStyle,
+          color: headingColor,
+          backgroundColor: "#19295a",
+          color: "white",
+          borderRadius: "10px",
+        }}
+      >
+        User Safety
+      </h2>
       <h3 style={{ ...textStyle, color: headingColor }}>
         Safety Tips While Waiting for an Ambulance
       </h3>
       <hr
         style={{ width: "100%", height: "2px", backgroundColor: headingColor }}
       />
-      <p style={textStyle}>
+      <p style={textStyle }>
         While waiting for an ambulance, please keep the following safety tips in
         mind:
         <ul style={customBulletStyle}>
