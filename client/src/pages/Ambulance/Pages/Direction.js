@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
-import axios from "axios";
-import moment from "moment";
-import driverIcon from "../../../assets/icons/download.png";
-import notification from "../../../assets/icons/images.png";
-import { Link } from "react-router-dom";
-import "../Ambulance_Home.css";
-import { useNavigate } from "react-router-dom";
+import "./Direction.css";
+function ShowPath(props) {
+  // const [origin, setOrigin] = useState(null);
+  const origin = { lat: 6.912901, lng: 79.877633 };
+
 
 function ShowPath(props) {
   // const [origin, setOrigin] = useState(null);
@@ -23,6 +21,7 @@ function ShowPath(props) {
 
 
   // }, []);
+
 
 
   useEffect(() => {
@@ -45,7 +44,7 @@ function ShowPath(props) {
       console.error("Geolocation is not available in this browser.");
     }
   }, []);
-  
+
   useEffect(() => {
     // Retrieve data from sessionStorage and parse it
     const hospitalReqData = JSON.parse(
@@ -74,6 +73,7 @@ function ShowPath(props) {
     }
   }, [origin, destination]);
  
+
   function initMap() {
     const directionsService = new window.google.maps.DirectionsService();
     const directionsRenderer = new window.google.maps.DirectionsRenderer();
@@ -101,6 +101,7 @@ function ShowPath(props) {
         window.alert("Directions request failed due to " + error.status);
       });
   }
+
   const navigate = useNavigate();
   const handleNotificationClick = () => {
     navigate("/notification");
@@ -137,6 +138,7 @@ function ShowPath(props) {
       <div className="driverMap">
         <div id="map" style={{ height: "670px" }}></div>
       </div>
+
     </div>
   );
 }
@@ -333,4 +335,5 @@ export default GoogleApiWrapper({
 
 // export default GoogleApiWrapper({
 //   apiKey: "AIzaSyAl5YvfOlFxEH09-MkWNh9OhYoQdN3uJOs", // Replace with your API key
+
 // })(ShowPath);
