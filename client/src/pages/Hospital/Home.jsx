@@ -24,7 +24,7 @@ const useWebSockets = (
 ) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+    const websocketUrl = `${process.env.REACT_APP_WEBSOCKET_URL}/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
 
@@ -117,6 +117,7 @@ const Home = (props) => {
     } 
     else {
       setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
+
     }
 
 
@@ -242,7 +243,9 @@ const Home = (props) => {
   const handleAssignAmbulance = (ambulance, notification) => {
     // Define the data to send in the request body
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    const requestData = {      
+
+    const requestData = {
+
       userID: notification.userID,
       ambulanceID: ambulance.ambulanceID,
       driverID: ambulance.driverID,
