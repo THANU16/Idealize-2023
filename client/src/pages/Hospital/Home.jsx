@@ -60,6 +60,7 @@ const Home = (props) => {
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
   const [AvailableAmbulance, setAvailableAmbulance] = useState([]);
+  const [hospitalLocation, setHospitalLocation] = useState([]);
 
   // Create an Audio element for the notification sound
   const notificationAudio = new Audio(notificationSound);
@@ -93,10 +94,29 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
 
+    if (!JSON.parse(sessionStorage.getItem("hospitalLocation"))) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/hospital/getHospitalLocation`, {
+          headers: { Authorization: "key " + sessionToken },
+        })
+        .then((res) => {
+          console.log(res.data.result[0]);
+          if (res.data.sucess) {
+            setHospitalLocation(res.data.result[0]);
+            sessionStorage.setItem(
+              "hospitalLocation",
+              JSON.stringify(res.data.result[0])
+            );
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
+    }
+
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
       .then((res) => {
-        // console.log(res.data);
         if (res.data.sucess) {
           setRequestData(res.data.result);
         }
@@ -144,22 +164,7 @@ const Home = (props) => {
   const [isNewRequest, setIsNewRequest] = useState(true);
 
   const handleAccept = () => {};
-  const handleReject = (notificationID) => {
-    // Make a POST request to your backend with the notificationID
-    // axios
-    //   .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
-    //     notificationID: notificationID,
-    //   })
-    //   .then((response) => {
-    //     // Handle the response from the server, if needed
-    //     console.log("Reject Notification Response:", response.data);
-    //     // You can update the state or perform other actions based on the response
-    //   })
-    //   .catch((error) => {
-    //     // Handle any errors that occurred during the request
-    //     console.error("Reject Notification Error:", error);
-    //   });
-  };
+  const handleReject = (notificationID) => {};
 
   useEffect(() => {
     setIsNewRequest(true);
