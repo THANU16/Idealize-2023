@@ -1,11 +1,16 @@
-.container{
+.hospital_sidebar_container{
     display:flex;
     margin-left: 0px;
+    max-width: 100%;
+    --bs-gutter-x: 0
+    height: 90vh;
+    position: relative;
   }
   main{
     width: 100%;
     padding: 20px;
   }
+
   .h_sidebar {
     /* padding-left: 30px; */ /* Remove this line */
     background: #19295a;
@@ -84,3 +89,5 @@
     background-size: cover;
     background-position: center;
   }
+
+  
