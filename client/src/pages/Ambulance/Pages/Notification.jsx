@@ -48,7 +48,7 @@ const Notification = () => {
   const [hospitalReqData, setHospitalReqData] = useState(false);
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
-
+  const [isNewRequest, setIsNewRequest] = useState(true);
   // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData

@@ -166,10 +166,6 @@ const Home = (props) => {
   const handleAccept = () => {};
   const handleReject = (notificationID) => {};
 
-  useEffect(() => {
-    setIsNewRequest(true);
-  }, [requestData]);
-
   const [showNotifications, setShowNotifications] = useState(false);
 
   // Function to toggle the visibility of notifications
