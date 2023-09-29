@@ -129,6 +129,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
                 Submit
               </button>
 
+
             </div>
           </form>
         </div>
