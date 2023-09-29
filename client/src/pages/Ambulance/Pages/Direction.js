@@ -14,8 +14,16 @@ function ShowPath(props) {
   const [time, setTime] = useState(new Date());
   const [currentTime, setCurrentTime] = useState([]);
   const destination = { lat: 6.793697, lng: 79.901385 };
-
+  const [requeste, setRequest] = useState([]);
   // const [destination, setDestination] = useState(null);
+
+
+  // useEffect(() => {
+    
+
+
+  // }, []);
+
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -37,7 +45,7 @@ function ShowPath(props) {
       console.error("Geolocation is not available in this browser.");
     }
   }, []);
-
+  
   useEffect(() => {
     // Retrieve data from sessionStorage and parse it
     const hospitalReqData = JSON.parse(
@@ -65,7 +73,7 @@ function ShowPath(props) {
       initMap();
     }
   }, [origin, destination]);
-
+ 
   function initMap() {
     const directionsService = new window.google.maps.DirectionsService();
     const directionsRenderer = new window.google.maps.DirectionsRenderer();
@@ -97,6 +105,8 @@ function ShowPath(props) {
   const handleNotificationClick = () => {
     navigate("/notification");
   };
+
+
   return (
     <div className="driverContainer">
       <div>
