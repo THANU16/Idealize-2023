@@ -203,6 +203,7 @@ const Home = (props) => {
               className={isNewRequest?"notification-icon ring":'notification-icon'}
               onClick={handleNotificationClick} // Add the onClick event handler
             />
+            {isNewRequest? requestData.length:'' }
             {/* Render other components as needed */}
           </div>
         </div>
