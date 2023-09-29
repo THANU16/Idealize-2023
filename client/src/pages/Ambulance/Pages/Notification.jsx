@@ -14,7 +14,8 @@ const useWebSockets = (
 ) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+
+    const websocketUrl = `${process.env.REACT_APP_WEBSOCKET_URL}/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
 
@@ -24,7 +25,6 @@ const useWebSockets = (
 
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log(data);
       if (data.identify === "hospitalReq") {
         updateHospitalReqData(data.requestData);
       } else {
@@ -38,8 +38,6 @@ const useWebSockets = (
     };
   }, [sessionToken, typeID, updateRequestData, updateHospitalReqData]); // Include updateRequestData in the dependencies
 };
-
-
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
@@ -68,10 +66,7 @@ const Notification = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
       .then((res) => {
-        // console.log(res.data);
         if (res.data.sucess) {
-          // console.log("we want to set to notification pannel data");
-          // console.log(res.data.result)
           setNotifications(res.data.result);
         }
       })
@@ -79,33 +74,34 @@ const Notification = () => {
   }, [requestData]);
   // console.log(notifications);
 
-
   const handleAccept = (notification) => {
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     const ambulancedata = JSON.parse(sessionStorage.getItem("ambulance"));
-    const ambulanceData = {
+    const data = {
       ambulanceID: ambulancedata.ambulanceID,
       userID: notification.userID,
       requestID: notification.requestID,
+      //  we want to set the current location of the ambulance driver location =========================================================
+      // ======================================================
+      // Please consider
+      // =======================================================================
+      // =====================================================
+      // =======================================
       latitude: notification.lat,
       longtitude: notification.lng,
-      driverID: ambulancedata.driverID,
       connectedTime: currentDateTime,
     };
 
-    console.log(
-      notification
-    );
-
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
-        ambulanceData,
+        `${process.env.REACT_APP_API_URL}/emergency/ambulanceAcceptReq`,
+        data,
         { headers: { Authorization: "key " + sessionToken } }
       )
       .then((response) => {
-        // Handle the response from the server, if needed
-        console.log("Assign Ambulance Response:", response.data);
+        if (response.data.success) {
+          navigate("/show");
+        }
 
         // You can update the state or perform other actions based on the response
       })
@@ -113,7 +109,7 @@ const Notification = () => {
         // Handle any errors that occurred during the request
         console.error("Assign Ambulance Error:", error);
       });
-  }
+  };
   function formatTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
     const hours = dateTime.getHours();
@@ -130,9 +126,6 @@ const Notification = () => {
     // For this example, we will remove the notification from the list.
   };
 
-
-
-  console.log(notifications);
   return (
     <div>
       <h1 className="heading1">Notifications</h1>
