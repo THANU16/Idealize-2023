@@ -165,6 +165,37 @@ const Home = (props) => {
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   }
 
+  function formatAndSubtractTime(timestamp) {
+    // Parse the provided timestamp
+    const providedTime = new Date(timestamp);
+
+    // Get the current time
+    const currentTime = new Date();
+
+    // Calculate the time difference in milliseconds
+    const timeDifference = currentTime - providedTime;
+
+    // Check if the provided time is in the future
+    if (timeDifference > 0) {
+      // Convert the time difference to hours, minutes, and seconds
+      const hours = Math.floor(timeDifference / 3600000);
+      const minutes = Math.floor((timeDifference % 3600000) / 60000);
+      const seconds = Math.floor((timeDifference % 60000) / 1000);
+
+      // Format the time difference
+      const formattedTime = `${minutes} min ago`;
+
+      return formattedTime;
+    } else {
+      return "The provided time is in the past.";
+    }
+  }
+
+  // Usage
+  const providedTimestamp = "2023-09-28T05:20:14.000Z";
+  const formattedDifference = formatAndSubtractTime(providedTimestamp);
+  console.log(formattedDifference);
+
   // Create a state variable to track the dropdown state for each notification
   const [notificationDropdowns, setNotificationDropdowns] = useState({});
 
@@ -278,7 +309,9 @@ const Home = (props) => {
                       <p>
                         <img src={user_profile} />
                       </p>
-                      <p>{formatTime(notification.requestedTime)}</p>
+                      <p style={{ fontWeight: "bold" }}>
+                        {formatAndSubtractTime(notification.requestedTime)}
+                      </p>
                       <span>
                         <button
                           className="req_hos_accept_button"
