@@ -12,7 +12,15 @@ import PlacesAutocomplete, {
 
 import axios from "axios";
 
-const useWebSockets = (sessionToken, typeID, updateRequestData) => {
+// Import your notification sound
+import notificationSound from "../soundmp3/iphoneRingtone.mp3";
+
+const useWebSockets = (
+  sessionToken,
+  typeID,
+  updateRequestData,
+  playNotificationSound
+) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
     const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
@@ -31,13 +39,16 @@ const useWebSockets = (sessionToken, typeID, updateRequestData) => {
 
       // Call the function to update requestData when new data is received
       updateRequestData(data);
+
+      // Play the notification sound when a new notification arrives
+      playNotificationSound();
     };
 
     return () => {
       console.log("web socket close");
       websocket.close();
     };
-  }, [sessionToken, typeID, updateRequestData]); // Include updateRequestData in the dependencies
+  }, [sessionToken, typeID, updateRequestData, playNotificationSound]); // Include updateRequestData and playNotificationSound in the dependencies
 };
 
 const Home = (props) => {
@@ -49,14 +60,23 @@ const Home = (props) => {
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
   const [AvailableAmbulance, setAvailableAmbulance] = useState([]);
+  const [hospitalLocation, setHospitalLocation] = useState([]);
+
+  // Create an Audio element for the notification sound
+  const notificationAudio = new Audio(notificationSound);
+
+  // Define a function to play the notification sound
+  const playNotificationSound = () => {
+    notificationAudio.play();
+  };
 
   // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
   };
 
-  // Pass updateRequestData to useWebSockets
-  useWebSockets(sessionToken, typeID, updateRequestData);
+  // Pass playNotificationSound to useWebSockets
+  useWebSockets(sessionToken, typeID, updateRequestData, playNotificationSound);
 
   useEffect(() => {
     axios
@@ -74,10 +94,29 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
 
+    if (!JSON.parse(sessionStorage.getItem("hospitalLocation"))) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/hospital/getHospitalLocation`, {
+          headers: { Authorization: "key " + sessionToken },
+        })
+        .then((res) => {
+          console.log(res.data.result[0]);
+          if (res.data.sucess) {
+            setHospitalLocation(res.data.result[0]);
+            sessionStorage.setItem(
+              "hospitalLocation",
+              JSON.stringify(res.data.result[0])
+            );
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
+    }
+
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
       .then((res) => {
-        // console.log(res.data);
         if (res.data.sucess) {
           setRequestData(res.data.result);
         }
@@ -125,22 +164,7 @@ const Home = (props) => {
   const [isNewRequest, setIsNewRequest] = useState(true);
 
   const handleAccept = () => {};
-  const handleReject = (notificationID) => {
-    // Make a POST request to your backend with the notificationID
-    // axios
-    //   .post(`${process.env.REACT_APP_API_URL}/hospital/rejectNotification`, {
-    //     notificationID: notificationID,
-    //   })
-    //   .then((response) => {
-    //     // Handle the response from the server, if needed
-    //     console.log("Reject Notification Response:", response.data);
-    //     // You can update the state or perform other actions based on the response
-    //   })
-    //   .catch((error) => {
-    //     // Handle any errors that occurred during the request
-    //     console.error("Reject Notification Error:", error);
-    //   });
-  };
+  const handleReject = (notificationID) => {};
 
   useEffect(() => {
     setIsNewRequest(true);
@@ -217,8 +241,6 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    // ... (your existing code for fetching data)
-  
     // Check if there are any new requests
     if (requestData.length > 0) {
       setIsNewRequest(true);

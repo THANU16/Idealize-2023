@@ -99,12 +99,12 @@ function handleWebSocketConnections(server) {
         // Handle WebSocket messages here.
       });
 
-      // socket.on("close", () => {
-      //   console.log("WebSocket client disconnected");
+      socket.on("close", () => {
+        console.log("WebSocket client disconnected");
 
-      //   // Remove the WebSocket connection from the map when the client disconnects.
-      //   hospitalsConnection.delete(clientID);
-      // });
+        // Remove the WebSocket connection from the map when the client disconnects.
+        hospitalsConnection.delete(clientID);
+      });
     } else {
       // If the session token is invalid, close the WebSocket connection.
       console.log("Invalid session token. Closing WebSocket connection.");
@@ -216,35 +216,36 @@ function handleWebSocketConnections(server) {
     const setQuery1 =
       "insert into user_ambulance_connection (requestID, ambulanceID,connectedTime) values(?,?,?);";
 
-    // connection.query(
-    //   setQuery1,
-    //   [requestID, ambulanceID, connectedTime],
-    //   (err, result) => {
-    //     if (err) {
-    //       // sendMessageToAmbulance(ambulanceID, requestData);
-    //       // console.log(ambulanceConnection.get(1));
-    //       res.send({
-    //         success: false,
-    //         isExist: false,
-    //         error: err,
-    //         result: null,
-    //       });
-    //     } else {
-    //       res.send({
-    //         success: true,
-    //         isExist: true,
-    //         error: null,
-    //         result: result,
-    //       });
-    ambulanceConnection
-      .get(driverID)
-      .send(
-        JSON.stringify({ requestData: requestData, identify: "hospitalReq" })
-      );
-    console.log("message sending to ambulance");
-    //     }
-    //   }
-    // );
+    connection.query(
+      setQuery1,
+      [requestID, ambulanceID, connectedTime],
+      (err, result) => {
+        if (err) {
+          // sendMessageToAmbulance(ambulanceID, requestData);
+          // console.log(ambulanceConnection.get(1));
+          res.send({
+            success: false,
+            isExist: false,
+            error: err,
+            result: null,
+          });
+        } else {
+          res.send({
+            success: true,
+            isExist: true,
+            error: null,
+            result: result,
+          });
+          ambulanceConnection.get(driverID).send(
+            JSON.stringify({
+              requestData: requestData,
+              identify: "hospitalReq",
+            })
+          );
+          console.log("message sending to ambulance");
+        }
+      }
+    );
   });
 
   return router;
