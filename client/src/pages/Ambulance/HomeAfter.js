@@ -86,7 +86,7 @@ const Home = (props) => {
     }));
   };
 
-  const handleReject = () => {};
+  const handleReject = () => { };
   function formatTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
     const hours = dateTime.getHours();
@@ -102,8 +102,8 @@ const Home = (props) => {
   const [isClientReq, setIsClientReq] = useState(false);
 
   const [userLocation, setUserLocation] = useState({
-    userLat: null,
-    userLng: null,
+    latitude: null,
+    longitude: null,
   });
 
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
@@ -149,7 +149,7 @@ const Home = (props) => {
         const longitude = position.coords.longitude;
 
         // Set the user's location in the state
-        setUserLocation({ userLat: latitude, userLng: longitude });
+        setUserLocation({ latitude, longitude });
       });
     } else {
       console.log("Geolocation is not available in this browser.");
@@ -245,8 +245,8 @@ const Home = (props) => {
 
               <Marker
                 position={{
-                  lat: userLocation.latitude,
-                  lng: userLocation.longitude,
+                  lat: userLocation.userLat,
+                  lng: userLocation.userLng,
                 }}
                 icon={{
                   url: deiverMarkerIcon,
