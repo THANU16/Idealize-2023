@@ -1,37 +1,41 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
-import { useEffect,useState } from "react";
-
 
 function ShowPath(props) {
-  const [origin, setOrigin] = useState(null);
-  const [destination, setDestination] = useState(null);
-  const [acceptData,setAcceptData] = useState(null)
+  const destination = { lat: 6.912901, lng: 79.877633 };
+
+  const origin = { lat: 6.793697, lng: 79.901385 };
 
   useEffect(() => {
-    const acceptDataFromSession = JSON.parse(sessionStorage.getItem("acceptData"));
-    setAcceptData(acceptDataFromSession);
-
-    // Check if acceptDataFromSession exists and then set origin
-    if (acceptDataFromSession) {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            setDestination({ lat: latitude, lng: longitude });
-            setOrigin({ lat: acceptDataFromSession.latitude, lng: acceptDataFromSession.longtitude });
-          },
-          (error) => {
-            console.error("Geolocation error:", error);
-            // Handle the error, e.g., by providing a user-friendly message
-          }
-        );
-      } else {
-        console.error("Geolocation is not available in this browser.");
-      }
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          // setDestination({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error("Geolocation error:", error);
+          // Handle the error, e.g., by providing a user-friendly message
+        }
+      );
+    } else {
+      console.error("Geolocation is not available in this browser.");
     }
   }, []);
+
+  useEffect(() => {
+    // Retrieve data from sessionStorage and parse it
+    const acceptData = JSON.parse(sessionStorage.getItem("acceptData"));
+    console.log(acceptData);
+
+    if (acceptData) {
+      // setOrigin({
+      //   lat: acceptData.ambulancelat,
+      //   lng: acceptData.ambulancelng,
+      // });
+    }
+  }, []); // Empty dependency array means this effect runs only once when the component mounts
 
   useEffect(() => {
     if (origin && destination) {

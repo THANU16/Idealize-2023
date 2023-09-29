@@ -103,7 +103,6 @@ const Notification = () => {
       connectedTime: currentDateTime,
     };
 
-    
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/emergency/ambulanceAcceptReq`,
@@ -139,7 +138,6 @@ const Notification = () => {
     // You can add your logic here, such as marking the notification as rejected.
     // For this example, we will remove the notification from the list.
   };
-
 
   return (
     <div>

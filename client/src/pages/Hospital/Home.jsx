@@ -260,7 +260,7 @@ const Home = (props) => {
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-
+    console.log(ambulance.latitude,ambulance.longitude)
     // Make a POST request to your backend
     axios
       .post(
