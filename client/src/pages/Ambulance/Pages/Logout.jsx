@@ -34,35 +34,37 @@ function Logout() {
   };
 
   return (
-    <div className="d-flex justify-content-between px-5 py-5">
+    <div className="driver-logout">
+      <div className="driver-logout-container">
       <div>
         {showConfirmationDialog ? (
-          <p>Are you sure you want to quit the job today?</p>
+          <p>Have you completed your work hours for the day?</p>
         ) : (
           <p>Are you sure you want to log out?</p>
         )}
       </div>
-      <div>
+      <div className="driver-logout-btn">
         {showConfirmationDialog ? (
-          <div className="LogoutButtons">
-            <button onClick={handleConfirmQuit} className="logoutLogoutButton btn btn-light mx-2 ">
+          <div >
+            <button onClick={handleConfirmQuit} className="driver-logout-logout ">
               Yes
             </button>
-            <button onClick={handleCancelQuit} className="logoutLogoutButton btn btn-light mx-2 ">
-              No Just Logout
+            <button onClick={handleCancelQuit} className="driver-logout-logout ">
+              No Just Break
             </button>
           </div>
         ) : (
           <>
-            <button onClick={handlecancel} className="btn btn-light mx-2 LogoutCancelButton ">
+            <button onClick={handlecancel} className="driver-logout-cancel ">
               Cancel
             </button>
-            <button onClick={handleLogout} className="btn btn-light mx-2 logoutLogoutButton">
+            <button onClick={handleLogout} className="driver-logout-logout">
               Logout
             </button>
           </>
         )}
-      </div>
+        </div>
+        </div>
     </div>
   );
 }
