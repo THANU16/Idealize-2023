@@ -17,8 +17,7 @@ router.post("/add", (req, res) => {
   const latitude = req.body.latitude;
   const longitude = req.body.longitude;
   // check the employee already exist or not
-  const checkQuery =
-    "SELECT * FROM ambulance where ambulanceNumber = ?;";
+  const checkQuery = "SELECT * FROM ambulance where ambulanceNumber = ?;";
 
   // type id is the forigen key so we set the forigen key correctly
   const insertQuery =

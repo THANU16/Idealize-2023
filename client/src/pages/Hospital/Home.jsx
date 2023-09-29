@@ -97,7 +97,7 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
 
-    if (JSON.parse(sessionStorage.getItem("hospitalLocation"))==null) {
+    if (JSON.parse(sessionStorage.getItem("hospitalLocation")) == null) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/hospital/getHospitalLocation`, {
           headers: { Authorization: "key " + sessionToken },
@@ -114,7 +114,7 @@ const Home = (props) => {
         })
         .catch((err) => console.log(err));
 
-    } 
+    }
     else {
       setHospitalLocation(JSON.parse(sessionStorage.getItem("hospitalLocation")));
 
@@ -260,7 +260,7 @@ const Home = (props) => {
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-
+    console.log(ambulance.latitude,ambulance.longitude)
     // Make a POST request to your backend
     axios
       .post(

@@ -10,10 +10,16 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
   const [registrationNo, setAmbulanceCompany] = useState("");
   const [registeredDate, setRegisteredDate] = useState("");
   const navigate = useNavigate();
-  const hospitalLocation = JSON.parse(sessionStorage.getItem("hospitalLocation"));
+  const hospitalLocation = JSON.parse(
+    sessionStorage.getItem("hospitalLocation")
+  );
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = { ambulanceNo: ambulanceNo ,latitude:hospitalLocation.latitude,longitude:hospitalLocation.longitude};
+    const data = {
+      ambulanceNo: ambulanceNo,
+      latitude: hospitalLocation.latitude,
+      longitude: hospitalLocation.longitude,
+    };
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
 
     axios
@@ -119,7 +125,10 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             </div>
 
             <div className="ambulance-details-next" style={{ color: "white" }}>
-              <button type="submit" onClick={handleSubmit}>Submit</button>
+              <button type="submit" onClick={handleSubmit}>
+                Submit
+              </button>
+
             </div>
           </form>
         </div>

@@ -52,6 +52,7 @@ const RequestCancel = (props) => {
 
   // Create a function to update requestData
   const updateAcceptData = (newData) => {
+    console.log("newDatajhjhfhtdfhjgjhf", newData);
     setAcceptData(newData); // Assuming newData is an object you want to add to requestData
     sessionStorage.setItem("acceptData", JSON.stringify(newData));
     navigate("show");
