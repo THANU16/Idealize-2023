@@ -175,6 +175,8 @@ h3 {
   margin: auto;
   border-radius: 5px ;
   background: #B3FBB5;
+  border: none;
+
 
 
   
@@ -227,6 +229,7 @@ h3 {
   align-items: center;
   padding: 5px 0;
   border-bottom: 1px solid #ccc;
+  
 }
 
 /* Add any other styles you need */
@@ -237,6 +240,8 @@ h3 {
   background: #B3FBB5;
   width: 65px;
   margin: 10px;
+  border: none;
+
 
 }
 
@@ -247,6 +252,8 @@ h3 {
   border-radius: 32px;
   background: #FA9898;
   width: 65px;
+  border: none;
+
 
 }
                           

@@ -68,7 +68,7 @@ const RequestCancel = (props) => {
   // Use useEffect to log currentLocation when it changes
   return (
     <div>
-      <div className="container">
+      <div className="req-container">
         <div className="req_modal">
           <SmallModal />
         </div>

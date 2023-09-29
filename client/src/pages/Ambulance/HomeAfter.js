@@ -189,7 +189,15 @@ const Home = (props) => {
           </Link>
           <div classname="amno">
             <p>
-              <h4>
+              <h4
+                style={{
+                  backgroundColor: "#19295a",
+                  borderRadius: "10px",
+                  color: "white",
+                  fontSize: "20px",
+                  padding: "10px",
+                }}
+              >
                 <b>AmbulanceNo:{ambulance.ambulanceNumber} </b>
               </h4>
             </p>
@@ -203,6 +211,7 @@ const Home = (props) => {
               }
               onClick={handleNotificationClick} // Add the onClick event handler
             />
+            {isNewRequest? requestData.length:'' }
             {/* Render other components as needed */}
           </div>
         </div>

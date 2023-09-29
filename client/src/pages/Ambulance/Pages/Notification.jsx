@@ -92,6 +92,7 @@ const Notification = () => {
       connectedTime: currentDateTime,
     };
 
+
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/emergency/ambulanceAcceptReq`,
@@ -126,24 +127,30 @@ const Notification = () => {
     // For this example, we will remove the notification from the list.
   };
 
+
   return (
     <div>
       <h1 className="heading1">Notifications</h1>
       <ul className="notification-list">
         {notifications.map((notification, index) => (
-          <li key={index} className="notification-item">
+          <li
+            key={index}
+            className={`notification-item ${index % 2 === 0 ? "even" : "odd"}`}
+          >
             <p>
-              <img src={user_profile} />
+              <img src={user_profile} alt="User Profile" />
             </p>
-            <p>{moment(notification.requestedTime).format("HH:mm:ss")}</p>
+            <p style={{ fontWeight: "bold" }}>
+              {moment(notification.requestedTime).format("HH:mm:ss")}
+            </p>
             <button
-              className="accept-button"
+              className="ambulance-accept-button"
               onClick={() => handleAccept(notification)}
             >
               Accept
             </button>
             <button
-              className="reject-button"
+              className="ambulance-reject-button"
               onClick={() => handleReject(notification.id)}
             >
               Reject
