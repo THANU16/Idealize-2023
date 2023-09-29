@@ -117,6 +117,7 @@ const Home = (props) => {
       setHospitalLocation(
         JSON.parse(sessionStorage.getItem("hospitalLocation"))
       );
+
     }
 
     axios
@@ -239,6 +240,7 @@ const Home = (props) => {
 
   const handleAssignAmbulance = (ambulance, notification) => {
     // Define the data to send in the request body
+
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
 
     const requestData = {
@@ -255,7 +257,7 @@ const Home = (props) => {
     };
     // console.log(requestData);
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
-
+    console.log(ambulance.latitude,ambulance.longitude)
     // Make a POST request to your backend
     axios
       .post(
@@ -273,6 +275,11 @@ const Home = (props) => {
         // Handle any errors that occurred during the request
         console.error("Assign Ambulance Error:", error);
       });
+
+      setNotificationDropdowns((prevState) => ({
+        ...prevState,
+        [notification.requestID]: !prevState[notification.requestID],
+      }));
   };
 
   useEffect(() => {
@@ -283,6 +290,8 @@ const Home = (props) => {
       setIsNewRequest(false);
     }
   }, [requestData]);
+
+  useEffect(() => {}, [notificationDropdowns]);
 
   return (
     <div className="hospital-container">

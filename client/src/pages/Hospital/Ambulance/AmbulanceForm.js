@@ -128,6 +128,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
               <button type="submit" onClick={handleSubmit}>
                 Submit
               </button>
+
             </div>
           </form>
         </div>
