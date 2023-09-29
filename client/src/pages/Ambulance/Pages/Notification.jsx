@@ -39,8 +39,6 @@ const useWebSockets = (
   }, [sessionToken, typeID, updateRequestData, updateHospitalReqData]); // Include updateRequestData in the dependencies
 };
 
-
-
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
   const navigate = useNavigate();
@@ -79,7 +77,6 @@ const Notification = () => {
   }, [requestData]);
   // console.log(notifications);
 
-
   const handleAccept = (notification) => {
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     const ambulancedata = JSON.parse(sessionStorage.getItem("ambulance"));
@@ -93,9 +90,7 @@ const Notification = () => {
       connectedTime: currentDateTime,
     };
 
-    console.log(
-      notification
-    );
+    console.log(notification);
 
     axios
       .post(
@@ -113,7 +108,7 @@ const Notification = () => {
         // Handle any errors that occurred during the request
         console.error("Assign Ambulance Error:", error);
       });
-  }
+  };
   function formatTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
     const hours = dateTime.getHours();
@@ -130,27 +125,30 @@ const Notification = () => {
     // For this example, we will remove the notification from the list.
   };
 
-
-
   console.log(notifications);
   return (
     <div>
       <h1 className="heading1">Notifications</h1>
       <ul className="notification-list">
         {notifications.map((notification, index) => (
-          <li key={index} className="notification-item">
+          <li
+            key={index}
+            className={`notification-item ${index % 2 === 0 ? "even" : "odd"}`}
+          >
             <p>
-              <img src={user_profile} />
+              <img src={user_profile} alt="User Profile" />
             </p>
-            <p>{moment(notification.requestedTime).format("HH:mm:ss")}</p>
+            <p style={{ fontWeight: "bold" }}>
+              {moment(notification.requestedTime).format("HH:mm:ss")}
+            </p>
             <button
-              className="accept-button"
+              className="ambulance-accept-button"
               onClick={() => handleAccept(notification)}
             >
               Accept
             </button>
             <button
-              className="reject-button"
+              className="ambulance-reject-button"
               onClick={() => handleReject(notification.id)}
             >
               Reject

@@ -14,7 +14,7 @@ function Example() {
       <Button
         onClick={() => setSmShow(true)}
         className="me"
-        style={{ width: "340px", height: "5vh" }} // Adjust the width as needed
+        style={{ width: "340px", height: "5vh", backgroundColor: "#19295a" }} // Adjust the width as needed
       >
         <h2>
           <LuChevronsDown />
