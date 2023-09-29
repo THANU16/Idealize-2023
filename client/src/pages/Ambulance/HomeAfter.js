@@ -8,6 +8,10 @@ import "./Ambulance_Home.css";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { Link } from "react-router-dom";
+
+// Import your notification sound
+import notificationSound from "../soundmp3/iphoneRingtone.mp3";
+
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -20,7 +24,8 @@ const useWebSockets = (
   sessionToken,
   typeID,
   updateRequestData,
-  updateHospitalReqData
+  updateHospitalReqData,
+  playNotificationSound
 ) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
@@ -41,13 +46,15 @@ const useWebSockets = (
       } else {
         updateRequestData(data.requestData);
       }
+      // Play the notification sound when a new notification arrives
+      playNotificationSound();
     };
 
     return () => {
       console.log("web socket close");
       websocket.close();
     };
-  }, [sessionToken, typeID, updateRequestData, updateHospitalReqData]); // Include updateRequestData in the dependencies
+  }, [sessionToken, typeID, updateRequestData, updateHospitalReqData, playNotificationSound]); // Include updateRequestData in the dependencies
 };
 
 const Home = (props) => {
@@ -63,7 +70,10 @@ const Home = (props) => {
   };
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
   const [isNewRequest, setIsNewRequest] = useState(true);
-
+  // Define a function to play the notification sound
+  const playNotificationSound = () => {
+    notificationAudio.play();
+  };
   // Create a state variable to track the dropdown state for each notification
   const [notificationDropdowns, setNotificationDropdowns] = useState({});
 
@@ -112,7 +122,7 @@ const Home = (props) => {
   };
 
   // Pass updateRequestData to useWebSockets
-  useWebSockets(sessionToken, typeID, updateRequestData, updateHospitalReqData);
+  useWebSockets(sessionToken, typeID, updateRequestData, updateHospitalReqData, playNotificationSound);
 
   // Store driver's location here
   useEffect(() => {
@@ -200,10 +210,10 @@ const Home = (props) => {
             <img
               src={notification}
               alt="notification"
-              className={isNewRequest?"notification-icon ring":'notification-icon'}
+              className={isNewRequest ? "notification-icon ring" : 'notification-icon'}
               onClick={handleNotificationClick} // Add the onClick event handler
             />
-            {isNewRequest? requestData.length:'' }
+            {isNewRequest ? requestData.length : ''}
             {/* Render other components as needed */}
           </div>
         </div>
