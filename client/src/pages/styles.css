@@ -189,11 +189,54 @@ h3 {
 }
 
 .white-button {
-  width: 80%;
+  width: 300px;
   margin: auto;
   border-radius: 5px ;
 }
 
 
+/* Add these styles to your existing CSS file or import a new CSS file */
+
+.hospital-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.map {
+  flex-grow: 1;
+  position: relative;
+}
+
+.map-notifications-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+}
+
+.notification-container {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Add any other styles you need */
 
 

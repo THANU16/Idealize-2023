@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import "./ambulance.css";
+import "../HospitalAmbulanceDriver.css";
 import Add from "../../../assets/icons/add.png";
 import axios from "axios";
 import CommonTable from "../Table";
@@ -23,7 +23,8 @@ const Ambulance = () => {
           const filteredArray = originalArray.map((item) => ({
             'Ambulance Number': item.ambulanceNumber,
             'Driver Assigned':item.driverAssigned?'Yes':'No',
-            'Driver ID':item.driverID,
+            'Driver Name':'set',
+            'Driver Phone No.':'set',
             'Available':item.available?'Yes':'No',
           }));
           setAmbulanceData(filteredArray);
@@ -35,16 +36,17 @@ const Ambulance = () => {
   const ambulanceColumns = [
     'Ambulance Number',
     'Driver Assigned',
-    'Driver ID',
+    'Driver Name',
+    'Driver Phone No.',
     'Available'
   ];
 
   return (
-    <div>
+    <div className="hospital-ambulance">
       <div>
         <div>
           <div style={{ textAlign: "center" }}>
-            <h1>Ambluance Details</h1>
+            <h1>Ambulance Details</h1>
           </div>
         </div>
         <CommonTable data={ambulanceData} columns={ambulanceColumns} />

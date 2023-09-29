@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import "../Ambulance/ambulance.css";
+import "../HospitalAmbulanceDriver.css";
 import Add from "../../../assets/icons/add.png";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
@@ -46,7 +46,7 @@ const Drivers = () => {
   ];
 
   return (
-    <div>
+    <div className="hospital-driver">
       <div>
         <div>
           <div style={{ textAlign: "center" }}>
