@@ -6,8 +6,38 @@ import driverIcon from "../../../assets/icons/download.png";
 import notification from "../../../assets/icons/images.png";
 import { Link } from "react-router-dom";
 import "../Ambulance_Home.css";
+import { useNavigate } from "react-router-dom";
+
+const useWebSockets = (sessionToken, typeID, updateRequestData) => {
+  useEffect(() => {
+    // Construct the WebSocket URL with headers as query parameters
+    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+
+    const websocket = new WebSocket(websocketUrl);
+
+    websocket.onopen = () => {
+      console.log("connected");
+    };
+
+    websocket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log(data);
+
+      updateRequestData(data.requestData);
+    };
+
+    return () => {
+      console.log("web socket close");
+      websocket.close();
+    };
+  }, [sessionToken, typeID, updateRequestData]); // Include updateRequestData in the dependencies
+};
 
 function ShowPath() {
+  const [requestData, setRequestData] = useState([]);
+  const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
+  const typeID = JSON.parse(sessionStorage.getItem("typeID"));
+
   const [origin, setOrigin] = useState({
     lat: 12.9802347063322,
     lng: 77.5907760360903,
@@ -18,7 +48,15 @@ function ShowPath() {
     lng: 78.5910979011596,
   }); // Replace with your destination latitude and longitude
 
-  // const [currentTime, setCurrentTime] = useState("");
+  // Create a function to update requestData
+  const updateRequestData = (newData) => {
+    setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
+
+    console.log(newData);
+  };
+
+  // Pass updateRequestData to useWebSockets
+  // useWebSockets(sessionToken, typeID, updateRequestData);
 
   useEffect(() => {
     // Call the API to fetch origin and destination data
@@ -88,7 +126,10 @@ function ShowPath() {
         window.alert("Directions request failed due to " + error.status);
       });
   };
-
+  const navigate = useNavigate();
+  const handleNotificationClick = () => {
+    navigate("/notification");
+  };
   return (
     <div className="driverContainer">
       <div>
@@ -106,7 +147,12 @@ function ShowPath() {
             </p>
           </div>
           <div>
-            <img src={notification} alt="notification" className="notification-icon" />
+            <img
+              src={notification}
+              alt="notification"
+              className="notification-icon"
+              onClick={handleNotificationClick} // Add the onClick event handler
+            />
             {/* Render notifications based on the state */}
             {/* {showNotifications && (
               <div className="notification-container">
@@ -143,7 +189,7 @@ function ShowPath() {
         </div>
       </div>
       <div className="driverMap">
-        <div id="map" style={{ height: "700px" }}></div>
+        <div id="map" style={{ height: "670px" }}></div>
       </div>
     </div>
   );

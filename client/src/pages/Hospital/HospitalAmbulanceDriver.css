@@ -1,0 +1,63 @@
+/* Add this CSS to your ambulance.css file */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #333; /* Text color */
+  background-color: rgba(255, 255, 255, 0.5); /* Background color with reduced opacity */
+  border-collapse: collapse; /* Collapse table borders */
+  border-radius: 10px; /* Add border-radius */
+  font-family: Arial, sans-serif; /* Change the font-family */
+}
+
+.table thead th {
+  background-color: #19295A; /* Header background color */
+  color: #fff; /* Header text color */
+  padding: 1rem;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  vertical-align: top;
+  border: 1px solid #dee2e6; /* Table border color */
+  border-radius: 5px; /* Add border-radius */
+  background-color: rgba(180, 177, 177, 0.5); /* Cell background color with reduced opacity */
+}
+
+/* Adjust the width of specific columns */
+.table td:nth-child(2),
+.table th:nth-child(2) {
+  width: 150px; /* Set the width of the second column */
+}
+
+/* Add more specific styling for your table as needed */
+
+.hospital-ambulance ,.hospital-driver,.hospital-help {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh; /* Adjust the height as needed */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  text-align: center;
+  color: #fff; /* Text color for contrast */
+  font-family: Arial, sans-serif; /* Choose your preferred font-family */
+}
+
+.hospital-ambulance::before,.hospital-driver::before, .hospital-help::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./../../assets/icons/Logo_LS.svg') ; /* Path to your LifeSaverLogo */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0.1; /* Adjust the opacity for the background image */
+  z-index: -1; /* Place it behind the content */
+}

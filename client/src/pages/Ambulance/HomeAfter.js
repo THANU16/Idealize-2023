@@ -3,8 +3,9 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import deiverMarkerIcon from "../../assets/icons/placeholder.png";
 import driverIcon from "../../assets/icons/download.png";
-import notification from "../../assets/icons/images.png"
+import notification from "../../assets/icons/images.png";
 import "./Ambulance_Home.css";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
@@ -15,9 +16,15 @@ import PlacesAutocomplete, {
 
 import axios from "axios";
 
-const useWebSockets = (sessionToken, typeID, updateRequestData) => {
+const useWebSockets = (
+  sessionToken,
+  typeID,
+  updateRequestData,
+  updateHospitalReqData
+) => {
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
+    // console.log(`${process.env.REACT_APP_WEBSOCKET_URL}`);
     const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
@@ -26,24 +33,25 @@ const useWebSockets = (sessionToken, typeID, updateRequestData) => {
       console.log("connected");
     };
 
-    // websocket.send(JSON.stringify("hiii "));
-
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log(data);
-
-      // Call the function to update requestData when new data is received
-      updateRequestData(data);
+      if (data.identify === "hospitalReq") {
+        updateHospitalReqData(data.requestData);
+      } else {
+        updateRequestData(data.requestData);
+      }
     };
 
     return () => {
       console.log("web socket close");
       websocket.close();
     };
-  }, [sessionToken, typeID, updateRequestData]); // Include updateRequestData in the dependencies
+  }, [sessionToken, typeID, updateRequestData, updateHospitalReqData]); // Include updateRequestData in the dependencies
 };
 
 const Home = (props) => {
+  const navigate = useNavigate();
   const ambulance = JSON.parse(sessionStorage.getItem("ambulance"));
   // const { onRequest, onCancel } = props;
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -55,7 +63,7 @@ const Home = (props) => {
   };
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
   const [isNewRequest, setIsNewRequest] = useState(true);
-  
+
   // Create a state variable to track the dropdown state for each notification
   const [notificationDropdowns, setNotificationDropdowns] = useState({});
 
@@ -67,7 +75,7 @@ const Home = (props) => {
     }));
   };
 
-  const handleReject = () => { }
+  const handleReject = () => {};
   function formatTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
     const hours = dateTime.getHours();
@@ -78,9 +86,8 @@ const Home = (props) => {
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   }
 
-
   const [requestData, setRequestData] = useState([]);
-  const [isHospitalReq, setIsHospitalReq] = useState(false);
+  const [hospitalReqData, setHospitalReqData] = useState(false);
   const [isClientReq, setIsClientReq] = useState(false);
 
   const [userLocation, setUserLocation] = useState({
@@ -92,23 +99,19 @@ const Home = (props) => {
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
 
   // Create a function to update requestData
-  const updateHospitalReq = () => {
-    setIsHospitalReq(true); 
-    setIsClientReq(false);
-  };
-
-  // Create a function to update requestData
-  const updateClientReq = (newData) => {
-    setIsClientReq(true);
-  };
-
-  // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
   };
 
+  // Create a function to update requestData
+  const updateHospitalReqData = (newData) => {
+    setHospitalReqData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
+    sessionStorage.setItem("hospitalReqData", JSON.stringify(hospitalReqData));
+    navigate("/show");
+  };
+
   // Pass updateRequestData to useWebSockets
-  useWebSockets(sessionToken, typeID, updateRequestData);
+  useWebSockets(sessionToken, typeID, updateRequestData, updateHospitalReqData);
 
   // Store driver's location here
   useEffect(() => {
@@ -116,10 +119,9 @@ const Home = (props) => {
     setSelectedAmbulance(JSON.parse(sessionStorage.getItem("ambulance")));
 
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/driver/checkConnection`,
-        { headers: { Authorization: "key " + sessionToken } }
-      )
+      .get(`${process.env.REACT_APP_API_URL}/driver/checkConnection`, {
+        headers: { Authorization: "key " + sessionToken },
+      })
       .then((res) => {
         if (res.data.sucess) {
           //   setAmbulanceNo(res.data.result);
@@ -164,6 +166,9 @@ const Home = (props) => {
   const onRequest = () => {
     setRequest(false);
   };
+  const handleNotificationClick = () => {
+    navigate("/notification");
+  };
 
   return (
     <div>
@@ -174,13 +179,18 @@ const Home = (props) => {
               <img src={driverIcon} alt="Driver Icon" className="driver-icon" />
             </div>
           </Link>
-          <div classname= "amno">
-            <p><h4><b>AmbulanceNo:{ambulance.ambulanceNumber} </b></h4></p>
+          <div classname="amno">
+            <p>
+              <h4>
+                <b>AmbulanceNo:{ambulance.ambulanceNumber} </b>
+              </h4>
+            </p>
           </div>
           <div className="notifications">
-            <img src={notification} alt="notification" className="notification-icon" />
+
+            {/* <img src={notification} alt="notification" className="notification-icon" /> */}
             {/* Render notifications based on the state */}
-            {showNotifications && (
+            {/* {showNotifications && (
               <div className="notification-container">
                 {requestData.map((notification, index) => (
                   <div className="notification" key={index}>
@@ -209,8 +219,13 @@ const Home = (props) => {
                   </div>
                 ))}
               </div>
-            )}
-
+            )} */}
+            <img
+              src={notification}
+              alt="notification"
+              className="notification-icon"
+              onClick={handleNotificationClick} // Add the onClick event handler
+            />
             {/* Render other components as needed */}
           </div>
         </div>
@@ -245,7 +260,6 @@ const Home = (props) => {
           )}
         </div>
       </div>
-
     </div>
   );
 };

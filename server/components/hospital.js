@@ -375,33 +375,29 @@ router.get("/getAvailableAmbulance", (req, res) => {
   });
 });
 
-// router.get("/getAvailableAmbulance", (req, res) => {
-//   console.log(req);
-//   const body = req.body;
+router.get("/getHospitalLocation", (req, res) => {
+  const body = req.body;
+  const sessionToken = req.headers.authorization.replace("key ", "");
 
-//   // const hospitalID = decodedUserId(req.headers.authorization);
-//   const sessionToken = req.headers.Authorization.replace("key ", "");
-//   const hospitalID = decodedUserId(sessionToken);
+  const hospitalID = decodedUserId(sessionToken);
+  const getQuery =
+    "SELECT latitude, longitude FROM hospital where hospitalID = ?";
 
-//   console.log(hospitalID);
-//   const getQuery =
-//     "SELECT * FROM ambulance where hospitalID = ? and isAvailable = 1;";
-
-//   connection.query(getQuery, [hospitalID], (err, result) => {
-//     if (err) {
-//       res.send({
-//         sucess: false,
-//         error: err,
-//         result: null,
-//       });
-//     } else {
-//       res.send({
-//         sucess: true,
-//         error: null,
-//         result: result,
-//       });
-//     }
-//   });
-// });
+  connection.query(getQuery, [hospitalID], (err, result) => {
+    if (err) {
+      res.send({
+        sucess: false,
+        error: err,
+        result: null,
+      });
+    } else {
+      res.send({
+        sucess: true,
+        error: null,
+        result: result,
+      });
+    }
+  });
+});
 
 module.exports = router;

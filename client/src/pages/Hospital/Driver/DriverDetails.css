@@ -1,102 +1,158 @@
-/* HospitalDetailsPage.css */
-.hospital-details-container {
-    width: 90%;
-    margin: auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow:4px 4px 4px 4px rgba(0, 0, 0, 0.1);
-    position: relative; /* Add this to establish a positioning context */
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-  }
-  
-  /* h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  } */
-  
-  .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 15px;
-  }
-  
-  .form-group {
-    flex: 1;
-    margin-right: 10px;
-    max-width: calc(50% - 5px); /* Equal width for labels and input fields */
-  }
-  
-  /* Adjust the width of the label for two input fields in one row */
-  label {
-    display: block;
-    font-weight: bold;
-    width: 20%; /* Adjust the width as needed */
-    text-align: left;
-    margin-bottom: 5px;
-  }
-  
-  /* Apply this style to every second form-group to ensure two fields in one row */
-  .form-group:nth-child(even) {
-    margin-right: 0; /* Remove the right margin for every second form-group */
-  }
-  
-  /* Style for input fields */
-  /* input[type="text"],
-  input[type="date"],
-  input[type="tel"],
-  input[type="email"],
-  input[type="url"],
-  input[type="password"],
+/* DriverDetails.css */
 
-  select {
-    width: 70%;
-    height: 40px;
-    padding: 5px;
-    border-radius: 10px;
-    border: 3px solid #19295A;
-    background: #FFF;
-    font-size: 15px;
-  } */
-  
-  
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-  }
-  
-  /* Adjust the position of the buttons */
-  button[type="next"] {
-    width: 10%;
-    padding: 10px;
-    background-color:  #2e427e;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    bottom: 0;
-    right: 150px;
-  }
-  
-  button[type="next"]{
-    margin-right: 0px;
-    margin-left: 85%;
-  }
-  
-  /* Style for button hover state */
-  button[type="next"]:hover {
-    background-color: #0056b3;
- 
-  }
+.driver-details {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh; /* Adjust the height as needed */
+  text-align: center;
+  color: #120202; /* Text color for contrast */
+  font-family: Arial, sans-serif; /* Choose your preferred font-family */
+}
 
-  NavLink{
-    color: #ffffff;
-  }
-  
-  /* You can add more styling as needed */
-  
+.driver-details::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../assets/icons/Logo_LS.svg'); /* Path to your LifeSaverLogo */
+  opacity: 0.1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.driver-details-container {
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(247, 241, 241, 0.5);
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* Add this to establish a positioning context */
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+/* Style for the title */
+.driver-details h2 {
+  text-align: center;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+  max-width: calc(50% - 5px); /* Equal width for labels and input fields */
+  margin: auto;
+}
+
+/* Adjust the width of the label for two input fields in one row */
+label {
+  display: block;
+  font-weight: bold;
+  width: 80%; /* Adjust the width as needed */
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+/* Apply this style to every second form-group to ensure two fields in one row */
+.form-group:nth-child(even) {
+  margin-right: 0; /* Remove the right margin for every second form-group */
+}
+
+/* Style for input fields */
+.driver-details-input {
+  width: 70%;
+  height: 40px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 3px solid #19295A;
+  background: #FFF;
+  font-size: 15px;
+}
+
+/* Specific style for NIC input */
+.NIC {
+  width: 360px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* Adjust the position of the buttons */
+.driver-details-next {
+  width: 10%;
+  padding: 10px;
+  background-color: #2e427e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  bottom: 0;
+  right: 150px;
+  margin-right: 0px;
+  margin-left: 85%;
+}
+
+/* Style for button hover state */
+.driver-details-next:hover {
+  background-color: #0056b3;
+}
+
+/* Style for navigation links */
+NavLink {
+  color: #ffffff;
+}
+
+/* You can add more styling as needed */
+.label-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+label {
+  flex: 0 0 20%; /* 20% of the container width */
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+  max-width: calc(50% - 5px); /* Equal width for labels and input fields */
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+/* Style for input fields */
+.driver-details-input {
+  width: 70%; /* Take up all available width */
+  height: 40px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 3px solid #19295A;
+  background: #FFF;
+  font-size: 15px;
+}
+
+.NIC {
+  width: 360px;
+}

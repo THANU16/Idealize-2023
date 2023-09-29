@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Dancing+Script:wght@700&family=Gugi&family=Oregano&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Dancing+Script:wght@700&family=EB+Garamond&family=Gugi&family=Oregano&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alice&family=Caveat:wght@700&family=Dancing+Script:wght@700&family=EB+Garamond&family=Gugi&family=Oregano&family=Permanent+Marker&family=Special+Elite&display=swap');
+
+
+
+
+/* nav_bars starting */
+.hospital-help{
+    color: black;
+}
+
+.nav_bar{
+    background-image: linear-gradient(to right, rgba(75, 21, 125, 0.785), rgba(8, 15, 56, 0.668));
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    font-family: sans-serif;
+}
+.nav_bar_toggle_button{
+    background-image: linear-gradient(to right, rgba(75, 21, 125, 0.785), rgba(8, 15, 56, 0.668));
+    height: auto;
+    display: none;
+    justify-content: space-between;
+    padding-right: 30px;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+.nav_bar_ancher_one{
+    padding:10px 20px;
+    font-size: 3em;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    font-family: 'Caveat', cursive, sans-serif;
+}
+.nav_bar_hidden{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(187, 182, 182);
+    height: 50vh;
+}
+.nav_bar_hidden_a{
+    font-size: 2em;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    line-height: 2em;
+}
+.nav_bar_hidden_a:hover{
+    text-decoration: none;
+    color: rgb(45, 44, 44);
+}
+.nav_bar_ancher_one:hover{
+    color: rgb(224, 222, 222);
+    text-decoration: none;
+}
+.nav_bar_ancher{
+    font-family: "Alice", sans-serif;
+    padding:10px 20px;
+    font-size: 2em;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+}
+.nav_bar_ancher:hover{
+    color: rgb(224, 222, 222);
+    text-decoration: none;
+}
+/* nev_bar ending.... */
+
+.container-1{
+    display: flex;
+    flex-direction: row;
+    margin-left:20px ;
+}
+.container-2{
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sub_container-2_hading{
+    font-family: 'Oregano', cursive, sans-serif;
+    font-size: 3em;
+    font-weight: 800;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: underline;
+}
+.sub_container-2_paragraph{
+    font-family: 'EB Garamond', serif;
+    text-align: center;
+    padding: 5px;
+    font-size: 1.3em;
+    font-family: 800;
+}
+.sub_container-1_img{
+    height: 400px;
+    transition: 1s ease;
+    width: 100%;
+}
+.sub_container-1_img:hover{
+    transform: translateX(2px);
+    transform: translateY(2px);
+}
+
+
+/* container-2....start */
+.container-2{
+    position: relative;
+    background-color: rgba(47, 7, 55, 0.273);
+    height: auto;
+}
+.sub_container-2_quto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em;
+    font-weight: 700;
+    font-family: 'Caveat', cursive, sans-serif;
+    color: black;
+}
+.sub_container-2_quto:hover{
+    color: #99327e;
+    cursor: pointer;
+}
+.container-2_life_saver_png{
+    height: 400px;
+}
+/* container-2....end */
+
+
+.hr_tag{
+    border: 1px solid rgba(99, 99, 99, 0.553);
+    margin: 5px 40px;
+}
+
+
+/* container-3....start */
+.container-3{
+    padding: 20px;
+    margin: 30px;
+}
+.container-3_paragraph{
+    font-family: sans-serif;
+    font-weight: 500;
+    text-align: center;
+    font-size: 2em;
+}
+/* container-3....end */
+
+/* container-4.... starting */
+.container-4{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+}
+.sub_container_4{
+    margin: 20px;
+    border: 2px solid rgb(104, 104, 104);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 1s ease;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.sub_container_4:hover{
+    transform: translateY(5px);
+}
+.container-4_image{
+    height: 300px;
+}
+.sub_container_4_image_caption{
+    font-size: 1.5em;
+    font-family: sans-serif;
+    font-weight: 500;
+    padding-bottom: 20px;
+    color: #36102c;
+    cursor: pointer;
+}
+.sub_container_4_image_caption:hover{
+    color: rgba(3, 30, 30, 0.689);
+
+}
+/* container-4.... ending */
+
+
+
+@media screen and (max-width: 1300px) {
+    .container-1{
+        flex-direction: column;
+    }
+    .container-2{
+        position: relative;
+        top: 0;
+    }
+    .sub_container-1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sub_container-2_hading{
+        text-align: center;
+    }
+    .container-2{
+        flex-direction: column;
+        height: auto;
+    }
+    .sub_container-2_quto{
+        text-align: center;
+    }
+    .container-2_life_saver_png{
+        height: 400px;
+    }
+    .nav_bar_toggle_button{
+        display: flex;
+    }
+    .nav_bar{
+        display: none;
+    }
+    .container-4{
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 600px) {
+    .sub_container-2_hading{
+        font-size: 2em;
+        text-align: center;
+    }
+    .sub_container-2_paragraph{
+        font-size: 1.5em;
+    }
+    .sub_container-1_img{
+        height: 300px;
+    }
+    .container-2_life_saver_png{
+        height: 300px;
+    }
+}

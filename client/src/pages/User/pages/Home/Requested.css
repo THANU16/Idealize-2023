@@ -7,7 +7,6 @@
 .container{ 
     height: 90vh;
     position: relative;
-    --bs-gutter-x: 0;
     
   }
 
