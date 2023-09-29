@@ -25,7 +25,7 @@ const useWebSockets = (
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
     // console.log(`${process.env.REACT_APP_WEBSOCKET_URL}`);
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+    const websocketUrl = `${process.env.REACT_APP_WEBSOCKET_URL}/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
 

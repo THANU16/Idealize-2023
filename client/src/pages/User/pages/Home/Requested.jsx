@@ -19,7 +19,7 @@ import Row from "react-bootstrap/Row";
 
 const useWebSockets = (sessionToken, typeID, updateAcceptData) => {
   useEffect(() => {
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+    const websocketUrl = `${process.env.REACT_APP_WEBSOCKET_URL}/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
 

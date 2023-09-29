@@ -212,6 +212,51 @@ function handleWebSocketConnections(server) {
     );
   });
 
+  router.post("/ambulanceAcceptReq", (req, res) => {
+    const requestData = req.body; // Assuming you receive the emergency request data from the user
+    const sessionToken = req.headers.authorization.replace("key ", "");
+    console.log(requestData);
+    const userID = requestData.userID;
+    const requestID = requestData.requestID;
+    const ambulanceID = requestData.ambulanceID;
+    const connectedTime = requestData.connectedTime;
+    const driverID = decodedUserId(sessionToken);
+
+    const setQuery =
+      "insert into user_ambulance_connection (requestID, ambulanceID,connectedTime) values(?,?,?);";
+
+    connection.query(
+      setQuery,
+      [requestID, ambulanceID, connectedTime],
+      (err, result) => {
+        if (err) {
+          // sendMessageToAmbulance(ambulanceID, requestData);
+          // console.log(ambulanceConnection.get(1));
+          res.send({
+            success: false,
+            isExist: false,
+            error: err,
+            result: null,
+          });
+        } else {
+          res.send({
+            success: true,
+            isExist: true,
+            error: null,
+            result: result,
+          });
+          clientConnection.get(userID).send(
+            JSON.stringify({
+              requestData: requestData,
+              identify: "aceeptReq",
+            })
+          );
+          console.log("message sending to client");
+        }
+      }
+    );
+  });
+
   return router;
 }
 
