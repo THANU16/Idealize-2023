@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import ambulanceMarkerIcon from "../../assets/icons/map_ambulance.svg";
 import "../styles.css";
 import moment from "moment";
+import user_profile from "../../assets/icons/user_profile.svg";
 
 import Table from "react-bootstrap/Table";
 import PlacesAutocomplete, {
@@ -35,10 +36,11 @@ const useWebSockets = (
 
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log(data);
+      console.log('hospital request')
+      console.log(data.requestData);
 
       // Call the function to update requestData when new data is received
-      updateRequestData(data);
+      updateRequestData(data.requestData);
 
       // Play the notification sound when a new notification arrives
       playNotificationSound();
@@ -73,7 +75,9 @@ const Home = (props) => {
   // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
+    console.log('new data',newData)
   };
+
 
   // Pass playNotificationSound to useWebSockets
   useWebSockets(sessionToken, typeID, updateRequestData, playNotificationSound);
@@ -188,6 +192,37 @@ const Home = (props) => {
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   }
 
+  function formatAndSubtractTime(timestamp) {
+    // Parse the provided timestamp
+    const providedTime = new Date(timestamp);
+
+    // Get the current time
+    const currentTime = new Date();
+
+    // Calculate the time difference in milliseconds
+    const timeDifference = currentTime - providedTime;
+
+    // Check if the provided time is in the future
+    if (timeDifference > 0) {
+      // Convert the time difference to hours, minutes, and seconds
+      const hours = Math.floor(timeDifference / 3600000);
+      const minutes = Math.floor((timeDifference % 3600000) / 60000);
+      const seconds = Math.floor((timeDifference % 60000) / 1000);
+
+      // Format the time difference
+      const formattedTime = `${minutes} min ago`;
+
+      return formattedTime;
+    } else {
+      return "The provided time is in the past.";
+    }
+  }
+
+  // Usage
+  const providedTimestamp = "2023-09-28T05:20:14.000Z";
+  const formattedDifference = formatAndSubtractTime(providedTimestamp);
+  console.log(formattedDifference);
+
   // Create a state variable to track the dropdown state for each notification
   const [notificationDropdowns, setNotificationDropdowns] = useState({});
 
@@ -250,103 +285,102 @@ const Home = (props) => {
   }, [requestData]);
 
   return (
-    <div>
-      <div className="hospital-container">
-        <div className="map">
-          <div className="map-notifications-container">
-            <button
-              className={
-                isNewRequest ? "white-button red-button" : "white-button"
-              }
-              onClick={toggleNotifications}
-            >
-              <h3>Notification - {requestData.length}</h3>
-            </button>
-            {showNotifications && (
-              <div className="notification-container">
-                {requestData.map((notification, index) => (
-                  <div className="notification" key={index}>
-                    {notificationDropdowns[notification.requestID] ? (
-                      <div className="notification-dropdown">
-                        <h4>Available Ambulances:</h4>
-                        <button
-                          style={{ backgroundColor: "red", marginLeft: "10px" }}
-                          onClick={() => handleCancel(notification.requestID)}
-                        >
-                          Cancel
-                        </button>
-                        <ul>
-                          {AvailableAmbulance.map((ambulance, index) => (
-                            <li key={index}>
-                              Ambulance No: {ambulance.ambulanceNumber}
-                              <button
-                                style={{
-                                  backgroundColor: "green",
-                                  marginLeft: "10px",
-                                }}
-                                onClick={() =>
-                                  handleAssignAmbulance(
-                                    ambulance.ambulanceID,
-                                    notification,
-                                    ambulance.driverID
-                                  )
-                                }
-                              >
-                                Assign
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : (
-                      <>
-                        <p>{notification.requestID}</p>
-                        <p>{formatTime(notification.requestedTime)}</p>
-                        <span>
-                          <button
-                            style={{ backgroundColor: "green", margin: "10px" }}
-                            onClick={() =>
-                              toggleNotificationDropdown(notification.requestID)
-                            }
-                          >
-                            Accept
-                          </button>
-                        </span>
-                        <span>
-                          <button
-                            style={{ backgroundColor: "red" }}
-                            onClick={() => handleReject(notification.requestID)}
-                          >
-                            Reject
-                          </button>
-                        </span>
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <Map
-            google={props.google}
-            zoom={14}
-            initialCenter={{ lat: 6.9271, lng: 79.8612 }}
-            mapContainerClassName="map-container"
-            onClick={onMapClick}
+    <div className="hospital-container">
+      <div className="hospital-map">
+        <div className="map-notifications-container">
+          <button
+            className={
+              isNewRequest ? "green-button red-button" : "green-button"
+            }
+            onClick={toggleNotifications}
           >
-            {ambulanceLocation.map((location, index) => (
-              <Marker
-                key={index}
-                position={{ lat: location.latitude, lng: location.longitude }}
-                icon={{
-                  url: ambulanceMarkerIcon,
-                  scaledSize: new window.google.maps.Size(100, 100),
-                }}
-                onClick={onMarkerClick}
-              />
-            ))}
-          </Map>
+            <h3>Notification - {requestData.length}</h3>
+          </button>
+          {showNotifications && (
+            <div className="notification-container">
+              {requestData.map((notification, index) => (
+                <div className="notification" key={index}>
+                  {notificationDropdowns[notification.requestID] ? (
+                    <div className="notification-dropdown">
+                      <h4>Available Ambulances:</h4>
+                      <button
+                        className="req_hos_cancel_button"
+                        onClick={() => handleCancel(notification.requestID)}
+                      >
+                        Cancel
+                      </button>
+                      <ul>
+                        {AvailableAmbulance.map((ambulance, index) => (
+                          <li key={index}>
+                            Ambulance No: {ambulance.ambulanceNumber}
+                            <button
+                              className="req_hos_assign_button"
+                              onClick={() =>
+                                handleAssignAmbulance(
+                                  ambulance.ambulanceID,
+                                  notification,
+                                  ambulance.driverID
+                                )
+                              }
+                            >
+                              Assign
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <>
+                      <p>
+                        <img src={user_profile} />
+                      </p>
+                      <p style={{ fontWeight: "bold" }}>
+                        {formatAndSubtractTime(notification.requestedTime)}
+                      </p>
+                      <span>
+                        <button
+                          className="req_hos_accept_button"
+                          onClick={() =>
+                            toggleNotificationDropdown(notification.requestID)
+                          }
+                        >
+                          Accept
+                        </button>
+                      </span>
+                      <span>
+                        <button
+                          className="req_hos_reject_button"
+                          onClick={() => handleReject(notification.requestID)}
+                        >
+                          Reject
+                        </button>
+                      </span>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+        <Map
+          google={props.google}
+          zoom={14}
+          initialCenter={{ lat: 6.9271, lng: 79.8612 }}
+          mapContainerClassName="hospital-map-container"
+          onClick={onMapClick}
+        >
+          {ambulanceLocation.map((location, index) => (
+            <Marker
+              key={index}
+              position={{ lat: location.latitude, lng: location.longitude }}
+              icon={{
+                url: ambulanceMarkerIcon,
+                scaledSize: new window.google.maps.Size(100, 100),
+              }}
+              onClick={onMarkerClick}
+            />
+          ))}
+        </Map>
       </div>
     </div>
   );

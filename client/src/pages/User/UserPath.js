@@ -27,7 +27,7 @@ const UserPath = () => {
         <Route path="/requested" element={<Requested />}></Route>
         <Route path="/firstaid" element={<FirstAidInstruction />}></Route>
         <Route path="/hospital" element={<Hospital />}></Route>
-        <Route path="/show" element={<ShowDirections />}></Route>
+        <Route path="/requested/show" element={<ShowDirections />}></Route>
         <Route path="/help" element={<Help />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/request/cancel" element={<CancelRequest />}></Route>

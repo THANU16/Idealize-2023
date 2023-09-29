@@ -10,7 +10,10 @@ import "./Hospital_Sidebar.css";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => {
+    setIsOpen(!isOpen);
+    console.log(isOpen);
+  };
   const menuItem = [
     {
       path: "/home",
@@ -39,7 +42,7 @@ const Sidebar = ({ children }) => {
     },
   ];
   return (
-    <div className="container">
+    <div className="hospital_sidebar_container">
       <div
         style={{ width: isOpen ? "283.179px" : "87.418px" }}
         className="h_sidebar"
@@ -49,26 +52,25 @@ const Sidebar = ({ children }) => {
             LifeSaver
           </h1>
           <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className="bars">
-            <img src={logo} alt="" onClick={toggle} />
+            <img src={logo} alt="logo" onClick={toggle} />
           </div>
         </div>
         {menuItem.map((item, index) => (
-  <NavLink
-    to={item.path}
-    key={index}
-    className="link"
-    activeClassName="active"
-  >
-    <div className="icon">{item.icon}</div>
-    <div
-      style={{ display: isOpen ? "block" : "none" }}
-      className="link_text"
-    >
-      {item.name}
-    </div>
-  </NavLink>
-))}
-
+          <NavLink
+            to={item.path}
+            key={index}
+            className="link"
+            activeClassName="active"
+          >
+            <div className="icon">{item.icon}</div>
+            <div
+              style={{ display: isOpen ? "block" : "none" }}
+              className="link_text"
+            >
+              {item.name}
+            </div>
+          </NavLink>
+        ))}
       </div>
       <main>{children}</main>
     </div>
