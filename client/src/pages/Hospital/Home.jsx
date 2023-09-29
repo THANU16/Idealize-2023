@@ -239,6 +239,7 @@ const Home = (props) => {
 
   const handleAssignAmbulance = (ambulance, notification) => {
     // Define the data to send in the request body
+
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     const requestData = {      
       userID: notification.userID,
@@ -272,6 +273,11 @@ const Home = (props) => {
         // Handle any errors that occurred during the request
         console.error("Assign Ambulance Error:", error);
       });
+
+      setNotificationDropdowns((prevState) => ({
+        ...prevState,
+        [notification.requestID]: !prevState[notification.requestID],
+      }));
   };
 
   useEffect(() => {
