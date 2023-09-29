@@ -119,7 +119,7 @@ function HospitalDetailsPage({ onPrevious, onNext }) {
             </div>
 
             <div className="ambulance-details-next" style={{ color: "white" }}>
-              <button type="submit">Next</button>
+              <button type="submit" onClick={handleSubmit}>Submit</button>
             </div>
           </form>
         </div>

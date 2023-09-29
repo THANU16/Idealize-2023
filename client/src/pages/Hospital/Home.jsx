@@ -289,6 +289,8 @@ const Home = (props) => {
     }
   }, [requestData]);
 
+  useEffect(() => {}, [notificationDropdowns]);
+
   return (
     <div className="hospital-container">
       <div className="hospital-map">
