@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import "./Notification.css"; // Import your CSS file
 import axios from "axios";
+import moment from "moment";
 
+import user_profile from "../../../assets/icons/user_profile.svg";
 const useWebSockets = (
   sessionToken,
   typeID,
@@ -37,13 +39,10 @@ const useWebSockets = (
   }, [sessionToken, typeID, updateRequestData, updateHospitalReqData]); // Include updateRequestData in the dependencies
 };
 
+
+
 const Notification = () => {
-  const [notifications, setNotifications] = useState([
-    { id: 1, text: "Notification 1" },
-    { id: 2, text: "Notification 2" },
-    { id: 3, text: "Notification 3" },
-    // Add more notifications as needed
-  ]);
+  const [notifications, setNotifications] = useState([]);
   const navigate = useNavigate();
   const [requestData, setRequestData] = useState([]);
   const [hospitalReqData, setHospitalReqData] = useState(false);
@@ -69,65 +68,84 @@ const Notification = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/hospital/getRequest`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.sucess) {
-          console.log("we want to set to notification pannel data");
+          // console.log("we want to set to notification pannel data");
+          // console.log(res.data.result)
+          setNotifications(res.data.result);
         }
       })
       .catch((err) => console.log(err));
   }, [requestData]);
+  // console.log(notifications);
 
-  const handleAccept = (notificationId) => {
-    setNotifications((prevNotifications) =>
-      prevNotifications.filter(
-        (notification) => notification.id !== notificationId
-      )
-    );
+
+  const handleAccept = (notification) => {
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    const ambulancedata = JSON.parse(sessionStorage.getItem("ambulance"));
+    const ambulanceData = {
+      ambulanceID: ambulancedata.ambulanceID,
+      userID: notification.userID,
+      requestID: notification.requestID,
+      latitude: notification.lat,
+      longtitude: notification.lng,
+      driverID: ambulancedata.driverID,
+      connectedTime: currentDateTime,
+    };
 
     console.log(
-      "i create restapi now i want to pass the data to backend so i want to set the data inside this finction"
+      notification
     );
 
-    // axios
-    //   .post(
-    //     `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
-    //     requestData,
-    //     { headers: { Authorization: "key " + sessionToken } }
-    //   )
-    //   .then((response) => {
-    //     // Handle the response from the server, if needed
-    //     console.log("Assign Ambulance Response:", response.data);
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/emergency/assignAmbulance`,
+        ambulanceData,
+        { headers: { Authorization: "key " + sessionToken } }
+      )
+      .then((response) => {
+        // Handle the response from the server, if needed
+        console.log("Assign Ambulance Response:", response.data);
 
-    //     // You can update the state or perform other actions based on the response
-    //   })
-    //   .catch((error) => {
-    //     // Handle any errors that occurred during the request
-    //     console.error("Assign Ambulance Error:", error);
-    //   });
-  };
+        // You can update the state or perform other actions based on the response
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the request
+        console.error("Assign Ambulance Error:", error);
+      });
+  }
+  function formatTime(dateTimeString) {
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours();
+    const minutes = dateTime.getMinutes();
+    const seconds = dateTime.getSeconds();
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  }
 
   const handleReject = (notificationId) => {
     // Handle the "Reject" action for the notification with the specified ID
     // You can add your logic here, such as marking the notification as rejected.
     // For this example, we will remove the notification from the list.
-    setNotifications((prevNotifications) =>
-      prevNotifications.filter(
-        (notification) => notification.id !== notificationId
-      )
-    );
   };
 
+
+
+  console.log(notifications);
   return (
     <div>
-      <h1 className="heading1">Notifications </h1>
-
+      <h1 className="heading1">Notifications</h1>
       <ul className="notification-list">
-        {notifications.map((notification) => (
-          <li key={notification.id} className="notification-item">
-            <span className="notification-text">{notification.text}</span>
+        {notifications.map((notification, index) => (
+          <li key={index} className="notification-item">
+            <p>
+              <img src={user_profile} />
+            </p>
+            <p>{moment(notification.requestedTime).format("HH:mm:ss")}</p>
             <button
               className="accept-button"
-              onClick={() => handleAccept(notification.id)}
+              onClick={() => handleAccept(notification)}
             >
               Accept
             </button>

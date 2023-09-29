@@ -210,7 +210,7 @@ const Home = (props) => {
     // Define the data to send in the request body
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     const requestData = {
-      ambulanceID: ambulanceID,
+      
       userID: notification.userID,
       requestID: notification.requestID,
       latitude: notification.lat,
