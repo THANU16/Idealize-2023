@@ -71,6 +71,7 @@ const Home = (props) => {
   const [selectedAmbulance, setSelectedAmbulance] = useState({});
   const [isNewRequest, setIsNewRequest] = useState(true);
   // Define a function to play the notification sound
+  const notificationAudio = new Audio(notificationSound);
   const playNotificationSound = () => {
     notificationAudio.play();
   };
@@ -101,8 +102,8 @@ const Home = (props) => {
   const [isClientReq, setIsClientReq] = useState(false);
 
   const [userLocation, setUserLocation] = useState({
-    latitude: null,
-    longitude: null,
+    userLat: null,
+    userLng: null,
   });
 
   const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
@@ -148,7 +149,7 @@ const Home = (props) => {
         const longitude = position.coords.longitude;
 
         // Set the user's location in the state
-        setUserLocation({ latitude, longitude });
+        setUserLocation({ userLat: latitude, userLng: longitude });
       });
     } else {
       console.log("Geolocation is not available in this browser.");

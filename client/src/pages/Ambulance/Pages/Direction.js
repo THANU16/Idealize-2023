@@ -42,13 +42,14 @@ function ShowPath() {
   const typeID = JSON.parse(sessionStorage.getItem("typeID"));
 
   const [origin, setOrigin] = useState({
-    lat: null,
-    lng: null,
+    lat: 6.9270786,
+    lng: 79.861243,
+
   }); // Replace with your origin latitude and longitude
 
   const [destination, setDestination] = useState({
-    lat: null,
-    lng: null,
+    lat: 12.7885,
+    lng: 75.3455,
   }); // Replace with your destination latitude and longitude
 
   // Create a function to update requestData
@@ -57,52 +58,56 @@ function ShowPath() {
 
     console.log(newData);
   };
+  useEffect(() => {
+    // if ("geolocation" in navigator) {
+    //   navigator.geolocation.getCurrentPosition(function (position) {
+    //     const lat = position.coords.latitude;
+    //     const lng = position.coords.longitude;
+
+    //     // Set the user's location in the state
+    //     console.log({ lat, lng });
+    //     setOrigin({lat: lat,lng: lng });
+    //   });
+    // } else {
+    //   console.log("Geolocation is not available in this browser.");
+    // }
+
+    // const user = JSON.parse(sessionStorage.getItem("ambulance"));
+    // // console.log(user);
+    // setDestination({ lat: user.userlat, lng: user.userlng });
+  }, []);
 
   // Pass updateRequestData to useWebSockets
   // useWebSockets(sessionToken, typeID, updateRequestData);
 
   useEffect(() => {
     // Call the API to fetch origin and destination data
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
 
-        // Set the user's location in the state
-        setOrigin({ lat, lng });
-      });
-    } else {
-      console.log("Geolocation is not available in this browser.");
-    }
-
-    const ambulance = JSON.parse(sessionStorage.getItem("ambulance"));
-
-    setDestination({ lat: ambulance.latitude, lng: ambulance.longitude });
 
     const sessionToken = JSON.parse(sessionStorage.getItem("sessionToken"));
 
     // axios
-    //   .get(`${process.env.REACT_APP_API_URL}/xxxxxxxxxxxxxxx`, {
-    //     headers: { Authorization: "key " + sessionToken },
-    //   })
-    //   .then((res) => {
-    //     if (res.data.success) {
-    //       setOrigin({
-    //         lat: res.data.originLat,
-    //         lng: res.data.originLng,
-    //       });
-    //       setDestination({
-    //         lat: res.data.destinationLat,
-    //         lng: res.data.destinationLng,
-    //       });
-    //       // Initialize the map once data is fetched
-    //       initMap();
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
+    // .get(`${process.env.REACT_APP_API_URL}/xxxxxxxxxxxxxxx`, {
+    //   headers: { Authorization: "key " + sessionToken },
+    // })
+    // .then((res) => {
+    //   if (res.data.success) {
+    //     setOrigin({
+    //       lat: res.data.originLat,
+    //       lng: res.data.originLng,
+    //     });
+    //     setDestination({
+    //       lat: res.data.destinationLat,
+    //       lng: res.data.destinationLng,
+    //     });
+    //     // Initialize the map once data is fetched
+    //     initMap();
+    //   }
+    // })
+    // .catch((err) => console.log(err));
     initMap();
   }, []);
- 
+
 
 
   const [time, setTime] = useState(new Date());
