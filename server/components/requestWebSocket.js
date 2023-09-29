@@ -1,55 +1,3 @@
-// const { WebSocketServer } = require("ws");
-// const decodedUserId = require("../Authentication/decodedToken");
-// const url = require("url");
-
-// // Map to store session tokens and associated WebSocket connections.
-// const sessions = new Map();
-
-// // Create a function to handle WebSocket connections.
-// function handleWebSocketConnections(server) {
-//   const wsServer = new WebSocketServer({ server });
-
-//   wsServer.on("connection", (socket, req) => {
-//     console.log("WebSocket client connected");
-
-//     // const sessionToken = req.headers.sessiontoken;
-//     // const typeID = req.headers.typeID;
-
-//     const { query } = url.parse(req.url, true);
-//     console.log(query);
-//     const sessionToken = query.sessionToken;
-//     const typeID = query.typeID;
-
-//     const clientID = decodedUserId(sessionToken);
-
-//     // Check if the session token is valid (you should implement your validation logic here).
-//     if (sessionToken && clientID) {
-//       // Store the WebSocket connection with the session token.
-//       sessions.set(sessionToken, socket);
-
-//       socket.send(JSON.stringify("I Lve You"));
-
-//       socket.on("message", (message) => {
-//         console.log(`Received message: ${message}`);
-//         // Handle WebSocket messages here.
-//       });
-
-//       socket.on("close", () => {
-//         console.log("WebSocket client disconnected");
-
-//         // Remove the WebSocket connection from the sessions map when the client disconnects.
-//         sessions.delete(sessionToken);
-//       });
-//     } else {
-//       // If the session token is invalid, close the WebSocket connection.
-//       console.log("Invalid session token. Closing WebSocket connection.");
-//       socket.close();
-//     }
-//   });
-// }
-
-// module.exports = handleWebSocketConnections;
-
 const express = require("express");
 const { WebSocketServer } = require("ws");
 const decodedUserId = require("../Authentication/decodedToken");
@@ -60,6 +8,7 @@ const databaseObj = new database();
 // Map to store session tokens and associated WebSocket connections for hospitals.
 const hospitalsConnection = new Map();
 const ambulanceConnection = new Map();
+const clientConnection = new Map();
 
 const router = express.Router();
 databaseObj.connectDatabase("Emergency");
@@ -91,7 +40,9 @@ function handleWebSocketConnections(server) {
       } else if (typeID === "dr") {
         console.log("ambulance connected");
         ambulanceConnection.set(clientID, socket);
-        // console.log(ambulanceConnection);
+      } else if (typeID === "us") {
+        console.log("client connected");
+        clientConnection.set(clientID, socket);
       }
 
       socket.on("message", (message) => {
@@ -103,7 +54,7 @@ function handleWebSocketConnections(server) {
         console.log("WebSocket client disconnected");
 
         // Remove the WebSocket connection from the map when the client disconnects.
-        hospitalsConnection.delete(clientID);
+        // hospitalsConnection.delete(clientID);
       });
     } else {
       // If the session token is invalid, close the WebSocket connection.
@@ -185,7 +136,7 @@ function handleWebSocketConnections(server) {
                   console.log("Sending message to a ambulance");
                   ambulanceSocket.send(
                     JSON.stringify({
-                      requestData: requestData,
+                      requestData: result[0],
                       identify: "clientReq",
                     })
                   );
@@ -194,7 +145,12 @@ function handleWebSocketConnections(server) {
                 // Notify all hospitals about the new emergency request
                 hospitalsConnection.forEach((hospitalSocket) => {
                   console.log("Sending message to a hospital");
-                  hospitalSocket.send(JSON.stringify(requestData));
+                  hospitalSocket.send(
+                    JSON.stringify({
+                      requestData: result[0],
+                      identify: "clientReq",
+                    })
+                  );
                 });
               }
             }
@@ -243,6 +199,14 @@ function handleWebSocketConnections(server) {
             })
           );
           console.log("message sending to ambulance");
+
+          clientConnection.get(userID).send(
+            JSON.stringify({
+              requestData: requestData,
+              identify: "aceeptReq",
+            })
+          );
+          console.log("message sending to client");
         }
       }
     );

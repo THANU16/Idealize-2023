@@ -35,10 +35,11 @@ const useWebSockets = (
 
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log(data);
+      console.log('hospital request')
+      console.log(data.requestData);
 
       // Call the function to update requestData when new data is received
-      updateRequestData(data);
+      updateRequestData(data.requestData);
 
       // Play the notification sound when a new notification arrives
       playNotificationSound();
@@ -73,7 +74,9 @@ const Home = (props) => {
   // Create a function to update requestData
   const updateRequestData = (newData) => {
     setRequestData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
+    console.log('new data',newData)
   };
+
 
   // Pass playNotificationSound to useWebSockets
   useWebSockets(sessionToken, typeID, updateRequestData, playNotificationSound);
