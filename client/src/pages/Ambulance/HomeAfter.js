@@ -25,7 +25,7 @@ const useWebSockets = (
   useEffect(() => {
     // Construct the WebSocket URL with headers as query parameters
     // console.log(`${process.env.REACT_APP_WEBSOCKET_URL}`);
-    const websocketUrl = `ws://localhost:8000/?sessionToken=${sessionToken}&typeID=${typeID}`;
+    const websocketUrl = `${process.env.REACT_APP_WEBSOCKET_URL}/?sessionToken=${sessionToken}&typeID=${typeID}`;
 
     const websocket = new WebSocket(websocketUrl);
 
@@ -105,8 +105,8 @@ const Home = (props) => {
 
   // Create a function to update requestData
   const updateHospitalReqData = (newData) => {
-    setHospitalReqData([...requestData, newData]); // Assuming newData is an object you want to add to requestData
-    sessionStorage.setItem("hospitalReqData", JSON.stringify(hospitalReqData));
+    setHospitalReqData(newData); // Assuming newData is an object you want to add to requestData
+    sessionStorage.setItem("hospitalReqData", JSON.stringify(newData));
     navigate("/show");
   };
 
@@ -170,6 +170,14 @@ const Home = (props) => {
     navigate("/notification");
   };
 
+  useEffect(() => {
+    // Check if there are any new requests
+    if (requestData.length > 0) {
+      setIsNewRequest(true);
+    } else {
+      setIsNewRequest(false);
+    }
+  }, [requestData]);
   return (
     <div>
       <div>
@@ -181,51 +189,29 @@ const Home = (props) => {
           </Link>
           <div classname="amno">
             <p>
-              <h4>
+              <h4
+                style={{
+                  backgroundColor: "#19295a",
+                  borderRadius: "10px",
+                  color: "white",
+                  fontSize: "20px",
+                  padding: "10px",
+                }}
+              >
                 <b>AmbulanceNo:{ambulance.ambulanceNumber} </b>
               </h4>
             </p>
           </div>
           <div className="notifications">
-
-            {/* <img src={notification} alt="notification" className="notification-icon" /> */}
-            {/* Render notifications based on the state */}
-            {/* {showNotifications && (
-              <div className="notification-container">
-                {requestData.map((notification, index) => (
-                  <div className="notification" key={index}>
-                    <>
-                      <p>{notification.requestID}</p>
-                      <p>{formatTime(notification.requestedTime)}</p>
-                      <span>
-                        <button
-                          style={{ backgroundColor: "green", margin: "10px" }}
-                          onClick={() =>
-                            toggleNotificationDropdown(notification.requestID)
-                          }
-                        >
-                          Accept
-                        </button>
-                      </span>
-                      <span>
-                        <button
-                          style={{ backgroundColor: "red" }}
-                          onClick={handleReject}
-                        >
-                          Reject
-                        </button>
-                      </span>
-                    </>
-                  </div>
-                ))}
-              </div>
-            )} */}
             <img
               src={notification}
               alt="notification"
-              className="notification-icon"
+              className={
+                isNewRequest ? "notification-icon ring" : "notification-icon"
+              }
               onClick={handleNotificationClick} // Add the onClick event handler
             />
+            {isNewRequest? requestData.length:'' }
             {/* Render other components as needed */}
           </div>
         </div>
@@ -253,7 +239,7 @@ const Home = (props) => {
                 }}
                 icon={{
                   url: deiverMarkerIcon,
-                  scaledSize: new window.google.maps.Size(100, 100),
+                  scaledSize: new window.google.maps.Size(70, 70),
                 }}
               />
             </Map>

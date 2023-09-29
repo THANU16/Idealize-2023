@@ -12,6 +12,13 @@
     margin-bottom: 10px;
   }
   
+  .notification-item.even {
+    background-color: #f2f2f2; /* Set your even background color here */
+  }
+  
+  .notification-item.odd {
+    background-color: #b5b5b5; /* Set your odd background color here */
+  }
   .notification-text {
     flex-grow: 1;
     font-weight: bold;
@@ -20,27 +27,37 @@
   .heading1 {
     font-weight: bold;
     font-size: 25px;
-    background: linear-gradient(to right, rgb(249, 18, 18), rgb(255, 115, 115));
+    /* background: linear-gradient(to right, rgb(238, 92, 92), rgb(255, 115, 115)); */
+    background-color: #19295a;
     text-align: center;
-   
+    border-radius: 10px;
+    color:white ;
     padding: 5px 0;
   }
-  .accept-button {
-    background-color: green;
-    color: white;
+  .ambulance-accept-button {
+    color: #0b6926;
+    border-radius: 32px;
+    background: #B3FBB5;
+    width: 75px;
+    margin: 10px;
     border: none;
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    font-size: 20px;
+
+    
   }
   
-  .reject-button {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 20px;
+  .ambulance-reject-button {
+    color: #FF0000;
+  border-radius: 32px;
+  background: #FA9898;
+  width: 75px;
+  border: none;
   }
-  
+  .ambulance-accept-button:hover{
+    background-color: #44953b;
+
+  }
+
+  .ambulance-reject-button:hover {
+    background-color: #b66b67;
+
+  }

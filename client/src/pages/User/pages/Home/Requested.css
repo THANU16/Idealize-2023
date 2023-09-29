@@ -4,9 +4,10 @@
     margin-left: 100px;
 }
 
-.container{ 
+.req-container{ 
     height: 90vh;
     position: relative;
+    --bs-gutter-x: 0
     
   }
 
