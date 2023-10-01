@@ -7,7 +7,7 @@ for business purposes.
 
 # [Idea](https://drive.google.com/drive/folders/17L_2yEZIYw7l9NmHPpc5VxTU7puMzmsQ?usp=drive_link)
 
-# [Figma]()
+# [Figma](https://www.figma.com/file/OAWtRkgvizSv40AK3CqkPv/Untitled?type=design&node-id=0%3A1&mode=design&t=Xihi1zFjDFLjtgXj-1)
 
 # [prototype](https://drive.google.com/drive/folders/1FupDaXbBNegS5dXH36q-1szcobyW2PtG?usp=drive_link)
 
