@@ -5,8 +5,12 @@ islandwide. With the guidance of Industry experts and conducting skill-building 
 2023 can be considered as an ultimate challenge for innovative and creative IT solutions and ideas
 for business purposes.
 
+# [Idea](https://drive.google.com/drive/folders/17L_2yEZIYw7l9NmHPpc5VxTU7puMzmsQ?usp=drive_link)
 
-# [prototype](https://drive.google.com/file/d/1rDf_SyY6sFYdqLHJMvy_8vtN4Ylc8oj_/view?usp=drive_link)
+# [Figma]()
 
-# Final presentation
-[a link](https://docs.google.com/presentation/d/1jgwmfTHZy1HDC9LSy8xsfpNHXa6tSqAR/edit?usp=drive_link&ouid=109960968106238403513&rtpof=true&sd=true)
+# [prototype](https://drive.google.com/drive/folders/1FupDaXbBNegS5dXH36q-1szcobyW2PtG?usp=drive_link)
+
+# [FinalPresentation](https://drive.google.com/drive/folders/1da0uwWVgU3X06lXhA_L3l-iGUWNw1qTX?usp=drive_link)
+
+
